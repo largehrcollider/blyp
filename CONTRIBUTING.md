@@ -60,28 +60,33 @@ git pull upstream dev
 **Second** Create a branch on your local machine
 ```sh
 git checkout -b feat-amazing-ui-#135
-git checkout -b feat-myFeature-#26 dev 
+git checkout -b feat-myFeature-#26 dev
 #will create new branch from dev no matter where you are
 ```
 
-**_Optional** Create a branch from dev in oganization repo to automatically set the issue as in progress. This enables auto push to upstream.
+**_Optional** Push new branch to oganization repo to automatically set the issue as in progress.
+
+Then, work on your branch until you feel like its a good time to send a PR
 
 **Third** Push branch to your fork
 ```sh
 git push origin <branch_name> # name required only first time
 # or
 git push origin
+# can also push to upstream
+git push upstream
 ```
 
-**Fourth** Submit pull request.
+**Fourth** Submit pull request from most recent place you pushed to. If you don't remember, just push again!
 Organization name / dev (BASE)
 Your name / branch (TARGET)
 
 **Fifth** Sync with organization master branch before working on new issue
 
 ```sh
+git checkout dev
 git pull upstream dev
-git branch -d <branch_name> # deletes only if already merged
+git branch -d <branch_name> # will delete only if already merged
 ```
 
 **Every morning**:
