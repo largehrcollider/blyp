@@ -1,16 +1,10 @@
 # Contributions Guide #
 
-## Style Guide ##
-  > For our style guide, be sure to use the Hack Reactor style guide, defined in the student wiki.  
-    Link: https://github.com/remotebeta/student-wiki/wiki/Style-Guide
-
 ## Branch Naming Syntax
 * `master` used for final deployment
 * `staging` used for last checks before deployment
 * `dev` used to sync peer work before sending it out to the world. No PRs from forks from here onwards. You should always check out new branches from here.
-* `feat/<featurename>` for any work in progress. Make sure branch name ends with `#<issue number>` if you want it to be tracked on waffle io. Will only take effect once branch is in organization repo. No need to squash or take any history ammending actions since these are for your personal use.
-
-## Commit Message Syntax
+* `feat-<featurename>` for any work in progress. Make sure branch name ends with `#<issue number>` if you want it to be tracked on waffle io. Will only take effect once branch is in organization repo. No need to squash or take any history ammending actions since these are for your personal use.
 
 ## Pull Request Message Syntax
 Whenever submitting a PR to largehrcollider, the name of the PR should be:
@@ -25,12 +19,21 @@ closes #19 database schemas design
 ```
 
 # One time setup
-Set up SSH on your machine.
+Edit .gitconfig:
+```sh
+git config --global push.default simple
+```
+
+Set up SSH on your machine:
+[Step1](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
+
+[Step2](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 
 **Fork** the repo.
 
 Then,
 ```sh
+# clone with ssh!
 git clone <your_forked_copy>
 ```
 
@@ -45,42 +48,40 @@ git remote add steven
 
 Checkout `dev` branch:
 ```sh
-git checkout upstream/dev # detached head warning, don't worry!
+git checkout dev
 ```
 
 # Standard git workflow
-1. Pull upstream branch
+**First** Pull upstream branch
 ```sh
 git checkout dev
 git pull upstream dev
 ```
-2. Create a branch on your local machine
+**Second** Create a branch on your local machine
 ```sh
-git checkout -b feat/amazing-ui-#135
+git checkout -b feat-amazing-ui-#135
 ```
 
-3. Squash all the commits when done
-```sh
+**_Optional** Create a branch from dev in oganization repo to automatically set the issue as in progress. This enables auto push to upstream.
 
+**Third** Push branch to your fork
+```sh
+git push origin <branch_name> # name required only first time
+# or
+git push origin
 ```
 
-4. Rebase your branch
-```sh
-git pull --rebase upstream master #make sure you are on your local branch, not local master
-```
-
-5. Push branch to your fork
-```sh
-git push origin <branch_name>
-```
-
-6. Submit pull request.
-Organization name / master (BASE)
+**Fourth** Submit pull request.
+Organization name / dev (BASE)
 Your name / branch (TARGET)
 
-7. Sync with organization master branch before working on new issue
+**Fifth** Sync with organization master branch before working on new issue
 
 ```sh
-git pull --rebase upstream master
-git branch -d <branch_name> # deletes only if merged
+git pull upstream dev
+git branch -d <branch_name> # deletes only if already merged
 ```
+
+**Every morning**:
+1. Pull dev and delete all merged branches
+2. Merge dev into all currently active branches, fix merge conflicts.
