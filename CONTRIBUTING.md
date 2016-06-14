@@ -7,8 +7,8 @@
 ## Branch Naming Syntax
 * `master` used for final deployment
 * `staging` used for last checks before deployment
-* `dev` used to sync peer work before sending it out to the world. No PRs from forks from here onwards.
-* `feat/<featurename>` as many as you like
+* `dev` used to sync peer work before sending it out to the world. No PRs from forks from here onwards. You should always check out new branches from here.
+* `feat/<featurename>` for any work in progress. Make sure branch name ends with `#<issue number>` if you want it to be tracked on waffle io. Will only take effect once branch is in organization repo. No need to squash or take any history ammending actions since these are for your personal use.
 
 ## Commit Message Syntax
 
@@ -24,24 +24,44 @@ closes #23
 closes #19 database schemas design
 ```
 
+# One time setup
+Set up SSH on your machine.
+
+**Fork** the repo.
+
+Then,
+```sh
+git clone <your_forked_copy>
+```
+
+Add remotes
+```sh
+git remote add upstream git@github.com:largehrcollider/blyp.git
+git remote add edu git@github.com:aryzing/blyp.git
+git remote add eric
+git remote add leo
+git remote add steven
+```
+
+Checkout `dev` branch:
+```sh
+git checkout upstream/dev # detached head warning, don't worry!
+```
+
 # Standard git workflow
 1. Pull upstream branch
 ```sh
-git pull --rebase upstream master
+git checkout dev
+git pull upstream dev
 ```
 2. Create a branch on your local machine
 ```sh
-git checkout -b <branch_name>
+git checkout -b feat/amazing-ui-#135
 ```
 
 3. Squash all the commits when done
 ```sh
-git rebase -i HEAD~4
-git rebase -i 32FFA1 # all comits AFTER selected
-```
-Inside editor, change all `pick`s to `fixup` except first. Change name of that one squashed commit to `closes #X` with command
-```sh
-git commit --amend
+
 ```
 
 4. Rebase your branch
