@@ -60,6 +60,8 @@ git pull upstream dev
 **Second** Create a branch on your local machine
 ```sh
 git checkout -b feat-amazing-ui-#135
+git checkout -b feat-myFeature-#26 dev 
+#will create new branch from dev no matter where you are
 ```
 
 **_Optional** Create a branch from dev in oganization repo to automatically set the issue as in progress. This enables auto push to upstream.
