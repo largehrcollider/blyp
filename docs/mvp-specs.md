@@ -6,14 +6,35 @@ Naming convention (facebook):
 * **Sign Up** to create new account for users
 
 ## Client
+Description for clientside specs.
+
+### Clientside Routes
+**`/`** Will display Sign-in prompt or the main application screen
+**`/settings`** Panel for app settings
+**`/products`** (Can also be called inventory or something else). Place where products are created, their pictures selected, and their descriptions, price are entered.
+**`/cart`** Screen for adding items and shaping client's order
+**`/cart/checkout`** Final area for payment processing.
+**`/accounting`** Area for accounting purposes. Can view payments history, issue refunds, etc.
 
 ## Server
-Our app will be a Single Page Application (SPA). The server will only process GET requests for static assets (images, js, css) and requests related to DB queries. All other GET requests will be defaulted to a "catch all" route, i.e `app.get(/*)` that will return the single index.html page of the app.
+Our app will be a Single Page Application (SPA). The server will only process GET requests for static assets (images, js, css) and requests related to DB queries. All other GET requests will be defaulted to a "catch all" route, i.e `app.get('/*')` that will return the single index.html page of the app.
 ### Routes
-Since
+**Static assets** All static assets under `build`.
+
+**`/` GET**. Response is HTML of index.html
+
+**`/login` POST**. Request is `user` credentials in JSON.
+
+If credentials **valid**, return JSON about the user info. As part of the JSON object, include JWT for that user.
+
+If credentials **invalid**, return 403.
+
+**`/signup POST`**.
+
+### DB schema
 
 # Allow one user
 # Allow user to add inventory
 # Allow form of payment
 # Allow transaction which connects with inventory when sale is completed inventory is deducted
-# Allow receipt of said transaction 
+# Allow receipt of said transaction
