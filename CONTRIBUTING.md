@@ -25,6 +25,7 @@ git config --global push.default simple
 ```
 
 Set up SSH on your machine:
+
 [Step1](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 
 [Step2](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
@@ -41,9 +42,9 @@ Add remotes
 ```sh
 git remote add upstream git@github.com:largehrcollider/blyp.git
 git remote add edu git@github.com:aryzing/blyp.git
-git remote add eric
-git remote add leo
-git remote add steven
+git remote add eric git@github.com:ericdsmith/blyp.git
+git remote add leo git@github.com:leov2000/blyp.git
+git remote add steven git@github.com:steveprograms/blyp.git
 ```
 
 Checkout `dev` branch:
