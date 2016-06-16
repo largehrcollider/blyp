@@ -52,11 +52,16 @@ email
 `Transactions`
 Date
 Amount
-List of items
+List of items (object, key is item, value is qty purchased)
 Customer number
 Type/tender
 
 `Inventory`
+Item
+qty
+price
+name
+photo?
 
 
 # Allow one user
