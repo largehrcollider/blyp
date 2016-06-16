@@ -15,8 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // routers
-app.use('/auth', auth);
-app.use('/products', products);
+app.use('/', function (req, res) {
+  res.sendFile(path.resolve(__dirname, '../build/index.html'))
+})
 app.use('/*', function (req, res) {
   res.redirect('/');
 });

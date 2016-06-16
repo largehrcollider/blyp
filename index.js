@@ -3,7 +3,7 @@ var app = require('http').Server(app);
 var io = require('socket.io')(app);
 var path = require('path');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3210;
 
 var i = 0;
 

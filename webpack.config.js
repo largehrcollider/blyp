@@ -1,5 +1,3 @@
-console.log('Webpack config file loaded!');
-
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 // var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -19,19 +17,19 @@ module.exports = {
   module: {
     loaders: [
       {
-        // runs all jsx through babel
+        // runs all js/jsx through babel
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         loaders: ['babel-loader']
       },
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
-      { test: /\.png$/, loader: 'url-loader?limit=100000' },
-      { test: /\.jpg$/, loader: 'file-loader' },
-      { test: /\.svg$/, loader: 'url?limit=65000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]' },
-      { test: /\.woff$/, loader: 'url?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]' },
-      { test: /\.woff2$/, loader: 'url?limit=65000&mimetype=application/font-woff2&name=public/fonts/[name].[ext]' },
-      { test: /\.[ot]tf$/, loader: 'url?limit=65000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]' },
-      { test: /\.eot$/, loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]' }
+      // { test: /\.css$/, loader: 'style-loader!css-loader' },
+      // { test: /\.png$/, loader: 'url-loader?limit=100000' },
+      // { test: /\.jpg$/, loader: 'file-loader' },
+      // { test: /\.svg$/, loader: 'url?limit=65000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]' },
+      // { test: /\.woff$/, loader: 'url?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]' },
+      // { test: /\.woff2$/, loader: 'url?limit=65000&mimetype=application/font-woff2&name=public/fonts/[name].[ext]' },
+      // { test: /\.[ot]tf$/, loader: 'url?limit=65000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]' },
+      // { test: /\.eot$/, loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]' }
     ]
   },
 
@@ -41,12 +39,11 @@ module.exports = {
       {
         from: __dirname + '/client/index.html',
         to: __dirname + '/build/index.html'
+      },
+      {
+        from: __dirname + '/client/favicon.ico',
+        to: __dirname + '/build/favicon.ico'
       }
     ])
   ]
-    // plugins: [new HtmlWebpackPlugin({
-    //  title: 'My App',
-    //  filename: ''
-    // })]
-
 };
