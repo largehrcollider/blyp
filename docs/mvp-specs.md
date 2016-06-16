@@ -10,7 +10,8 @@ Description for clientside specs.
 
 ### Clientside Routes
 **`/`** Will display Sign-in prompt or the main application screen
-**`/settings`** Panel for app settings
+**`/settings`** Pane for app settings.
+**`/users`** Pane for selecting active user.
 **`/products`** (Can also be called inventory or something else). Place where products are created, their pictures selected, and their descriptions, price are entered.
 **`/cart`** Screen for adding items and shaping client's order
 **`/cart/checkout`** Final area for payment processing.
@@ -31,7 +32,32 @@ If credentials **invalid**, return 403.
 
 **`/signup POST`**.
 
+**`/transactions` GET**. Returns array of transactions that fit query parameterrs
+
+**`/transactions` POST**. Insert new transaction in DB.
+
+**`/product` GET**.
+**`/product` POST**.
+
+**`/customer` POST**.
+**`/customer` POST**.
+
 ### DB schema
+`Users`
+username
+password
+name
+email
+
+`Transactions`
+Date
+Amount
+List of items
+Customer number
+Type/tender
+
+`Inventory`
+
 
 # Allow one user
 # Allow user to add inventory
