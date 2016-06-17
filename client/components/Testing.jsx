@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Testing = ({children}) => (
-  <div className="testing">
-    <p>TESTING</p>
+  <div>
+    <p className="testing">TESTING</p>
     {children}
   </div>
 );
