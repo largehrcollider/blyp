@@ -15,11 +15,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // routers
-app.use('/', function (req, res) {
+app.use('/*', function (req, res) {
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
 })
-app.use('/*', function (req, res) {
-  res.redirect('/');
-});
+// app.use('/*', function (req, res) {
+//   res.redirect('/');
+// });
 
 module.exports = app;
