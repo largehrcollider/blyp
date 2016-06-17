@@ -7,7 +7,8 @@
     "forever": "forever start -c nodemon index.js",
     "test": "./node_modules/.bin/mocha --reporter spec specs/server/ServerSpec.js;",
     "here": "concurrently \"npm run build\" \"nodemon index.js\"",
-    "build": "webpack -c -d -w"
+    "build": "webpack -c -d -w",
+    "buildnow": "webpack -c -d"
   },
   "repository": {
     "type": "git",
