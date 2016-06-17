@@ -1,0 +1,20 @@
+import * as types from '../constants/actionTypes';
+// import helper from '../services/helper';
+import { push } from 'react-router-redux';
+import { reset } from 'redux-form';
+
+//////////////////////////////////////////////////////////////
+// Synchronous Action Creators
+//////////////////////////////////////////////////////////////
+
+// example action creator
+export const somethingHappened = (data) => {
+  return {
+    type: types.DUMMY,
+    color: data.color
+  }
+}
+
+//////////////////////////////////////////////////////////////
+// Asynchronous Action Creator combination
+//////////////////////////////////////////////////////////////
