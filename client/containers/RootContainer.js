@@ -1,26 +1,13 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
-import RootComponent from '../components/Root.js';
+import Root from '../components/RootComponent.jsx';
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    attemptVerify: () => {
-      let token = window.localStorage.getItem('jwtToken');
-
-      // If there is no token, do nothing
-      if(!token || token === '') {
-        return;
-      }
-      dispatch(actions.attemptVerify(token));
-    }
-  };
+  return {};
 };
 
 function mapStateToProps(state, ownProps) {
-  return {
-    user: state.user,
-    token: state.auth.token
-  };
+  return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RootComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

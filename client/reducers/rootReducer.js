@@ -10,6 +10,7 @@ import { reducer as formReducer } from 'redux-form';
  */
 const rootReducer = combineReducers({
   form: formReducer, // Reducer provided by 'redux-form' module
+  routing
 });
 
 export default rootReducer;
