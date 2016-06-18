@@ -1,6 +1,4 @@
-//import mongoose from 'mongoose';
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
 var productSchema = mongoose.Schema({
   created_at: {type: Date, required: true}, 
@@ -9,7 +7,10 @@ var productSchema = mongoose.Schema({
   price: [{type: String, required: true}],
   inventory: {type: Number, required: true},
   name: String,
-  description: [{type: String}]
+
+  //Can contain an arbritray number of details. i.e. Album, Artist etc. 
+  //Categories can be here as well
+  details: [{type: String}]
 });
 
 var Product = mongoose.model('Product', productSchema);

@@ -1,8 +1,5 @@
-//import User from './user/user.js';
 var User = require('./user/user.js');
-//import Transaction from './transaction/transaction.js';
 var Transaction = require('./transaction/transaction.js');
-//import mongoose from 'mongoose';
 var mongoose = require('mongoose');
 
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blyp';
