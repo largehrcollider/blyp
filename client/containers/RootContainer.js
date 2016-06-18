@@ -6,7 +6,7 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state) => {
   return {};
 }
 
