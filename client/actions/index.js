@@ -31,3 +31,10 @@ export const inventoryClick = () => {
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator combination
 //////////////////////////////////////////////////////////////
+// export const chatSetup = () => {
+//   return (dispatch) => {
+//     helper.startSock((message) => {
+//       dispatch(messageReceived(message));
+//     });
+//   }
+// }

@@ -5,6 +5,7 @@ import InitialPrompt from './containers/InitialPromptContainer.js';
 import ProductsPane from './containers/ProductsPaneContainer.js';
 import Toolbar from './containers/ToolbarContainer.js';
 import StoreMaster from './containers/StoreMasterContainer.js';
+import Chat from './containers/ChatContainer.js';
 // import ComponentOrContainer from './containers/Name';
 
 //testing imports
@@ -18,8 +19,9 @@ export default (
     <Route path="/" component={InitialPrompt} >
     {/* for testing and debugging*/}
     </Route>
+    <Route path="/chat" component={Chat}/>
     <Route component={Toolbar} >
-    <Route path="/products" component={ProductsPane} />
+    
     
     <Route path="/store" component={StoreMaster}/>
     
