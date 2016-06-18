@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var productSchema = mongoose.Schema({
-  created_at: {type: Date, required: true}, 
-  updated_at: {type: Date},
+  created_at: {type: Date, required: true, default: Date.now}, 
+  updated_at: {type: Date, default: Date.now},
   sku: String,
   price: [{type: Number, required: true}],
   inventory: {type: Number, required: true},
