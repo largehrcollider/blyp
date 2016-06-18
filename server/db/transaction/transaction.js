@@ -1,14 +1,15 @@
-import mongoose from 'mongoose';
+//import mongoose from 'mongoose';
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var transactionSchema = mongoose.Schema({
   created_at: {type: Date, required: true}, 
-  index: {required: true, unique: true},
-  customer: {type: String, required: true},
-  items: {type: Array, required: true},
-  currency: [{type: Item, required: true}],
-  amount: {type: Number, required: true}
+  customer: {type: Schema.ObjectId, ref: 'Customer'},
+  item_id: [{type: Schema.ObjectId, ref: 'Product'}],
+  currency: [{type: String, required: true}],
+  purchase_total: {type: Number, required: true}
 });
 
 var Transaction = mongoose.model('Transaction', transactionSchema);
 
-module.exports = User;
+module.exports = Transaction;

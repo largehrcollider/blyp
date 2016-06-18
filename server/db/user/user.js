@@ -1,11 +1,10 @@
-import mongoose from 'mongoose';
+//import mongoose from 'mongoose';
+var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-  username: { type: String, required: true, 
-  index: {unique: true},
-  firstName: {type: String, required: true},
-  lastName: {type: String, required: true}
-  }
+  username: {type: String, required: true}, 
+  name: {type: String, required: true},
+  role: String
 });
 
 var User = mongoose.model('User', userSchema);
