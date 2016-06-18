@@ -22,6 +22,12 @@ export const checkoutClick = () => {
   }
 }
 
+export const inventoryClick = () => {
+  return {
+    type: types.INVENTORY_CLICK
+  }
+}
+
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator combination
 //////////////////////////////////////////////////////////////
