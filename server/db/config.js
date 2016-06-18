@@ -1,5 +1,3 @@
-var User = require('./user/user.js');
-var Transaction = require('./transaction/transaction.js');
 var mongoose = require('mongoose');
 
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blyp';
@@ -13,3 +11,4 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
   console.log('Mongodb connection open');
 }); 
+

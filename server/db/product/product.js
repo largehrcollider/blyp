@@ -4,7 +4,7 @@ var productSchema = mongoose.Schema({
   created_at: {type: Date, required: true}, 
   updated_at: {type: Date},
   sku: String,
-  price: [{type: String, required: true}],
+  price: [{type: Number, required: true}],
   inventory: {type: Number, required: true},
   name: String,
 
