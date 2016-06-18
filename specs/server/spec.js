@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var Customer = require('../../server/db/customer/customer.js');
 
-var dbURI = 'mongodb://localhost/blyp';
+var dbURI = 'mongodb://localhost/blypTest';
 
 describe('Customer Model', function () {
 
@@ -47,6 +47,9 @@ describe('Customer Model', function () {
       address: '123 Street Jacksonville, FL 32250',
       phone: '404-555-5555'
     };
-    new Customer(testCustomer).save(done); 
+
+    new Customer(testCustomer).save(function(done){
+      return done();
+    }); 
   });
 });

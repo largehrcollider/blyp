@@ -17,10 +17,6 @@ db.once('open', function(){
 
 module.exports = db;
 
-var test = new User({username: 'ericdasdfsmith'});
-test.save(function(err){
-  console.log(err);
-});
 
 new Transaction({
 
@@ -31,6 +27,10 @@ new Transaction({
   currency: 'Amex',
   purchase_total: 100}).save();
 
-Users.getAllUsers(function(users){
-  console.log(users)
-});
+// Users.getAllUsers(function(users){
+//   console.log(users)
+// });
+
+Users.getUserById('5765a222a94f8980147b27f1', function(user){
+  console.log(user);
+})
