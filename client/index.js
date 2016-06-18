@@ -6,7 +6,7 @@ import Root from './containers/RootContainer.js';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import './styles/index.css'
+//import './styles/index.css';
 
 injectTapEventPlugin();
 
