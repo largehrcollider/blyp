@@ -1,0 +1,135 @@
+@import url(http://fonts.googleapis.com/css?family=Muli:400,700);
+body {
+  -webkit-perspective: 800px;
+          perspective: 800px;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Muli', sans-serif;
+  background: #225c46;
+  background: -webkit-linear-gradient(315deg, #82a7d3 0%, #0ca56a 100%);
+  background: linear-gradient(135deg, #82a7d3 0%, #0ca56a 100%);
+}
+
+body .authent {
+  display: none;
+  background: #58595d;
+  position: absolute;
+  left: 0;
+  right: 90px;
+  margin: auto;
+  width: 100px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 20px 70px;
+  top: 200px;
+  bottom: 0;
+  height: 70px;
+  opacity: 0;
+}
+
+body p {
+  color: #b0b0b0;
+  font-size: 10px;
+  text-align: left;
+}
+
+body .login {
+  opacity: 1;
+  top: 20px;
+  position: relative;
+  width: 240px;
+  border-top: 2px solid #0ca56a;
+  height: 300px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  padding: 100px 40px 40px 40px;
+  background: #58595d;
+}
+body .login .validation {
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  top: 6px;
+  opacity: 0;
+}
+body .login .disclaimer {
+  position: absolute;
+  bottom: -60px;
+  left: 35px;
+  width: 250px;
+}
+body .login_title {
+  /*background-image: url("../imgs/blyplogo.png");
+  background-repeat: no-repeat;*/
+  height: 60px;
+  width: 50%;
+  margin: auto;
+
+}
+body .login_fields {
+  height: 208px;
+  position: absolute;
+  left: 0;
+}
+body .login_fields .icon {
+  position: absolute;
+  z-index: 1;
+  left: 36px;
+  top: 8px;
+  opacity: .5;
+}
+body .login_fields input[type='password'] {
+  color: #0ca56a !important;
+}
+body .login_fields input[type='text'], body .login_fields input[type='password'] {
+  color: #afb1be;
+  width: 190px;
+  margin-top: -2px;
+  background: #58595d;
+  left: 0;
+  padding: 10px 65px;
+  border-top: 1px solid #0ca56a;
+  border-bottom: 1px solid #0ca56a;
+  border-right: none;
+  border-left: none;
+  outline: none;
+  font-family: 'Muli', sans-serif;
+  box-shadow: none;
+}
+body .login_fields__user, body .login_fields__password {
+  position: relative;
+}
+body .login_fields__submit {
+  position: relative;
+  top: 42px;
+  left: 0;
+  width: 77%;
+  right: 0;
+  margin: auto;
+}
+
+body .login_fields__submit input {
+  border-radius: 50px;
+  background: transparent;
+  padding: 13px 100px;
+  border: 2px solid #0ca56a;
+  color: #0ca56a;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+body .login_fields__submit input:focus {
+  box-shadow: none;
+  outline: none;
+}
+body .login_fields__submit input:hover {
+  color: white;
+  background: #0ca56a;
+  cursor: pointer;
+}
