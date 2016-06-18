@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes';
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import toolbar from './toolbarReducer.js';
 // import reducer from './myReducerFile.js';
 
 /**
@@ -10,6 +11,7 @@ import { reducer as formReducer } from 'redux-form';
  */
 const rootReducer = combineReducers({
   form: formReducer, // Reducer provided by 'redux-form' module
+  toolbar,
   routing
 });
 

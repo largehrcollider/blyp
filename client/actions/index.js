@@ -15,6 +15,19 @@ export const somethingHappened = (data) => {
   }
 }
 
+// Toolbar Buttons Actions
+export const checkoutClick = () => {
+  return {
+    type: types.CHECKOUT_CLICK
+  }
+}
+
+export const inventoryClick = () => {
+  return {
+    type: types.INVENTORY_CLICK
+  }
+}
+
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator combination
 //////////////////////////////////////////////////////////////
