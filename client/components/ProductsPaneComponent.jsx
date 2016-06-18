@@ -12,7 +12,15 @@ export default class ProductsPane extends Component {
     return (
       <div>
         <table>
+          <caption>Inventory</caption>
           <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>sku</th>
+          </tr>
           {this.props.productsData.map(
             element =>
             <ProductsPaneRow key={element.name} row={element}/>

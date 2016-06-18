@@ -11,7 +11,10 @@ export default class ProductsPaneRow extends Component {
     return (
         <tr >
           <td>{this.props.row.name}</td>
+          <td>{this.props.row.price}</td>
           <td>{this.props.row.quantity}</td>
+          <td>{this.props.row.category}</td>
+          <td>{this.props.row.sku}</td>
         </tr>
     );
   }
