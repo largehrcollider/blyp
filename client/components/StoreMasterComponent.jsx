@@ -13,7 +13,6 @@ export default class StoreMaster extends Component {
     return (
       <div>
         <ProductsPane products={this.props.products}/>
-        <Toolbar/>
       </div>
     );
   }

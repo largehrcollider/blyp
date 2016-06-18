@@ -18,9 +18,12 @@ export default (
     <Route path="/" component={InitialPrompt} >
     {/* for testing and debugging*/}
     </Route>
+    <Route component={Toolbar} >
     <Route path="/products" component={ProductsPane} />
-    <Route path="/toolbar" component={Toolbar} />
+    
     <Route path="/store" component={StoreMaster}/>
+    
+    </Route>
     <Route path="/testing" component={Testing}>
     
       {/*component available at /testing/sample*/}

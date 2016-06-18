@@ -19,9 +19,10 @@ export default class Toolbar extends Component {
           {this.props.inventory && <p>Inventory</p>}
         </div>
         <div className='toolbar-button'>
-          <button id="checkoutButton" onClick={this.props.checkoutClick}>Checkout</button>
+          <button id="checkoutButton" onClick={this.props.checkout}>Checkout</button>
           {this.props.checkout && <p>Check out</p>}
         </div>
+        {this.props.children}
       </div>
     );
   }
