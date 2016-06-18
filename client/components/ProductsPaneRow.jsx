@@ -9,11 +9,10 @@ export default class ProductsPaneRow extends Component {
   render() {
     //const {fields: {username, password}, handleSubmit} = this.props;
     return (
-      <div>
         <tr >
           <td>{this.props.row.name}</td>
+          <td>{this.props.row.quantity}</td>
         </tr>
-      </div>
     );
   }
 }

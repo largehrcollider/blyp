@@ -1,5 +1,6 @@
 import React from 'react'
 import {Component} from 'react'
+import ProductsPaneRow from './ProductsPaneRow.jsx'
 
 export default class ProductsPane extends Component {
   constructor(props) {
@@ -12,11 +13,10 @@ export default class ProductsPane extends Component {
       <div>
         <table>
           <tbody>
-          {this.props.list.map(
+          {this.props.productsData.map(
             element =>
-            <ProductsPaneRow row={element}/>
-            )}
-          
+            <ProductsPaneRow key={element.name} row={element}/>
+          )}
           </tbody>
         </table>
       </div>
