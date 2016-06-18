@@ -7,11 +7,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     checkoutClick: () => {
       dispatch(actions.checkoutClick());
+      dispatch(push('/testing'));
       //router.pushroute  give new route
       //react-router-redux
     },
     inventoryClick: () => {
       dispatch(actions.inventoryClick());
+      dispatch(push('/testing'));
       //router.pushroute  give new route
       //react-router-redux
     },

@@ -10,20 +10,22 @@ export default class Toolbar extends Component {
     //const {fields: {username, password}, handleSubmit} = this.props;
     return (
       <div className='toolbar'>
-      Toolbar
+      <img src="./blyp-login/assets/imgs/blyplogo.png"/>
+        <div className='toolbar-button'>
+          <button id="inventoryButton" onClick={this.props.inventoryClick}>Inventory</button>
+        </div>
+        <div className='toolbar-button'>
+          <button id="checkoutButton" onClick={this.props.checkoutClick}>Checkout</button>
+        </div>
         <div className='toolbar-button'>
           <button id="settingsButton">Settings</button>
         </div>
         <div className='toolbar-button'>
-          <button id="inventoryButton" onClick={this.props.inventoryClick}>Inventory</button>
-          {this.props.inventory && <p>Inventory</p>}
-        </div>
-        <div className='toolbar-button'>
-          <button id="checkoutButton" onClick={this.props.checkout}>Checkout</button>
-          {this.props.checkout && <p>Check out</p>}
+          <button id="userButton">User</button>
         </div>
         {this.props.children}
       </div>
     );
   }
 }
+//{this.props.checkout && <p>Check out</p>}
