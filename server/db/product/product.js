@@ -7,9 +7,9 @@ var productSchema = mongoose.Schema({
   price: [{type: Number, required: true}],
   inventory: {type: Number, required: true},
   name: String,
+  categories: [{type: String}],
 
   //Can contain an arbritray number of details. i.e. Album, Artist etc. 
-  //Categories can be here as well
   details: [{type: String}]
 });
 
