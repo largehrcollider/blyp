@@ -21,7 +21,7 @@ export default class ProductsPane extends Component {
             <th>Category</th>
             <th>sku</th>
           </tr>
-          {this.props.productsData.map(
+          {this.props.products.map(
             element =>
             <ProductsPaneRow key={element.name} row={element}/>
           )}
