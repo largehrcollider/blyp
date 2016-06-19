@@ -74,7 +74,7 @@ export const attemptLogin = ({username, password}) => {
       data: {username, password},
     };
     axios(config)
-    .then(({jwt, name, username, admin}) => {
+    .then(({data: {jwt, name, username, admin}}) => {
       localStorage.setItem('jwt', jwt);
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));

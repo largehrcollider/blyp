@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import * as types from '../actions';
-// search for jwt
+
 var jwt = localStorage.getItem('jwt');
 var isAuthenticated = jwt ? true : false;
 if (jwt) {
@@ -20,7 +20,7 @@ const initialState = {
   error: false
 };
 
-export const (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch(action.type) {
 
     case types.LOGIN_REQUEST_SENT:
@@ -29,12 +29,12 @@ export const (state = initialState, action) => {
     case types.LOGIN_REQUEST_SUCCESS:
     return {
       ...state,
-      jwt: action.jwt;
-      name: action.name;
-      username: action.username;
-      admin: action.admin;
-      fetching: false;
-      error: false;
+      jwt: action.jwt,
+      name: action.name,
+      username: action.username,
+      admin: action.admin,
+      fetching: false,
+      error: false
     };
 
     case types.LOGIN_REQUEST_FAILURE:
@@ -44,3 +44,5 @@ export const (state = initialState, action) => {
     return state;
   }
 }
+
+export default authReducer;

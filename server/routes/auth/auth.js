@@ -1,5 +1,10 @@
+var jwtParser = require('express-jwt');
+var jwt = require('jsonwebtoken');
+var SECRET = require('./secret.js');
 var router = require('express').Router();
 
-module.exports = router.post('/', (req, res) => {
-  res.sendStatus(200);
+
+
+module.exports = router.use(jwtParser({secret: SECRET}), protectedRoute, (err, req, res, next) => {
+  res.sendStatus(403);
 });
