@@ -1,7 +1,8 @@
 import * as types from '../constants/actionTypes';
 // import helper from '../services/helper';
-import { push } from 'react-router-redux';
-import { reset } from 'redux-form';
+import {push} from 'react-router-redux';
+import {reset} from 'redux-form';
+import axios from 'axios';
 
 //////////////////////////////////////////////////////////////
 // Synchronous Action Creators
@@ -28,8 +29,32 @@ export const inventoryClick = () => {
   }
 }
 
+// authentication state
+export const loginRequestSent = () => {
+  return {
+    type: types.LOGIN_REQUEST_SENT
+  }
+}
+
+export const loginRequestSuccess = (admin, jwt, name, username) => {
+  return {
+    type: types.LOGIN_REQUEST_SUCCESS,
+    admin,
+    jwt,
+    name,
+    username
+  }
+}
+
+export const loginRequestFailure = (message) => {
+  return {
+    type: types.LOGIN_REQUEST_FAILURE,
+    message
+  }
+}
+
 //////////////////////////////////////////////////////////////
-// Asynchronous Action Creator combination
+// Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
 // export const chatSetup = () => {
 //   return (dispatch) => {
@@ -38,3 +63,28 @@ export const inventoryClick = () => {
 //     });
 //   }
 // }
+
+export const attemptLogin = ({username, password}) => {
+  // prepare request
+
+  return (dispatch) => {
+    const config = {
+      url: '/login',
+      method: 'post',
+      data: {username, password},
+    };
+    axios(config)
+    .then(({jwt, name, username, admin}) => {
+      localStorage.setItem('jwt', jwt);
+      dispatch(loginRequestSuccess(admin, jwt, name, username));
+      dispatch(reset('loginForm'));
+      dispatch(push('/store'));
+
+    })
+    .catch(err => {
+      dispatch(loginRequestFailure(err));
+    });
+
+    dispatch(loginRequestSent());
+  }
+}
