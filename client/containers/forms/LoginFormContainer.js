@@ -3,7 +3,12 @@ import * as actions from '../../actions/index.js';
 import LoginForm from '../../components/forms/LoginFormComponent.jsx';
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    attemptLogin: (values) => {
+      dispatch(actions.attemptLogin());
+      // console.log(values);
+    }
+  };
 };
 
 const mapStateToProps = (state) => {

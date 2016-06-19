@@ -7,10 +7,10 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit} = this.props;
+    const {fields: {username, password}, handleSubmit, attemptLogin} = this.props;
     return (
       <div>
-        <form>
+        <form onSubmit={handleSubmit(attemptLogin)}>
           <label>Username: <input type="text" {...username}></input></label>
           <label>Password: <input type="password" {...password}></input></label>
           <button>Log In</button>
