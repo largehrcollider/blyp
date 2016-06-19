@@ -15,19 +15,15 @@ import Sample from './components/Sample.jsx'
 export default (
   // main app routes
   <Route component={CoreLayout}>
-
     <Route path="/" component={InitialPrompt} >
-    {/* for testing and debugging*/}
     </Route>
     <Route path="/chat" component={Chat}/>
     <Route component={Toolbar} >
-    
-    
     <Route path="/store" component={StoreMaster}/>
-    
     </Route>
+
+    {/* for testing and debugging*/}
     <Route path="/testing" component={Testing}>
-    
       {/*component available at /testing/sample*/}
       <Route path="/testing/sample" component={Sample} />
     </Route>

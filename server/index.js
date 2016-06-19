@@ -5,6 +5,7 @@ var path = require('path');
 var morgan = require('morgan');
 var auth = require('./routes/auth/auth.js');
 var products = require('./routes/products/products.js');
+var authRouter = require('./routes/auth/auth.js');
 
 var app = express();
 
@@ -15,11 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // routers
+app.use('/auth', authRouter);
 app.use('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
-})
-// app.use('/*', function (req, res) {
-//   res.redirect('/');
-// });
+});
 
 module.exports = app;
