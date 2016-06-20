@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var User = require('./user/user.js');
+var Transaction = require('./transaction/transaction.js')
+var Users = require('./user/userController.js');
 
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blyp';
 mongoose.connect(mongoURI);
@@ -12,3 +15,4 @@ db.once('open', function(){
   console.log('Mongodb connection open');
 }); 
 
+module.exports = db;
