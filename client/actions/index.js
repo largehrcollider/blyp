@@ -149,8 +149,8 @@ export const saveProduct = (data) => {
       data
     };
     axios(config)
-    .then((product) => {
-      dispatch(saveProductRequestSuccess(product));
+    .then(({ data }) => {
+      dispatch(saveProductRequestSuccess(data));
       dispatch(reset('addComponentForm'));
     })
     .catch(err => {
