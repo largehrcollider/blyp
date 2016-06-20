@@ -106,6 +106,15 @@ export const saveProductRequestSent = () => {
     type: types.SAVE_PRODUCT_REQUEST_SENT,
   }
 }
+
+/**
+* UI action creators
+*/
+export const toggleCheckout = () => {
+  return {
+    type: types.TOGGLE_CHECKOUT
+  }
+}
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////

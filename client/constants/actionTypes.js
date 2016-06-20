@@ -28,8 +28,9 @@ export const PAYMENT_COMPLETED = 'PAYMENT_COMPLETED';
 /**
 * Actions related to UI
 */
-export const CHECKOUT = 'CHECKOUT';
-export const CHECKIN = 'CHECKIN';
+// export const CHECKOUT = 'CHECKOUT';
+// export const CHECKIN = 'CHECKIN';
+export const TOGGLE_CHECKOUT = 'TOGGLE_CHECKOUT';
 
 /**
 * Product insertion
