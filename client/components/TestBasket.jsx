@@ -6,6 +6,7 @@ import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
 import ProductsPane2 from '../containers/ProductsPane2Container.js';
 import Basket from '../containers/BasketContainer.js';
 import Total from '../containers/Total.js'
+import Paid from '../containers/Paid.js'
 
 const TestBasket = ({children}) => (
   <div>
@@ -14,6 +15,7 @@ const TestBasket = ({children}) => (
     <h2>The basket:</h2>
     <Basket />
     <Total />
+    <Paid />
   </div>
 );
 

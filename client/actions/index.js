@@ -84,6 +84,30 @@ export const basketRemoveItem = (id) => {
   };
 };
 
+export const clearBasket = () => {
+  return {
+    type: types.CLEAR_BASKET
+  };
+}
+
+export const transactionRequestSuccess = () => {
+  return {
+    type: types.TRANSACTION_REQUEST_SUCCESS
+  };
+}
+
+export const transactionRequestFailure = () => {
+  return {
+    type: types.TRANSACTION_REQUEST_FAILURE
+  };
+}
+
+export const transactionRequestSent = () => {
+  return {
+    type: types.TRANSACTION_REQUEST_SENT
+  };
+}
+
 /**
 * Product save requests
 */
@@ -166,5 +190,30 @@ export const saveProduct = (data) => {
       dispatch(saveProductRequestFailure(err));
     });
     dispatch(saveProductRequestSent());
+  }
+}
+
+export const transactionCompleted = () => {
+  return (dispatch, getState) => {
+    var transaction = {
+      basket: getState().basket,
+      method: 'visa'
+    };
+    console.log(transaction.basket);
+    const config = {
+      url: '/api/transactions',
+      method: 'post',
+      data: transaction
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(transactionRequestSuccess());
+      dispatch(clearBasket());
+      dispatch(toggleCheckout());
+    })
+    .catch(err => {
+      dispatch(transactionRequestFailure());
+    });
+    dispatch(transactionRequestSent());
   }
 }
