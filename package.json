@@ -15,7 +15,9 @@
     "url": "git+https://github.com/hrr16-velociraptors/triceratops.git"
   },
   "keywords": [
-    "blyp", "pos", "point of sale"
+    "blyp",
+    "pos",
+    "point of sale"
   ],
   "author": "LargeHRCollider",
   "license": "MIT",
@@ -46,7 +48,8 @@
     "express-session": "^1.13.0",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "2.17.0",
-    "jsonwebtoken": "^7.0.0",
+    "jsonwebtoken": "^7.0.1",
+    "jwt-decode": "^2.0.1",
     "material-ui": "^0.15.0",
     "mongodb": "^2.1.20",
     "mongoose": "^4.4.19",
@@ -66,8 +69,8 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "2.1.0",
     "socket.io": "",
-    "stripe": "^4.7.0",
     "socket.io-client": "",
+    "stripe": "^4.7.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7"
   },
