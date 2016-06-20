@@ -50,8 +50,39 @@ export const loginRequestFailure = (message) => {
   return {
     type: types.LOGIN_REQUEST_FAILURE,
     message
-  }
-}
+  };
+};
+
+export const populateWithFakeData = (data) => {
+  return {
+    type: types.POPULATE_WITH_FAKE_DATA,
+    data
+  };
+};
+
+/**
+* Basket interaction
+*/
+export const basketDecreaseCount = (id) => {
+  return {
+    type: types.BASKET_DECREASE_COUNT,
+    id
+  };
+};
+
+export const basketIncreaseCount = (id) => {
+  return {
+    type: types.BASKET_INCREASE_COUNT,
+    id
+  };
+};
+
+export const basketRemoveItem = (id) => {
+  return {
+    type: types.BASKET_REMOVE_ITEM,
+    id
+  };
+};
 
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
