@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 // import helper from '../services/helper';
-import {push} from 'react-router-redux';
-import {reset} from 'redux-form';
+import { push } from 'react-router-redux';
+import { reset } from 'redux-form';
 import axios from 'axios';
 
 //////////////////////////////////////////////////////////////
