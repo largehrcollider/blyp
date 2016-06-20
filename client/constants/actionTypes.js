@@ -30,3 +30,8 @@ export const PAYMENT_COMPLETED = 'PAYMENT_COMPLETED';
 */
 export const CHECKOUT = 'CHECKOUT';
 export const CHECKIN = 'CHECKIN';
+
+/**
+* Actions for testing
+*/
+export const POPULATE_WITH_FAKE_DATA = 'POPULATE_WITH_FAKE_DATA';

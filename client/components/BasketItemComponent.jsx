@@ -7,10 +7,21 @@ export default class BasketItem extends Component {
     super(props);
   }
   render() {
-    const {name} = this.props;
+    /**
+    * TODO:
+    * attach function to increment quantity
+    * attach function to decrement quantity
+    * attach function to delete item
+    */
+    const {name, qty, incrementItem, decrementItem, deleteItem} = this.props;
     return (
       <div>
-        {name}
+        <span onClick={incrementItem}>[[+]]</span>
+        <span onClick={decrementItem}>[[-]]</span>
+        <span>
+          {name + 'qty: ' + qty + ' '}
+        </span>
+        <span onClick={deleteItem}>[[X]]</span>
       </div>
     )
   }

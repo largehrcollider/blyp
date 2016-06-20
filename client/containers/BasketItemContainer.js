@@ -5,12 +5,28 @@ import Basket from '../components/BasketItemComponent.jsx'
 const mapStateToProps = (state, ownProps) => {
   const {id} = ownProps;
   return {
-    name: state.products.id;
+    name: state.products[id].name,
+    // qty: state.products.id.qty
+    // qty: (() => {
+    //   state.basket.find
+    // })()
+    qty: state.basket.find((item) => (item.id === id)).qty
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const {id} = ownProps;
+  return {
+    incrementItem: () => {
+      dispatch(actions.basketIncreaseCount(id));
+    },
+    decrementItem: () => {
+      dispatch(actions.basketDecreaseCount(id));
+    },
+    deleteItem: () => {
+      dispatch(actions.basketRemoveItem(id));
+    }
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Basket);

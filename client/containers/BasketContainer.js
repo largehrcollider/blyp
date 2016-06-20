@@ -4,7 +4,7 @@ import Basket from '../components/BasketComponent.jsx'
 
 const mapStateToProps = (state) => {
   return {
-    basketItems = [...state.basket];
+    basketItems: [...state.basket]
   };
 }
 

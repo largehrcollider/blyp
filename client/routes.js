@@ -11,6 +11,7 @@ import Chat from './containers/ChatContainer.js';
 //testing imports
 import Testing from './components/Testing.jsx';
 import Sample from './components/Sample.jsx'
+import TestBasket from './components/TestBasket.jsx'
 
 export default (
   // main app routes
@@ -26,6 +27,7 @@ export default (
     <Route path="/testing" component={Testing}>
       {/*component available at /testing/sample*/}
       <Route path="/testing/sample" component={Sample} />
+      <Route path="/testing/basket" component={TestBasket} />
     </Route>
   </Route>
 
