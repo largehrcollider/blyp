@@ -40,3 +40,5 @@ const basketReducer = (state = {}, action) => {
     return state;
   }
 }
+
+export default basketReducer;

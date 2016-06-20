@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import toolbar from './toolbarReducer.js';
 import auth from './authReducer';
+import basket from './basketReducer';
 // import reducer from './myReducerFile.js';
 
 /**
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   form: formReducer, // Reducer provided by 'redux-form' module
   toolbar,
   routing,
-  auth
+  auth,
+  basket
 });
 
 export default rootReducer;
