@@ -18,7 +18,7 @@ router.post('/', function(req, res){
       res.writeHead(500);
     } else {
       res.writeHead(201).send(product);
-    };
+    }
   });
 });
 

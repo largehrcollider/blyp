@@ -40,3 +40,13 @@ exports.updateTransactionById = function(id, update, callback){
     callback(err);
   });
 };
+
+exports.TransactionById = function(id, callback){
+  Transaction.findOneAndRemove({_id: id})
+  .then(function(transaction){
+    callback(transaction);
+  })
+  .catch(function(err){
+    callback(err);
+  });
+};
