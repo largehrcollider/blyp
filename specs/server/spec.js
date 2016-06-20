@@ -1,13 +1,14 @@
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var Customer = require('../../server/db/customer/customer.js');
+var userController = require('../../server/db/user/userController.js');
+
 
 var dbURI = 'mongodb://localhost/blypTest';
 
 describe('Customer Model', function () {
 
-  beforeEach(function (done) {
-    if (mongoose.connection.db) return done();
+  before(function(done){
 
     function clearDB() {
       for (var i in mongoose.connection.collections) {
@@ -21,24 +22,18 @@ describe('Customer Model', function () {
         if (err) {
           throw err;
         }
-        return done();//clearDB();
+        return clearDB();
       });
     } else {
-      return done()//clearDB();
+      return clearDB();
     }
   });
 
-  afterEach(function (done) {
-    mongoose.disconnect();
-    return done();
-  });
-
-  it('should be a Mongoose model', function () {
-    expect(new Customer()).to.be.instanceOf(mongoose.Model);
-  });
-
-  it('should have a schema', function () {
-    expect(Customer.schema).to.exist;
+  after(function(done){
+    for (var i in mongoose.connection.collections) {
+      mongoose.connection.collections[i].remove(function() {});
+    }
+    mongoose.connection.close(done);
   });
 
   it('should save', function(done){
@@ -48,8 +43,109 @@ describe('Customer Model', function () {
       phone: '404-555-5555'
     };
 
-    new Customer(testCustomer).save(function(done){
-      return done();
+    new Customer(testCustomer).save(function(err, user){
+      expect(user.name).to.equal(testCustomer.name);
+      done();
     }); 
+  });
+
+  it('should retrieve all customers', function(done){
+    var testCustomer2 = {
+      name: 'Jenny Thompson',
+      address: '555 Some Road Chicago, IL 55555',
+      phone: '555-904-404'
+    }
+    new Customer(testCustomer2).save(function(err, user){
+      Customer.find({}, function(err, customers){
+        if(err) return err;
+        expect(customers.length).to.equal(2);
+        done();
+      });
+    });
+  });
+});
+
+describe('User Controller', function () {
+
+  before(function(done){
+    function clearDB() {
+      // for (var i in mongoose.connection.collections) {
+      //   mongoose.connection.collections[i].remove(function() {});
+      // }
+      return done();
+    }
+
+    if (mongoose.connection.readyState === 0) {
+      mongoose.connect(dbURI, function (err) {
+        if (err) {
+          throw err;
+        }
+        return clearDB();
+      });
+    } else {
+      return clearDB();
+    }
+  });
+
+  after(function(done){
+    // for (var i in mongoose.connection.collections) {
+    //   mongoose.connection.collections[i].remove(function() {});
+    // }
+    mongoose.connection.close(done);
+  });
+
+  it('Create a new user', function(done){
+    var fakeUser = {
+      username: 'ericdsmith',
+      name: 'Eric Smith',
+      role: 'Admin'
+    };
+
+    userController.createUser(fakeUser, function(newUser){
+      expect(newUser.username).to.equal(fakeUser.username);
+      done();
+    });
+  });
+
+  it('Should not allow duplicate usernames', function(done){
+    var fakeUser = {
+      username: 'ericdsmith',
+      name: 'Eric Smith',
+      role: 'Admin'
+    };
+
+    userController.createUser(fakeUser, function(newUser){
+      expect(newUser.username).to.not.equal(fakeUser.username);
+      done();
+    });
+  });
+
+  it('Should get all users', function(done){
+    var fakeUser2 = {
+      username: 'fakeuser',
+      name: 'Jim Thompson',
+      role: 'Cashier'
+    };
+
+    userController.createUser(fakeUser2, function(){
+      userController.getAllUsers(function(users){
+        expect(users.length).to.equal(2);
+        done();
+      });
+    });
+  });
+
+  it('Should delete a user by id', function(done){
+    var userId = null;
+    userController.getUserByUsername('fakeuser', function(user){
+      userId = user._id;
+      userController.deleteUserById(userId, function(user){
+        expect(user.username).to.equal('fakeuser');
+        userController.getUserByUsername('fakeuser', function(user){
+          expect(user).to.equal(null);
+          done();
+        });
+      });
+    });
   });
 });

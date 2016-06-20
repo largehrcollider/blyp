@@ -2,22 +2,40 @@ var Transaction = require('./transaction.js');
 
 exports.getAllTransactions = function(callback){
   Transaction.find({})
-  .then(function(err, transactions){
-    if(err){
-      callback(err);
-    } else {
-      callback(transactions);
-    }
+  .then(function(transactions){
+    callback(transactions);
+  })
+  .catch(function(err){
+    callback(err);
   });
 };
 
 exports.getTransactionById = function(id, callback){
   Transaction.findOne({_id: id})
-  .then(function(err, user){
-    if(err){
-      callback(err);
-    } else {
-      callback(user);
-    }
+  .then(function(user){
+    callback(user);
+  })
+  .catch(function(err){
+    callback(err);
+  });
+};
+
+exports.createTransaction = function(transaction, callback){
+  Transaction(transaction).save()
+  .then(function(transaction){
+    callback(transaction);
+  })
+  .catch(function(err){
+    callback(err);
+  });
+};
+
+exports.updateTransactionById = function(id, update, callback){
+  Transaction.findOneAndUpdate({_id: id}, update)
+  .then(function(transaction){
+    callback(transaction);
+  })
+  .catch(function(err){
+    callback(err);
   });
 };

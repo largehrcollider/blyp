@@ -16,21 +16,3 @@ db.once('open', function(){
 }); 
 
 module.exports = db;
-
-
-new Transaction({
-
-  //References to items in item collection
-
-
-  //How was the purchase made, Amex, MasterCard, Cash etc.
-  currency: 'Amex',
-  purchase_total: 100}).save();
-
-// Users.getAllUsers(function(users){
-//   console.log(users)
-// });
-
-Users.getUserById('5765a222a94f8980147b27f1', function(user){
-  console.log(user);
-})
