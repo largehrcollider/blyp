@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 
 var productSchema = mongoose.Schema({
-  created_at: {type: Date, required: true, default: Date.now}, 
-  updated_at: {type: Date, default: Date.now},
   sku: String,
   price: {type: Number, required: true},
   inventory: {type: Number, required: true},
@@ -11,7 +9,11 @@ var productSchema = mongoose.Schema({
 
   //Can contain an arbritray number of details. i.e. Album, Artist etc. 
   details: Array
-});
+},
+{
+  timestamps: true
+}
+);
 
 var Product = mongoose.model('Product', productSchema);
 
