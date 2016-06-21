@@ -1,0 +1,24 @@
+import React from 'react';
+import FilterPane from '../containers/FilterPane/FilterPane.js';
+import ProductsPane from '../containers/ProductsPane3.js'
+import BasketPane from '../containers/BasketContainer.js';
+import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
+
+const Sell = () => (
+  <div className="container-fluid">
+    <div className="col-md-12">
+      <PopulateWithFakeData />
+    </div>
+    <div className="col-md-2">
+      <FilterPane />
+    </div>
+    <div className="col-md-8">
+      <ProductsPane />
+    </div>
+    <div className="col-md-2">
+      <BasketPane />
+    </div>
+  </div>
+);
+
+export default Sell;

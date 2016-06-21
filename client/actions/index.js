@@ -139,6 +139,16 @@ export const toggleCheckout = () => {
     type: types.TOGGLE_CHECKOUT
   }
 }
+
+/**
+* category filter pane
+*/
+export const toggleCategory = (category) => {
+  return {
+    type: types.TOGGLE_CATEGORY,
+    category
+  }
+}
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
