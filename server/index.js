@@ -4,9 +4,10 @@ var cookieParser = require('cookie-parser');
 var path = require('path');
 var morgan = require('morgan');
 // var auth = require('./routes/auth/auth.js');
-// var products = require('./routes/products/products.js');
+var productsRouter = require('./routes/products/products.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
+var db = require('./db/config.js');
 
 var app = express();
 
@@ -21,7 +22,7 @@ app.use('/login', loginRouter);
 // app.use('/logout', logoutRouter); // token invalidation?
 
 // protected routes
-// app.use('/api/products', productsRouter);
+app.use('/api/products', productsRouter);
 // app.use('/api/clients', clientsRouter);
 // app.use('/api/transactions' transactionsRouter);
 
