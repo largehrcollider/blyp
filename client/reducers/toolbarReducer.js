@@ -5,7 +5,8 @@ import * as types from '../constants/actionTypes';
  */
 export default (state = {
   checkoutButton: false,
-  inventoryButton: false
+  inventoryButton: false,
+  viewCheckout: false
 }, action) => {
   switch (action.type) {
     case types.CHECKOUT_CLICK:
@@ -18,6 +19,13 @@ export default (state = {
       ...state,
       inventoryButton: !state.inventoryButton
     };
+
+    case types.TOGGLE_CHECKOUT:
+    return {
+      ...state,
+      viewCheckout: !state.viewCheckout
+    }
+
     default:
     return state;
   };

@@ -65,8 +65,8 @@ const basketReducer = (state = [], action) => {
       return state;
     }
 
-    case types.PAYMENT_COMPLETED:
-    return {};
+    case types.CLEAR_BASKET:
+    return [];
 
     default:
     return state;

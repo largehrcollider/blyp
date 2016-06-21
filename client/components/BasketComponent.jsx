@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import BasketItem from '';
-// import Checkout from '';
+import Checkout from '../containers/buttons/CheckoutButtonContainer.js';
 import BasketItem from '../containers/BasketItemContainer.js'
 
 export default class Basket extends Component {
@@ -14,7 +14,7 @@ export default class Basket extends Component {
         {basketItems.map(item => (
           <BasketItem key={item.id} id={item.id}/>
         ))}
-        {/*<Checkout />*/}
+        <Checkout />
       </div>
     )
   }
