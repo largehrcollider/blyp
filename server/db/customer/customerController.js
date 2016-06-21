@@ -42,7 +42,7 @@ exports.getCustomerByCustomername = function(customername, callback){
 
 //Not tested
 exports.updateCustomerById = function(id, update, callback){
-  Customer.findOneAndUpdate({_id: id}, update)
+  Customer.findOneAndUpdate({_id: id}, update, {new: true})
   .then(function(customer){
     callback(customer);
   })

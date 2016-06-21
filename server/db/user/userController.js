@@ -42,7 +42,7 @@ exports.getUserByUsername = function(username, callback){
 
 //Not tested
 exports.updateUserById = function(id, update, callback){
-  User.findOneAndUpdate({_id: id}, update)
+  User.findOneAndUpdate({_id: id}, update, {new: true})
   .then(function(user){
     callback(user);
   })

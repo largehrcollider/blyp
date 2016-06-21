@@ -32,7 +32,7 @@ exports.createTransaction = function(transaction, callback){
 
 //Not tested
 exports.updateTransactionById = function(id, update, callback){
-  Transaction.findOneAndUpdate({_id: id}, update)
+  Transaction.findOneAndUpdate({_id: id}, update, {new: true})
   .then(function(transaction){
     callback(transaction);
   })
