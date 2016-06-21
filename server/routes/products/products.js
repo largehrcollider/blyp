@@ -17,7 +17,7 @@ router.post('/', function(req, res){
     if(err){
       res.sendStatus(500);
     } else {
-      res.status(201).send(product);
+      res.status(201).json(product);
     }
   });
 });
@@ -27,7 +27,7 @@ router.put('/:id', function(req, res){
     if(err){
       res.sendStatus(500);
     } else {
-      res.status(200).send(product);
+      res.status(200).json(product);
     }
   });
 });
@@ -37,7 +37,7 @@ router.delete('/:id', function(req, res){
     if(err){
       res.sendStatus(500);
     } else {
-      res.status(200).send(product);
+      res.status(200).json(product);
     }
   });
 });
