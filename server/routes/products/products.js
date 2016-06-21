@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var Product = require('../db/user/productController.js');
+var Product = require('../../db/product/productController.js');
 
 router.get('/', function(req, res){
   Product.getAllProducts(function(err, products){
     if(err){
-      res.writeHead(500);
+      res.sendStatus(500);
     } else {
-      res.writeHead(200).send(products);
+      res.status(200).json(products);
     }
   });
 });
@@ -15,9 +15,9 @@ router.get('/', function(req, res){
 router.post('/', function(req, res){
   Product.createProduct(req.body, function(err, product){
     if(err){
-      res.writeHead(500);
+      res.sendStatus(500);
     } else {
-      res.writeHead(201).send(product);
+      res.status(201).send(product);
     }
   });
 });
@@ -25,9 +25,9 @@ router.post('/', function(req, res){
 router.put('/:id', function(req, res){
   Product.updateProductById(req.params.id, req.body, function(err, product){
     if(err){
-      res.writeHead(500);
+      res.sendStatus(500);
     } else {
-      res.writeHead(200).send(product);
+      res.status(200).send(product);
     }
   });
 });
@@ -35,9 +35,11 @@ router.put('/:id', function(req, res){
 router.delete('/:id', function(req, res){
   Product.deleteProductById(req.params.id, function(err, product){
     if(err){
-      res.writeHead(500);
+      res.sendStatus(500);
     } else {
-      res.writeHead(200).send(product);
+      res.status(200).send(product);
     }
   });
 });
+
+module.exports = router;
