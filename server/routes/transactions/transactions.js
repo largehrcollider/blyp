@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Transaction = require('../db/user/transactionController.js');
+var Transaction = require('../../db/transaction/transactionController.js');
 
 router.get('/', function(req, res){
   Transaction.getAllTransactions(function(err, transactions){
@@ -41,3 +41,5 @@ router.delete('/:id', function(req, res){
     }
   });
 });
+
+module.exports = router;

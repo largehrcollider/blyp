@@ -1,4 +1,16 @@
 var Transaction = require('./transaction.js');
+var ProductController = require('../product/productController.js');
+
+//Deducts the quantity purchased from the product quantity in the db
+//Adds the item name to the transaction
+var processTransaction = function(transaction){
+  transaction.item_id.forEach(function(item){
+    ProductController.updateProductBySku(item.id, {$inc: {quantity: -item.quantity}}, function(err, product){
+      item.name = product.name;
+    });
+  });
+  return transaction;
+};
 
 exports.getAllTransactions = function(callback){
   Transaction.find({})
@@ -21,8 +33,9 @@ exports.getTransactionById = function(id, callback){
 };
 
 exports.createTransaction = function(transaction, callback){
-  Transaction(transaction).save()
+  Transaction(processTransaction(transaction)).save()
   .then(function(transaction){
+    console.log(transaction + 'saved');
     callback(null, transaction);
   })
   .catch(function(err){
@@ -50,3 +63,4 @@ exports.TransactionById = function(id, callback){
     callback(err);
   });
 };
+

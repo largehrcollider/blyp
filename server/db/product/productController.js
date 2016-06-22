@@ -59,3 +59,13 @@ exports.deleteProductById = function(id, callback){
     callback(err);
   });
 };
+
+exports.updateProductBySku = function(sku, update, callback){
+  Product.findOneAndUpdate({sku: sku}, update, {new: true})
+  .then(function(product){
+    callback(null, product);
+  })
+  .catch(function(err){
+    callback(err);
+  });
+};
