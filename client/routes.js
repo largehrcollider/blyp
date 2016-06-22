@@ -11,9 +11,8 @@ import AddProduct from './containers/forms/AddProductFormContainer.js';
 
 //testing imports
 import Testing from './components/Testing.jsx';
-import Sample from './components/Sample.jsx';
-import TestBasket from './components/TestBasket.jsx';
 import Sell from './components/Sell.jsx';
+import Checkout from './components/Checkout.jsx'
 
 export default (
   // main app routes
@@ -28,10 +27,8 @@ export default (
     {/* for testing and debugging*/}
     <Route path="/testing" component={Testing}>
       {/*component available at /testing/sample*/}
-      <Route path="/testing/sample" component={Sample} />
-      <Route path="/testing/basket" component={TestBasket} />
-      <Route path="/testing/addProduct" component={AddProduct} />
       <Route path="/testing/sell" component={Sell} />
+      <Route path="/testing/checkout" component={Checkout} />
     </Route>
   </Route>
 

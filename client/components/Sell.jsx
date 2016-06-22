@@ -1,7 +1,7 @@
 import React from 'react';
-import FilterPane from '../containers/FilterPane/FilterPane.js';
-import ProductsPane from '../containers/ProductsPane3.js'
-import BasketPane from '../containers/BasketContainer.js';
+// import FilterPane from '../containers/FilterPane/FilterPane.js';
+import ProductsPane from '../containers/ProductsPane5.js'
+import BasketPane from './BasketPane.jsx';
 import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
 
 const Sell = () => (
@@ -10,7 +10,7 @@ const Sell = () => (
       <PopulateWithFakeData />
     </div>
     <div className="col-md-2">
-      <FilterPane />
+      {/* <FilterPane /> */}
     </div>
     <div className="col-md-8">
       <ProductsPane />
