@@ -33,9 +33,9 @@ exports.getTransactionById = function(id, callback){
 };
 
 exports.createTransaction = function(transaction, callback){
-  Transaction(processTransaction(transaction)).save()
+  processTransaction(transaction);
+  Transaction(transaction).save()
   .then(function(transaction){
-    console.log(transaction + 'saved');
     callback(null, transaction);
   })
   .catch(function(err){
