@@ -1,6 +1,6 @@
 import * as actions from '../actions'
 import {connect} from 'react-redux';
-import Basket from '../components/BasketItemComponent.jsx'
+import BasketItem from '../components/BasketItem.jsx'
 
 const mapStateToProps = (state, ownProps) => {
   const {id} = ownProps;
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Basket);
+export default connect(mapStateToProps, mapDispatchToProps)(BasketItem);

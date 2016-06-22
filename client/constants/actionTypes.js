@@ -47,3 +47,8 @@ export const SAVE_PRODUCT_REQUEST_SENT = 'SAVE_PRODUCT_REQUEST_SENT';
 * Actions for testing
 */
 export const POPULATE_WITH_FAKE_DATA = 'POPULATE_WITH_FAKE_DATA';
+
+/**
+* category filter pane
+*/
+export const TOGGLE_CATEGORY = 'TOGGLE_CATEGORY';
