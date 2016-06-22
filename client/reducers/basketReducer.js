@@ -8,15 +8,6 @@ import * as types from '../constants/actionTypes.js'
 const basketReducer = (state = [], action) => {
   switch(action.type) {
 
-    // case types.BASKET_DECREASE_COUNT:
-    // if (state[action.id] > 1) {
-    //   return {...state, [action.id]: state[action.id] - 1};
-    // } else {
-    //   var newState = ({...state});
-    //   delete newState[action.id];
-    //   return newState;
-    // }
-
     case types.BASKET_DECREASE_COUNT:
     var index;
     if ((index = state.findIndex(item => (item.id === action.id))) !== -1) {
@@ -31,13 +22,6 @@ const basketReducer = (state = [], action) => {
       return state;
     }
 
-    // case types.BASKET_INCREASE_COUNT:
-    // if (state[action.id]) {
-    //   return {...state, [action.id]: state[action.id] + 1};
-    // } else {
-    //   return {...state, [action.id]: 1};
-    // }
-
     case types.BASKET_INCREASE_COUNT:
     var index;
     if ((index = state.findIndex(item => (item.id === action.id))) !== -1) {
@@ -48,15 +32,6 @@ const basketReducer = (state = [], action) => {
       return [...state, {id: action.id, qty: 1}];
     }
 
-    // case types.BASKET_REMOVE_ITEM:
-    // if (state[action.id]) {
-    //   var newState = {...state};
-    //   delete newState[action.id];
-    //   return newState;
-    // } else {
-    //   return state;
-    // }
-
     case types.BASKET_REMOVE_ITEM:
     var index;
     if ((index = state.findIndex(item => (item.id === action.id))) !== -1) {
@@ -64,6 +39,7 @@ const basketReducer = (state = [], action) => {
     } else {
       return state;
     }
+
 
     case types.CLEAR_BASKET:
     return [];

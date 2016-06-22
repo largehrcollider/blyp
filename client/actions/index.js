@@ -3,10 +3,33 @@ import * as types from '../constants/actionTypes';
 import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 import axios from 'axios';
+import total from '../helpers/basketTotal.js'
 
 //////////////////////////////////////////////////////////////
 // Synchronous Action Creators
 //////////////////////////////////////////////////////////////
+
+/**
+* Payment methods
+*/
+export const paymentMetodSelected = (method) => {
+  return {
+    type: types.PAYMENT_METHOD_CASH,
+    method
+  }
+};
+
+export const cashReceived = () => {
+  return {
+    type: types.CHECKOUT_COMPLETED;
+  }
+}
+
+export const checkoutCompleted = () => {
+  return {
+    type: types.CHECKOUT_COMPLETED;
+  }
+}
 
 // example action creator
 export const somethingHappened = (data) => {
@@ -227,3 +250,28 @@ export const transactionCompleted = () => {
     dispatch(transactionRequestSent());
   }
 }
+
+{
+  type: types.CASH_RECEIVED,
+  cashReceived: amount
+}
+
+export const cashReceived = (amount) => {
+  return (dispatch, getState) => {
+    if (amount - total(getState().basket) > 0) {
+      // change is due
+
+      // send transaction request to server
+      // dispatch cash received value
+    }
+  }
+};
+
+export const cashCheckoutCompleted = () => {
+  return (dispatch) => {
+    dispatch(reset('amountReceived'));
+    dispatch(checkoutCompleted());
+    dispatch(clearBasket());
+    dispatch(push('/testing/sell'));
+  };
+};
