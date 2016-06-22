@@ -137,3 +137,9 @@ body .login_fields__submit input:hover {
   background: #0ca56a;
   cursor: pointer;
 }
+
+.index-card {
+  height: 250px;
+  max-width: 250px;
+  min-width: 200px;
+}
