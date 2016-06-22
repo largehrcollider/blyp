@@ -2,6 +2,6 @@ import React, { Component } from 'react';
 
 export default ({ total }) => (
   <div>
-    {total}
+    $ {total}
   </div>
 )
