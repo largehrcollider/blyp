@@ -10,7 +10,8 @@ const mapStateToProps = (state, ownProps) => {
     // quantity: (() => {
     //   state.basket.find
     // })()
-    quantity: state.basket.find((item) => (item.sku === sku)).quantity
+    quantity: state.basket.find((item) => (item.sku === sku)).quantity,
+    price: state.products[sku].price
   };
 }
 
