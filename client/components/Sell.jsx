@@ -1,5 +1,5 @@
 import React from 'react';
-// import FilterPane from '../containers/FilterPane/FilterPane.js';
+import FilterPane from '../containers/FilterPane.js';
 import ProductsPane from '../containers/ProductsPane5.js'
 import BasketPane from './BasketPane.jsx';
 import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
