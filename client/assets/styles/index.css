@@ -216,3 +216,15 @@ body .login_fields__submit input:hover {
 .quantity: {
   margin: 3px 0px 15px 0px;
 }
+
+.login {
+  box-sizing: content-box;
+}
+
+.login-fields {
+  box-sizing: content-box;
+}
+
+.login-title {
+  box-sizing: content-box;
+}
