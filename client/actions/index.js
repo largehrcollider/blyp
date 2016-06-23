@@ -237,7 +237,7 @@ export const transactionCompleted = () => {
   return (dispatch, getState) => {
     var transaction = {
       basket: getState().basket,
-      method: getState().payment.method
+      tender: getState().payment.method
     };
     const config = {
       url: '/api/transactions',
