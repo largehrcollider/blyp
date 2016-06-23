@@ -237,9 +237,8 @@ export const transactionCompleted = () => {
   return (dispatch, getState) => {
     var transaction = {
       basket: getState().basket,
-      method: 'visa'
+      method: getState().payment.method
     };
-    console.log(transaction.basket);
     const config = {
       url: '/api/transactions',
       method: 'post',
@@ -248,8 +247,6 @@ export const transactionCompleted = () => {
     axios(config)
     .then(({ data }) => {
       dispatch(transactionRequestSuccess());
-      dispatch(clearBasket());
-      dispatch(toggleCheckout());
     })
     .catch(err => {
       dispatch(transactionRequestFailure());
@@ -258,19 +255,14 @@ export const transactionCompleted = () => {
   }
 }
 
-// {
-//   type: types.CASH_RECEIVED,
-//     cashReceived: amount
-// }
-
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
     if (amount - total(getState()) > 0) {
       // send transaction request to server
+      dispatch(transactionCompleted());
     } else {
       // display warning not enough
     }
-    // dispatch cash received value
     dispatch(cashReceived(amount));
   }
 };
