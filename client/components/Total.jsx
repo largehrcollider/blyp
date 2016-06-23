@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default ({ total }) => (
-  <div>
+  <div className="total">
     Total: $ {total}
   </div>
 )
