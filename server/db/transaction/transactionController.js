@@ -4,7 +4,7 @@ var ProductController = require('../product/productController.js');
 //Deducts the quantity purchased from the product quantity in the db
 //Adds the item name to the transaction
 var processTransaction = function(transaction){
-  transaction.item_id.forEach(function(item){
+  transaction.basket.forEach(function(item){
     ProductController.updateProductBySku(item.id, {$inc: {quantity: -item.quantity}}, function(err, product){
       item.name = product.name;
     });
