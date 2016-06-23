@@ -22,8 +22,8 @@ router.post('/', function(req, res){
   });
 });
 
-router.put('/:id', function(req, res){
-  Transaction.updateTransactionById(req.params.id, req.body, function(err, transaction){
+router.put('/:sku', function(req, res){
+  Transaction.updateTransactionById(req.params.sku, req.body, function(err, transaction){
     if(err){
       res.sendStatus(500);
     } else {
@@ -32,8 +32,8 @@ router.put('/:id', function(req, res){
   });
 });
 
-router.delete('/:id', function(req, res){
-  Transaction.deleteTransactionById(req.params.id, function(err, transaction){
+router.delete('/:sku', function(req, res){
+  Transaction.deleteTransactionById(req.params.sku, function(err, transaction){
     if(err){
       res.sendStatus(500);
     } else {
