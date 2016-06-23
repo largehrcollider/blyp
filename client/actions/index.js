@@ -93,24 +93,24 @@ export const populateWithFakeData = (data) => {
 /**
 * Basket interaction
 */
-export const basketDecreaseCount = (id) => {
+export const basketDecreaseCount = (sku) => {
   return {
     type: types.BASKET_DECREASE_COUNT,
-    id
+    sku
   };
 };
 
-export const basketIncreaseCount = (id) => {
+export const basketIncreaseCount = (sku) => {
   return {
     type: types.BASKET_INCREASE_COUNT,
-    id
+    sku
   };
 };
 
-export const basketRemoveItem = (id) => {
+export const basketRemoveItem = (sku) => {
   return {
     type: types.BASKET_REMOVE_ITEM,
-    id
+    sku
   };
 };
 
@@ -237,7 +237,7 @@ export const transactionCompleted = () => {
   return (dispatch, getState) => {
     var transaction = {
       basket: getState().basket,
-      method: getState().payment.method
+      tender: getState().payment.method
     };
     const config = {
       url: '/api/transactions',

@@ -5,7 +5,7 @@ import BasketItem from '../containers/BasketItem.js'
 const Basket = ({ basketItems }) => (
   <div>
     {basketItems.map(item => (
-      <BasketItem key={item.id} id={item.id}/>
+      <BasketItem key={item.sku} sku={item.sku}/>
     ))}
   </div>
 );

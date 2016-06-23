@@ -27,7 +27,7 @@ export default class ProductsPane extends Component {
             {(() => {
               var nodes = [];
                 for (var i in list) {
-                  nodes.push(<Product key={list[i].sku} id={list[i].sku} />)
+                  nodes.push(<Product key={list[i].sku} sku={list[i].sku} />)
                 }
               return nodes;
             })()}
