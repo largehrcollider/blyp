@@ -17,12 +17,9 @@ import Checkout from './components/Checkout.jsx'
 export default (
   // main app routes
   <Route component={CoreLayout}>
-    <Route path="/" component={InitialPrompt} >
-    </Route>
-    <Route path="/chat" component={Chat}/>
-    <Route component={Toolbar} >
-    <Route path="/store" component={StoreMaster}/>
-    </Route>
+    <Route path="/" component={InitialPrompt} />
+    <Route path="/sell" component={Sell} />
+    <Route path="/checkout" component={Checkout} />
 
     {/* for testing and debugging*/}
     <Route path="/testing" component={Testing}>

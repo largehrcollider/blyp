@@ -203,7 +203,7 @@ export const attemptLogin = ({username, password}) => {
       localStorage.setItem('jwt', jwt);
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));
-      dispatch(push('/store'));
+      dispatch(push('/sell'));
 
     })
     .catch(err => {
@@ -252,8 +252,8 @@ export const transactionCompleted = () => {
       dispatch(transactionRequestFailure());
     });
     dispatch(transactionRequestSent());
-  }
-}
+  };
+};
 
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
@@ -264,7 +264,7 @@ export const validateCashReceived = (amount) => {
       // display warning not enough
     }
     dispatch(cashReceived(amount));
-  }
+  };
 };
 
 export const paymentMethodChange = (newMethod) => {
@@ -281,6 +281,6 @@ export const cashCheckoutCompleted = () => {
     dispatch(reset('amountReceived'));
     dispatch(checkoutCompleted());
     dispatch(clearBasket());
-    dispatch(push('/testing/sell'));
+    dispatch(push('/sell'));
   };
 };

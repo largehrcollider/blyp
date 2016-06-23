@@ -13,14 +13,16 @@ export default class BasketItem extends Component {
     * attach function to decrement quantity
     * attach function to delete item
     */
-    const {name, quantity, incrementItem, decrementItem, deleteItem} = this.props;
+    const {name, quantity, price, incrementItem, decrementItem, deleteItem} = this.props;
     return (
       <div className="basket-item">
       <span className="name">
           {name}
         </span>
       <span className="delete" onClick={deleteItem}>X</span>
-        
+        <div>
+        {'($' + price*quantity + ')'}
+        </div>
         <div className="quantity">
         <span> {'Quantity: '+quantity+' '}</span>
         <span className="increment-up" onClick={incrementItem}>+</span>

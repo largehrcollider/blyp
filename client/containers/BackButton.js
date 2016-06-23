@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     back: () => {
-      dispatch(push('/testing/sell'));;
+      dispatch(push('/sell'));
     }
   };
 }

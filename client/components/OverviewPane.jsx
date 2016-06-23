@@ -7,8 +7,8 @@ import Total from '../containers/Total.js'
 const OverviewPane = () => (
   <div>
     <Basket />
-    <BackButton />
     <Total />
+    <BackButton />
   </div>
 );
 

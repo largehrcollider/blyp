@@ -4,6 +4,7 @@ import CreditCardSelector from '../containers/CreditCardSelector.js';
 
 const PaymentMethodSelector = () => (
   <div>
+    <div className="pay-with">Pay with:</div>
     <CashSelector />
     <CreditCardSelector />
   </div>
