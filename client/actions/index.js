@@ -252,8 +252,8 @@ export const transactionCompleted = () => {
       dispatch(transactionRequestFailure());
     });
     dispatch(transactionRequestSent());
-  }
-}
+  };
+};
 
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
@@ -264,7 +264,7 @@ export const validateCashReceived = (amount) => {
       // display warning not enough
     }
     dispatch(cashReceived(amount));
-  }
+  };
 };
 
 export const paymentMethodChange = (newMethod) => {
