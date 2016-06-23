@@ -2,14 +2,11 @@ import * as actions from '../actions'
 import { connect } from 'react-redux';
 import ProductsPane from '../components/ProductsPane5.jsx'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    products: state.products
+    products: state.products,
+    visibilityFilter: state.toolbar.visibilityFilter
   };
-}
+};
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsPane);
+export default connect(mapStateToProps)(ProductsPane);

@@ -6,12 +6,14 @@ export default class ProductsPane extends Component {
     super(props);
   }
   render() {
-    const { products } = this.props;
+    const { products, visibilityFilter } = this.props;
     // the prop `products` is object, and filter transforms to array
     const filter = (products) => {
       var results = [];
       for (var key in products) {
-        results.push(products[key]);
+        if (products[key].category === visibilityFilter || visibilityFilter === 'all') {
+          results.push(products[key]);
+        }
       }
       return results;
     };
