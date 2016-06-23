@@ -8,11 +8,11 @@ var transactionSchema = mongoose.Schema({
   customer: {type: Schema.ObjectId, ref: 'Customer'},
 
   //References to items in item collection
-  item_id: [{type: Schema.ObjectId, ref: 'Product'}],
+  item_id: Array,
 
   //How was the purchase made, Amex, MasterCard, Cash etc.
-  currency: [{type: String, required: true}],
-  purchase_total: {type: Number, required: true}
+  currency: {type: String},
+  purchase_total: {type: Number}
 });
 
 var Transaction = mongoose.model('Transaction', transactionSchema);

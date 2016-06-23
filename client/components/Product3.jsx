@@ -7,7 +7,7 @@ export default class BasketItem extends Component {
   render() {
     const {name, incrementItem} = this.props;
     return (
-      <div className="col-md-3">
+      <div className="col-md-3 index-card">
         <div className="card" onClick={incrementItem} col-md-3>
           <div className="card-block">
             <h4 className="card-title">{name}</h4>
