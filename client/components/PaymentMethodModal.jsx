@@ -3,7 +3,7 @@ import AmountReceived from '../containers/AmountReceived.js';
 import ChangeDue from '../containers/ChangeDue.js';
 // import ProcessCreditCard from '../containers/ProcessCreditCard.js';
 
-const PaymentMethodModal = ({ method, changeDue}) => (
+const PaymentMethodModal = ({ method, changeDue }) => (
   <div>
     <div>
       {(method === 'cash') && !changeDue && (

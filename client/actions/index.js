@@ -12,9 +12,9 @@ import total from '../helpers/basketTotal.js'
 /**
 * Payment methods
 */
-export const paymentMetodSelected = (method) => {
+export const paymentMethodSelected = (method) => {
   return {
-    type: types.PAYMENT_METHOD_CASH,
+    type: types.PAYMENT_METHOD_SELECTED,
     method
   };
 };
@@ -265,7 +265,7 @@ export const transactionCompleted = () => {
 
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
-    if (amount - total(getState().basket) > 0) {
+    if (amount - total(getState()) > 0) {
       // send transaction request to server
     } else {
       // display warning not enough
@@ -279,6 +279,8 @@ export const paymentMethodChange = (newMethod) => {
   return (dispatch) => {
     dispatch(resetPayment());
     dispatch(paymentMethodSelected(newMethod));
+    // clear payment forms?
+    dispatch(reset('amountReceived'));
   };
 };
 

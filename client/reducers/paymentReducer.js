@@ -25,7 +25,7 @@ var initialState = {
     case types.CASH_RECEIVED:
     return {
       ...state,
-      cashReceived: action.cashReceived
+      cashReceived: action.amount
     };
 
     case types.CHECKOUT_COMPLETED:

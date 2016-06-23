@@ -1,6 +1,6 @@
 import * as actions from '../actions/index.js';
 import { connect } from 'react-redux'
-import MethodCreditCard from '../components/MethodCreditCard.jsx';
+import CreditCardSelector from '../components/CreditCardSelector.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -12,8 +12,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    isSelected: state.payment.method === 'credit card';
+    isSelected: state.payment.method === 'credit card'
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MethodCreditCard);
+export default connect(mapStateToProps, mapDispatchToProps)(CreditCardSelector);
