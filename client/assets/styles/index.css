@@ -178,7 +178,7 @@ body .login_fields__submit input:hover {
 .backButton {
   border: 1px solid #ff9966;
   border-radius: 10px;
-  padding: 0px 0px 0px 10px;
+  padding: 0px 0px 0px 30px;
   max-width: 100px;
 }
 
@@ -227,4 +227,29 @@ body .login_fields__submit input:hover {
 
 .login-title {
   box-sizing: content-box;
+}
+
+.pay-button{
+  border: 1px solid #004d1a;
+  background-color: #009933;
+  border-radius: 10px;
+  padding: 0px 0px 0px 30px;
+  margin: 0px 0px 5px 0px;
+  max-width: 100px;
+}
+
+.credit-button{
+  border: 1px solid #004d1a;
+  background-color: #009933;
+  border-radius: 10px;
+  padding: 0px 0px 0px 8px;
+  max-width: 100px;
+}
+
+.pay-with{
+  padding: 0px 0px 0px 10px;
+}
+
+.total{
+  padding: 0px 0px 0px 10px;
 }
