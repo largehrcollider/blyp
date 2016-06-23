@@ -1,6 +1,6 @@
 import React from 'react';
-import OverviewPane from "./OverviewPane.jsx"
-// import PaymentPane from
+import OverviewPane from './OverviewPane.jsx';
+import PaymentPane from './PaymentPane.jsx';
 
 const Checkout = () => (
   <div>
@@ -8,7 +8,7 @@ const Checkout = () => (
       <OverviewPane />
     </div>
     <div className="col-md-9">
-      {/*<PaymentPane /> */}
+      <PaymentPane />
     </div>
   </div>
 );

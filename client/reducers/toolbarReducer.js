@@ -7,7 +7,7 @@ export default (state = {
   checkoutButton: false,
   inventoryButton: false,
   viewCheckout: false,
-  visibilityFilter: 'All'
+  visibilityFilter: 'all',
 }, action) => {
   switch (action.type) {
     case types.CHECKOUT_CLICK:
