@@ -1,11 +1,11 @@
-import * as actions from '../../actions'
 import { connect } from 'react-redux';
-import Basket from '../../components/BasketItem.jsx'
+import * as actions from '../actions'
+import FilterPane from '../components/FilterPane.jsx'
 
 const mapStateToProps = (state) => {
   return {
     categories: (() => {
-      var categories = [];
+      var categories = ['all'];
       for (var product in state.products) {
         if (categories.indexOf(state.products[product].category) === -1) {
           categories.push(state.products[product].category);
@@ -16,4 +16,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps)(FilterPane);
