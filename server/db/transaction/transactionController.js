@@ -5,7 +5,8 @@ var ProductController = require('../product/productController.js');
 //Adds the item name to the transaction
 var processTransaction = function(transaction){
   transaction.basket.forEach(function(item){
-    ProductController.updateProductBySku(item.id, {$inc: {quantity: -item.quantity}}, function(err, product){
+    ProductController.updateProductBySku(item.sku, {$inc: {quantity: -item.quantity}})
+    .then(function(product){
       item.name = product.name;
     });
   });
@@ -22,8 +23,8 @@ exports.getAllTransactions = function(callback){
   });
 };
 
-exports.getTransactionById = function(id, callback){
-  Transaction.findOne({_id: id})
+exports.getTransactionById = function(sku, callback){
+  Transaction.findOne({sku: sku})
   .then(function(transaction){
     callback(null, transaction);
   })
@@ -44,8 +45,8 @@ exports.createTransaction = function(transaction, callback){
 };
 
 //Not tested
-exports.updateTransactionById = function(id, update, callback){
-  Transaction.findOneAndUpdate({_id: id}, update, {new: true})
+exports.updateTransactionById = function(sku, update, callback){
+  Transaction.findOneAndUpdate({sku: sku}, update, {new: true})
   .then(function(transaction){
     callback(null, transaction);
   })
@@ -54,8 +55,8 @@ exports.updateTransactionById = function(id, update, callback){
   });
 };
 
-exports.TransactionById = function(id, callback){
-  Transaction.findOneAndRemove({_id: id})
+exports.TransactionById = function(sku, callback){
+  Transaction.findOneAndRemove({sku: sku})
   .then(function(transaction){
     callback(null, transaction);
   })
