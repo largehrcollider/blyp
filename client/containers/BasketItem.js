@@ -3,28 +3,28 @@ import {connect} from 'react-redux';
 import BasketItem from '../components/BasketItem.jsx'
 
 const mapStateToProps = (state, ownProps) => {
-  const {id} = ownProps;
+  const {sku} = ownProps;
   return {
-    name: state.products[id].name,
-    // qty: state.products.id.qty
-    // qty: (() => {
+    name: state.products[sku].name,
+    // quantity: state.products.sku.quantity
+    // quantity: (() => {
     //   state.basket.find
     // })()
-    qty: state.basket.find((item) => (item.id === id)).qty
+    quantity: state.basket.find((item) => (item.sku === sku)).quantity
   };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const {id} = ownProps;
+  const {sku} = ownProps;
   return {
     incrementItem: () => {
-      dispatch(actions.basketIncreaseCount(id));
+      dispatch(actions.basketIncreaseCount(sku));
     },
     decrementItem: () => {
-      dispatch(actions.basketDecreaseCount(id));
+      dispatch(actions.basketDecreaseCount(sku));
     },
     deleteItem: () => {
-      dispatch(actions.basketRemoveItem(id));
+      dispatch(actions.basketRemoveItem(sku));
     }
   };
 }

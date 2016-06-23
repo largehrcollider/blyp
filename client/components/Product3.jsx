@@ -8,9 +8,9 @@ export default class BasketItem extends Component {
     const {name, incrementItem} = this.props;
     return (
       <div className="col-md-3 index-card">
-        <div className="card" onClick={incrementItem} col-md-3>
-          <div className="card-block">
-            <h4 className="card-title">{name}</h4>
+        <div className="my-card" onClick={incrementItem} col-md-3>
+          <div className="my-card-block">
+            <h3 className="my-card-title">{name}</h3>
           </div>
           <img data-src="" alt={name} />
         </div>
