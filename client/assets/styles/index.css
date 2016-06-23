@@ -162,10 +162,17 @@ body .login_fields__submit input:hover {
 .my-card-block{
   margin: 0px;
   padding: 0px;
+  text-align: center;
 }
 .my-card-title{
+  text-align: center;
   margin: 0px;
   padding: 0px;
+}
+
+.my-card-image{
+  text-align: center;
+  margin: auto;
 }
 
 .checkoutButton {
