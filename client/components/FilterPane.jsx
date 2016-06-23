@@ -1,10 +1,10 @@
 import React from 'react'
-import CategoryToggle from '../containers/CategoryToggle.js'
+import ToggleCategory from '../containers/ToggleCategory.js'
 
 const FilterPane = ({ categories }) => (
   <div>
     {categories.map(category => (
-      <CategoryToggle key={category} category={category} />
+      <ToggleCategory key={category} category={category} />
       ))}
   </div>
 );

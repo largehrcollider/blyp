@@ -1,6 +1,6 @@
 import * as actions from '../actions'
 import { connect } from 'react-redux';
-import CategoryToggle from '../components/CategoryToggle.jsx';
+import ToggleCategory from '../components/ToggleCategory.jsx';
 
 const mapStateToProps = (state) => {
   return {};
@@ -15,4 +15,4 @@ const mapDispatchToProps = (dispatch, { category }) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryToggle);
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleCategory);
