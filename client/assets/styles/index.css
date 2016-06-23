@@ -181,3 +181,38 @@ body .login_fields__submit input:hover {
   padding: 0px 0px 0px 10px;
   max-width: 100px;
 }
+
+.increment-up{
+  background-color: #009900;
+  border: 1px solid #009900;
+  border-radius: 3px;
+  margin: 0px 2px 0px 2px;
+  padding: 0px 6px 2px 6px;
+  color: #ffffff;
+}
+
+.increment-down{
+  background-color: #009900;
+  border: 1px solid #009900;
+  border-radius: 3px;
+  margin: 0px 2px 0px 2px;
+  padding: 0px 7px 2px 7px;
+  color: #ffffff;
+}
+
+.delete{
+  background-color: #cc0000;
+  border: 1px solid #cc0000;
+  border-radius: 3px;
+  margin: 0px 2px 0px 2px;
+  padding: 0px 6px 2px 6px;
+  color: #ffffff;
+}
+
+.basket-item{
+  width: 210px
+}
+
+.quantity: {
+  margin: 3px 0px 15px 0px;
+}
