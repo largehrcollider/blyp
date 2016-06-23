@@ -10,7 +10,7 @@ const Sell = () => (
       <PopulateWithFakeData />
     </div>
     <div className="col-md-2">
-      {/* <FilterPane /> */}
+      <FilterPane />
     </div>
     <div className="col-md-8">
       <ProductsPane />
