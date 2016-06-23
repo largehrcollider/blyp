@@ -16,41 +16,48 @@ export const paymentMetodSelected = (method) => {
   return {
     type: types.PAYMENT_METHOD_CASH,
     method
-  }
+  };
 };
 
-export const cashReceived = () => {
+export const cashReceived = (amount) => {
   return {
-    type: types.CHECKOUT_COMPLETED;
-  }
-}
+    type: types.CASH_RECEIVED,
+    amount
+  };
+};
 
 export const checkoutCompleted = () => {
   return {
-    type: types.CHECKOUT_COMPLETED;
-  }
-}
+    type: types.CHECKOUT_COMPLETED,
+  };
+};
+
+export const resetPayment = () => {
+  return {
+    type: types.RESET_PAYMENT,
+  };
+};
 
 // example action creator
 export const somethingHappened = (data) => {
   return {
     type: types.DUMMY,
     color: data.color
-  }
-}
+  };
+};
 
 // Toolbar Buttons Actions
 export const checkoutClick = () => {
   return {
     type: types.CHECKOUT_CLICK
-  }
-}
+  };
+};
 
 export const inventoryClick = () => {
   return {
     type: types.INVENTORY_CLICK
-  }
-}
+  };
+};
 
 // authentication state
 export const loginRequestSent = () => {
@@ -251,20 +258,28 @@ export const transactionCompleted = () => {
   }
 }
 
-{
-  type: types.CASH_RECEIVED,
-  cashReceived: amount
-}
+// {
+//   type: types.CASH_RECEIVED,
+//     cashReceived: amount
+// }
 
-export const cashReceived = (amount) => {
+export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
     if (amount - total(getState().basket) > 0) {
-      // change is due
-
       // send transaction request to server
-      // dispatch cash received value
+    } else {
+      // display warning not enough
     }
+    // dispatch cash received value
+    dispatch(cashReceived(amount));
   }
+};
+
+export const paymentMethodChange = (newMethod) => {
+  return (dispatch) => {
+    dispatch(resetPayment());
+    dispatch(paymentMethodSelected(newMethod));
+  };
 };
 
 export const cashCheckoutCompleted = () => {

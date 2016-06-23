@@ -35,6 +35,13 @@ var initialState = {
       cashReceived: null
     }
 
+    case types.RESET_PAYMENT:
+    return {
+      ...state,
+      method: null,
+      cashReceived: null
+    }
+
     default:
     return state;
   };

@@ -5,7 +5,7 @@ import MethodCreditCard from '../components/MethodCreditCard.jsx';
 const mapDispatchToProps = (dispatch) => {
   return {
     selectCreditCard: () => {
-      // dispatch(actions.paymentMethodCreditCard());
+      // dispatch(actions.paymentMethodSelected('credit card'));
     }
   };
 };

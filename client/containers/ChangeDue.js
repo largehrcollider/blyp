@@ -1,12 +1,11 @@
 import * as actions from '../actions'
 import { connect } from 'react-redux';
 import ChangeDue from '../containers/ChangeDue.jsx';
+import total from '../helpers/basketTotal.js'
 
 const mapStateToProps = (state) => {
   return {
-    due: state.basket.reduce((memo, product) => {
-      return memo + state.products[product.id].price * product.qty;
-    }, 0) - state.payment.cashReceived
+    due: total(state.basket) - state.payment.cashReceived
   };
 }
 

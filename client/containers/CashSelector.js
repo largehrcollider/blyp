@@ -5,7 +5,7 @@ import MethodCash from '../components/MethodCash.jsx';
 const mapDispatchToProps = (dispatch) => {
   return {
     selectCash: () => {
-      dispatch(actions.paymentMetodSelected('cash'));
+      dispatch(actions.paymentMethodSelected('cash'));
     }
   };
 };

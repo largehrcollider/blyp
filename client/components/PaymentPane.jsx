@@ -1,10 +1,10 @@
 import React from 'react';
-import PaymentMathods from './PaymentMethods.jsx';
+import PaymentMethodSelector from './PaymentMethodSelector.jsx';
 import PaymentMethodModal from '../containers/PaymentMethodModal.js';
 
 const PaymentPane = () => (
   <div>
-    <PaymentMethods />
+    <PaymentMethodSelector />
     <PaymentMethodModal />
   </div>
 );
