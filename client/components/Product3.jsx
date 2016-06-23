@@ -12,7 +12,9 @@ export default class BasketItem extends Component {
           <div className="my-card-block">
             <h3 className="my-card-title">{name}</h3>
           </div>
+          <div className="my-card-image">
           <img data-src="" alt={name} />
+          </div>
         </div>
       </div>
     );
