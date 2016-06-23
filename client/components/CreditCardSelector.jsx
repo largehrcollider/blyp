@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MethodCreditCard = ({ selectCreditCard }) => (
-  <div onClick={selectCreditCard}>
+  <div className="credit-button btn-success" onClick={selectCreditCard}>
     Credit Card
   </div>
 );
