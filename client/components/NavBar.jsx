@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import blypLogo from '../assets/images/blyplogonav.png';
 import settings from '../assets/images/settings.png';
 import barcode from '../assets/images/barcode.png';
@@ -9,9 +10,9 @@ const NavBar = () => (
   <nav className="menu">
   	<ul>
     	<li className="active">
-        <a href="">
+        <Link to='/'>
           <img src={blypLogo}/>
-        </a>
+        </Link>
       </li>
 			<li>
         <form className="search">
@@ -20,19 +21,19 @@ const NavBar = () => (
 				</form>
       </li>
       <li>
-        <a href={""}>
+        <Link to='/settings'>
           <img src={settings}/>
-        </a>
+        </Link>
       </li>
       <li>
-        <a href={""}>
+        <Link to='/inventory'>
           <img src={barcode}/>
-        </a>
+        </Link>
       </li>
       <li>
-        <a href={""}>
+        <Link to='/sell'>
           <img src={cart}/>
-        </a>
+        </Link>
       </li>
     </ul>
   </nav>

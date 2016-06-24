@@ -1,8 +1,11 @@
 import React from 'react';
 import FilterPane from '../containers/FilterPane.js';
+import InventoryPane from '../containers/InventoryPane.js';
+import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
 
-const Settings = () => (
+const Inventory = () => (
   <div className="container-fluid">
+    <PopulateWithFakeData />
     <div className="col-md-2">
       <FilterPane />
     </div>
@@ -12,4 +15,4 @@ const Settings = () => (
   </div>
 );
 
-export default Settings;
+export default Inventory;

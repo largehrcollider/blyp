@@ -1,6 +1,6 @@
 import * as actions from '../actions'
 import { connect } from 'react-redux';
-import ProductsPane from '../components/ProductsPane5.jsx'
+import InventoryPane from '../components/InventoryPane.jsx'
 
 const mapStateToProps = (state) => {
   return {
@@ -9,4 +9,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ProductsPane);
+export default connect(mapStateToProps)(InventoryPane);

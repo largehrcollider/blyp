@@ -1,5 +1,8 @@
-import React, { Component } from 'react'
-import Product from '../containers/Product3.js';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import ProductsPaneRow from './ProductsPaneRow.jsx';
+
+import style from '../assets/styles/InventoryPane.css';
 
 export default class InventoryPane extends Component {
   constructor(props) {
@@ -24,16 +27,18 @@ export default class InventoryPane extends Component {
     };
 
     var list = order(filter(products));
+
+    console.log(style.row);
     return (
-        <div className="row">
-            {(() => {
-              var nodes = [];
-                for (var i in list) {
-                  nodes.push(<Product key={list[i].sku} sku={list[i].sku} />)
-                }
-              return nodes;
-            })()}
-        </div>
+      <div>
+        {list.map(element => (
+          <div className={style.row} key={element.name}>
+            <Link to={`/inventory/${element.sku}`}>
+              <ProductsPaneRow row={element}/>
+            </Link>
+          </div>
+        ))}
+      </div>
     );
-  }
+  };
 }
