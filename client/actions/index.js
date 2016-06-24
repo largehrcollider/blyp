@@ -142,6 +142,8 @@ export const transactionRequestSent = () => {
 * Product save requests
 */
 export const saveProductRequestSuccess = (product) => {
+  // might have to modify later to take in array of products
+  // this or the reducer
   return {
     type: types.SAVE_PRODUCT_REQUEST_SUCCESS,
     product
@@ -179,6 +181,82 @@ export const toggleCategory = (category) => {
     category
   }
 }
+/**
+* product request C action creators
+*/
+export const productCRequestSent = () => {
+  return {
+    type: types.PRODUCT_C_REQUEST_SENT
+  };
+};
+export const productCRequestSuccess = () => {
+  return {
+    type: types.PRODUCT_C_REQUEST_SUCCESS
+  };
+};
+export const productCRequestFailure = () => {
+  return {
+    type: types.PRODUCT_C_REQUEST_FAILURE
+  };
+};
+
+/**
+* product request R action creators
+*/
+export const productRRequestSent = () => {
+  return {
+    type: types.PRODUCT_R_REQUEST_SENT
+  };
+};
+export const productRRequestSuccess = (data) => {
+  return {
+    type: types.PRODUCT_R_REQUEST_SUCCESS,
+    data
+  };
+};
+export const productRRequestFailure = () => {
+  return {
+    type: types.PRODUCT_R_REQUEST_FAILURE
+  };
+};
+/**
+* product request U action creators
+*/
+export const productURequestSent = () => {
+  return {
+    type: types.PRODUCT_U_REQUEST_SENT
+  };
+};
+export const productURequestSuccess = () => {
+  return {
+    type: types.PRODUCT_U_REQUEST_SUCCESS
+  };
+};
+export const productURequestFailure = () => {
+  return {
+    type: types.PRODUCT_U_REQUEST_FAILURE
+  };
+};
+
+/**
+* product request D action creators
+*/
+export const productDRequestSent = () => {
+  return {
+    type: types.PRODUCT_D_REQUEST_SENT
+  };
+};
+export const productDRequestSuccess = () => {
+  return {
+    type: types.PRODUCT_D_REQUEST_SUCCESS
+  };
+};
+export const productDRequestFailure = () => {
+  return {
+    type: types.PRODUCT_D_REQUEST_FAILURE
+  };
+};
+
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -292,6 +370,23 @@ export const cashCheckoutCompleted = () => {
 /**
 * the sku is optional. if not supplied, will fetch all products in database
 */
+export const createProduct(product) = () => {
+  return (dispatch) => {
+    const config = {
+      url: '/api/products',
+      method: 'post',
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(productCRequestSuccess(data));
+      dispatch(reset('addComponentForm'));
+    })
+    .catch(err => {
+      dispatch(productCRequestFailure());
+    });
+    dispatch(productCRequestSent());
+  };
+};
 export const readProduct(sku) = () => {
   return (dispatch) => {
     const config = {
@@ -300,26 +395,46 @@ export const readProduct(sku) = () => {
     };
     axios(config)
     .then(({ data }) => {
-      dispatch(());
+      dispatch(productRRequestSuccess(data));
     })
     .catch(err => {
-      dispatch(());
+      dispatch(productRRequestFailure());
     });
-    dispatch(());
+    dispatch(productRRequestSent());
   };
 };
-export const readProduct(sku) = () => {
+export const updateProduct(product) = () => {
   return (dispatch) => {
-
+    const config = {
+      url: '/api/products',
+      method: 'put',
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(productURequestSuccess(data));
+      // dispatch(reset('addComponentForm'));
+      // maybe reset the an updateComponent form?
+    })
+    .catch(err => {
+      dispatch(productURequestFailure());
+    });
+    dispatch(productURequestSent());
   };
 };
-export const readProduct(sku) = () => {
+export const deleteProduct(sku) = () => {
   return (dispatch) => {
-
-  };
-};
-export const readProduct(sku) = () => {
-  return (dispatch) => {
+    const config = {
+      url: `/api/products/${sku}`,
+      method: 'delete',
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(productDRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(productDRequestFailure());
+    });
+    dispatch(productDRequestSent());
 
   };
 };

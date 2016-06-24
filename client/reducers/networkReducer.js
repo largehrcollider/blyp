@@ -33,7 +33,8 @@ const networkReducer = (state = initialState, action) => {
         ...state.product,
         C: {
           ...state.product.C,
-          isFetching: true
+          isFetching: true,
+          error: false
         }
       }
     };
@@ -67,7 +68,8 @@ const networkReducer = (state = initialState, action) => {
         ...state.product,
         R: {
           ...state.product.R,
-          isFetching: true
+          isFetching: true,
+          error: false
         }
       }
     };
@@ -102,7 +104,8 @@ const networkReducer = (state = initialState, action) => {
         ...state.product,
         U: {
           ...state.product.U,
-          isFetching: true
+          isFetching: true,
+          error: false
         }
       }
     };
@@ -137,7 +140,8 @@ const networkReducer = (state = initialState, action) => {
         ...state.product,
         D: {
           ...state.product.D,
-          isFetching: true
+          isFetching: true,
+          error: false
         }
       }
     };
