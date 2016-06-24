@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import ProductsPaneRow from './ProductsPaneRow.jsx';
 
 import style from '../assets/styles/InventoryPane.css';
@@ -32,9 +33,9 @@ export default class InventoryPane extends Component {
       <div>
         {list.map(element => (
           <div className={style.row} key={element.name}>
-            <a key={element.sku} href={`/inventory/${element.sku}`}>
+            <Link to={`/inventory/${element.sku}`}>
               <ProductsPaneRow row={element}/>
-            </a>
+            </Link>
           </div>
         ))}
       </div>
