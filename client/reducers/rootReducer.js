@@ -7,6 +7,7 @@ import auth from './authReducer.js';
 import basket from './basketReducer.js';
 import products from './productsReducer.js';
 import payment from './paymentReducer'
+import network from './networkReducer.js'
 // import reducer from './myReducerFile.js';
 
 /**
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   auth,
   basket,
   products,
-  payment
+  payment,
+  network
 });
 
 export default rootReducer;
