@@ -6,6 +6,7 @@ import ProductsPane from './containers/ProductsPaneContainer.js';
 import Toolbar from './containers/ToolbarContainer.js';
 import StoreMaster from './containers/StoreMasterContainer.js';
 import Chat from './containers/ChatContainer.js';
+
 // import ComponentOrContainer from './containers/Name';
 
 //testing imports
@@ -15,17 +16,18 @@ import Checkout from './components/Checkout.jsx'
 
 export default (
   // main app routes
-  <Route component={CoreLayout}>
+  <Route>
     <Route path="/" component={InitialPrompt} />
-    <Route path="/sell" component={Sell} />
-    <Route path="/checkout" component={Checkout} />
+    <Route component={CoreLayout}>
+      <Route path="/sell" component={Sell} />
+      <Route path="/checkout" component={Checkout} />
 
-    {/* for testing and debugging*/}
-    <Route path="/testing" component={Testing}>
-      {/*component available at /testing/sample*/}
-      <Route path="/testing/sell" component={Sell} />
-      <Route path="/testing/checkout" component={Checkout} />
+      {/* for testing and debugging*/}
+      <Route path="/testing" component={Testing}>
+        {/*component available at /testing/sample*/}
+        <Route path="/testing/sell" component={Sell} />
+        <Route path="/testing/checkout" component={Checkout} />
+      </Route>
     </Route>
   </Route>
-
 );
