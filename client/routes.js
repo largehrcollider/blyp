@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, IndexRedirect} from 'react-router';
-import CoreLayout from './components/CoreLayoutComponent.jsx';
+import CoreLayout from './containers/CoreLayoutComponent.jsx';
 import InitialPrompt from './containers/InitialPromptContainer.js';
 import ProductsPane from './containers/ProductsPaneContainer.js';
 import Toolbar from './containers/ToolbarContainer.js';
