@@ -9,6 +9,7 @@ var transactionsRouter = require('./routes/transactions/transactions.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
 var db = require('./db/config.js');
+var stripe = require('stripe')('sk_test_POErNj4c0RKPiEkBtdBgtAn4');
 
 var app = express();
 
