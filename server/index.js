@@ -9,7 +9,8 @@ var transactionsRouter = require('./routes/transactions/transactions.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
 var db = require('./db/config.js');
-var stripe = require('stripe')('sk_test_POErNj4c0RKPiEkBtdBgtAn4');
+var controller = require('./db2/workoutController.js');
+var stripeRouter = require('./routes/stripe/stripe.js');
 
 var app = express();
 
@@ -27,6 +28,9 @@ app.use('/login', loginRouter);
 app.use('/api/products', productsRouter);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', transactionsRouter);
+
+//stripe
+app.use('/stripe', stripeRouter);
 
 // catch all
 app.use('*', function (req, res) {
