@@ -7,7 +7,8 @@ import Toolbar from './containers/ToolbarContainer.js';
 import StoreMaster from './containers/StoreMasterContainer.js';
 import Chat from './containers/ChatContainer.js';
 import Sell from './components/Sell.jsx';
-import Checkout from './components/Checkout.jsx'
+import Checkout from './components/Checkout.jsx';
+import Inventory from './components/Inventory.jsx';
 // import ComponentOrContainer from './containers/Name';
 
 //testing imports
@@ -21,6 +22,7 @@ export default (
     <Route component={CoreLayout}>
       <Route path="/sell" component={Sell} />
       <Route path="/checkout" component={Checkout} />
+      <Route path='/inventory' component={Inventory} />
     </Route>
 
     {/* for testing and debugging*/}
