@@ -3,18 +3,18 @@ import * as actions from '../actions/index.js';
 import ProductEditor from '../components/ProductEditor.jsx';
 
 const mapStateToProps = (state, ownProps) => {
-  const sku = ownProps.params.sku
-  console.log(`I did receive ${sku}`);
+  const sku = ownProps.params.sku;
   return {
     initialValues: state.products[sku],
     product: state.products[sku]
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const sku = ownProps.params.sku;
   return {
     updateProduct: (data) => {
-      dispatch(actions.cashReceived(amount));
+      dispatch(actions.updateProduct(data));
     },
     deleteProduct: ({ sku }) => {
       dispatch(actions.deleteProduct(sku));
@@ -24,5 +24,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default reduxForm({
   form: 'productEditor',
-  fields: ['sku', 'price', 'inventory', 'name', 'categories', 'details']
+  fields: ['sku', 'price', 'quantity', 'name', 'categories', 'details']
 }, mapStateToProps, mapDispatchToProps)(ProductEditor);

@@ -5,12 +5,12 @@ const ProductEditor = class extends Component {
     super(props);
   }
   render() {
-    const { product, fields: {sku, price, inventory, name, categories, details}, handleSubmit, fnToHandleSubmit } = this.props;
+    const { product, fields: {sku, price, quantity, name, categories, details}, handleSubmit, updateProduct, deleteProduct } = this.props;
     return (
       <div>
         <h1>{product.sku}</h1>
         <h1>{product.name}</h1>
-        <form onSubmit={handleSubmit(/*I need an argument */)}>
+        <form onSubmit={handleSubmit(updateProduct)}>
           <div>
             <label>sku <input type='text' {...sku}/></label>
           </div>
@@ -18,7 +18,7 @@ const ProductEditor = class extends Component {
             <label>price <input type='text' {...price}/></label>
           </div>
           <div>
-            <label>inventory <input type='text' {...inventory}/></label>
+            <label>quantity <input type='text' {...quantity}/></label>
           </div>
           <div>
             <label>name <input type='text' {...name}/></label>
@@ -32,10 +32,10 @@ const ProductEditor = class extends Component {
           <div className=''>
             <input type='submit' value='SAVE' />
           </div>
-          <div className=''>
-            <input type='submit' value='DELETE' />
-          </div>
         </form>
+        <div className=''>
+          <button onClick={deleteProduct}>DELETE</button>
+        </div>
       </div>
     );
   }
