@@ -26,7 +26,7 @@ export default (
       {/*component available at /testing/sample*/}
       <Route path="/testing/sell" component={Sell} />
       <Route path="/testing/checkout" component={Checkout} />
-      <Route path="/testing/create" component={CreateProduct}
+      <Route path="/testing/create" component={CreateProduct} />
     </Route>
   </Route>
 

@@ -370,7 +370,7 @@ export const cashCheckoutCompleted = () => {
 /**
 * the sku is optional. if not supplied, will fetch all products in database
 */
-export const createProduct(product) = () => {
+export const createProduct = (product) => {
   return (dispatch) => {
     const config = {
       url: '/api/products',
@@ -380,6 +380,7 @@ export const createProduct(product) = () => {
     .then(({ data }) => {
       dispatch(productCRequestSuccess(data));
       dispatch(reset('addComponentForm'));
+      // dispatch(push('/settings'));
     })
     .catch(err => {
       dispatch(productCRequestFailure());
@@ -387,7 +388,7 @@ export const createProduct(product) = () => {
     dispatch(productCRequestSent());
   };
 };
-export const readProduct(sku) = () => {
+export const readProduct = (sku) => {
   return (dispatch) => {
     const config = {
       url: sku ? `/api/products/${sku}` : '/api/products',
@@ -403,7 +404,7 @@ export const readProduct(sku) = () => {
     dispatch(productRRequestSent());
   };
 };
-export const updateProduct(product) = () => {
+export const updateProduct = (product) => {
   return (dispatch) => {
     const config = {
       url: '/api/products',
@@ -421,7 +422,7 @@ export const updateProduct(product) = () => {
     dispatch(productURequestSent());
   };
 };
-export const deleteProduct(sku) = () => {
+export const deleteProduct = (sku) => {
   return (dispatch) => {
     const config = {
       url: `/api/products/${sku}`,

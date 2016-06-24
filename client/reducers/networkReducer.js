@@ -174,4 +174,4 @@ const networkReducer = (state = initialState, action) => {
   }
 }
 
-export default basketReducer;
+export default networkReducer;
