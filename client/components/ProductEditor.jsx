@@ -5,12 +5,12 @@ const ProductEditor = class extends Component {
     super(props);
   }
   render() {
-    const { product, sku, fields: {sku, price, inventory, name, categories, details}, handleSubmit, fnToHandleSubmit } = this.props;
+    const { product, fields: {sku, price, inventory, name, categories, details}, handleSubmit, fnToHandleSubmit } = this.props;
     return (
       <div>
         <h1>{product.sku}</h1>
         <h1>{product.name}</h1>
-        <form onSubmit={handleSubmit(create)}>
+        <form onSubmit={handleSubmit(/*I need an argument */)}>
           <div>
             <label>sku <input type='text' {...sku}/></label>
           </div>

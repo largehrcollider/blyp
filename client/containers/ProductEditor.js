@@ -2,10 +2,12 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../actions/index.js';
 import ProductEditor from '../components/ProductEditor.jsx';
 
-const mapStateToProps = (state, { sku }) => {
+const mapStateToProps = (state, ownProps) => {
+  const sku = ownProps.params.sku
   console.log(`I did receive ${sku}`);
   return {
-    initialValues: state.products[sku];
+    initialValues: state.products[sku],
+    product: state.products[sku]
   };
 }
 
