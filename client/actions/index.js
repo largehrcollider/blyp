@@ -284,3 +284,42 @@ export const cashCheckoutCompleted = () => {
     dispatch(push('/sell'));
   };
 };
+
+/**
+* product CRUD operations
+*/
+
+/**
+* the sku is optional. if not supplied, will fetch all products in database
+*/
+export const readProduct(sku) = () => {
+  return (dispatch) => {
+    const config = {
+      url: sku ? `/api/products/${sku}` : '/api/products',
+      method: 'get',
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(());
+    })
+    .catch(err => {
+      dispatch(());
+    });
+    dispatch(());
+  };
+};
+export const readProduct(sku) = () => {
+  return (dispatch) => {
+
+  };
+};
+export const readProduct(sku) = () => {
+  return (dispatch) => {
+
+  };
+};
+export const readProduct(sku) = () => {
+  return (dispatch) => {
+
+  };
+};
