@@ -26,3 +26,5 @@ router.post('/stripe', (req, res) => {
       }
     },stripe);
 });
+
+module.exports = router;

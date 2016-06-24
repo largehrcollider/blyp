@@ -9,7 +9,6 @@ var transactionsRouter = require('./routes/transactions/transactions.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
 var db = require('./db/config.js');
-var controller = require('./db2/workoutController.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
 
 var app = express();
