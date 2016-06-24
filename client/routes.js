@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, IndexRedirect} from 'react-router';
-import CoreLayout from './containers/CoreLayoutComponent.jsx';
+import CoreLayout from './containers/CoreLayout.js';
 import InitialPrompt from './containers/InitialPromptContainer.js';
 import ProductsPane from './containers/ProductsPaneContainer.js';
 import Toolbar from './containers/ToolbarContainer.js';
@@ -21,6 +21,7 @@ export default (
     <Route component={CoreLayout}>
       <Route path="/sell" component={Sell} />
       <Route path="/checkout" component={Checkout} />
+    </Route>
 
     {/* for testing and debugging*/}
     <Route path="/testing" component={Testing}>

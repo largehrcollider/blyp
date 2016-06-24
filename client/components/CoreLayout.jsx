@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import NavBar from './NavBar.jsx';
 
 class CoreLayout extends Component {
@@ -12,7 +12,7 @@ class CoreLayout extends Component {
     return (
       <div>
         <NavBar/>
-        {children}
+        {this.props.children}
       </div>
     );
   }
