@@ -6,7 +6,11 @@ var ProductController = require('../product/productController.js');
 var processTransaction = function(transaction){
   transaction.basket.forEach(function(item){
     ProductController.updateProductBySku(item.sku, {$inc: {quantity: -item.quantity}}, function(err, product){
-      item.name = product.name;
+      if(err){
+        return;
+      } else if(product){
+        item.name = product.name;
+      }
     });
   });
   return transaction;

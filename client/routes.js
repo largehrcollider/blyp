@@ -16,10 +16,11 @@ import CreateProduct from './containers/CreateProduct.js'
 
 export default (
   // main app routes
-  <Route component={CoreLayout}>
+  <Route>
     <Route path="/" component={InitialPrompt} />
-    <Route path="/sell" component={Sell} />
-    <Route path="/checkout" component={Checkout} />
+    <Route component={CoreLayout}>
+      <Route path="/sell" component={Sell} />
+      <Route path="/checkout" component={Checkout} />
 
     {/* for testing and debugging*/}
     <Route path="/testing" component={Testing}>
@@ -29,5 +30,4 @@ export default (
       <Route path="/testing/create" component={CreateProduct} />
     </Route>
   </Route>
-
 );
