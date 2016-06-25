@@ -371,10 +371,12 @@ export const cashCheckoutCompleted = () => {
 * the sku is optional. if not supplied, will fetch all products in database
 */
 export const createProduct = (product) => {
+  console.log(product)
   return (dispatch) => {
     const config = {
       url: '/api/products',
       method: 'post',
+      data: product
     };
     axios(config)
     .then(({ data }) => {
@@ -409,6 +411,7 @@ export const updateProduct = (product) => {
     const config = {
       url: '/api/products',
       method: 'put',
+      data: product
     };
     axios(config)
     .then(({ data }) => {

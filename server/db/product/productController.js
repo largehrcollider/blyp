@@ -54,6 +54,8 @@ exports.updateProductById = function(id, update, callback){
 };
 
 exports.updateProductBySku = function(sku, update, callback){
+  console.log(sku);
+  console.log(update);
   Product.findOneAndUpdate({sku: sku}, update, {new: true})
   .then(function(product){
     callback(null, product);
