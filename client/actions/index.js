@@ -335,7 +335,7 @@ export const transactionCompleted = () => {
 
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
-    if (amount - total(getState()) > 0) {
+    if (amount - total(getState()) >= 0) {
       // send transaction request to server
       dispatch(transactionCompleted());
     } else {
