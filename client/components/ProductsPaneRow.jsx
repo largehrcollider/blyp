@@ -7,15 +7,14 @@ export default class ProductsPaneRow extends Component {
   }
 
   render() {
-    //const {fields: {username, password}, handleSubmit} = this.props;
     return (
-        <tr >
-          <td>{this.props.row.name}</td>
-          <td>{this.props.row.price}</td>
-          <td>{this.props.row.quantity}</td>
-          <td>{this.props.row.category}</td>
-          <td>{this.props.row.sku}</td>
-        </tr>
+      <span>
+        <span>{this.props.row.name}</span>
+        <span>{this.props.row.price}</span>
+        <span>{this.props.row.quantity}</span>
+        <span>{this.props.row.category}</span>
+        <span>{this.props.row.sku}</span>
+      </span>
     );
   }
 }
