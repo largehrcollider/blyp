@@ -34,16 +34,11 @@ app.use('/api/transactions', transactionsRouter);
 
 // for testing only! products should be uploaded to /api/products
 app.post('/api/createProduct', upload.single('file'), (req, res) => {
-  var filePath = req.file.path; // full path of uploaded file
-  var buff = req.file.buffer; // buffer of entire file
-  fs.rename(filePath, path.resolve(__dirname, '../uploads', '' + req.body.sku + '.jpg'), 
-    Product.createProduct(req.body, function(err, product){
-      if(err){
-        res.sendStatus(500);
-      } else {
-        res.status(201).json(product);
-      }
-    }));
+  var filePath = req.file.path // full path of uploaded file
+  var buff = req.file.buffer // buffer of entire file
+  fs.rename(filePath, path.resolve(__dirname, '../uploads', '' + req.body.sku + '.jpg'), () => {
+    res.sendStatus(200);
+  });
 });
 
 //stripe
