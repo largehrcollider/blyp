@@ -5,7 +5,7 @@ export default class LoginForm extends Component {
     super(props);
   }
   render() {
-    const {fields: {sku, price, inventory, name, categories, details}, handleSubmit, create} = this.props;
+    const {fields: {sku, price, inventory, name, categories, details, productPicture}, handleSubmit, create} = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit(create)}>
@@ -26,6 +26,9 @@ export default class LoginForm extends Component {
           </div>
           <div>
             <label>details <input type='text' {...details}/></label>
+          </div>
+          <div>
+            <label>File: <input type='file' {...productPicture} value={null}/></label>
           </div>
           <div className=''>
             <input type='submit' value='SAVE' />
