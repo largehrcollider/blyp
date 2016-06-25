@@ -1,5 +1,6 @@
 var Product = require('./product.js');
 
+//Create operations
 exports.createProduct = function(newProduct, callback){
   new Product(newProduct).save()
   .then(function(product){
@@ -10,6 +11,7 @@ exports.createProduct = function(newProduct, callback){
   });
 };
 
+//Read operations
 exports.getAllProducts = function(callback){
   Product.find({})
   .then(function(products){
@@ -20,8 +22,8 @@ exports.getAllProducts = function(callback){
   });
 };
 
-exports.getProductById = function(id, callback){
-  Product.findOne({_id: id})
+exports.getProductBySku = function(sku, callback){
+  Product.findOne({sku: sku})
   .then(function(product){
     callback(null, product);
   })
@@ -40,6 +42,7 @@ exports.getProductByName = function(productname, callback){
   });
 };
 
+//Update operations
 exports.updateProductById = function(id, update, callback){
   Product.findOneAndUpdate({_id: id}, update, {new: true})
   .then(function(product){
@@ -50,6 +53,17 @@ exports.updateProductById = function(id, update, callback){
   });
 };
 
+exports.updateProductBySku = function(sku, update, callback){
+  Product.findOneAndUpdate({sku: sku}, update, {new: true})
+  .then(function(product){
+    callback(null, product);
+  })
+  .catch(function(err){
+    callback(err);
+  });
+};
+
+//Delete operations
 exports.deleteProductById = function(id, callback){
   Product.findOneAndRemove({_id: id})
   .then(function(product){
@@ -60,8 +74,8 @@ exports.deleteProductById = function(id, callback){
   });
 };
 
-exports.updateProductBySku = function(sku, update, callback){
-  Product.findOneAndUpdate({sku: sku}, update, {new: true})
+exports.deleteProductBySku = function(sku, callback){
+  Product.findOneAndRemove({sku: sku})
   .then(function(product){
     callback(null, product);
   })

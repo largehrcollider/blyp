@@ -15,9 +15,40 @@ router.get('/', function(req, res){
 router.post('/', function(req, res){
   Product.createProduct(req.body, function(err, product){
     if(err){
+      console.log(err)
       res.sendStatus(500);
     } else {
       res.status(201).json(product);
+    }
+  });
+});
+
+router.get('/:sku', function(req, res){
+  Product.getProductBySku(req.params.sku, function(err, product){
+    if(err){
+      res.sendStatus(500);
+    } else {
+      res.status(200).json(product);
+    }
+  });
+});
+
+router.put('/:sku', function(req, res){
+  Product.updateProductBySku(req.params.sku, req.body, function(err, product){
+    if(err){
+      res.sendStatus(500);
+    } else {
+      res.status(200).json(product);
+    }
+  });
+});
+
+router.delete('/:sku', function(req, res){
+  Product.deleteProductBySku(req.params.sku, function(err, product){
+    if(err){
+      res.sendStatus(500);
+    } else {
+      res.status(200).json(product);
     }
   });
 });
