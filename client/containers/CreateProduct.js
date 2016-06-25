@@ -16,5 +16,5 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'addComponentForm',
-  fields: ['sku', 'price', 'inventory', 'name', 'categories', 'details', 'productPicture']
+  fields: ['sku', 'price', 'quantity', 'name', 'categories', 'details', 'productPicture']
 }, mapStateToProps, mapDispatchToProps)(CreateProduct);

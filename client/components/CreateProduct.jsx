@@ -6,7 +6,7 @@ export default class LoginForm extends Component {
   }
   render() {
 
-    const {fields: {sku, price, inventory, name, categories, details, productPicture}, handleSubmit, create} = this.props;
+    const {fields: {sku, price, quantity, name, categories, details, productPicture}, handleSubmit, create} = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit(create)}>

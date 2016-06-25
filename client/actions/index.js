@@ -377,14 +377,14 @@ export const createProduct = (product) => {
     var data = new FormData();
     data.append('categories', product.categories);
     data.append('details', product.details);
-    data.append('inventory', product.inventory);
+    data.append('quantity', product.quantity);
     data.append('name', product.name);
     data.append('price', product.price);
     data.append('sku', product.sku);
     data.append('file', product.productPicture[0]);
 
     const config = {
-      url: '/api/createProduct',
+      url: '/api/products',
       method: 'post',
       data
     };
