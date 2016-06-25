@@ -419,7 +419,7 @@ export const readProduct = (sku) => {
 export const updateProduct = (product) => {
   return (dispatch) => {
     const config = {
-      url: '/api/products',
+      url: '/api/products/' + product.sku,
       method: 'put',
       data: product
     };
