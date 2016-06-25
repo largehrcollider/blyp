@@ -37,7 +37,6 @@ router.put('/:sku', function(req, res){
     if(err){
       res.sendStatus(500);
     } else {
-      console.log(product)
       res.status(200).json(product);
     }
   });
