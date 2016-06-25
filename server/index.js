@@ -1,3 +1,4 @@
+var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -10,6 +11,9 @@ var transactionsRouter = require('./routes/transactions/transactions.js');
 var loginRouter = require('./routes/loginRouter.js');
 var db = require('./db/config.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
+
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' })
 
 var app = express();
 
@@ -27,6 +31,15 @@ app.use('/login', loginRouter);
 app.use('/api/products', productsRouter);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', transactionsRouter);
+
+// for testing only! products should be uploaded to /api/products
+app.post('/api/createProduct', upload.single('file'), (req, res) => {
+  var filePath = req.file.path // full path of uploaded file
+  var buff = req.file.buffer // buffer of entire file
+  fs.rename(filePath, path.resolve(__dirname, '../uploads', '' + req.body.sku + '.jpg'), () => {
+    res.sendStatus(200);
+  });
+});
 
 //stripe
 app.use('/stripe', stripeRouter);

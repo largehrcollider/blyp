@@ -373,10 +373,20 @@ export const cashCheckoutCompleted = () => {
 export const createProduct = (product) => {
   console.log(product)
   return (dispatch) => {
+    console.log(product);
+    var data = new FormData();
+    data.append('categories', product.categories);
+    data.append('details', product.details);
+    data.append('inventory', product.inventory);
+    data.append('name', product.name);
+    data.append('price', product.price);
+    data.append('sku', product.sku);
+    data.append('file', product.productPicture[0]);
+
     const config = {
-      url: '/api/products',
+      url: '/api/createProduct',
       method: 'post',
-      data: product
+      data
     };
     axios(config)
     .then(({ data }) => {
