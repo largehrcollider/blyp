@@ -8,6 +8,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import './assets/styles/index.css';
 import './assets/styles/bootstrap.css';
+//import './assets/materialize/css/materialize.css';
+//import './assets/materialize/js/materialize.js';
 
 injectTapEventPlugin();
 
