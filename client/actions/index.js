@@ -399,10 +399,10 @@ export const createProduct = (product) => {
     dispatch(productCRequestSent());
   };
 };
-export const readProduct = (sku) => {
+export const readProduct = (sku = '') => {
   return (dispatch) => {
     const config = {
-      url: sku ? `/api/products/${sku}` : '/api/products',
+      url: `/api/products/${sku}`,
       method: 'get',
     };
     axios(config)

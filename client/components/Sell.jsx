@@ -6,9 +6,11 @@ import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
 
 const Sell = () => (
   <div className="container-fluid">
-    <div className="col-md-12">
+    {/*
+      <div className="col-md-12">
       <PopulateWithFakeData />
-    </div>
+      </div>
+    */}
     <div className="col-md-2">
       <FilterPane />
     </div>

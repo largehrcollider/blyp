@@ -13,7 +13,7 @@ var db = require('./db/config.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
 
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' })
+var upload = multer({ dest: path.resolve(__dirname, '../uploads') });
 
 var app = express();
 
@@ -36,9 +36,14 @@ app.use('/api/transactions', transactionsRouter);
 app.post('/api/createProduct', upload.single('file'), (req, res) => {
   var filePath = req.file.path // full path of uploaded file
   var buff = req.file.buffer // buffer of entire file
-  fs.rename(filePath, path.resolve(__dirname, '../uploads', '' + req.body.sku + '.jpg'), () => {
+  fs.rename(path.resolve(__dirname, '../' ,filePath), path.resolve(__dirname, '../images', '' + req.body.sku + '.jpg'), (err) => {
+    console.log(err);
     res.sendStatus(200);
   });
+});
+
+app.get('/images/:sku', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../images', req.params.sku));
 });
 
 //stripe
