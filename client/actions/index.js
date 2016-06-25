@@ -371,19 +371,20 @@ export const cashCheckoutCompleted = () => {
 * the sku is optional. if not supplied, will fetch all products in database
 */
 export const createProduct = (product) => {
+  console.log(product)
   return (dispatch) => {
     console.log(product);
     var data = new FormData();
     data.append('categories', product.categories);
     data.append('details', product.details);
-    data.append('inventory', product.inventory);
+    data.append('quantity', product.quantity);
     data.append('name', product.name);
     data.append('price', product.price);
     data.append('sku', product.sku);
     data.append('file', product.productPicture[0]);
 
     const config = {
-      url: '/api/createProduct',
+      url: '/api/products',
       method: 'post',
       data
     };
@@ -418,8 +419,9 @@ export const readProduct = (sku = '') => {
 export const updateProduct = (product) => {
   return (dispatch) => {
     const config = {
-      url: '/api/products',
+      url: '/api/products/' + product.sku,
       method: 'put',
+      data: product
     };
     axios(config)
     .then(({ data }) => {
