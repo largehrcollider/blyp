@@ -21,10 +21,11 @@ export default (
   <Route>
     <Route path="/" component={InitialPrompt} />
     <Route component={CoreLayout}>
-      <Route path="/sell" component={Sell} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/create" component={CreateProduct} />
       <Route path='/inventory' component={Inventory} />
       <Route path='/inventory/:sku' component={ProductEditor} />
+      <Route path="/sell" component={Sell} />
     </Route>
 
     {/* for testing and debugging*/}
@@ -32,7 +33,6 @@ export default (
       {/*component available at /testing/sample*/}
       <Route path="/testing/sell" component={Sell} />
       <Route path="/testing/checkout" component={Checkout} />
-      <Route path="/testing/create" component={CreateProduct} />
     </Route>
   </Route>
 );

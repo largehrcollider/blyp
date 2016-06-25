@@ -31,6 +31,9 @@ export default class InventoryPane extends Component {
     console.log(style.row);
     return (
       <div>
+        <Link to='/create'>
+          <div>CREATE NEW PRODUCT</div>
+        </Link>
         {list.map(element => (
           <div className={style.row} key={element.name}>
             <Link to={`/inventory/${element.sku}`}>
