@@ -333,6 +333,38 @@ export const transactionCompleted = () => {
   };
 };
 
+//stripe CHARGE
+export const stripe = (data) => {
+  return (dispatch, getState) => {
+    Stripe.card.createToken(data, (status, response) => {
+      if (response.error) {
+        console.log("ERROR");
+      }else{
+        var transaction = {
+          basket: getState().basket,
+          tender: getState().payment.method,
+          token: response.id
+        };
+        const config = {
+          url: '/stripe',
+          method: 'post',
+          data: transaction
+        };
+        axios(config)
+        .then(({ data }) => {
+          //ANY UI CHANGES HAVE TO BE IN HERE.
+          //AFTER OUR SERVER HAS SUCCESSFULLY CONTACTED THE STRIPE SERVERS.
+          dispatch(transactionRequestSuccess());
+        })
+        .catch(err => {
+          dispatch(transactionRequestFailure());
+        });
+        dispatch(transactionRequestSent());
+      }
+    });
+  };
+};
+
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
     if (amount - total(getState()) >= 0) {

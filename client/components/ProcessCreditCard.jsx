@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {asyncLoad} from 'react-async-loader';
 
 export default class LoginForm extends Component {
   constructor(props) {
