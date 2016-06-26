@@ -31,19 +31,8 @@ app.use('/login', loginRouter);
 app.use('/api/products', productsRouter);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', transactionsRouter);
-
-// for testing only! products should be uploaded to /api/products
-app.post('/api/createProduct', upload.single('file'), (req, res) => {
-  var filePath = req.file.path // full path of uploaded file
-  var buff = req.file.buffer // buffer of entire file
-  fs.rename(path.resolve(__dirname, '../' ,filePath), path.resolve(__dirname, '../images', '' + req.body.sku + '.jpg'), (err) => {
-    console.log(err);
-    res.sendStatus(200);
-  });
-});
-
 app.get('/images/:sku', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../images', req.params.sku));
+  res.sendFile(path.resolve(__dirname, '../images', req.params.sku + '.jpg'));
 });
 
 //stripe
