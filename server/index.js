@@ -17,6 +17,14 @@ var upload = multer({ dest: path.resolve(__dirname, '../uploads') });
 
 var app = express();
 
+/**
+* Temporary directory where images will be stored.
+* Should later be changed to make directories on a per-company basis.
+* Note: mkdirSync will throw error if directory already exists, so better to use
+* fs.mkdir, which is async, in the corresponding route handler.
+*/
+// fs.mkdirSync(path.resolve(__dirname, '../images'));
+
 // middleware
 app.use(express.static(path.resolve(__dirname, '../build')));
 app.use(morgan('dev'));
