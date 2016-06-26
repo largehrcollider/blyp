@@ -18,6 +18,13 @@ import * as types from '../constants/actionTypes';
     // same
     // case types.SAVE_PRODUCT_REQUEST_SENT:
 
+    case types.PRODUCT_R_REQUEST_SUCCESS:
+    var newState = {...state};
+    action.products.forEach((product) => {
+      newState[product.sku] = product;
+    });
+    return newState;
+
     default:
     return state;
   };

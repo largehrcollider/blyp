@@ -5,7 +5,9 @@ import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
 
 const Inventory = () => (
   <div className="container-fluid">
-    <PopulateWithFakeData />
+    {/*
+      <PopulateWithFakeData />
+    */}
     <div className="col-md-2">
       <FilterPane />
     </div>

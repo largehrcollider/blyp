@@ -208,10 +208,10 @@ export const productRRequestSent = () => {
     type: types.PRODUCT_R_REQUEST_SENT
   };
 };
-export const productRRequestSuccess = (data) => {
+export const productRRequestSuccess = (products) => {
   return {
     type: types.PRODUCT_R_REQUEST_SUCCESS,
-    data
+    products
   };
 };
 export const productRRequestFailure = () => {
@@ -392,7 +392,8 @@ export const createProduct = (product) => {
     .then(({ data }) => {
       dispatch(productCRequestSuccess(data));
       dispatch(reset('addComponentForm'));
-      // dispatch(push('/settings'));
+      dispatch(readProduct());
+      dispatch(push('/inventory'));
     })
     .catch(err => {
       dispatch(productCRequestFailure());
@@ -400,10 +401,10 @@ export const createProduct = (product) => {
     dispatch(productCRequestSent());
   };
 };
-export const readProduct = (sku) => {
+export const readProduct = (sku = '') => {
   return (dispatch) => {
     const config = {
-      url: sku ? `/api/products/${sku}` : '/api/products',
+      url: `/api/products/${sku}`,
       method: 'get',
     };
     axios(config)

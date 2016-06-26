@@ -17,9 +17,8 @@ router.get('/', function(req, res){
 });
 
 router.post('/', upload.single('file'), function(req, res){
-  var filePath = req.file.path; // full path of uploaded file
-  var buff = req.file.buffer; // buffer of entire file
-  fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, '../../../uploads', '' + req.body.sku + '.jpg'), () => {
+  var filePath = req.file.path;
+  fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, '../../../images', '' + req.body.sku + '.jpg'), () => {
     Product.createProduct(req.body, function(err, product){
       if(err){
         res.sendStatus(500);
