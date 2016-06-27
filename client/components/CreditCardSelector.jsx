@@ -1,7 +1,12 @@
 import React from 'react';
+import material from '../assets/materialize/css/materialize.css';
+import index from '../assets/styles/index.css';
+import bootstrap from '../assets/styles/bootstrap.css';
+import inventory from '../assets/styles/InventoryPane.css';
+
 
 const MethodCreditCard = ({ selectCreditCard }) => (
-  <div className="credit-button btn-success" onClick={selectCreditCard}>
+  <div className={index.creditButton} onClick={selectCreditCard}>
     Credit Card
   </div>
 );

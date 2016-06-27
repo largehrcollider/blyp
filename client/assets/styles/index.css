@@ -159,18 +159,18 @@ body .login_fields__submit input:hover {
   border-radius: .25rem;
 }
 
-.my-card-block{
+.myCardBlock{
   margin: 0px;
   padding: 0px;
   text-align: center;
 }
-.my-card-title{
+.myCardTitle{
   text-align: center;
   margin: 0px;
   padding: 0px;
 }
 
-.my-card-image{
+.myCardImage{
   text-align: center;
   margin: auto;
 }
