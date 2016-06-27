@@ -20,7 +20,7 @@ export default class BasketItem extends Component {
     */
     const {name, quantity, price, incrementItem, decrementItem, deleteItem} = this.props;
     return (
-      <div className={index.basket-item}>
+      <div className={index.basketItem}>
       <span className={index.name}>
           {name}
         </span>

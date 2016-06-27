@@ -9,10 +9,10 @@ import inventory from '../assets/styles/InventoryPane.css';
 
 const Checkout = () => (
   <div>
-    <div className={bootstrap.colMd3}>
+    <div className={bootstrap["col-md-3"]}>
       <OverviewPane />
     </div>
-    <div className={bootstrap.colMd9}>
+    <div className={bootstrap["col-md-9"]}>
       <PaymentPane />
     </div>
   </div>

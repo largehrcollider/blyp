@@ -9,7 +9,7 @@ import inventory from '../assets/styles/InventoryPane.css';
 
 
 const Inventory = () => (
-  <div className="container-fluid">
+  <div className={bootstrap.containerFluid}>
     {/*
       <PopulateWithFakeData />
     */}
