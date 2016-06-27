@@ -27,8 +27,6 @@ export default class InventoryPane extends Component {
     };
 
     var list = order(filter(products));
-
-    console.log(style.row);
     return (
       <div>
         <Link to='/create'>

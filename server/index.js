@@ -13,9 +13,17 @@ var db = require('./db/config.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
 
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' })
+var upload = multer({ dest: path.resolve(__dirname, '../uploads') });
 
 var app = express();
+
+/**
+* Temporary directory where images will be stored.
+* Should later be changed to make directories on a per-company basis.
+* Note: mkdirSync will throw error if directory already exists, so better to use
+* fs.mkdir, which is async, in the corresponding route handler.
+*/
+// fs.mkdirSync(path.resolve(__dirname, '../images'));
 
 // middleware
 app.use(express.static(path.resolve(__dirname, '../build')));
@@ -31,14 +39,8 @@ app.use('/login', loginRouter);
 app.use('/api/products', productsRouter);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', transactionsRouter);
-
-// for testing only! products should be uploaded to /api/products
-app.post('/api/createProduct', upload.single('file'), (req, res) => {
-  var filePath = req.file.path // full path of uploaded file
-  var buff = req.file.buffer // buffer of entire file
-  fs.rename(filePath, path.resolve(__dirname, '../uploads', '' + req.body.sku + '.jpg'), () => {
-    res.sendStatus(200);
-  });
+app.get('/images/:sku', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../images', req.params.sku + '.jpg'));
 });
 
 //stripe

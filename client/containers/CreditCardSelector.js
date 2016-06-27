@@ -5,7 +5,7 @@ import CreditCardSelector from '../components/CreditCardSelector.jsx';
 const mapDispatchToProps = (dispatch) => {
   return {
     selectCreditCard: () => {
-      // dispatch(actions.paymentMethodSelected('credit card'));
+      dispatch(actions.paymentMethodSelected('credit card'));
     }
   };
 };

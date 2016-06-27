@@ -1,11 +1,11 @@
 import { reduxForm } from 'redux-form';
 import * as actions from '../actions/index.js';
-import CreateProduct from '../components/CreateProduct.jsx';
+import ProcessCard from '../components/ProcessCreditCard.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return {
     create: (data) => {
-      dispatch(actions.createProduct(data));
+      dispatch(actions.stripe(data));
     }
   };
 };
@@ -16,5 +16,5 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'addComponentForm',
-  fields: ['sku', 'price', 'quantity', 'name', 'categories', 'details', 'productPicture']
-}, mapStateToProps, mapDispatchToProps)(CreateProduct);
+  fields: ['number', 'exp_month', 'exp_year', 'cvc']
+}, mapStateToProps, mapDispatchToProps)(ProcessCard);
