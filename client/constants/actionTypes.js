@@ -18,6 +18,7 @@ export const LOGIN_REQUEST_FAILURE = 'LOGIN_REQUEST_FAILURE';
 export const SIGNUP_REQUEST_SENT = 'SIGNUP_REQUEST_SENT';
 export const SIGNUP_REQUEST_SUCCESS = 'SIGNUP_REQUEST_SUCCESS';
 export const SIGNUP_REQUEST_FAILURE = 'SIGNUP_REQUEST_FAILURE';
+export const USER_LOGOUT = 'USER_LOGOUT';
 
 /**
 * Actions related to basket and payment
