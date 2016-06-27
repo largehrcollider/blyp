@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import userPNG from '../../assets/images/user.png'
-import lockPNG from '../../assets/images/lock.png'
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import userPNG from '../../assets/images/user.png';
+import lockPNG from '../../assets/images/lock.png';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -36,6 +37,9 @@ export default class LoginForm extends Component {
             </div>
           </div>
         </form>
+        <div>
+          <span>Don't have an account? <Link to='/signup'>Sign Up!</Link></span>
+        </div>
       </div>
     );
   }
