@@ -2,7 +2,12 @@
   background-color: #ff9966;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Muli:400,700);
+@font-face {
+  font-family: Muli;
+  src: url(../font/mulireg.ttf);
+  font-weight: 400;
+}
+
 body {
   -webkit-perspective: 800px;
           perspective: 800px;
