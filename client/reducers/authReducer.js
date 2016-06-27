@@ -18,7 +18,8 @@ const initialState = {
   isAuthenticated, // no need. if jwt present, then is authenticated
   isFetching: false, // move out to ui or something
   error: false, // ditto
-  businesses: {} // object with `businessName: role` pairs
+  businesses: {}, // object with `businessName: role` pairs
+  business: null
 };
 
 const authReducer = (state = initialState, action) => {
