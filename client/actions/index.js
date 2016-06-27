@@ -208,10 +208,10 @@ export const productRRequestSent = () => {
     type: types.PRODUCT_R_REQUEST_SENT
   };
 };
-export const productRRequestSuccess = (data) => {
+export const productRRequestSuccess = (products) => {
   return {
     type: types.PRODUCT_R_REQUEST_SUCCESS,
-    data
+    products
   };
 };
 export const productRRequestFailure = () => {
@@ -333,6 +333,38 @@ export const transactionCompleted = () => {
   };
 };
 
+//stripe CHARGE
+export const stripe = (data) => {
+  return (dispatch, getState) => {
+    Stripe.card.createToken(data, (status, response) => {
+      if (response.error) {
+        console.log("ERROR");
+      }else{
+        var transaction = {
+          basket: getState().basket,
+          tender: getState().payment.method,
+          token: response.id
+        };
+        const config = {
+          url: '/stripe',
+          method: 'post',
+          data: transaction
+        };
+        axios(config)
+        .then(({ data }) => {
+          //ANY UI CHANGES HAVE TO BE IN HERE.
+          //AFTER OUR SERVER HAS SUCCESSFULLY CONTACTED THE STRIPE SERVERS.
+          dispatch(transactionRequestSuccess());
+        })
+        .catch(err => {
+          dispatch(transactionRequestFailure());
+        });
+        dispatch(transactionRequestSent());
+      }
+    });
+  };
+};
+
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
     if (amount - total(getState()) >= 0) {
@@ -371,19 +403,20 @@ export const cashCheckoutCompleted = () => {
 * the sku is optional. if not supplied, will fetch all products in database
 */
 export const createProduct = (product) => {
+  console.log(product)
   return (dispatch) => {
     console.log(product);
     var data = new FormData();
     data.append('categories', product.categories);
     data.append('details', product.details);
-    data.append('inventory', product.inventory);
+    data.append('quantity', product.quantity);
     data.append('name', product.name);
     data.append('price', product.price);
     data.append('sku', product.sku);
     data.append('file', product.productPicture[0]);
 
     const config = {
-      url: '/api/createProduct',
+      url: '/api/products',
       method: 'post',
       data
     };
@@ -391,7 +424,8 @@ export const createProduct = (product) => {
     .then(({ data }) => {
       dispatch(productCRequestSuccess(data));
       dispatch(reset('addComponentForm'));
-      // dispatch(push('/settings'));
+      dispatch(readProduct());
+      dispatch(push('/inventory'));
     })
     .catch(err => {
       dispatch(productCRequestFailure());
@@ -399,10 +433,10 @@ export const createProduct = (product) => {
     dispatch(productCRequestSent());
   };
 };
-export const readProduct = (sku) => {
+export const readProduct = (sku = '') => {
   return (dispatch) => {
     const config = {
-      url: sku ? `/api/products/${sku}` : '/api/products',
+      url: `/api/products/${sku}`,
       method: 'get',
     };
     axios(config)
@@ -418,8 +452,9 @@ export const readProduct = (sku) => {
 export const updateProduct = (product) => {
   return (dispatch) => {
     const config = {
-      url: '/api/products' + product.sku,
+      url: '/api/products/' + product.sku,
       method: 'put',
+      data: product
     };
     axios(config)
     .then(({ data }) => {

@@ -5,9 +5,6 @@ import total from '../helpers/basketTotal.js'
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectCash: () => {
-      dispatch(actions.paymentMethodSelected('cash'));
-    }
   };
 };
 
