@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import userPNG from '../../assets/images/user.png'
 import lockPNG from '../../assets/images/lock.png'
+import index from '../../assets/styles/index.css';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -12,11 +13,11 @@ export default class LoginForm extends Component {
     return (
       <div>
         <form onSubmit={handleSubmit(attemptLogin)}>
-          <div className='login'>
-            <div className='login_title'>
+          <div className={index.login}>
+            <div className={index.login_title}>
             </div>
-            <div className='login_fields'>
-              <div className='login_fields__user'>
+            <div className={index.login_fields}>
+              <div className={index.login_fields__user}>
                 <div className='icon'>
                   <img src={userPNG} />
                 </div>
