@@ -59,13 +59,14 @@ export const inventoryClick = () => {
   };
 };
 
-// authentication state
+/**
+* authentication: signup and login
+*/
 export const loginRequestSent = () => {
   return {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-
 export const loginRequestSuccess = (admin, jwt, name, username) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
@@ -75,7 +76,6 @@ export const loginRequestSuccess = (admin, jwt, name, username) => {
     username
   }
 }
-
 export const loginRequestFailure = (message) => {
   return {
     type: types.LOGIN_REQUEST_FAILURE,
@@ -83,6 +83,26 @@ export const loginRequestFailure = (message) => {
   };
 };
 
+export const signupRequestSent = () => {
+  return {
+    type: types.SIGNUP_REQUEST_SENT
+  };
+};
+export const signupRequestSuccess = (data) => {
+  return {
+    type: types.SIGNUP_REQUEST_SUCCESS,
+    data
+  };
+};
+export const signupRequestFailure = () => {
+  return {
+    type: types.SIGNUP_REQUEST_FAILURE
+  };
+};
+
+/**
+* temporary solution
+*/
 export const populateWithFakeData = (data) => {
   return {
     type: types.POPULATE_WITH_FAKE_DATA,
@@ -268,8 +288,10 @@ export const productDRequestFailure = () => {
 //   }
 // }
 
+/**
+* Login and Signup operations
+*/
 export const attemptLogin = ({username, password}) => {
-
   return (dispatch) => {
     const config = {
       url: '/login',
@@ -282,15 +304,36 @@ export const attemptLogin = ({username, password}) => {
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));
       dispatch(push('/sell'));
-
     })
     .catch(err => {
       dispatch(loginRequestFailure(err));
     });
-
     dispatch(loginRequestSent());
   }
 }
+export const signup = (data) => {
+  return (dispatch) => {
+    const config = {
+      url: '/signup',
+      method: 'post',
+      data
+    }
+    axios(config)
+    // .then(({ data: {jwt, name, username, businesses }}) => {
+    .then( ({ data }) => {
+      localStorage.setItem('jwt', data.jwt);
+      dispatch(signupRequestSuccess(data));
+      dispatch(reset('signup'));
+      dispatch(push('/sell')); // should dispatch to landing page first
+    })
+    .catch(err => {
+      dispatch(signupRequestFailure(err));
+    });
+    dispatch(signupRequestSent());
+  }
+}
+
+
 
 export const saveProduct = (data) => {
   return (dispatch) => {

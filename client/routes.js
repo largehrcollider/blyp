@@ -10,6 +10,7 @@ import Sell from './components/Sell.jsx';
 import Checkout from './components/Checkout.jsx';
 import Inventory from './components/Inventory.jsx';
 import ProductEditor from './containers/ProductEditor.js';
+import Signup from './containers/Signup.js';
 // import ComponentOrContainer from './containers/Name';
 
 //testing imports
@@ -20,6 +21,7 @@ export default (
   // main app routes
   <Route>
     <Route path="/" component={InitialPrompt} />
+    <Route path='/signup' component={Signup} />
     <Route component={CoreLayout}>
       <Route path="/checkout" component={Checkout} />
       <Route path="/create" component={CreateProduct} />
