@@ -18,20 +18,20 @@ export default class LoginForm extends Component {
             </div>
             <div className={index.login_fields}>
               <div className={index.login_fields__user}>
-                <div className='icon'>
+                <div className={index.icon}>
                   <img src={userPNG} />
                 </div>
                 <input placeholder='Username' type='text' {...username} />
-                <div className='login_fields__password'>
-                  <div className='icon'>
+                <div className={index.login_fields__password}>
+                  <div className={index.icon}>
                     <img src={lockPNG} /></div>
                     <input placeholder='Password' type='password' {...password} />
                 </div>
-                <div className='login_fields__submit'>
+                <div className={index.login_fields__submit}>
                   <input type='submit' value='Log In' />
                 </div>
               </div>
-              <div className='disclaimer'>
+              <div className={index.disclaimer}>
                 <p>BLYP 2016 ALL RIGHTS RESERVED</p>
               </div>
             </div>
