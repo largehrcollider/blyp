@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import Product from '../containers/Product3.js';
+import material from '../assets/materialize/css/materialize.css';
+import index from '../assets/styles/index.css';
+import bootstrap from '../assets/styles/bootstrap.css';
+import inventory from '../assets/styles/InventoryPane.css';
 
 export default class ProductsPane extends Component {
   constructor(props) {
@@ -25,7 +29,7 @@ export default class ProductsPane extends Component {
 
     var list = order(filter(products));
     return (
-        <div className="row">
+        <div className={bootstrap.row}>
             {(() => {
               var nodes = [];
                 for (var i in list) {

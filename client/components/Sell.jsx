@@ -3,6 +3,10 @@ import FilterPane from '../containers/FilterPane.js';
 import ProductsPane from '../containers/ProductsPane5.js'
 import BasketPane from './BasketPane.jsx';
 import PopulateWithFakeData from '../containers/PopulateWithFakeData.js';
+import material from '../assets/materialize/css/materialize.css';
+import index from '../assets/styles/index.css';
+import bootstrap from '../assets/styles/bootstrap.css';
+import inventory from '../assets/styles/InventoryPane.css';
 
 const Sell = () => (
   <div className="container-fluid">
@@ -11,13 +15,13 @@ const Sell = () => (
       <PopulateWithFakeData />
       </div>
     */}
-    <div className="col-md-2">
+    <div className={boostrap["col-md-2"]}>
       <FilterPane />
     </div>
-    <div className="col-md-8">
+    <div className={boostrap["col-md-8"]}>
       <ProductsPane />
     </div>
-    <div className="col-md-2">
+    <div className={boostrap["col-md-2"]}>
       <BasketPane />
     </div>
   </div>
