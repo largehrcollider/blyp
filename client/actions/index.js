@@ -559,9 +559,9 @@ export const deleteProduct = (sku) => {
 /**
 * business selected
 */
-export const businessSelected = (business) => {
+export const businessSelected = (b) => {
   return (dispatch) {
-    dispatch(business(business));
+    dispatch(business(b));
     dispatch(readProduct());
     dispatch(push('/sell')); // don't like this, but will suffice for now
   };
