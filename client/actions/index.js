@@ -305,7 +305,7 @@ export const business = (business) => {
 /**
 * Login, Signup, Logout operations
 */
-export const attemptLogin = ({username, password}) => {
+export const login = ({username, password}) => {
   return (dispatch) => {
     const config = {
       url: '/login',
