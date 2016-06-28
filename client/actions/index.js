@@ -475,7 +475,7 @@ export const readProduct = (sku = '') => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'get',
-      data: {business: getState.auth.business}
+      data: {business: getState().auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -492,7 +492,7 @@ export const updateProduct = (product) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'put',
-      data: {...product, business: getState.auth.business}
+      data: {...product, business: getState().auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -511,7 +511,7 @@ export const deleteProduct = (sku) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'delete',
-      data: {business: getState.auth.business}
+      data: {business: getState().auth.business}
     };
     axios(config)
     .then(({ data }) => {
