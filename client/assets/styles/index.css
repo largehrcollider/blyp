@@ -189,17 +189,11 @@ body .login_fields__submit input:hover {
 }
 
 .checkoutButton {
-  border: 1px dotted #ff9966;
-  border-radius: 10px;
-  padding: 0px 0px 0px 10px;
-  max-width: 100px;
+  background-color: #0ca56a;
 }
 
 .backButton {
-  border: 1px solid #ff9966;
-  border-radius: 10px;
-  padding: 0px 0px 0px 30px;
-  max-width: 100px;
+  background-color: #ff3333;
 }
 
 .increment-up{
@@ -215,6 +209,8 @@ body .login_fields__submit input:hover {
 
 .pic{
   width: 100px;
+  height: 65px;
+  border: 1px solid #bfbfbf;
 }
 
 .delete{
@@ -226,7 +222,7 @@ body .login_fields__submit input:hover {
 .basket-item{
   width: 210px;
   border: #ff9966;
-  box-shadow: 2px 3px 3px 2px;
+  box-shadow: 2px 2px 2px 2px;
   padding: 5px;
   margin: 5px;
 }

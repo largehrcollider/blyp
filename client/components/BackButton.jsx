@@ -5,6 +5,6 @@ import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
 export default ({ back }) => (
-  <button className={material.btn +" "+ material.wavesEffect +" "+ material.wavesLight} onClick={back}>
+  <button className={index.backButton+" "+material.btn +" "+ material.wavesEffect +" "+ material.wavesLight} onClick={back}>
     Back</button>
 )

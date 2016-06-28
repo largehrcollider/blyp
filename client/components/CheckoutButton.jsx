@@ -6,7 +6,7 @@ import inventory from '../assets/styles/InventoryPane.css';
 
 
 export default ({ checkout }) => (
-  <div className={material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={checkout}>
+  <div className={index.checkoutButton+" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={checkout}>
     <div>Checkout</div>
   </div>
 )
