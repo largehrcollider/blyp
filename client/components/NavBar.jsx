@@ -12,7 +12,7 @@ import inventory from '../assets/styles/InventoryPane.css';
 
 
 const NavBar = () => (
-  <nav className="menu">
+  <nav className={index.menu}>
   	<ul>
     	<li className={index.active}>
         <Link to='/'>

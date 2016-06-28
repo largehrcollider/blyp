@@ -6,7 +6,7 @@ import inventory from '../assets/styles/InventoryPane.css';
 
 
 const MethodCash = ({ selectCash }) => (
-  <div className={index.payButton} onClick={selectCash}>
+  <div className={index.payButton +" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={selectCash}>
     Cash
   </div>
 );
