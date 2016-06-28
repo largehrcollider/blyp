@@ -1,4 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import material from '../assets/materialize/css/materialize.css';
+import index from '../assets/styles/index.css';
+import bootstrap from '../assets/styles/bootstrap.css';
+import inventory from '../assets/styles/InventoryPane.css';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -10,7 +14,7 @@ export default class LoginForm extends Component {
       <div>
         <form onSubmit={handleSubmit(create)}>
           <div>
-            <input type='text' placeholder="swipe your card" {...creditswipe}/>
+            <input className={index.createProductInput}type='text' placeholder="swipe your card" {...creditswipe}/>
           </div>
           <div className=''>
             <input type='submit' value='CHARGE'/>

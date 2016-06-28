@@ -12,28 +12,28 @@ export default class LoginForm extends Component {
 
     const {fields: {sku, price, quantity, name, categories, details, productPicture}, handleSubmit, create} = this.props;
     return (
-      <div className={index.createProduct}>
+      <div>
         <form  onSubmit={handleSubmit(create)}>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>sku <input type='text' {...sku}/></label>
+            <label className={index.createProductLabel}>sku <input className={index.createProductInput}type='text' {...sku}/></label>
           </div>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>price <input type='text' {...price}/></label>
+            <label className={index.createProductLabel}>price <input className={index.createProductInput}type='text' {...price}/></label>
           </div>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>quantity <input type='text' {...quantity}/></label>
+            <label className={index.createProductLabel}>quantity <input className={index.createProductInput}type='text' {...quantity}/></label>
           </div>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>name <input type='text' {...name}/></label>
+            <label className={index.createProductLabel}>name <input className={index.createProductInput}type='text' {...name}/></label>
           </div>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>categories <input type='text' {...categories}/></label>
+            <label className={index.createProductLabel}>categories <input className={index.createProductInput}type='text' {...categories}/></label>
           </div>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>details <input type='text' {...details}/></label>
+            <label className={index.createProductLabel}>details <input className={index.createProductInput}type='text' {...details}/></label>
           </div>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>File: <input type='file' {...productPicture} value={undefined}/></label>
+            <label className={index.createProductLabel}>File: <input className={index.createProductInput}type='file' {...productPicture} value={undefined}/></label>
           </div>
           <div className=''>
             <input className={index.save+" "+material.wavesEffect+" "+material.wavesLight} type='submit' value='SAVE' />
