@@ -10,10 +10,10 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit, attemptLogin} = this.props;
+    const {fields: {username, password}, handleSubmit, login} = this.props;
     return (
       <div>
-        <form onSubmit={handleSubmit(attemptLogin)}>
+        <form onSubmit={handleSubmit(login)}>
           <div className={index.login}>
             <div className={index.login_title}>
             </div>
