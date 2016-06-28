@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Logout from '../containers/Logout.js'
+
 import blypLogo from '../assets/images/blyplogonav.png';
 import settings from '../assets/images/settings.png';
 import barcode from '../assets/images/barcode.png';
@@ -39,6 +41,9 @@ const NavBar = () => (
         <Link to='/sell'>
           <img src={cart}/>
         </Link>
+      </li>
+      <li>
+        <Logout />
       </li>
     </ul>
   </nav>

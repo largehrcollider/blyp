@@ -15,6 +15,10 @@ export const CHECKOUT_CLICK = 'CHECKOUT_CLICK';
 export const LOGIN_REQUEST_SENT = 'LOGIN_REQUEST_SENT';
 export const LOGIN_REQUEST_SUCCESS = 'LOGIN_REQUEST_SUCCESS';
 export const LOGIN_REQUEST_FAILURE = 'LOGIN_REQUEST_FAILURE';
+export const SIGNUP_REQUEST_SENT = 'SIGNUP_REQUEST_SENT';
+export const SIGNUP_REQUEST_SUCCESS = 'SIGNUP_REQUEST_SUCCESS';
+export const SIGNUP_REQUEST_FAILURE = 'SIGNUP_REQUEST_FAILURE';
+export const USER_LOGOUT = 'USER_LOGOUT';
 
 /**
 * Actions related to basket and payment
@@ -70,3 +74,8 @@ export const POPULATE_WITH_FAKE_DATA = 'POPULATE_WITH_FAKE_DATA';
 * category filter pane
 */
 export const TOGGLE_CATEGORY = 'TOGGLE_CATEGORY';
+
+/**
+* business selector
+*/
+export const SELECT_BUSINESS = 'SELECT_BUSINESS';

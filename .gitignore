@@ -51,3 +51,4 @@ keys
 # Client uploads
 uploads
 images
+!docs/**

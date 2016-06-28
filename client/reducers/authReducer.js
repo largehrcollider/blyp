@@ -14,10 +14,12 @@ const initialState = {
   jwt,
   name,
   username,
-  admin,
-  isAuthenticated,
-  isFetching: false,
-  error: false
+  // admin,
+  isAuthenticated, // no need. if jwt present, then is authenticated
+  isFetching: false, // move out to ui or something
+  error: false, // ditto
+  businesses: {}, // object with `businessName: role` pairs
+  business: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -27,18 +29,23 @@ const authReducer = (state = initialState, action) => {
     return {...state, fetching: true};
 
     case types.LOGIN_REQUEST_SUCCESS:
+    case types.SIGNUP_REQUEST_SUCCESS:
     return {
       ...state,
       jwt: action.jwt,
       name: action.name,
       username: action.username,
-      admin: action.admin,
+      // admin: action.admin,
+      businesses: action.businesses,
       fetching: false,
       error: false
     };
 
-    case types.LOGIN_REQUEST_FAILURE:
+    case types.LOGIN_REQUEST_FAILURE: // possible remove from here
     return {...state, error: true};
+
+    case types.SELECT_BUSINESS:
+    return {...state, business: action.business};
 
     default:
     return state;

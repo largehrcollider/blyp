@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router';
 import userPNG from '../../assets/images/user.png'
 import lockPNG from '../../assets/images/lock.png'
 import index from '../../assets/styles/index.css';
@@ -37,6 +38,9 @@ export default class LoginForm extends Component {
             </div>
           </div>
         </form>
+        <div>
+          <span>Don't have an account? <Link to='/signup'>Sign Up!</Link></span>
+        </div>
       </div>
     );
   }
