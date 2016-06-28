@@ -19,7 +19,8 @@ const initialState = {
   isFetching: false, // move out to ui or something
   error: false, // ditto
   businesses: {}, // object with `businessName: role` pairs
-  business: null
+  business: null,
+  notifications: []
 };
 
 const authReducer = (state = initialState, action) => {
@@ -46,6 +47,9 @@ const authReducer = (state = initialState, action) => {
 
     case types.SELECT_BUSINESS:
     return {...state, business: action.business};
+
+    case types.NOTIFICATIONS_REQUEST_SUCCESS:
+    return {...state, notifications: action.notifications}
 
     default:
     return state;
