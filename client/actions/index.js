@@ -481,7 +481,7 @@ export const createProduct = (product) => {
     data.append('name', product.name);
     data.append('price', product.price);
     data.append('sku', product.sku);
-    data.append('business', getState.auth.business);
+    data.append('business', getState().auth.business);
     data.append('file', product.productPicture[0]);
 
     const config = {
@@ -560,7 +560,7 @@ export const deleteProduct = (sku) => {
 * business selected
 */
 export const businessSelected = (b) => {
-  return (dispatch) {
+  return (dispatch) => {
     dispatch(business(b));
     dispatch(readProduct());
     dispatch(push('/sell')); // don't like this, but will suffice for now
