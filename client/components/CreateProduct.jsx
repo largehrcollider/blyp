@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import material from '../assets/materialize/css/materialize.css';
+import index from '../assets/styles/index.css';
+import bootstrap from '../assets/styles/bootstrap.css';
+import inventory from '../assets/styles/InventoryPane.css';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -8,31 +12,31 @@ export default class LoginForm extends Component {
 
     const {fields: {sku, price, quantity, name, categories, details, productPicture}, handleSubmit, create} = this.props;
     return (
-      <div>
-        <form onSubmit={handleSubmit(create)}>
-          <div>
-            <label>sku <input type='text' {...sku}/></label>
+      <div className={index.createProduct}>
+        <form  onSubmit={handleSubmit(create)}>
+          <div className={index.createProduct}>
+            <label className={index.createProductLabel}>sku <input type='text' {...sku}/></label>
           </div>
-          <div>
-            <label>price <input type='text' {...price}/></label>
+          <div className={index.createProduct}>
+            <label className={index.createProductLabel}>price <input type='text' {...price}/></label>
           </div>
-          <div>
-            <label>quantity <input type='text' {...quantity}/></label>
+          <div className={index.createProduct}>
+            <label className={index.createProductLabel}>quantity <input type='text' {...quantity}/></label>
           </div>
-          <div>
-            <label>name <input type='text' {...name}/></label>
+          <div className={index.createProduct}>
+            <label className={index.createProductLabel}>name <input type='text' {...name}/></label>
           </div>
-          <div>
-            <label>categories <input type='text' {...categories}/></label>
+          <div className={index.createProduct}>
+            <label className={index.createProductLabel}>categories <input type='text' {...categories}/></label>
           </div>
-          <div>
-            <label>details <input type='text' {...details}/></label>
+          <div className={index.createProduct}>
+            <label className={index.createProductLabel}>details <input type='text' {...details}/></label>
           </div>
-          <div>
-            <label>File: <input type='file' {...productPicture} value={null}/></label>
+          <div className={index.createProduct}>
+            <label className={index.createProductLabel}>File: <input type='file' {...productPicture} value={undefined}/></label>
           </div>
           <div className=''>
-            <input type='submit' value='SAVE' />
+            <input className={index.save+" "+material.wavesEffect+" "+material.wavesLight} type='submit' value='SAVE' />
           </div>
         </form>
       </div>

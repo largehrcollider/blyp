@@ -9,6 +9,7 @@ var productsRouter = require('./routes/products/products.js');
 var transactionsRouter = require('./routes/transactions/transactions.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
+var signupRouter = require('./routes/signupRouter.js');
 var db = require('./db/config.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
 
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // publicly accessible
 app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
 // app.use('/logout', logoutRouter); // token invalidation?
 
 // protected routes
