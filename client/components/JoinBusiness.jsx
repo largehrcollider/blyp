@@ -10,10 +10,10 @@ export default class JoinBusiness extends Component {
       <div>
         <form onSubmit={handleSubmit(create)}>
           <div>
-            <label>sku <input type='text' {...business}/></label>
+            <label>Business to join: <input type='text' {...business}/></label>
           </div>
           <div className=''>
-            <input type='submit' value='CREATE' />
+            <input type='submit' value='JOIN' />
           </div>
         </form>
       </div>

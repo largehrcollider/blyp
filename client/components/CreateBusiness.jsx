@@ -10,7 +10,7 @@ export default class CreateBusiness extends Component {
       <div>
         <form onSubmit={handleSubmit(create)}>
           <div>
-            <label>sku <input type='text' {...business}/></label>
+            <label>Business to create: <input type='text' {...business}/></label>
           </div>
           <div className=''>
             <input type='submit' value='CREATE' />
