@@ -449,7 +449,7 @@ export const createProduct = (product) => {
     data.append('name', product.name);
     data.append('price', product.price);
     data.append('sku', product.sku);
-    data.append('business', getState.auth.business);
+    data.append('business', getState().auth.business);
     data.append('file', product.productPicture[0]);
 
     const config = {
