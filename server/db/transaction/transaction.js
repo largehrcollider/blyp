@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var transactionSchema = mongoose.Schema({
-  created_at: {type: Date, required: true, default: Date.now }, 
+  created_at: {type: Date, required: true, default: Date.now },
+  bussiness_id: String, 
 
   //References to customers in customer collection
   customer: {type: Schema.ObjectId, ref: 'Customer'},
