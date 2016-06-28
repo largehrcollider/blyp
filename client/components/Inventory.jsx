@@ -13,10 +13,10 @@ const Inventory = () => (
     {/*
       <PopulateWithFakeData />
     */}
-    <div className={bootstrap['col-md-2']}>
+    <div className={bootstrap.colmd2}>
       <FilterPane />
     </div>
-    <div className={bootstrap['col-md-10']}>
+    <div className={bootstrap.colmd10}>
       <InventoryPane />
     </div>
   </div>

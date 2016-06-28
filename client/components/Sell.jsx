@@ -15,13 +15,13 @@ const Sell = () => (
       <PopulateWithFakeData />
       </div>
     */}
-    <div className={bootstrap["col-md-2"]}>
+    <div className={bootstrap.colmd2}>
       <FilterPane />
     </div>
-    <div className={bootstrap["col-md-8"]}>
+    <div className={bootstrap.colmd8}>
       <ProductsPane />
     </div>
-    <div className={bootstrap["col-md-2"]}>
+    <div className={bootstrap.colmd2}>
       <BasketPane />
     </div>
   </div>

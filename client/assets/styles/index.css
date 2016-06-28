@@ -199,22 +199,31 @@ body .login_fields__submit input:hover {
 
 .increment-up{
   text-align: center;
-  line-height: 30px;
+  line-height: 32px;
 
 }
 
 .increment-down{
   text-align: center;
-  line-height: 30px;
+  line-height: 32px;
+}
+
+.pic{
+  width: 100px;
 }
 
 .delete{
   text-align: center;
-  line-height: 40px;
+  line-height: 37px;
+  margin: 0px 0px 0px 2px;
 }
 
 .basket-item{
-  width: 210px
+  width: 210px;
+  border: #ff9966;
+  box-shadow: 2px 3px 3px 2px;
+  padding: 5px;
+  margin: 5px;
 }
 
 .quantity: {
