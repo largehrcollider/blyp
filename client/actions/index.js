@@ -281,6 +281,16 @@ export const productDRequestFailure = () => {
   };
 };
 
+/**
+* Business selector
+*/
+export const business = (business) => {
+  return {
+    type: types.SELECT_BUSINESS,
+    business
+  }
+};
+
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -307,7 +317,7 @@ export const attemptLogin = ({username, password}) => {
       localStorage.setItem('jwt', jwt);
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));
-      dispatch(push('/sell'));
+      dispatch(push('/sell')); // will have to be changed to '/profile'
     })
     .catch(err => {
       dispatch(loginRequestFailure(err));
@@ -431,9 +441,7 @@ export const cashCheckoutCompleted = () => {
 * the sku is optional. if not supplied, will fetch all products in database
 */
 export const createProduct = (product) => {
-  console.log(product)
-  return (dispatch) => {
-    console.log(product);
+  return (dispatch, getState) => {
     var data = new FormData();
     data.append('categories', product.categories);
     data.append('details', product.details);
@@ -441,6 +449,7 @@ export const createProduct = (product) => {
     data.append('name', product.name);
     data.append('price', product.price);
     data.append('sku', product.sku);
+    data.append('business', getState.auth.business);
     data.append('file', product.productPicture[0]);
 
     const config = {
@@ -462,10 +471,11 @@ export const createProduct = (product) => {
   };
 };
 export const readProduct = (sku = '') => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'get',
+      data: {business: getState.auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -478,11 +488,11 @@ export const readProduct = (sku = '') => {
   };
 };
 export const updateProduct = (product) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
-      url: '/api/products/' + product.sku,
+      url: `/api/products/${sku}`,
       method: 'put',
-      data: product
+      data: {...product, business: getState.auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -497,10 +507,11 @@ export const updateProduct = (product) => {
   };
 };
 export const deleteProduct = (sku) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'delete',
+      data: {business: getState.auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -510,6 +521,16 @@ export const deleteProduct = (sku) => {
       dispatch(productDRequestFailure());
     });
     dispatch(productDRequestSent());
+  };
+};
 
+/**
+* business selected
+*/
+export const businessSelected = (business) => {
+  return (dispatch) {
+    dispatch(business(business));
+    dispatch(readProduct());
+    dispatch(push('/sell')); // don't like this, but will suffice for now
   };
 };

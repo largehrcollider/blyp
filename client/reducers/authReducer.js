@@ -44,6 +44,9 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_REQUEST_FAILURE: // possible remove from here
     return {...state, error: true};
 
+    case types.SELECT_BUSINESS:
+    return {...state, business: action.business};
+
     default:
     return state;
   }
