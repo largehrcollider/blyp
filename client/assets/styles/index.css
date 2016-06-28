@@ -150,12 +150,18 @@ body .login_fields__submit input:hover {
 }
 
 .createProduct{
-  color: #ee6e73;
+  color: #ffffff;
+
 }
 
 .createProductLabel{
-  color: #ee6e73;
+  color: #333333;
   font-size: 1.5em;
+}
+
+.createProductInput{
+  color: #f2f2f2;
+  font-size: 2em;
 }
 
 .my-card{
@@ -233,6 +239,9 @@ body .login_fields__submit input:hover {
 
 .login {
   box-sizing: content-box;
+}
+
+.logOut{
 }
 
 .login-fields {
