@@ -74,3 +74,8 @@ export const POPULATE_WITH_FAKE_DATA = 'POPULATE_WITH_FAKE_DATA';
 * category filter pane
 */
 export const TOGGLE_CATEGORY = 'TOGGLE_CATEGORY';
+
+/**
+* business selector
+*/
+export const SELECT_BUSINESS = 'SELECT_BUSINESS';

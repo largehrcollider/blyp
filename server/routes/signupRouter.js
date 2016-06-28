@@ -13,6 +13,9 @@ module.exports = router.post('/', (req, res) => {
   * use info above to insert user in DB
   */
 
+  // if does not exist, create user and send back token below
+  // else, send back 403
+
   // if insertion succesful:
   var token = jwt.sign({
     businesses: {},

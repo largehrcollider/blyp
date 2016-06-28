@@ -28,6 +28,7 @@ export default (
       <Route path='/inventory' component={Inventory} />
       <Route path='/inventory/:sku' component={ProductEditor} />
       <Route path="/sell" component={Sell} />
+      {/*<Route path='/profile' component={Profile} />*/}
     </Route>
 
     {/* for testing and debugging*/}
