@@ -291,6 +291,40 @@ export const business = (business) => {
   }
 };
 
+/**
+* Business requests
+*/
+export const businessCRequestSuccess = () => {
+  return {
+    type: types.BUSINESS_C_REQUEST_SUCCESS
+  };
+};
+export const businessCRequestFailure = () => {
+  return {
+    type: types.BUSINESS_C_REQUEST_FAILURE
+  };
+};
+export const businessCRequestSent = () => {
+  return {
+    type: types.BUSINESS_C_REQUEST_SENT
+  };
+};
+export const businessJoinRequestSuccess = () => {
+  return {
+    type: types.BUSINESS_JOIN_REQUEST_SUCCESS
+  };
+};
+export const businessJoinRequestFailure = () => {
+  return {
+    type: types.BUSINESS_JOIN_REQUEST_FAILURE
+  };
+};
+export const businessJoinRequestSent = () => {
+  return {
+    type: types.BUSINESS_JOIN_REQUEST_SENT
+  };
+};
+
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -525,12 +559,46 @@ export const deleteProduct = (sku) => {
 };
 
 /**
-* business selected
+* business related thunks
 */
 export const businessSelected = (business) => {
   return (dispatch) => {
     dispatch(business(business));
     dispatch(readProduct());
     dispatch(push('/sell')); // don't like this, but will suffice for now
+  };
+};
+export const createBusiness = (business) => {
+  return (dispatch) => {
+    const config = {
+      url: `/api/business/create`,
+      method: 'post',
+      data: {business}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(businessCRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(businessCRequestFailure());
+    });
+    dispatch(businessCRequestSent());
+  };
+};
+export const joinBusiness = (business) => {
+  return (dispatch) => {
+    const config = {
+      url: `/api/business/join`,
+      method: 'post',
+      data: {business}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(businessJoinRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(businessJoinRequestFailure());
+    });
+    dispatch(businessJoinRequestSent());
   };
 };
