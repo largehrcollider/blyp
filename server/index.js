@@ -44,7 +44,7 @@ app.use('/api/products', productsRouter);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/employment', employmentRouter);
-app.use('/api/business', businessesRouter);
+app.use('/api/businesses', businessesRouter);
 app.get('/images/:sku', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../images', req.params.sku + '.jpg'));
 });
