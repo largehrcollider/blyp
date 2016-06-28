@@ -317,7 +317,7 @@ export const attemptLogin = ({username, password}) => {
       localStorage.setItem('jwt', jwt);
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));
-      dispatch(push('/sell')); // will have to be changed to '/profile'
+      dispatch(push('/settings')); // will have to be changed to '/profile'
     })
     .catch(err => {
       dispatch(loginRequestFailure(err));
@@ -338,7 +338,7 @@ export const signup = (data) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(signupRequestSuccess(data));
       dispatch(reset('signup'));
-      dispatch(push('/sell')); // should dispatch to landing page first
+      dispatch(push('/settings')); // should dispatch to landing page first
     })
     .catch(err => {
       dispatch(signupRequestFailure(err));
@@ -528,7 +528,7 @@ export const deleteProduct = (sku) => {
 * business selected
 */
 export const businessSelected = (business) => {
-  return (dispatch) {
+  return (dispatch) => {
     dispatch(business(business));
     dispatch(readProduct());
     dispatch(push('/sell')); // don't like this, but will suffice for now
