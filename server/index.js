@@ -8,7 +8,7 @@ var morgan = require('morgan');
 var productsRouter = require('./routes/products/products.js');
 var transactionsRouter = require('./routes/transactions/transactions.js');
 var employmentRouter = require('./routes/employment/employment.js');
-var businessRouter = require('./routes/business/business.js');
+var businessesRouter = require('./routes/businesses/businesses.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
 var signupRouter = require('./routes/signupRouter.js');
@@ -44,7 +44,7 @@ app.use('/api/products', productsRouter);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/employment', employmentRouter);
-app.use('/api/business', businessRouter);
+app.use('/api/business', businessesRouter);
 app.get('/images/:sku', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../images', req.params.sku + '.jpg'));
 });
