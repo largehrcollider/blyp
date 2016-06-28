@@ -305,7 +305,7 @@ export const business = (business) => {
 /**
 * Login, Signup, Logout operations
 */
-export const attemptLogin = ({username, password}) => {
+export const login = ({username, password}) => {
   return (dispatch) => {
     const config = {
       url: '/login',
@@ -363,11 +363,13 @@ export const logout = () => {
 
 
 export const saveProduct = (data) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
       url: '/api/products',
       method: 'post',
-      data
+      data,
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -382,6 +384,7 @@ export const saveProduct = (data) => {
 }
 
 export const transactionCompleted = () => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     var transaction = {
       basket: getState().basket,
@@ -390,7 +393,8 @@ export const transactionCompleted = () => {
     const config = {
       url: '/api/transactions',
       method: 'post',
-      data: transaction
+      data: transaction,
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -473,6 +477,7 @@ export const cashCheckoutCompleted = () => {
 * the sku is optional. if not supplied, will fetch all products in database
 */
 export const createProduct = (product) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     var data = new FormData();
     data.append('categories', product.categories);
@@ -487,7 +492,8 @@ export const createProduct = (product) => {
     const config = {
       url: '/api/products',
       method: 'post',
-      data
+      data,
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -503,11 +509,13 @@ export const createProduct = (product) => {
   };
 };
 export const readProduct = (sku = '') => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'get',
-      data: {business: getState.auth.business}
+      data: {business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -520,11 +528,13 @@ export const readProduct = (sku = '') => {
   };
 };
 export const updateProduct = (product) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'put',
-      data: {...product, business: getState.auth.business}
+      data: {...product, business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -539,11 +549,13 @@ export const updateProduct = (product) => {
   };
 };
 export const deleteProduct = (sku) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'delete',
-      data: {business: getState.auth.business}
+      data: {business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
