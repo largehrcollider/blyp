@@ -59,13 +59,14 @@ export const inventoryClick = () => {
   };
 };
 
-// authentication state
+/**
+* authentication: signup, login, logout
+*/
 export const loginRequestSent = () => {
   return {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-
 export const loginRequestSuccess = (admin, jwt, name, username) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
@@ -75,14 +76,37 @@ export const loginRequestSuccess = (admin, jwt, name, username) => {
     username
   }
 }
-
 export const loginRequestFailure = (message) => {
   return {
     type: types.LOGIN_REQUEST_FAILURE,
     message
   };
 };
+export const signupRequestSent = () => {
+  return {
+    type: types.SIGNUP_REQUEST_SENT
+  };
+};
+export const signupRequestSuccess = (data) => {
+  return {
+    type: types.SIGNUP_REQUEST_SUCCESS,
+    data
+  };
+};
+export const signupRequestFailure = () => {
+  return {
+    type: types.SIGNUP_REQUEST_FAILURE
+  };
+};
+export const logoutStore = () => {
+  return {
+    type: types.USER_LOGOUT
+  };
+};
 
+/**
+* temporary solution
+*/
 export const populateWithFakeData = (data) => {
   return {
     type: types.POPULATE_WITH_FAKE_DATA,
@@ -257,6 +281,16 @@ export const productDRequestFailure = () => {
   };
 };
 
+/**
+* Business selector
+*/
+export const business = (business) => {
+  return {
+    type: types.SELECT_BUSINESS,
+    business
+  }
+};
+
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -268,8 +302,10 @@ export const productDRequestFailure = () => {
 //   }
 // }
 
+/**
+* Login, Signup, Logout operations
+*/
 export const attemptLogin = ({username, password}) => {
-
   return (dispatch) => {
     const config = {
       url: '/login',
@@ -281,16 +317,50 @@ export const attemptLogin = ({username, password}) => {
       localStorage.setItem('jwt', jwt);
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));
-      dispatch(push('/sell'));
-
+      dispatch(push('/sell')); // will have to be changed to '/profile'
     })
     .catch(err => {
       dispatch(loginRequestFailure(err));
     });
-
     dispatch(loginRequestSent());
   }
 }
+export const signup = (data) => {
+  return (dispatch) => {
+    const config = {
+      url: '/signup',
+      method: 'post',
+      data
+    }
+    axios(config)
+    // .then(({ data: {jwt, name, username, businesses }}) => {
+    .then( ({ data }) => {
+      localStorage.setItem('jwt', data.jwt);
+      dispatch(signupRequestSuccess(data));
+      dispatch(reset('signup'));
+      dispatch(push('/sell')); // should dispatch to landing page first
+    })
+    .catch(err => {
+      dispatch(signupRequestFailure(err));
+    });
+    dispatch(signupRequestSent());
+  }
+}
+export const logout = () => {
+  const jwt = localStorage.getItem('jwt');
+  localStorage.removeItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/logout',
+      method: 'get',
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config); // for now, don't care on server response.
+    dispatch(logoutStore());
+    dispatch(push('/'));
+  };
+};
+
 
 export const saveProduct = (data) => {
   return (dispatch) => {
@@ -403,9 +473,7 @@ export const cashCheckoutCompleted = () => {
 * the sku is optional. if not supplied, will fetch all products in database
 */
 export const createProduct = (product) => {
-  console.log(product)
-  return (dispatch) => {
-    console.log(product);
+  return (dispatch, getState) => {
     var data = new FormData();
     data.append('categories', product.categories);
     data.append('details', product.details);
@@ -413,6 +481,7 @@ export const createProduct = (product) => {
     data.append('name', product.name);
     data.append('price', product.price);
     data.append('sku', product.sku);
+    data.append('business', getState().auth.business);
     data.append('file', product.productPicture[0]);
 
     const config = {
@@ -434,10 +503,11 @@ export const createProduct = (product) => {
   };
 };
 export const readProduct = (sku = '') => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'get',
+      data: {business: getState().auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -450,11 +520,11 @@ export const readProduct = (sku = '') => {
   };
 };
 export const updateProduct = (product) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
-      url: '/api/products/' + product.sku,
+      url: `/api/products/${sku}`,
       method: 'put',
-      data: product
+      data: {...product, business: getState().auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -469,10 +539,11 @@ export const updateProduct = (product) => {
   };
 };
 export const deleteProduct = (sku) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'delete',
+      data: {business: getState().auth.business}
     };
     axios(config)
     .then(({ data }) => {
@@ -482,6 +553,16 @@ export const deleteProduct = (sku) => {
       dispatch(productDRequestFailure());
     });
     dispatch(productDRequestSent());
+  };
+};
 
+/**
+* business selected
+*/
+export const businessSelected = (b) => {
+  return (dispatch) => {
+    dispatch(business(b));
+    dispatch(readProduct());
+    dispatch(push('/sell')); // don't like this, but will suffice for now
   };
 };
