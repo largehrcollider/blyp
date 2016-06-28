@@ -60,7 +60,7 @@ export const inventoryClick = () => {
 };
 
 /**
-* authentication: signup and login
+* authentication: signup, login, logout
 */
 export const loginRequestSent = () => {
   return {
@@ -82,7 +82,6 @@ export const loginRequestFailure = (message) => {
     message
   };
 };
-
 export const signupRequestSent = () => {
   return {
     type: types.SIGNUP_REQUEST_SENT
@@ -97,6 +96,11 @@ export const signupRequestSuccess = (data) => {
 export const signupRequestFailure = () => {
   return {
     type: types.SIGNUP_REQUEST_FAILURE
+  };
+};
+export const logoutStore = () => {
+  return {
+    type: types.USER_LOGOUT
   };
 };
 
@@ -289,7 +293,7 @@ export const productDRequestFailure = () => {
 // }
 
 /**
-* Login and Signup operations
+* Login, Signup, Logout operations
 */
 export const attemptLogin = ({username, password}) => {
   return (dispatch) => {
@@ -332,7 +336,20 @@ export const signup = (data) => {
     dispatch(signupRequestSent());
   }
 }
-
+export const logout = () => {
+  const jwt = localStorage.getItem('jwt');
+  localStorage.removeItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/logout',
+      method: 'get',
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config); // for now, don't care on server response.
+    dispatch(logoutStore());
+    dispatch(push('/'));
+  };
+};
 
 
 export const saveProduct = (data) => {
