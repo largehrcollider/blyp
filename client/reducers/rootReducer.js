@@ -6,8 +6,8 @@ import toolbar from './toolbarReducer.js';
 import auth from './authReducer.js';
 import basket from './basketReducer.js';
 import products from './productsReducer.js';
-import payment from './paymentReducer'
-import network from './networkReducer.js'
+import payment from './paymentReducer';
+import network from './networkReducer.js';
 // import reducer from './myReducerFile.js';
 
 /**

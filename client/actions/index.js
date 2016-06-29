@@ -291,6 +291,42 @@ export const business = (business) => {
   }
 };
 
+/**
+* notifications
+*/
+export const notificationsRequestSuccess = (notifications) => {
+  return {
+    type: types.NOTIFICATIONS_REQUEST_SUCCESS,
+    notifications
+  };
+};
+export const notificationsRequestFailure = () => {
+  return {
+    type: types.NOTIFICATIONS_REQUEST_FAILURE
+  };
+};
+export const notificationsRequestSent = () => {
+  return {
+    type: types.NOTIFICATIONS_REQUEST_SENT
+  };
+};
+export const acceptanceRequestSuccess = (accept, username) => {
+  return {
+    type: types.ACCEPTANCE_REQUEST_SUCCESS,
+    accept,
+    username
+  };
+};
+export const acceptanceRequestFailure = () => {
+  return {
+      type: types.ACCEPTANCE_REQUEST_FAILURE
+  };
+};
+export const acceptanceRequestSent = () => {
+  return {
+      type: types.ACCEPTANCE_REQUEST_SENT
+  };
+};
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -576,5 +612,51 @@ export const businessSelected = (b) => {
     dispatch(business(b));
     dispatch(readProduct());
     dispatch(push('/sell')); // don't like this, but will suffice for now
+  };
+};
+
+/**
+* notifications, requests
+*/
+export const notifications = () => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/notifications',
+      method: 'get',
+      data: {business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(notificationsRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(notificationsRequestFailure());
+    });
+    dispatch(notificationsRequestSent());
+  };
+};
+export const acceptance = (username, accept) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/employment',
+      method: 'get',
+      data: {
+        business: getState().auth.business,
+        username,
+        accept
+      },
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(acceptanceRequestSuccess(data.accept, username));
+    })
+    .catch(err => {
+      dispatch(acceptanceRequestFailure());
+    });
+    dispatch(acceptanceRequestSent());
   };
 };
