@@ -12,8 +12,8 @@ exports.createProduct = function(newProduct, callback){
 };
 
 //Read operations
-exports.getAllProducts = function(callback){
-  Product.find({})
+exports.getAllProducts = function(businessName, callback){
+  Product.find({business: businessName})
   .then(function(products){
     callback(null, products);
   })
@@ -22,8 +22,8 @@ exports.getAllProducts = function(callback){
   });
 };
 
-exports.getProductBySku = function(sku, callback){
-  Product.findOne({sku: sku})
+exports.getProductBySku = function(businessName, sku, callback){
+  Product.findOne({business: businessName, sku: sku})
   .then(function(product){
     callback(null, product);
   })
@@ -32,8 +32,8 @@ exports.getProductBySku = function(sku, callback){
   });
 };
 
-exports.getProductByName = function(productname, callback){
-  Product.findOne({name: productname})
+exports.getProductByName = function(businessName, productname, callback){
+  Product.findOne({business: businessName, name: productname})
   .then(function(product){
     callback(null, product);
   })
@@ -43,8 +43,8 @@ exports.getProductByName = function(productname, callback){
 };
 
 //Update operations
-exports.updateProductById = function(id, update, callback){
-  Product.findOneAndUpdate({_id: id}, update, {new: true})
+exports.updateProductById = function(businessName, id, update, callback){
+  Product.findOneAndUpdate({business: businessName, _id: id}, update, {new: true})
   .then(function(product){
     callback(null, product);
   })
@@ -53,8 +53,8 @@ exports.updateProductById = function(id, update, callback){
   });
 };
 
-exports.updateProductBySku = function(sku, update, callback){
-  Product.findOneAndUpdate({sku: sku}, update, {new: true})
+exports.updateProductBySku = function(businessName, sku, update, callback){
+  Product.findOneAndUpdate({business: businessName, sku: sku}, update, {new: true})
   .then(function(product){
     callback(null, product);
   })
@@ -74,8 +74,8 @@ exports.deleteProductById = function(id, callback){
   });
 };
 
-exports.deleteProductBySku = function(sku, callback){
-  Product.findOneAndRemove({sku: sku})
+exports.deleteProductBySku = function(businessName, sku, callback){
+  Product.findOneAndRemove({business: businessName, sku: sku})
   .then(function(product){
     callback(null, product);
   })

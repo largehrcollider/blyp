@@ -59,24 +59,4 @@ router.delete('/:sku', function(req, res){
   });
 });
 
-// router.put('/:id', function(req, res){
-//   Product.updateProductById(req.params.id, req.body, function(err, product){
-//     if(err){
-//       res.sendStatus(500);
-//     } else {
-//       res.status(200).json(product);
-//     }
-//   });
-// });
-
-// router.delete('/:id', function(req, res){
-//   Product.deleteProductById(req.params.id, function(err, product){
-//     if(err){
-//       res.sendStatus(500);
-//     } else {
-//       res.status(200).json(product);
-//     }
-//   });
-// });
-
 module.exports = router;
