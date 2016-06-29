@@ -406,7 +406,7 @@ export const login = ({username, password}) => {
     };
     axios(config)
     .then(({ data }) => {
-      localStorage.setItem('jwt', jwt);
+      localStorage.setItem('jwt', data.jwt);
       dispatch(loginRequestSuccess(data));
       dispatch(reset('loginForm'));
       dispatch(push('/profile')); // will have to be changed to '/profile'
