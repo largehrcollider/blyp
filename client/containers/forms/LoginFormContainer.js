@@ -4,8 +4,8 @@ import LoginForm from '../../components/forms/LoginFormComponent.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    attemptLogin: (values) => {
-      dispatch(actions.attemptLogin(values));
+    login: (values) => {
+      dispatch(actions.login(values));
     }
   };
 };

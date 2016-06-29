@@ -325,6 +325,42 @@ export const businessJoinRequestSent = () => {
   };
 };
 
+/**
+* notifications
+*/
+export const notificationsRequestSuccess = (notifications) => {
+  return {
+    type: types.NOTIFICATIONS_REQUEST_SUCCESS,
+    notifications
+  };
+};
+export const notificationsRequestFailure = () => {
+  return {
+    type: types.NOTIFICATIONS_REQUEST_FAILURE
+  };
+};
+export const notificationsRequestSent = () => {
+  return {
+    type: types.NOTIFICATIONS_REQUEST_SENT
+  };
+};
+export const acceptanceRequestSuccess = (accept, username) => {
+  return {
+    type: types.ACCEPTANCE_REQUEST_SUCCESS,
+    accept,
+    username
+  };
+};
+export const acceptanceRequestFailure = () => {
+  return {
+      type: types.ACCEPTANCE_REQUEST_FAILURE
+  };
+};
+export const acceptanceRequestSent = () => {
+  return {
+      type: types.ACCEPTANCE_REQUEST_SENT
+  };
+};
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -339,7 +375,7 @@ export const businessJoinRequestSent = () => {
 /**
 * Login, Signup, Logout operations
 */
-export const attemptLogin = ({username, password}) => {
+export const login = ({username, password}) => {
   return (dispatch) => {
     const config = {
       url: '/login',
@@ -397,11 +433,13 @@ export const logout = () => {
 
 
 export const saveProduct = (data) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
       url: '/api/products',
       method: 'post',
-      data
+      data,
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -416,6 +454,7 @@ export const saveProduct = (data) => {
 }
 
 export const transactionCompleted = () => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     var transaction = {
       basket: getState().basket,
@@ -424,7 +463,8 @@ export const transactionCompleted = () => {
     const config = {
       url: '/api/transactions',
       method: 'post',
-      data: transaction
+      data: transaction,
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -507,6 +547,7 @@ export const cashCheckoutCompleted = () => {
 * the sku is optional. if not supplied, will fetch all products in database
 */
 export const createProduct = (product) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     var data = new FormData();
     data.append('categories', product.categories);
@@ -521,7 +562,8 @@ export const createProduct = (product) => {
     const config = {
       url: '/api/products',
       method: 'post',
-      data
+      data,
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -537,11 +579,13 @@ export const createProduct = (product) => {
   };
 };
 export const readProduct = (sku = '') => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'get',
-      data: {business: getState.auth.business}
+      data: {business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -554,11 +598,13 @@ export const readProduct = (sku = '') => {
   };
 };
 export const updateProduct = (product) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'put',
-      data: {...product, business: getState.auth.business}
+      data: {...product, business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -573,11 +619,13 @@ export const updateProduct = (product) => {
   };
 };
 export const deleteProduct = (sku) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'delete',
-      data: {business: getState.auth.business}
+      data: {business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -632,5 +680,49 @@ export const joinBusiness = (business) => {
       dispatch(businessJoinRequestFailure());
     });
     dispatch(businessJoinRequestSent());
+
+/**
+* notifications, requests
+*/
+export const notifications = () => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/notifications',
+      method: 'get',
+      data: {business: getState().auth.business},
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(notificationsRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(notificationsRequestFailure());
+    });
+    dispatch(notificationsRequestSent());
+  };
+};
+export const acceptance = (username, accept) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/employment',
+      method: 'get',
+      data: {
+        business: getState().auth.business,
+        username,
+        accept
+      },
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(acceptanceRequestSuccess(data.accept, username));
+    })
+    .catch(err => {
+      dispatch(acceptanceRequestFailure());
+    });
+    dispatch(acceptanceRequestSent());
   };
 };

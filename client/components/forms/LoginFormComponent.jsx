@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Link } from 'react-router';
-import userPNG from '../../assets/images/user.png';
-import lockPNG from '../../assets/images/lock.png';
+import userPNG from '../../assets/images/user.png'
+import lockPNG from '../../assets/images/lock.png'
+import index from '../../assets/styles/index.css';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -9,29 +10,29 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    const {fields: {username, password}, handleSubmit, attemptLogin} = this.props;
+    const {fields: {username, password}, handleSubmit, login} = this.props;
     return (
       <div>
-        <form onSubmit={handleSubmit(attemptLogin)}>
-          <div className='login'>
-            <div className='login_title'>
+        <form onSubmit={handleSubmit(login)}>
+          <div className={index.login}>
+            <div className={index.login_title}>
             </div>
-            <div className='login_fields'>
-              <div className='login_fields__user'>
-                <div className='icon'>
+            <div className={index.login_fields}>
+              <div className={index.login_fields__user}>
+                <div className={index.icon}>
                   <img src={userPNG} />
                 </div>
                 <input placeholder='Username' type='text' {...username} />
-                <div className='login_fields__password'>
-                  <div className='icon'>
+                <div className={index.login_fields__password}>
+                  <div className={index.icon}>
                     <img src={lockPNG} /></div>
                     <input placeholder='Password' type='password' {...password} />
                 </div>
-                <div className='login_fields__submit'>
+                <div className={index.login_fields__submit}>
                   <input type='submit' value='Log In' />
                 </div>
               </div>
-              <div className='disclaimer'>
+              <div className={index.disclaimer}>
                 <p>BLYP 2016 ALL RIGHTS RESERVED</p>
               </div>
             </div>
