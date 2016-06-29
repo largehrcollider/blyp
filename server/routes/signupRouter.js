@@ -19,16 +19,17 @@ module.exports = router.post('/', (req, res) => {
       User.createUser(newUser, (err, user) => {
         if(user){
           var token = jwt.sign({
-          businesses: {},
-          email,
-          name,
-          username,
+            businesses: {},
+            email,
+            name,
+            username,
           }, SECRET);
           res.status(201).json({user, jwt: token});
         }
-      }
+      });
     }
-  }
+  });
+});
   /**
   * use info above to insert user in DB
   */
@@ -47,4 +48,4 @@ module.exports = router.post('/', (req, res) => {
 
   // if insertion not succesful:
   // res.sendStatus(403);
-});
+
