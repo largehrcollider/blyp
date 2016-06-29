@@ -50,8 +50,14 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_REQUEST_FAILURE: // possible remove from here
     return {...state, error: true};
 
-    case types.SELECT_BUSINESS:
-    return {...state, business: action.business};
+    case types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL:
+    return {...state,
+      jwt: action.jwt,
+      business: {
+      name: action.business,
+      notifications: action.notifications,
+      users: action.users
+    }};
 
     case types.NOTIFICATIONS_REQUEST_SUCCESS:
     return {...state, notifications: action.notifications};

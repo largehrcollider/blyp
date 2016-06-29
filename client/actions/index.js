@@ -67,10 +67,10 @@ export const loginRequestSent = () => {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-export const loginRequestSuccess = (admin, jwt, name, username) => {
+export const loginRequestSuccess = (role, jwt, name, username) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
-    admin,
+    role,
     jwt,
     name,
     username
@@ -284,15 +284,34 @@ export const productDRequestFailure = () => {
 /**
 * Business selector
 */
-export const business = (business) => {
+// export const business = (business) => {
+//   return {
+//     type: types.SELECT_BUSINESS,
+//     business
+//   }
+// };
+export const businessCheckinRequestSuccesful = (business, jwt, products, notifications) => {
   return {
-    type: types.SELECT_BUSINESS,
-    business
-  }
+    type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
+    business,
+    jwt,
+    products,
+    notifications
+  };
+};
+export const businessCheckinRequestFailure = () => {
+  return {
+    type: types.BUSINESS_CHECKIN_REQUEST_FAILURE
+  };
+};
+export const businessCheckinRequestSent = () => {
+  return {
+    type: types.BUSINESS_CHECKIN_REQUEST_SENT
+  };
 };
 
 /**
-* Business requests
+* Business related action creators
 */
 export const businessCRequestSuccess = () => {
   return {
@@ -641,19 +660,36 @@ export const deleteProduct = (sku) => {
 /**
 * business related thunks
 */
-export const businessSelected = (b) => {
+export const checkinBusiness = (business) => {
+  // server sends back new jwt
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
-    dispatch(business(b));
-    dispatch(readProduct());
-    dispatch(push('/sell')); // don't like this, but will suffice for now
+    const config = {
+      url: '/api/business/checkin',
+      method: 'post',
+      data: {business},
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      localStorage.setItem('jwt', data.jwt);
+      dispatch(businessCheckinRequestSuccesful(business, data.jwt, data.products, data.notifications));
+      dispatch(push('/sell'));
+    })
+    .catch(err => {
+      dispatch(businessCheckinRequestFailure());
+    });
+    dispatch(businessCheckinRequestSent());
   };
 };
 export const createBusiness = (business) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: `/api/business/create`,
+      url: '/api/business/create',
       method: 'post',
       data: {business}
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -666,11 +702,13 @@ export const createBusiness = (business) => {
   };
 };
 export const joinBusiness = (business) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: `/api/business/join`,
+      url: '/api/business/join',
       method: 'post',
       data: {business}
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -690,7 +728,7 @@ export const notifications = () => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: '/api/notifications',
+      url: '/api/business/requests',
       method: 'get',
       data: {business: getState().auth.business},
       headers: {'Authorization': 'Bearer ' + jwt}
@@ -709,8 +747,8 @@ export const acceptance = (username, accept) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: '/api/employment',
-      method: 'get',
+      url: '/api/business/accept',
+      method: 'post',
       data: {
         business: getState().auth.business,
         username,
