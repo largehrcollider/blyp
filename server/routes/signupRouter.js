@@ -12,12 +12,17 @@ module.exports = router.post('/', (req, res) => {
 
   //Check if user exists
   User.getUserByUsername(username, (err, user) => {
+    if(err){
+      console.log(err);
+    }
     if(user){
       res.status(409).send('User already exists!');
     } else {
       var newUser = {name: name, username: username, email: email, password: password};
       User.createUser(newUser, (err, user) => {
-        if(user){
+        if(err){
+          res.sendStatus(500);
+        } else if(user){
           var token = jwt.sign({
             businesses: {},
             email,
