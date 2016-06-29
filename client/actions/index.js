@@ -67,9 +67,10 @@ export const loginRequestSent = () => {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-export const loginRequestSuccess = (jwt, username) => {
+export const loginRequestSuccess = ({ businesses, jwt, username }) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
+    businesses,
     jwt,
     username
   }
@@ -85,10 +86,12 @@ export const signupRequestSent = () => {
     type: types.SIGNUP_REQUEST_SENT
   };
 };
-export const signupRequestSuccess = (data) => {
+export const signupRequestSuccess = ({ jwt, username }) => {
   return {
     type: types.SIGNUP_REQUEST_SUCCESS,
-    data
+    jwt,
+    username,
+    businesses: []
   };
 };
 export const signupRequestFailure = () => {
@@ -402,9 +405,9 @@ export const login = ({username, password}) => {
       data: {username, password},
     };
     axios(config)
-    .then(({data: {jwt, username }}) => {
+    .then(({ data }) => {
       localStorage.setItem('jwt', jwt);
-      dispatch(loginRequestSuccess(jwt, username));
+      dispatch(loginRequestSuccess(data));
       dispatch(reset('loginForm'));
       dispatch(push('/profile')); // will have to be changed to '/profile'
     })
@@ -422,9 +425,9 @@ export const signup = (data) => {
       data
     }
     axios(config)
-    // .then(({ data: {jwt, name, username, businesses }}) => {
-    .then( ({ data }) => {
-      localStorage.setItem('jwt', data.jwt);
+    .then(({ data: { jwt, username } }) => {
+    // .then( ({ data }) => {
+      localStorage.setItem('jwt', jwt);
       dispatch(signupRequestSuccess(data));
       dispatch(reset('signup'));
       dispatch(push('/profile')); // should dispatch to landing page first
