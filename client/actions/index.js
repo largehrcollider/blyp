@@ -662,11 +662,13 @@ export const deleteProduct = (sku) => {
 */
 export const checkinBusiness = (business) => {
   // server sends back new jwt
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
       url: '/api/business/checkin',
       method: 'post',
-      data: {business}
+      data: {business},
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -681,11 +683,13 @@ export const checkinBusiness = (business) => {
   };
 };
 export const createBusiness = (business) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
       url: '/api/business/create',
       method: 'post',
       data: {business}
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
@@ -698,11 +702,13 @@ export const createBusiness = (business) => {
   };
 };
 export const joinBusiness = (business) => {
+  const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
       url: '/api/business/join',
       method: 'post',
       data: {business}
+      headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
     .then(({ data }) => {
