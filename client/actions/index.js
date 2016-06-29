@@ -651,7 +651,7 @@ export const businessSelected = (b) => {
 export const createBusiness = (business) => {
   return (dispatch) => {
     const config = {
-      url: `/api/business/create`,
+      url: '/api/business/create',
       method: 'post',
       data: {business}
     };
@@ -668,7 +668,7 @@ export const createBusiness = (business) => {
 export const joinBusiness = (business) => {
   return (dispatch) => {
     const config = {
-      url: `/api/business/join`,
+      url: '/api/business/join',
       method: 'post',
       data: {business}
     };
@@ -690,7 +690,7 @@ export const notifications = () => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: '/api/notifications',
+      url: '/api/business/requests',
       method: 'get',
       data: {business: getState().auth.business},
       headers: {'Authorization': 'Bearer ' + jwt}
@@ -709,8 +709,8 @@ export const acceptance = (username, accept) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: '/api/employment',
-      method: 'get',
+      url: '/api/business/accept',
+      method: 'post',
       data: {
         business: getState().auth.business,
         username,
