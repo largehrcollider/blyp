@@ -67,12 +67,10 @@ export const loginRequestSent = () => {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-export const loginRequestSuccess = (role, jwt, name, username) => {
+export const loginRequestSuccess = (jwt, username) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
-    role,
     jwt,
-    name,
     username
   }
 }
@@ -290,13 +288,14 @@ export const productDRequestFailure = () => {
 //     business
 //   }
 // };
-export const businessCheckinRequestSuccesful = (business, jwt, products, notifications) => {
+export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, notifications }) => {
   return {
     type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
     business,
     jwt,
+    notifications,
     products,
-    notifications
+    role
   };
 };
 export const businessCheckinRequestFailure = () => {
@@ -313,9 +312,10 @@ export const businessCheckinRequestSent = () => {
 /**
 * Business related action creators
 */
-export const businessCRequestSuccess = () => {
+export const businessCRequestSuccess = (business) => {
   return {
-    type: types.BUSINESS_C_REQUEST_SUCCESS
+    type: types.BUSINESS_C_REQUEST_SUCCESS,
+    business
   };
 };
 export const businessCRequestFailure = () => {
@@ -402,9 +402,9 @@ export const login = ({username, password}) => {
       data: {username, password},
     };
     axios(config)
-    .then(({data: {jwt, name, username, admin}}) => {
+    .then(({data: {jwt, username }}) => {
       localStorage.setItem('jwt', jwt);
-      dispatch(loginRequestSuccess(admin, jwt, name, username));
+      dispatch(loginRequestSuccess(jwt, username));
       dispatch(reset('loginForm'));
       dispatch(push('/profile')); // will have to be changed to '/profile'
     })
@@ -427,7 +427,7 @@ export const signup = (data) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(signupRequestSuccess(data));
       dispatch(reset('signup'));
-      dispatch(push('/settings')); // should dispatch to landing page first
+      dispatch(push('/profile')); // should dispatch to landing page first
     })
     .catch(err => {
       dispatch(signupRequestFailure(err));
@@ -661,7 +661,6 @@ export const deleteProduct = (sku) => {
 * business related thunks
 */
 export const checkinBusiness = (business) => {
-  // server sends back new jwt
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
@@ -673,7 +672,7 @@ export const checkinBusiness = (business) => {
     axios(config)
     .then(({ data }) => {
       localStorage.setItem('jwt', data.jwt);
-      dispatch(businessCheckinRequestSuccesful(business, data.jwt, data.products, data.notifications));
+      dispatch(businessCheckinRequestSuccesful(data));
       dispatch(push('/sell'));
     })
     .catch(err => {
@@ -693,7 +692,7 @@ export const createBusiness = (business) => {
     };
     axios(config)
     .then(({ data }) => {
-      dispatch(businessCRequestSuccess(data));
+      dispatch(businessCRequestSuccess(business));
     })
     .catch(err => {
       dispatch(businessCRequestFailure());
