@@ -50,7 +50,7 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_REQUEST_FAILURE: // possible remove from here
     return {...state, error: true};
 
-    case types.SELECT_BUSINESS:
+    case types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL:
     return {...state, business: action.business};
 
     case types.NOTIFICATIONS_REQUEST_SUCCESS:
