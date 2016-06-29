@@ -18,17 +18,5 @@ exports.deleteBusinessByName = function(name, callback){
 };
 
 exports.employementRequest = function(username, businessName, status, callback){
-  Business.findOne({name: businessName}, function(business){
-    if(status === 'accept'){
-      business.users.push({id: username, role: 'cashier'});
-      callback(business);
-    } else {
-      for(var i = 0; i < business.requests.length; i++){
-        if(business.requests[i] === username){
-          business.requests.splice(i, 1);
-        }
-      }
-      callback(business);
-    }
-  });
+  Business.findOne({name: businessName}, callback);
 };
