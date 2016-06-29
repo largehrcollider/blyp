@@ -7,6 +7,11 @@ class Settings extends Component {
   componentDidMount() {
     // request server for pending requests and stuff
   }
+  render() {
+    return (
+      <div></div>
+    )
+  }
 }
 
 export default Settings;
