@@ -23,8 +23,10 @@ module.exports = router.post('/', (req, res) => {
       user.comparePasswords(req.body.password)
       .then(function(isMatch){
         if(isMatch){
-          var token = jwt.sign({username: req.username}, SECRET);
-          res.status(200).json(token);
+          var data = {};
+          data.jwt = jwt.sign({username: req.body.username}, SECRET);
+          data.username = req.body.username;
+          res.status(200).json(data);
         } else {
           res.sendStatus(403);
         }
