@@ -20,16 +20,6 @@ exports.getAllUsers = function(callback){
   });
 };
 
-exports.getUserById = function(id, callback){
-  User.findOne({_id: id})
-  .then(function(user){
-    callback(null, user);
-  })
-  .catch(function(err){
-    callback(err);
-  });
-};
-
 exports.getUserByUsername = function(username, callback){
   User.findOne({username: username})
   .then(function(user){
