@@ -693,6 +693,7 @@ export const createBusiness = (business) => {
     axios(config)
     .then(({ data }) => {
       dispatch(businessCRequestSuccess(business));
+      dispatch(reset('createBusiness'));
     })
     .catch(err => {
       dispatch(businessCRequestFailure());

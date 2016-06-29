@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import * as types from '../actions';
+import * as types from '../constants/actionTypes.js'
 
 var jwt = localStorage.getItem('jwt');
 if (jwt) {
@@ -55,7 +55,7 @@ const authReducer = (state = initialState, action) => {
     case types.BUSINESS_C_REQUEST_SUCCESS:
     return {
       ...state,
-      businesses: [...(state.businesses), actions.business]
+      businesses: [...(state.businesses), action.business]
     };
 
     default:
