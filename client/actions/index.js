@@ -387,7 +387,7 @@ export const login = ({username, password}) => {
       localStorage.setItem('jwt', jwt);
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));
-      dispatch(push('/settings')); // will have to be changed to '/profile'
+      dispatch(push('/profile')); // will have to be changed to '/profile'
     })
     .catch(err => {
       dispatch(loginRequestFailure(err));
@@ -680,6 +680,8 @@ export const joinBusiness = (business) => {
       dispatch(businessJoinRequestFailure());
     });
     dispatch(businessJoinRequestSent());
+  };
+};
 
 /**
 * notifications, requests

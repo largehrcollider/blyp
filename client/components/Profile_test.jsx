@@ -3,7 +3,7 @@ import SelectBusiness from '../containers/SelectBusiness.js';
 import JoinBusiness from '../containers/JoinBusiness';
 import CreateBusiness from '../containers/CreateBusiness';
 
-const Settings = ({ businesses }) => (
+const Profile = ({ businesses }) => (
   <div>
     {businesses.map(b => (
       <SelectBusiness key={b} business={b} />
@@ -13,4 +13,4 @@ const Settings = ({ businesses }) => (
   </div>
 );
 
-export default Settings;
+export default Profile;
