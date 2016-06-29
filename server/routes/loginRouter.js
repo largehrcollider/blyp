@@ -5,11 +5,11 @@ var router = require('express').Router();
 var User = require('../db/user/userController.js');
 
 module.exports = router.post('/', (req, res) => {
-  var token = jwt.sign({
-    admin: true,
-    name: 'Eduard',
-    username: 'edu',
-  }, SECRET);
+  // var token = jwt.sign({
+  //   admin: true,
+  //   name: 'Eduard',
+  //   username: 'edu',
+  // }, SECRET);
 
 User.getUserByUsername(req.body.username, (err, user) => {
   if(err){
