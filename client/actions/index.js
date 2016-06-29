@@ -688,7 +688,7 @@ export const createBusiness = (business) => {
     const config = {
       url: '/api/business/create',
       method: 'post',
-      data: {business}
+      data: {business},
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
@@ -707,7 +707,7 @@ export const joinBusiness = (business) => {
     const config = {
       url: '/api/business/join',
       method: 'post',
-      data: {business}
+      data: {business},
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
