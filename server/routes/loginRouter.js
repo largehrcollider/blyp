@@ -24,7 +24,7 @@ module.exports = router.post('/', (req, res) => {
       .then(function(isMatch){
         if(isMatch){
           var data = {};
-          data.jwt = jwt.sign({username: req.username}, SECRET);
+          data.jwt = jwt.sign({username: req.body.username}, SECRET);
           data.username = req.body.username;
           res.status(200).json(data);
         } else {
