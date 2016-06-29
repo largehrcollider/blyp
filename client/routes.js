@@ -12,7 +12,7 @@ import Inventory from './components/Inventory.jsx';
 import ProductEditor from './containers/ProductEditor.js';
 import Signup from './containers/Signup.js';
 import Profile from './containers/Profile_test.js';
-// import Settings from './containers/Settings_test.js';
+import Settings from './containers/Settings.js';
 // import ComponentOrContainer from './containers/Name';
 
 //testing imports
@@ -31,7 +31,7 @@ export default (
       <Route path='/inventory/:sku' component={ProductEditor} />
       <Route path="/sell" component={Sell} />
       <Route path='/profile' component={Profile} />
-      {/*<Route path='/settings' component={Settings} />*/}
+      <Route path='/settings' component={Settings} />
     </Route>
 
     {/* for testing and debugging*/}
