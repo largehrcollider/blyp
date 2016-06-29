@@ -26,6 +26,7 @@ module.exports = router.post('/', (req, res) => {
           var data = {};
           data.jwt = jwt.sign({username: req.body.username}, SECRET);
           data.username = req.body.username;
+          data.businesses = user.businesses;
           res.status(200).json(data);
         } else {
           res.sendStatus(403);
