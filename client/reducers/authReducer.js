@@ -19,8 +19,13 @@ const initialState = {
   isFetching: false, // move out to ui or something
   error: false, // ditto
   businesses: {}, // object with `businessName: role` pairs
-  business: null,
-  notifications: []
+  business: {
+    name: null,
+    notifications: [],
+    users: []
+  },
+  notifications: null,
+
 };
 
 const authReducer = (state = initialState, action) => {
@@ -49,7 +54,15 @@ const authReducer = (state = initialState, action) => {
     return {...state, business: action.business};
 
     case types.NOTIFICATIONS_REQUEST_SUCCESS:
-    return {...state, notifications: action.notifications}
+    return {...state, notifications: action.notifications};
+
+    case types.ACCEPTANCE_REQUEST_SUCCESS:
+    var notifications = state.business.notifications.filter(username => (
+      username !== action.username
+    ));
+    var users = [...state.business.users];
+    action.accept && users.push({username: action.username, role: action.role});
+    return {...state, business: {... state.business, notifications, users}};
 
     default:
     return state;
