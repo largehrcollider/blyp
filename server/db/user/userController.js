@@ -1,13 +1,7 @@
 var User = require('./user.js');
 
 exports.createUser = function(newUser, callback){
-  new User(newUser).save()
-  .then(function(newUser){
-    callback(null, newUser);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+  new User(newUser).save(callback);
 };
 
 exports.getAllUsers = function(callback){
