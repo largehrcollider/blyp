@@ -290,10 +290,13 @@ export const productDRequestFailure = () => {
 //     business
 //   }
 // };
-export const businessCheckinRequestSuccesful = (business) => {
+export const businessCheckinRequestSuccesful = (business, jwt, products, notifications) => {
   return {
     type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
-    business
+    business,
+    jwt,
+    products,
+    notifications
   };
 };
 export const businessCheckinRequestFailure = () => {
@@ -668,7 +671,7 @@ export const checkinBusiness = (business) => {
     axios(config)
     .then(({ data }) => {
       localStorage.setItem('jwt', data.jwt);
-      dispatch(businessCheckinRequestSuccesful(b));
+      dispatch(businessCheckinRequestSuccesful(business, data.jwt, data.products, data.notifications));
       dispatch(push('/sell'));
     })
     .catch(err => {
