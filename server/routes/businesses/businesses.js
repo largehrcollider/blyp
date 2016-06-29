@@ -12,8 +12,8 @@ router.get('/', function(req, res){
   });
 });
 
-router.post('/', function(req, res){
-  Business.createBusiness(req.body, function(err, business){
+router.post('/create', function(req, res){
+  Business.createBusiness(req.body, req.user, function(err, business){
     if(err){
       res.sendStatus(500);
     } else {
