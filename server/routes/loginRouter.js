@@ -11,23 +11,22 @@ module.exports = router.post('/', (req, res) => {
   //   username: 'edu',
   // }, SECRET);
 
-User.getUserByUsername(req.body.username, (err, user) => {
-  if(err){
-    res.sendStatus(500);
-  } else if(!user){
-    res.status(500).send('User does not exist');
-  } else {
-    user.comparePasswords(req.body.password)
-    .then(function(isMatch){
-      console.log(isMatch)
-      if(isMatch){
-        var token = jwt.sign({username: req.username}, SECRET);
-        res.status(200).json(token);
-      } else {
-        res.sendStatus(500);
-      }
-    })
-  }
-});
+  User.getUserByUsername(req.body.username, (err, user) => {
+    if(err){
+      res.sendStatus(500);
+    } else if(!user){
+      res.status(500).send('User does not exist');
+    } else {
+      user.comparePasswords(req.body.password)
+      .then(function(isMatch){
+        if(isMatch){
+          var token = jwt.sign({username: req.username}, SECRET);
+          res.status(200).json(token);
+        } else {
+          res.sendStatus(500);
+        }
+      });
+    }
+  });
   //res.json({admin: true, jwt: token, name: 'Eduard', username: 'edu'});
 });
