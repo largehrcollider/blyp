@@ -526,9 +526,16 @@ export const stripe = (data) => {
         };
         axios(config)
         .then(({ data }) => {
-          //ANY UI CHANGES HAVE TO BE IN HERE.
-          //AFTER OUR SERVER HAS SUCCESSFULLY CONTACTED THE STRIPE SERVERS.
-          dispatch(transactionRequestSuccess());
+          dispatch(resetPayment());
+          dispatch(paymentMethodSelected(newMethod));
+          // clear payment forms?
+          dispatch(reset('amountReceived'));
+        })
+        .then(()=>{
+          dispatch(reset('amountReceived'));
+          dispatch(checkoutCompleted());
+          dispatch(clearBasket());
+          dispatch(push('/sell'));
         })
         .catch(err => {
           dispatch(transactionRequestFailure());
