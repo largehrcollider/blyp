@@ -89,9 +89,9 @@ export const signupRequestSent = () => {
 export const signupRequestSuccess = ({ jwt, username }) => {
   return {
     type: types.SIGNUP_REQUEST_SUCCESS,
+    businesses: [],
     jwt,
     username,
-    businesses: []
   };
 };
 export const signupRequestFailure = () => {
