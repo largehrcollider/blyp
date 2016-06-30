@@ -2,7 +2,8 @@ import * as types from '../constants/actionTypes.js'
 
 /**
 * NOTE
-* An item added to the basket by inserting an object into the state array that has an `sku` field and a `quantity` field
+* An item added to the basket by inserting an object into the state array that
+* has an `sku` field and a `quantity` field
 */
 
 const basketReducer = (state = [], action) => {
