@@ -159,6 +159,15 @@ body .login_fields__submit input:hover {
   font-size: 1.5em;
 }
 
+.productPicture{
+  color: #ffffff;
+}
+
+.productPictureLabel{
+  color: #333333;
+  font-size: 1em;
+}
+
 .createProductInput{
   color: #f2f2f2;
   font-size: 2em;
@@ -242,6 +251,7 @@ body .login_fields__submit input:hover {
 }
 
 .logOut{
+
 }
 
 .login-fields {
