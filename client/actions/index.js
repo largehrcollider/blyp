@@ -291,14 +291,15 @@ export const productDRequestFailure = () => {
 //     business
 //   }
 // };
-export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, notifications }) => {
+export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, notifications, users }) => {
   return {
     type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
     business,
     jwt,
     notifications,
     products,
-    role
+    role,
+    users
   };
 };
 export const businessCheckinRequestFailure = () => {
