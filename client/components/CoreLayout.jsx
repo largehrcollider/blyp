@@ -6,7 +6,7 @@ class CoreLayout extends Component {
     super(props);
   }
   componentDidMount() {
-    this.props.getProducts();
+    // this.props.getProducts();
   }
   render() {
     return (
