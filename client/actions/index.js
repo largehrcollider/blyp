@@ -581,7 +581,9 @@ export const createProduct = (product) => {
     data.append('price', product.price);
     data.append('sku', product.sku);
     data.append('business', getState().auth.business);
-    data.append('file', product.productPicture[0]);
+    if (product.productPicture[0]) {
+      data.append('file', product.productPicture[0]);
+    }
 
     const config = {
       url: '/api/products',
