@@ -1,7 +1,7 @@
 import React from 'react'
 
-const SelectBusiness = ({ select }) => (
-  <div onClick={select}>
+const SelectBusiness = ({ checkin, business }) => (
+  <div onClick={checkin}>
     {business}
   </div>
 );

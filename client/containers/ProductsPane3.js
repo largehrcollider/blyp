@@ -4,7 +4,7 @@ import ProductsPane from '../components/ProductsPane3.jsx'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    products: state.products
+    products: state.auth.business.products
   };
 }
 

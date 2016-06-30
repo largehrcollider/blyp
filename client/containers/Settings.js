@@ -3,7 +3,19 @@ import { connect } from 'react-redux';
 import Settings from '../components/Settings.jsx'
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    requests: state.auth.requests,
+    admins: (() => {
+      return state.auth.business.users.filter(user => {
+        return user.role === 'admin';
+      })
+    })(),
+    users: (() => {
+      return state.auth.business.users.filter(user => {
+        return user.role === 'cashier';
+      })
+    })(),
+  };
 }
 
 const mapDispatchToProps = (dispatch, { username }) => {

@@ -4,7 +4,7 @@ import ProductsPane from '../components/ProductsPane5.jsx'
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
+    products: state.auth.business.products,
     visibilityFilter: state.toolbar.visibilityFilter
   };
 };

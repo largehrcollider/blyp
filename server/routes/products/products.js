@@ -7,13 +7,17 @@ var fs = require('fs');
 var path = require('path');
 
 router.get('/', function(req, res){
-  Product.getAllProducts(function(err, products){
-    if(err){
-      res.sendStatus(500);
-    } else {
-      res.status(200).json(products);
-    }
-  });
+  if(!req.user.business){
+    res.status(500).send('Business not selected!');
+  } else {
+    Product.getAllProducts(req.user.business, function(err, products){
+      if(err){
+        res.sendStatus(500);
+      } else {
+        res.status(200).json(products);
+      }
+    });
+  }
 });
 
 router.post('/', upload.single('file'), function(req, res){

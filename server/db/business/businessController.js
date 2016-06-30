@@ -1,7 +1,11 @@
 
 var Business = require('./business.js');
 
-exports.createBusiness = function(newBusiness, callback){
+exports.createBusiness = function(reqBody, tokenPayload, callback){
+  var newBusiness = {
+    name: reqBody.business,
+    users: [{username: tokenPayload.username, role: 'admin'}]
+  };
   new Business(newBusiness).save(callback);
 };
 
