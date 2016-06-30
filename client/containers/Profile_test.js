@@ -9,7 +9,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    businesses: businessesList(state.auth.businesses)
+    businesses: state.auth.businesses
   };
 };
 

@@ -15,6 +15,6 @@ const mapStateToProps = (state) => {
 }
 
 export default reduxForm({
-  form: 'createBusiness',
+  form: 'joinBusiness',
   fields: ['business']
 }, mapStateToProps, mapDispatchToProps)(JoinBusiness);

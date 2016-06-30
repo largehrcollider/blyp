@@ -14,6 +14,8 @@ var loginRouter = require('./routes/loginRouter.js');
 var signupRouter = require('./routes/signupRouter.js');
 var db = require('./db/config.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
+var jwtParser = require('express-jwt');
+var SECRET = require('../keys/secret.js');
 
 var multer = require('multer');
 var upload = multer({ dest: path.resolve(__dirname, '../uploads') });
@@ -27,6 +29,10 @@ var app = express();
 * fs.mkdir, which is async, in the corresponding route handler.
 */
 // fs.mkdirSync(path.resolve(__dirname, '../images'));
+var errHandler = function(err, req, res, next){
+  console.log(err)
+  res.sendStatus(403);
+}
 
 // middleware
 app.use(express.static(path.resolve(__dirname, '../build')));
@@ -40,11 +46,11 @@ app.use('/signup', signupRouter);
 // app.use('/logout', logoutRouter); // token invalidation?
 
 // protected routes
-app.use('/api/products', productsRouter);
+app.use('/api/products', jwtParser({secret: SECRET}), productsRouter, errHandler);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/employment', employmentRouter);
-app.use('/api/businesses', businessesRouter);
+app.use('/api/business', jwtParser({secret: SECRET}), businessesRouter, errHandler);
 app.get('/images/:sku', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../images', req.params.sku + '.jpg'));
 });
