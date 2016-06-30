@@ -48,8 +48,8 @@ const authReducer = (state = initialState, action) => {
     return {
       ...state,
       jwt: action.jwt,
-      username: action.username,
-      businesses: action.businesses
+      name: action.name,
+      username: action.username
     };
 
     case types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL:

@@ -67,11 +67,11 @@ export const loginRequestSent = () => {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-export const loginRequestSuccess = ({ businesses, jwt, username }) => {
+export const loginRequestSuccess = ({ name, jwt, username }) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
-    businesses,
     jwt,
+    name,
     username
   }
 }
@@ -217,7 +217,7 @@ export const productCRequestSent = () => {
 export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku }) => {
   return {
     type: types.PRODUCT_C_REQUEST_SUCCESS,
-    categories, 
+    categories,
     details,
     name,
     price,
