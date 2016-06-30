@@ -367,11 +367,12 @@ export const requestsRequestSent = () => {
     type: types.REQUESTS_REQUEST_SENT
   };
 };
-export const acceptanceRequestSuccess = (accept, username) => {
+export const acceptanceRequestSuccess = ({ accept, username, role }) => {
   return {
     type: types.ACCEPTANCE_REQUEST_SUCCESS,
     accept,
-    username
+    username,
+    role
   };
 };
 export const acceptanceRequestFailure = () => {
@@ -762,7 +763,7 @@ export const acceptance = (username, accept) => {
     };
     axios(config)
     .then(({ data }) => {
-      dispatch(acceptanceRequestSuccess(data.accept, username));
+      dispatch(acceptanceRequestSuccess(data));
     })
     .catch(err => {
       dispatch(acceptanceRequestFailure());
