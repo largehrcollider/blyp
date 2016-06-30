@@ -15,7 +15,7 @@ const initialState = {
   business: {
     name: null,
     role: null,
-    notifications: [],
+    requests: [],
     users: []
   },
 };
@@ -38,20 +38,20 @@ const authReducer = (state = initialState, action) => {
       business: {
       name: action.business,
       role: action.role,
-      notifications: action.notifications,
+      requests: action.requests,
       users: action.users
     }};
 
-    case types.NOTIFICATIONS_REQUEST_SUCCESS:
-    return {...state, notifications: action.notifications};
+    case types.REQUESTS_REQUEST_SUCCESS:
+    return {...state, requests: action.requests};
 
     case types.ACCEPTANCE_REQUEST_SUCCESS:
-    var notifications = state.business.notifications.filter(username => (
+    var requests = state.business.requests.filter(username => (
       username !== action.username
     ));
     var users = [...state.business.users];
     action.accept && users.push({username: action.username, role: action.role});
-    return {...state, business: {... state.business, notifications, users}};
+    return {...state, business: {...(state.business), requests, users}};
 
     case types.BUSINESS_C_REQUEST_SUCCESS:
     return {
