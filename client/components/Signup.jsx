@@ -63,6 +63,6 @@ render() {
         <div>Already have an accout? <Link to='/'>Log in</Link></div>
       </div>
     </div>
-  );
-}
+    );
+  }
 }
