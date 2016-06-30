@@ -292,6 +292,40 @@ export const business = (business) => {
 };
 
 /**
+* Business requests
+*/
+export const businessCRequestSuccess = () => {
+  return {
+    type: types.BUSINESS_C_REQUEST_SUCCESS
+  };
+};
+export const businessCRequestFailure = () => {
+  return {
+    type: types.BUSINESS_C_REQUEST_FAILURE
+  };
+};
+export const businessCRequestSent = () => {
+  return {
+    type: types.BUSINESS_C_REQUEST_SENT
+  };
+};
+export const businessJoinRequestSuccess = () => {
+  return {
+    type: types.BUSINESS_JOIN_REQUEST_SUCCESS
+  };
+};
+export const businessJoinRequestFailure = () => {
+  return {
+    type: types.BUSINESS_JOIN_REQUEST_FAILURE
+  };
+};
+export const businessJoinRequestSent = () => {
+  return {
+    type: types.BUSINESS_JOIN_REQUEST_SENT
+  };
+};
+
+/**
 * notifications
 */
 export const notificationsRequestSuccess = (notifications) => {
@@ -353,7 +387,7 @@ export const login = ({username, password}) => {
       localStorage.setItem('jwt', jwt);
       dispatch(loginRequestSuccess(admin, jwt, name, username));
       dispatch(reset('loginForm'));
-      dispatch(push('/sell')); // will have to be changed to '/profile'
+      dispatch(push('/profile')); // will have to be changed to '/profile'
     })
     .catch(err => {
       dispatch(loginRequestFailure(err));
@@ -374,7 +408,7 @@ export const signup = (data) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(signupRequestSuccess(data));
       dispatch(reset('signup'));
-      dispatch(push('/sell')); // should dispatch to landing page first
+      dispatch(push('/settings')); // should dispatch to landing page first
     })
     .catch(err => {
       dispatch(signupRequestFailure(err));
@@ -605,13 +639,47 @@ export const deleteProduct = (sku) => {
 };
 
 /**
-* business selected
+* business related thunks
 */
 export const businessSelected = (b) => {
   return (dispatch) => {
     dispatch(business(b));
     dispatch(readProduct());
     dispatch(push('/sell')); // don't like this, but will suffice for now
+  };
+};
+export const createBusiness = (business) => {
+  return (dispatch) => {
+    const config = {
+      url: `/api/business/create`,
+      method: 'post',
+      data: {business}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(businessCRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(businessCRequestFailure());
+    });
+    dispatch(businessCRequestSent());
+  };
+};
+export const joinBusiness = (business) => {
+  return (dispatch) => {
+    const config = {
+      url: `/api/business/join`,
+      method: 'post',
+      data: {business}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(businessJoinRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(businessJoinRequestFailure());
+    });
+    dispatch(businessJoinRequestSent());
   };
 };
 
