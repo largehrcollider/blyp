@@ -5,7 +5,7 @@ import Total from '../components/Total.jsx'
 const mapStateToProps = (state) => {
   return {
     total: state.basket.reduce((memo, product) => {
-      return memo + state.products[product.sku].price * product.quantity;
+      return memo + state.auth.business.products[product.sku].price * product.quantity;
     }, 0)
   };
 }
