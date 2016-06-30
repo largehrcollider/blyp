@@ -33,7 +33,7 @@ export default class LoginForm extends Component {
             <label className={index.createProductLabel}>details <input className={index.createProductInput}type='text' {...details}/></label>
           </div>
           <div className={index.createProduct}>
-            <label className={index.createProductLabel}>File: <input className={index.createProductInput}type='file' {...productPicture} value={undefined}/></label>
+            <label className={index.productPictureLabel}>File: <input className={index.productPicture}type='file' {...productPicture} value={undefined}/></label>
           </div>
           <div className=''>
             <input className={index.save+" "+material.wavesEffect+" "+material.wavesLight} type='submit' value='SAVE' />
