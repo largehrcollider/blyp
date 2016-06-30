@@ -14,7 +14,7 @@ export default class LoginForm extends Component {
     return (
       <div>
         <form onSubmit={handleSubmit(login)}>
-          <div className={index.login+" "+index.loginHeight}>
+          <div className={index.login}>
             <div className={index.login_title}>
             </div>
             <div className={index.login_fields}>
