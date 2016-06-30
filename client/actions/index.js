@@ -67,7 +67,7 @@ export const loginRequestSent = () => {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-export const loginRequestSuccess = ({ name, jwt, username }) => {
+export const loginRequestSuccess = ({ businesses, name, jwt, username }) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
     jwt,

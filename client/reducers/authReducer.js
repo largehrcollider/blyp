@@ -47,6 +47,7 @@ const authReducer = (state = initialState, action) => {
     case types.SIGNUP_REQUEST_SUCCESS:
     return {
       ...state,
+      businesses: action.businesses,
       jwt: action.jwt,
       name: action.name,
       username: action.username
