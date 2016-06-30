@@ -527,16 +527,17 @@ export const stripe = (data) => {
         axios(config)
         .then(({ data }) => {
           dispatch(resetPayment());
-          dispatch(paymentMethodSelected(newMethod));
           // clear payment forms?
-          dispatch(reset('amountReceived'));
-        })
-        .then(()=>{
-          dispatch(reset('amountReceived'));
           dispatch(checkoutCompleted());
           dispatch(clearBasket());
           dispatch(push('/sell'));
         })
+        // .then(()=>{
+        //   dispatch(reset('amountReceived'));
+        //   dispatch(checkoutCompleted());
+        //   dispatch(clearBasket());
+        //   dispatch(push('/sell'));
+        // })
         .catch(err => {
           dispatch(transactionRequestFailure());
         });
