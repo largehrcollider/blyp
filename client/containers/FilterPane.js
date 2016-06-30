@@ -3,13 +3,16 @@ import * as actions from '../actions'
 import FilterPane from '../components/FilterPane.jsx'
 
 const mapStateToProps = (state) => {
+  var products = state.auth.business.products;
   return {
     categories: (() => {
       var categories = ['all'];
-      for (var product in state.products) {
-        if (categories.indexOf(state.products[product].category) === -1) {
-          categories.push(state.products[product].category);
-        }
+      for (var productKey in products) {
+        products[productKey].categories.map(category => {
+          if (categories.indexOf(category) === -1) {
+            categories.push(category);
+          }
+        });
       }
       return categories;
     })()

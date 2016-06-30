@@ -5,8 +5,8 @@ import ProductEditor from '../components/ProductEditor.jsx';
 const mapStateToProps = (state, ownProps) => {
   const sku = ownProps.params.sku;
   return {
-    initialValues: state.products[sku],
-    product: state.products[sku]
+    initialValues: state.auth.business.products[sku],
+    product: state.auth.business.products[sku]
   };
 }
 

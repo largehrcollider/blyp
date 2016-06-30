@@ -214,9 +214,15 @@ export const productCRequestSent = () => {
     type: types.PRODUCT_C_REQUEST_SENT
   };
 };
-export const productCRequestSuccess = () => {
+export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku }) => {
   return {
-    type: types.PRODUCT_C_REQUEST_SUCCESS
+    type: types.PRODUCT_C_REQUEST_SUCCESS,
+    categories, 
+    details,
+    name,
+    price,
+    quantity,
+    sku
   };
 };
 export const productCRequestFailure = () => {

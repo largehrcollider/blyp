@@ -14,6 +14,7 @@ const initialState = {
   businesses: [], // businesses the user belongs to
   business: {
     name: null,
+    products: {}, // key is sku, value is product object
     role: null,
     requests: [],
     users: []
@@ -22,6 +23,25 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case types.PRODUCT_C_REQUEST_SUCCESS:
+    return {
+      ...state,
+      business: {
+        ...(state.business),
+        products: {
+          ...(state.business.products),
+          [action.sku]: {
+            categories: action.categories,
+            details: action.details,
+            name: action.name,
+            price: action.price,
+            quantity: action.quantity,
+            sku: action.sku
+          }
+        }
+      }
+    };
 
     case types.LOGIN_REQUEST_SUCCESS:
     case types.SIGNUP_REQUEST_SUCCESS:
@@ -37,6 +57,7 @@ const authReducer = (state = initialState, action) => {
       jwt: action.jwt,
       business: {
       name: action.business,
+      products: action.products,
       role: action.role,
       requests: action.requests,
       users: action.users
