@@ -291,14 +291,15 @@ export const productDRequestFailure = () => {
 //     business
 //   }
 // };
-export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, notifications }) => {
+export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, requests, users }) => {
   return {
     type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
     business,
     jwt,
-    notifications,
     products,
-    role
+    requests,
+    role,
+    users
   };
 };
 export const businessCheckinRequestFailure = () => {
@@ -348,29 +349,30 @@ export const businessJoinRequestSent = () => {
 };
 
 /**
-* notifications
+* requests
 */
-export const notificationsRequestSuccess = (notifications) => {
+export const requestsRequestSuccess = (requests) => {
   return {
-    type: types.NOTIFICATIONS_REQUEST_SUCCESS,
-    notifications
+    type: types.REQUESTS_REQUEST_SUCCESS,
+    requests
   };
 };
-export const notificationsRequestFailure = () => {
+export const requestsRequestFailure = () => {
   return {
-    type: types.NOTIFICATIONS_REQUEST_FAILURE
+    type: types.REQUESTS_REQUEST_FAILURE
   };
 };
-export const notificationsRequestSent = () => {
+export const requestsRequestSent = () => {
   return {
-    type: types.NOTIFICATIONS_REQUEST_SENT
+    type: types.REQUESTS_REQUEST_SENT
   };
 };
-export const acceptanceRequestSuccess = (accept, username) => {
+export const acceptanceRequestSuccess = ({ accept, username, role }) => {
   return {
     type: types.ACCEPTANCE_REQUEST_SUCCESS,
     accept,
-    username
+    username,
+    role
   };
 };
 export const acceptanceRequestFailure = () => {
@@ -579,7 +581,9 @@ export const createProduct = (product) => {
     data.append('price', product.price);
     data.append('sku', product.sku);
     data.append('business', getState().auth.business);
-    data.append('file', product.productPicture[0]);
+    if (product.productPicture[0]) {
+      data.append('file', product.productPicture[0]);
+    }
 
     const config = {
       url: '/api/products',
@@ -725,9 +729,9 @@ export const joinBusiness = (business) => {
 };
 
 /**
-* notifications, requests
+* requests, requests
 */
-export const notifications = () => {
+export const requests = () => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
@@ -738,12 +742,12 @@ export const notifications = () => {
     };
     axios(config)
     .then(({ data }) => {
-      dispatch(notificationsRequestSuccess(data));
+      dispatch(requestsRequestSuccess(data));
     })
     .catch(err => {
-      dispatch(notificationsRequestFailure());
+      dispatch(requestsRequestFailure());
     });
-    dispatch(notificationsRequestSent());
+    dispatch(requestsRequestSent());
   };
 };
 export const acceptance = (username, accept) => {
@@ -761,7 +765,7 @@ export const acceptance = (username, accept) => {
     };
     axios(config)
     .then(({ data }) => {
-      dispatch(acceptanceRequestSuccess(data.accept, username));
+      dispatch(acceptanceRequestSuccess(data));
     })
     .catch(err => {
       dispatch(acceptanceRequestFailure());
