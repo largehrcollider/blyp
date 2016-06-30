@@ -51,7 +51,6 @@ body .login {
   position: relative;
   width: 240px;
   border-top: 2px solid #0ca56a;
-  height: 300px;
   position: absolute;
   left: 0;
   right: 0;
@@ -61,6 +60,16 @@ body .login {
   padding: 100px 40px 40px 40px;
   background: #58595d;
 }
+
+
+.loginHeight {
+  height: 320px;
+}
+
+.signupHeight {
+  height: 500px;
+}
+
 body .login .validation {
   position: absolute;
   z-index: 1;
@@ -69,7 +78,7 @@ body .login .validation {
   opacity: 0;
 }
 body .login .disclaimer {
-  position: absolute;
+  position: relative;
   bottom: -60px;
   left: 35px;
   width: 250px;
@@ -159,6 +168,15 @@ body .login_fields__submit input:hover {
   font-size: 1.5em;
 }
 
+.productPicture{
+  color: #ffffff;
+}
+
+.productPictureLabel{
+  color: #333333;
+  font-size: 1em;
+}
+
 .createProductInput{
   color: #f2f2f2;
   font-size: 2em;
@@ -242,6 +260,7 @@ body .login_fields__submit input:hover {
 }
 
 .logOut{
+
 }
 
 .login-fields {

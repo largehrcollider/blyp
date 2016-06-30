@@ -15,7 +15,7 @@ export default class ProductsPane extends Component {
     const filter = (products) => {
       var results = [];
       for (var key in products) {
-        if (products[key].category === visibilityFilter || visibilityFilter === 'all') {
+        if ((products[key].categories.indexOf(visibilityFilter) !== -1)  || visibilityFilter === 'all') {
           results.push(products[key]);
         }
       }

@@ -4,12 +4,22 @@ class Settings extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    // request server for pending requests and stuff
-  }
   render() {
+    const { requests, admins, users } = this.props;
     return (
-      <div></div>
+      <div>
+        {(requests.length > 0) && (<h1>Pending Requests</h1>)}
+        {(requests.length > 0) && (
+          <div>
+            {requests.map(username => (
+              <Request key={user} username={username} />
+            ))}
+          </div>
+        )}
+        <h1>Admins</h1>
+
+        <h1>Users</h1>
+      </div>
     )
   }
 }
