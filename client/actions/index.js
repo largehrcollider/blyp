@@ -70,6 +70,7 @@ export const loginRequestSent = () => {
 export const loginRequestSuccess = ({ businesses, name, jwt, username }) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
+    businesses,
     jwt,
     name,
     username
