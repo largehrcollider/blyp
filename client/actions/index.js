@@ -574,9 +574,12 @@ export const validateCashReceived = (amount) => {
 };
 export const checkoutCompleted = () => {
   return (dispatch) => {
-    dispatch(resetPayment());
-    dispatch(clearBasket());
-    dispatch(push('/sell'));
+    try {
+      dispatch(clearBasket());
+    } finally {
+      dispatch(push('/sell'));
+      dispatch(resetPayment());
+    }
   };
 };
 

@@ -4,7 +4,6 @@ import BasketItem from '../components/BasketItem.jsx'
 
 const mapStateToProps = (state, ownProps) => {
   const { sku } = ownProps;
-  console.log(sku);
   return {
     name: state.auth.business.products[sku].name,
     quantity: state.basket.find((item) => (item.sku === sku)).quantity,
