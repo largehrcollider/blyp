@@ -18,7 +18,6 @@ router.get('/', function(req, res){
 
 router.post('/create', function(req, res){
   Business.createBusiness(req.body, req.user, function(err, business){
-    console.log(req.user)
     if(err){
       res.status(500).send('It failed with the business!');
     } else {
@@ -47,8 +46,6 @@ router.post('/checkin', function(req, res){
         res.status(404).send('Business not found!');
       } else {
         for(var i = 0; i < business.users.length; i++){
-          console.log(business.users[i].username)
-
           if(business.users[i].username === req.user.username){
             data.jwt = jwt.sign({username: req.user.username, name: req.user.name, 
               email: req.user.email, business: business.name, role: business.users[i].role}, SECRET);
@@ -71,13 +68,12 @@ router.post('/checkin', function(req, res){
                 res.status(200).json(data);
               }
             });
-          } else {
-            res.status(500).send('There was an error with this business record!');
-          }
+          } 
+        }
+        if(!('username' in data)){
+          res.status(500).send('There was an error with this business record!');
         }
       }
-
-      //res.status(403).send('You do not have permission for this business!');
     }
   });
 });
