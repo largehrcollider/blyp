@@ -2,7 +2,8 @@ import * as types from '../constants/actionTypes.js'
 
 /**
 * NOTE
-* An item added to the basket by inserting an object into the state array that has an `sku` field and a `quantity` field
+* An item added to the basket by inserting an object into the state array that
+* has an `sku` field and a `quantity` field
 */
 
 const basketReducer = (state = [], action) => {
@@ -27,7 +28,7 @@ const basketReducer = (state = [], action) => {
     if ((index = state.findIndex(item => (item.sku === action.sku))) !== -1) {
       var newState = [...state];
       newState[index] = {...(state[index]), quantity: state[index].quantity + 1};
-      return newState
+      return newState;
     } else {
       return [...state, {sku: action.sku, quantity: 1}];
     }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const PaymentMethodModal = ({ due, done }) => (
+const PaymentMethodModal = ({ due, checkoutCompleted }) => (
   <div>
     <h3>Change: ${due}</h3>
-    <button onClick={done}>DONE</button>
+    <button onClick={checkoutCompleted}>DONE</button>
   </div>
 );
 

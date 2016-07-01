@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch) => {
         return stripeObj;
       };
       dispatch(actions.stripe(insert(data)));
-      console.log(insert, "INSERT");
     }
   };
 };
@@ -26,6 +25,6 @@ const mapStateToProps = (state) => {
 }
 
 export default reduxForm({
-  form: 'addComponentForm',
+  form: 'ccSwipe',
   fields: ['creditswipe']
 }, mapStateToProps, mapDispatchToProps)(ProcessCardSwipe);

@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
 import Request from '../containers/Request.js';
 
-class Notifications extends Component {
+class Requests extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    this.props.notifications();
-  }
   render() {
-    // pending, add array of usernames
     const { usernames } = this.props;
     return (
       <div>
+        <h1>Pending Requests</h1>
         {usernames.map(u => {
-          <Request key={u}, username={u} />
+          <Request key={u} username={u} />
         })}
       </div>
     )
   }
 }
 
-export default Notifications;
+export default Requests;

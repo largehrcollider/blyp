@@ -4,7 +4,6 @@ import ProcessCreditCard from '../containers/ProcessCreditCard.js';
 import CreditManual from '../containers/CreditManualSelector.js';
 import CreditSwipe from '../containers/CreditSwipeSelector.js';
 
-
 const CreditCardModal = ({ method }) => (
   <div>
     <CreditManual />

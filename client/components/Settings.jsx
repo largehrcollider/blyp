@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import Requests from '../containers/Requests.js';
+import UserAdministration from '../components/UserAdministration.jsx';
 
 class Settings extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    // request server for pending requests and stuff
-  }
   render() {
+    const { requests, admins, users } = this.props;
     return (
-      <div></div>
+      <div>
+        <Requests />
+        <UserAdministration />
+      </div>
     )
   }
 }

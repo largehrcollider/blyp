@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import index from '../assets/styles/index.css';
 
 export default class JoinBusiness extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class JoinBusiness extends Component {
       <div>
         <form onSubmit={handleSubmit(create)}>
           <div>
-            <label>Business to join: <input type='text' {...business}/></label>
+            <label className={index.createProductLabel}>Business to join: <input className={index.createProduct} type='text' {...business}/></label>
           </div>
           <div className=''>
             <input type='submit' value='JOIN' />

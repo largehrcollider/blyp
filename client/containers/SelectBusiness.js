@@ -5,8 +5,8 @@ import SelectBusiness from '../components/SelectBusiness.jsx';
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { business } = ownProps;
   return {
-    select: () => {
-      dispatch(actions.selectBusiness(business));
+    checkin: () => {
+      dispatch(actions.checkinBusiness(business));
     },
     business
   };

@@ -11,9 +11,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    isSelected: state.payment.method === 'cash'
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CashSelector);
