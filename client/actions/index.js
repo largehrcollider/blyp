@@ -26,11 +26,11 @@ export const cashReceived = (amount) => {
   };
 };
 
-export const checkoutCompleted = () => {
-  return {
-    type: types.CHECKOUT_COMPLETED,
-  };
-};
+// export const checkoutCompleted = () => {
+//   return {
+//     type: types.CHECKOUT_COMPLETED,
+//   };
+// };
 
 export const resetPayment = () => {
   return {
@@ -462,7 +462,6 @@ export const logout = () => {
   };
 };
 
-
 export const saveProduct = (data) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
@@ -484,7 +483,27 @@ export const saveProduct = (data) => {
   }
 }
 
-export const transactionCompleted = () => {
+export const paymentMethodChange = (newMethod) => {
+  return (dispatch) => {
+    dispatch(resetPayment());
+    /**
+    * No need to reset forms after resetting payment: before the next line of
+    * code is run, React will re-render and all forms will be unmounted.
+    * Unmounted forms are automatically reset
+    */
+    dispatch(paymentMethodSelected(newMethod));
+  };
+};
+
+/**
+* Notifies the server that a cash transaction took place. Only necessary
+* to explicitly notify the server of cash transactions due to their offline and
+* physical nature.
+*
+* CC payments not explicitly notified b/c server interprets
+* succesful response from payment servers as finalization of a CC transaction.
+*/
+export const cashTransaction = () => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     var transaction = {
@@ -508,7 +527,9 @@ export const transactionCompleted = () => {
   };
 };
 
-//stripe CHARGE
+/**
+* Processes cc payments with Stripe.
+*/
 export const stripe = (data) => {
   return (dispatch, getState) => {
     Stripe.card.createToken(data, (status, response) => {
@@ -527,18 +548,9 @@ export const stripe = (data) => {
         };
         axios(config)
         .then(({ data }) => {
-          dispatch(resetPayment());
-          // clear payment forms?
+          dispatch(transactionRequestSuccess());
           dispatch(checkoutCompleted());
-          dispatch(clearBasket());
-          dispatch(push('/sell'));
         })
-        // .then(()=>{
-        //   dispatch(reset('amountReceived'));
-        //   dispatch(checkoutCompleted());
-        //   dispatch(clearBasket());
-        //   dispatch(push('/sell'));
-        // })
         .catch(err => {
           dispatch(transactionRequestFailure());
         });
@@ -550,29 +562,19 @@ export const stripe = (data) => {
 
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
+    dispatch(cashReceived(amount));
     if (amount - total(getState()) >= 0) {
-      // send transaction request to server
-      dispatch(transactionCompleted());
+      dispatch(cashTransaction());
+      // checkoutCompleted will be called as `onClick` of "Done" button of
+      // `ChangeDue` component
     } else {
       // display warning not enough
     }
-    dispatch(cashReceived(amount));
   };
 };
-
-export const paymentMethodChange = (newMethod) => {
+export const checkoutCompleted = () => {
   return (dispatch) => {
     dispatch(resetPayment());
-    dispatch(paymentMethodSelected(newMethod));
-    // clear payment forms?
-    dispatch(reset('amountReceived'));
-  };
-};
-
-export const cashCheckoutCompleted = () => {
-  return (dispatch) => {
-    dispatch(reset('amountReceived'));
-    dispatch(checkoutCompleted());
     dispatch(clearBasket());
     dispatch(push('/sell'));
   };

@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    done: () => {
-      dispatch(actions.cashCheckoutCompleted());
+    checkoutCompleted: () => {
+      dispatch(actions.checkoutCompleted());
     }
   };
 }

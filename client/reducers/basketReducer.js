@@ -28,7 +28,7 @@ const basketReducer = (state = [], action) => {
     if ((index = state.findIndex(item => (item.sku === action.sku))) !== -1) {
       var newState = [...state];
       newState[index] = {...(state[index]), quantity: state[index].quantity + 1};
-      return newState
+      return newState;
     } else {
       return [...state, {sku: action.sku, quantity: 1}];
     }
