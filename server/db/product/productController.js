@@ -2,84 +2,44 @@ var Product = require('./product.js');
 
 //Create operations
 exports.createProduct = function(newProduct, callback){
-  new Product(newProduct).save()
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+  new Product(newProduct).save(callback);
 };
 
 //Read operations
-exports.getAllProducts = function(businessName, callback){
-  Product.find({business: businessName})
-  .then(function(products){
-    callback(null, products);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+exports.getAllProducts = function(business, callback){
+  Product.find({business: business}, callback);
 };
 
-exports.getProductBySku = function(businessName, sku, callback){
-  Product.findOne({business: businessName, sku: sku})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+exports.getProductBySku = function(business, sku, callback){
+  Product.findOne({business: business, sku: sku}, callback);
 };
 
-exports.getProductByName = function(businessName, productname, callback){
-  Product.findOne({business: businessName, name: productname})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+exports.getProductByName = function(business, productname, callback){
+  Product.findOne({business: business, name: productname}, callback);
 };
 
 //Update operations
-exports.updateProductById = function(businessName, id, update, callback){
-  Product.findOneAndUpdate({business: businessName, _id: id}, update, {new: true})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+exports.updateProductBySku = function(business, sku, update, callback){
+  Product.findOneAndUpdate({business: business, sku: sku}, update, {new: true}, callback);
 };
 
-exports.updateProductBySku = function(sku, update, callback){
-  Product.findOneAndUpdate({sku: sku}, update, {new: true})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
+exports.updateProductQuantityBySku = function(business, sku, productQuantity, callback){
+  Product.findOneAndUpdate({business: business, sku: sku}, {$inc: {quantity: -productQuantity}}, {new: true}
+    , callback);
+};
+
+exports.addProductCategoryBySku = function(business, sku, category, callback){
+  Product.findOne({business: business, sku: sku}, function(err, product){
+    if(err){
+      callback(err);
+    } else {
+      product.categories.push(category);
+      product.save(callback);
+    }
   });
 };
 
 //Delete operations
-exports.deleteProductById = function(id, callback){
-  Product.findOneAndRemove({_id: id})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
-};
-
-exports.deleteProductBySku = function(businessName, sku, callback){
-  Product.findOneAndRemove({business: businessName, sku: sku})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+exports.deleteProductBySku = function(business, sku, callback){
+  Product.findOneAndRemove({business: business, sku: sku}, callback);
 };
