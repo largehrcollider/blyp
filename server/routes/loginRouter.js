@@ -15,7 +15,6 @@ module.exports = router.post('/', (req, res) => {
 
 //Comment out the block of code below if you'd like to disable Auth for development.
   User.getUserByUsername(req.body.username, (err, user) => {
-    console.log(req.body.username)
     if(err){
       res.sendStatus(500);
     } else if(!user){
