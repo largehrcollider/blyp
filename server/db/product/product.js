@@ -12,8 +12,7 @@ var productSchema = mongoose.Schema({
   image: String,
 
   //Can contain an arbritray number of details. i.e. Album, Artist etc. 
-  details: Schema.Types.Mixed
-  },
+  details: String,
   {
     timestamps: true
   });
