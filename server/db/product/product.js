@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 
 var productSchema = mongoose.Schema({
-  id: {type: String, unique: true},
   sku: String,
   business: String,
   price: {type: Number, required: true},
@@ -19,6 +18,7 @@ var productSchema = mongoose.Schema({
     timestamps: true
   });
 
+productSchema.index({sku: 1, business: 1}, {unique: true});
 productSchema.plugin(uniqueValidator);
 var Product = mongoose.model('Product', productSchema);
 
