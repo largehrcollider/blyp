@@ -3,10 +3,11 @@ var router = express.Router();
 var Product = require('../../db/product/productController.js');
 var multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
+var acl = require('../../utils/helpers.js').checkPermission;
 var fs = require('fs');
 var path = require('path');
 
-router.get('/', function(req, res){
+router.get('/', acl(['admin', 'cashier']), function(req, res){
   if(!req.user.business){
     res.status(500).send('Business not selected!');
   } else {
@@ -20,20 +21,28 @@ router.get('/', function(req, res){
   }
 });
 
-router.post('/', upload.single('file'), function(req, res){
+router.post('/', acl(['admin']), upload.single('file'), function(req, res){
   var filePath = req.file.path;
-  fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, '../../../images', '' + req.body.sku + '.jpg'), () => {
-    Product.createProduct(req.body, function(err, product){
-      if(err){
-        res.sendStatus(500);
-      } else {
-        res.status(201).json(product);
-      }
+  var newProduct = req.body;
+  newProduct.business = req.user.business;
+  if(!req.user.business){
+    res.status(500).send('Business not selected!');
+  } else {
+    fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, '../../../images', '' + newProduct.sku + '.jpg'), () => {
+      Product.createProduct(newProduct, function(err, product){
+        if(err){
+          res.sendStatus(500);
+        } else {
+          res.status(201).json(product);
+        }
+      });
     });
-  });
+  }
 });
 
 router.get('/:sku', function(req, res){
+  var acl = ['admin', 'cashier'];
+  helper.checkPermission(req, res, acl);
   Product.getProductBySku(req.params.sku, function(err, product){
     if(err){
       res.sendStatus(500);
@@ -44,6 +53,8 @@ router.get('/:sku', function(req, res){
 });
 
 router.put('/:sku', function(req, res){
+  var acl = ['admin', 'cashier'];
+  helper.checkPermission(req, res, acl);
   Product.updateProductBySku(req.params.sku, req.body, function(err, product){
     if(err){
       res.sendStatus(500);
@@ -54,6 +65,8 @@ router.put('/:sku', function(req, res){
 });
 
 router.delete('/:sku', function(req, res){
+  var acl = ['admin'];
+  helper.checkPermission(req, res, acl);
   Product.deleteProductBySku(req.params.sku, function(err, product){
     if(err){
       res.sendStatus(500);
