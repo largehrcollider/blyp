@@ -751,7 +751,7 @@ export const joinBusiness = (business) => {
 };
 
 /**
-* requests, requests
+* User management related thunks
 */
 export const requests = () => {
   const jwt = localStorage.getItem('jwt');
@@ -795,3 +795,47 @@ export const acceptance = (username, accept) => {
     dispatch(acceptanceRequestSent());
   };
 };
+export const role = (username, role) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/business/users/role',
+      method: 'post',
+      data: {username, role},
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(roleRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(roleRequestFailure());
+    });
+    dispatch(roleRequestSent());
+  };
+}
+/**
+* Deletes `username` from business.
+* Business argument optional. If not provided, assumed to be currently checked-
+* in business
+*/
+export const deleteUser = (username, business) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch, getState) => {
+    business = business || getState().auth.business.name;
+    const config = {
+      url: '/api/business/users/delete',
+      method: 'post',
+      data: {username, business},
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(deleteUserRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(deleteUserRequestFailure());
+    });
+    dispatch(deleteUserRequestSent());
+  };
+}
