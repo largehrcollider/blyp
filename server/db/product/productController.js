@@ -1,85 +1,94 @@
 var Product = require('./product.js');
 
 //Create operations
+/**
+ * Creates a new product in DB
+ * @param {object} newProduct - Product to be added to the database. Should conform to mongoose schema.
+ * @param {function} callback - Node err back style callback. Newly created product passed to callback
+ */
 exports.createProduct = function(newProduct, callback){
-  new Product(newProduct).save()
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+  new Product(newProduct).save(callback);
 };
 
 //Read operations
-exports.getAllProducts = function(businessName, callback){
-  Product.find({business: businessName})
-  .then(function(products){
-    callback(null, products);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+/**
+ * Gets all products for a particular business
+ * @param {string} business - Business that products will be returned for
+ * @param {function} callback - Node err back style callback
+ */
+exports.getAllProducts = function(business, callback){
+  Product.find({business: business}, callback);
 };
 
-exports.getProductBySku = function(businessName, sku, callback){
-  Product.findOne({business: businessName, sku: sku})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+/**
+ * Gets a single product based upon its sku for a particular business
+ * @param {string} business - Business that products will be returned for
+ * @param {string} sku - Sku for the product
+ * @param {function} callback - Node err back style callback. Products passed to callback
+ */
+exports.getProductBySku = function(business, sku, callback){
+  Product.findOne({business: business, sku: sku}, callback);
 };
 
-exports.getProductByName = function(businessName, productname, callback){
-  Product.findOne({business: businessName, name: productname})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+/**
+ * Gets a single product based upon its name for a particular business
+ * @param {string} business - Business that products will be returned for
+ * @param {string} name - Name for the product
+ * @param {function} callback - Node err back style callback. Found product passed to callback
+ */
+exports.getProductByName = function(business, productname, callback){
+  Product.findOne({business: business, name: productname}, callback);
 };
 
 //Update operations
-exports.updateProductById = function(businessName, id, update, callback){
-  Product.findOneAndUpdate({business: businessName, _id: id}, update, {new: true})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+/**
+ * Updates a single product based upon its sku for a particular business
+ * @param {string} business - Business that products will be returned for
+ * @param {string} sku - Sku for the product
+ * @param {object} update - Updates the keys in the update object for the Product on the DB. 
+ * @param {function} callback - Node err back style callback. Updated product passed to callback
+ */
+exports.updateProductBySku = function(business, sku, update, callback){
+  Product.findOneAndUpdate({business: business, sku: sku}, update, {new: true}, callback);
 };
 
-exports.updateProductBySku = function(sku, update, callback){
-  Product.findOneAndUpdate({sku: sku}, update, {new: true})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
+/**
+ * Increments or decrements a products quantity
+ * @param {string} business - Business that products will be returned for
+ * @param {string} sku - Sku for the product
+ * @param {number} productQuantity - Positive numbers will decrement and negative will increment
+ * @param {function} callback - Node err back style callback. Update product passed to callback
+ */
+exports.updateProductQuantityBySku = function(business, sku, productQuantity, callback){
+  Product.findOneAndUpdate({business: business, sku: sku}, {$inc: {quantity: -productQuantity}}, {new: true}
+    , callback);
+};
+
+/**
+ * Adds a category to a product
+ * @param {string} business - Business that products will be returned for
+ * @param {string} sku - Sku for the product
+ * @param {number} category - The category to be added
+ * @param {function} callback - Node err back style callback. Update product passed
+ */
+exports.addProductCategoryBySku = function(business, sku, category, callback){
+  Product.findOne({business: business, sku: sku}, function(err, product){
+    if(err){
+      callback(err);
+    } else {
+      product.categories.push(category);
+      product.save(callback);
+    }
   });
 };
 
 //Delete operations
-exports.deleteProductById = function(id, callback){
-  Product.findOneAndRemove({_id: id})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
-};
-
-exports.deleteProductBySku = function(businessName, sku, callback){
-  Product.findOneAndRemove({business: businessName, sku: sku})
-  .then(function(product){
-    callback(null, product);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+/**
+ * Deletes a product
+ * @param {string} business - Business that products will be returned for
+ * @param {string} sku - Sku for the product
+ * @param {function} callback - Node err back style callback. Deleted product passed to callback
+ */
+exports.deleteProductBySku = function(business, sku, callback){
+  Product.findOneAndRemove({business: business, sku: sku}, callback);
 };
