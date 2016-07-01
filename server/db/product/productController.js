@@ -3,7 +3,6 @@ var Product = require('./product.js');
 //Create operations
 /**
  * Creates a new product in DB
- * @constructor
  * @param {object} newProduct - Product to be added to the database. Should conform to mongoose schema.
  * @param {function} callback - Node err back style callback. Newly created product passed to callback
  */
@@ -14,7 +13,6 @@ exports.createProduct = function(newProduct, callback){
 //Read operations
 /**
  * Gets all products for a particular business
- * @constructor
  * @param {string} business - Business that products will be returned for
  * @param {function} callback - Node err back style callback
  */
@@ -24,7 +22,6 @@ exports.getAllProducts = function(business, callback){
 
 /**
  * Gets a single product based upon its sku for a particular business
- * @constructor
  * @param {string} business - Business that products will be returned for
  * @param {string} sku - Sku for the product
  * @param {function} callback - Node err back style callback. Products passed to callback
@@ -35,7 +32,6 @@ exports.getProductBySku = function(business, sku, callback){
 
 /**
  * Gets a single product based upon its name for a particular business
- * @constructor
  * @param {string} business - Business that products will be returned for
  * @param {string} name - Name for the product
  * @param {function} callback - Node err back style callback. Found product passed to callback
@@ -47,7 +43,6 @@ exports.getProductByName = function(business, productname, callback){
 //Update operations
 /**
  * Updates a single product based upon its sku for a particular business
- * @constructor
  * @param {string} business - Business that products will be returned for
  * @param {string} sku - Sku for the product
  * @param {object} update - Updates the keys in the update object for the Product on the DB. 
@@ -59,7 +54,6 @@ exports.updateProductBySku = function(business, sku, update, callback){
 
 /**
  * Increments or decrements a products quantity
- * @constructor
  * @param {string} business - Business that products will be returned for
  * @param {string} sku - Sku for the product
  * @param {number} productQuantity - Positive numbers will decrement and negative will increment
@@ -72,7 +66,6 @@ exports.updateProductQuantityBySku = function(business, sku, productQuantity, ca
 
 /**
  * Adds a category to a product
- * @constructor
  * @param {string} business - Business that products will be returned for
  * @param {string} sku - Sku for the product
  * @param {number} category - The category to be added
@@ -92,7 +85,6 @@ exports.addProductCategoryBySku = function(business, sku, category, callback){
 //Delete operations
 /**
  * Deletes a product
- * @constructor
  * @param {string} business - Business that products will be returned for
  * @param {string} sku - Sku for the product
  * @param {function} callback - Node err back style callback. Deleted product passed to callback
