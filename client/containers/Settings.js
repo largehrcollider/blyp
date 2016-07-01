@@ -1,10 +1,10 @@
-import * as actions from '../actions'
+import * as actions from '../actions';
 import { connect } from 'react-redux';
-import Settings from '../components/Settings.jsx'
+import Settings from '../components/Settings.jsx';
 
 const mapStateToProps = (state) => {
   return {
-    requests: state.auth.requests,
+    requests: state.auth.business.requests,
     admins: (() => {
       return state.auth.business.users.filter(user => {
         return user.role === 'admin';
@@ -16,10 +16,10 @@ const mapStateToProps = (state) => {
       })
     })(),
   };
-}
+};
 
 const mapDispatchToProps = (dispatch, { username }) => {
   return {};
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
