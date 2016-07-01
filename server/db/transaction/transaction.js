@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var transactionSchema = mongoose.Schema({
   created_at: {type: Date, required: true, default: Date.now },
-  bussiness_id: String, 
+  bussiness: {type: String, required: true}, 
 
   //References to customers in customer collection
   customer: {type: Schema.ObjectId, ref: 'Customer'},
