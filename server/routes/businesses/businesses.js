@@ -40,7 +40,7 @@ router.post('/checkin', function(req, res){
   var data = {};
   Business.getBusinessByName(req.body.business, function(err, business){
     if(err){
-      //res.sendStatus(500);
+      res.sendStatus(500);
     } else {
       if(!business){
         res.status(404).send('Business not found!');
@@ -74,8 +74,6 @@ router.post('/checkin', function(req, res){
           res.status(500).send('There was an error with this business record!');
         }
       }
-
-      //res.status(403).send('You do not have permission for this business!');
     }
   });
 });
