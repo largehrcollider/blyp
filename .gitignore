@@ -52,3 +52,6 @@ keys
 uploads
 images
 !docs/**
+
+# Items to be deleted
+**z_del**
