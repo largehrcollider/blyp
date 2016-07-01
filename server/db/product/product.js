@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 
 var productSchema = mongoose.Schema({
@@ -12,10 +11,10 @@ var productSchema = mongoose.Schema({
   image: String,
 
   //Can contain an arbritray number of details. i.e. Album, Artist etc. 
-  details: String,
-  {
-    timestamps: true
-  });
+  details: String
+},
+  { timestamps: true }
+);
 
 productSchema.index({sku: 1, business: 1}, {unique: true});
 productSchema.plugin(uniqueValidator);
