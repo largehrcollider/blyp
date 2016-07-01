@@ -576,6 +576,8 @@ export const checkoutCompleted = () => {
   return (dispatch) => {
     try {
       dispatch(clearBasket());
+    } catch (e){
+      // ignore it
     } finally {
       dispatch(push('/sell'));
       dispatch(resetPayment());
