@@ -15,6 +15,6 @@ const mapStateToProps = (state) => {
 }
 
 export default reduxForm({
-  form: 'addComponentForm',
+  form: 'ccManual',
   fields: ['number', 'exp_month', 'exp_year', 'cvc']
 }, mapStateToProps, mapDispatchToProps)(ProcessCard);

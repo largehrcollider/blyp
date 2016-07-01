@@ -4,12 +4,12 @@ import index from '../assets/styles/index.css';
 import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
-export default class LoginForm extends Component {
+export default class ProcessCreditCard extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const {fields: {number, exp_month, exp_year, cvc}, handleSubmit, create} = this.props;
+    const { fields: { number, exp_month, exp_year, cvc }, handleSubmit, create } = this.props;
     return (
       <div>
         <form onSubmit={handleSubmit(create)}>
