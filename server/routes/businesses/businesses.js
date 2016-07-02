@@ -5,6 +5,7 @@ var SECRET = require('../../../keys/secret.js');
 var Business = require('../../db/business/businessController.js');
 var User = require('../../db/user/userController.js');
 var Product = require('../../db/product/productController.js');
+var acl = require('../../utils/helpers.js').checkPermission;
 
 router.get('/', function(req, res){
   Business.getAllBusinesses(function(err, businesss){
@@ -78,7 +79,7 @@ router.post('/checkin', function(req, res){
   });
 });
 
-router.get('/:name', function(req, res){
+router.get('/:name', acl(['admin', 'cashier']), function(req, res){
   Business.getBusinessByName(req.params.name, function(err, business){
     if(err){
       res.sendStatus(500);
@@ -88,7 +89,7 @@ router.get('/:name', function(req, res){
   });
 });
 
-router.delete('/:name', function(req, res){
+router.delete('/:name', acl(['admin']), function(req, res){
   Business.deleteBusinessBySku(req.params.delete, function(err, business){
     if(err){
       res.sendStatus(500);
@@ -96,6 +97,23 @@ router.delete('/:name', function(req, res){
       res.status(200).json(business);
     }
   });
+});
+
+router.post('/accept', acl(['admin']), function(req, res){
+  Business.updateEmploymentRequst(req.body.username, req.user.business, req.body.status, 
+    function(err, business){
+      if(err){
+        res.status(500).send(err.message);
+      } else {
+        User.updateUserRequests(req.body.username, req.user.business, function(err, user){
+          if(err){
+            res.status(500).send(err.message);
+          } else {
+            res.status(200).json(business);
+          }
+        });
+      }
+    });
 });
 
 module.exports = router;
