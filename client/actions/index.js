@@ -646,7 +646,7 @@ export const updateProduct = (product) => {
     const config = {
       url: `/api/products/${product.sku}`,
       method: 'put',
-      data: {...product, business: getState().auth.business},
+      data: product,
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
