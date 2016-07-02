@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Product from '../containers/Product3.js';
+import Product from '../containers/Product.js';
 import material from '../assets/materialize/css/materialize.css';
 import index from '../assets/styles/index.css';
 import bootstrap from '../assets/styles/bootstrap.css';

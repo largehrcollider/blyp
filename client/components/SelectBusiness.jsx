@@ -5,7 +5,10 @@ import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
 const SelectBusiness = ({ checkin, business }) => (
-  <button className={index.selectBusiness+" "+material.btn +" "+material.wavesYellow+" "+ material.wavesEffect +" "+ material.wavesLight} onClick={checkin}>
+  <button
+    onClick={checkin}
+    className={index.selectBusiness+" "+material.btn +" "+material.wavesYellow+" "+ material.wavesEffect +" "+ material.wavesLight}
+  >
     {business}
   </button>
 );
