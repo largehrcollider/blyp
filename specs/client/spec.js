@@ -155,102 +155,158 @@ describe('actions', () => {
   })
 })
 
-// export const basketDecreaseCount = (sku) => {
-//   return {
-//     type: types.BASKET_DECREASE_COUNT,
-//     sku
-//   };
-// };
+describe('actions', () => {
+  it('should create an action for basket increase count', () => {
+    const sku = '00078'
+    const expectedAction = {
+      type: types.BASKET_INCREASE_COUNT,
+      sku
+    }
+    expect(actions.basketIncreaseCount(sku)).toEqual(expectedAction)
+  })
+})
 
-// export const basketIncreaseCount = (sku) => {
-//   return {
-//     type: types.BASKET_INCREASE_COUNT,
-//     sku
-//   };
-// };
+describe('actions', () => {
+  it('should create an action for basket remove item', () => {
+    const sku = '00078'
+    const expectedAction = {
+      type: types.BASKET_REMOVE_ITEM,
+      sku
+    }
+    expect(actions.basketRemoveItem(sku)).toEqual(expectedAction)
+  })
+})
 
-// export const basketRemoveItem = (sku) => {
-//   return {
-//     type: types.BASKET_REMOVE_ITEM,
-//     sku
-//   };
-// };
+describe('actions', () => {
+  it('should create an action for clear basket', () => {
+    const expectedAction = {
+      type: types.CLEAR_BASKET,
+    }
+    expect(actions.clearBasket()).toEqual(expectedAction)
+  })
+})
 
-// export const clearBasket = () => {
-//   return {
-//     type: types.CLEAR_BASKET
-//   };
-// }
+describe('actions', () => {
+  it('should create an action for transaction request success', () => {
+    const expectedAction = {
+      type: types.TRANSACTION_REQUEST_SUCCESS,
+    }
+    expect(actions.transactionRequestSuccess()).toEqual(expectedAction)
+  })
+})
 
-// export const transactionRequestSuccess = () => {
-//   return {
-//     type: types.TRANSACTION_REQUEST_SUCCESS
-//   };
-// }
+describe('actions', () => {
+  it('should create an action for transaction request failuer', () => {
+    const expectedAction = {
+      type: types.TRANSACTION_REQUEST_FAILURE,
+    }
+    expect(actions.transactionRequestFailure()).toEqual(expectedAction)
+  })
+})
 
-// export const transactionRequestFailure = () => {
-//   return {
-//     type: types.TRANSACTION_REQUEST_FAILURE
-//   };
-// }
+describe('actions', () => {
+  it('should create an action for transaction request sent', () => {
+    const expectedAction = {
+      type: types.TRANSACTION_REQUEST_SENT,
+    }
+    expect(actions.transactionRequestSent()).toEqual(expectedAction)
+  })
+})
 
-// export const transactionRequestSent = () => {
-//   return {
-//     type: types.TRANSACTION_REQUEST_SENT
-//   };
-// }
+/**
+* Product save requests
+*/
+describe('actions', () => {
+  it('should create an action for save product request success', () => {
+    const product = 'productOne'
+    const expectedAction = {
+      type: types.SAVE_PRODUCT_REQUEST_SUCCESS,
+      product
+    }
+    expect(actions.saveProductRequestSuccess(product)).toEqual(expectedAction)
+  })
+})
 
-// /**
-// * Product save requests
-// */
-// export const saveProductRequestSuccess = (product) => {
-//   // might have to modify later to take in array of products
-//   // this or the reducer
-//   return {
-//     type: types.SAVE_PRODUCT_REQUEST_SUCCESS,
-//     product
-//   }
-// }
+describe('actions', () => {
+  it('should create an action for save product request failure', () => {
+    const err = "Error"
+    const expectedAction = {
+      type: types.SAVE_PRODUCT_REQUEST_FAILURE,
+      err
+    }
+    expect(actions.saveProductRequestFailure(err)).toEqual(expectedAction)
+  })
+})
 
-// export const saveProductRequestFailure = (err) => {
-//   return {
-//     type: types.SAVE_PRODUCT_REQUEST_FAILURE,
-//     err
-//   }
-// }
+describe('actions', () => {
+  it('should create an action for save product request sent', () => {
+    const expectedAction = {
+      type: types.SAVE_PRODUCT_REQUEST_SENT,
+    }
+    expect(actions.saveProductRequestSent()).toEqual(expectedAction)
+  })
+})
 
-// export const saveProductRequestSent = () => {
-//   return {
-//     type: types.SAVE_PRODUCT_REQUEST_SENT,
-//   }
-// }
 
-// /**
-// * UI action creators
-// */
-// export const toggleCheckout = () => {
-//   return {
-//     type: types.TOGGLE_CHECKOUT
-//   }
-// }
+/**
+* UI action creators
+*/
+describe('actions', () => {
+  it('should create an action for toggle checkout', () => {
+    const expectedAction = {
+      type: types.TOGGLE_CHECKOUT,
+    }
+    expect(actions.toggleCheckout()).toEqual(expectedAction)
+  })
+})
 
-// /**
-// * category filter pane
-// */
-// export const toggleCategory = (category) => {
-//   return {
-//     type: types.TOGGLE_CATEGORY,
-//     category
-//   }
-// }
-// /**
-// * product request C action creators
-// */
-// export const productCRequestSent = () => {
-//   return {
-//     type: types.PRODUCT_C_REQUEST_SENT
-//   };
-// };
+/**
+* category filter pane
+*/
+describe('actions', () => {
+  it('should create an action for toggle category', () => {
+    const category = "shoes"
+    const expectedAction = {
+      type: types.TOGGLE_CATEGORY,
+      category
+    }
+    expect(actions.toggleCategory(category)).toEqual(expectedAction)
+  })
+})
+
+/**
+* product request C action creators
+*/
+describe('actions', () => {
+  it('should create an action for product C request sent', () => {
+    const expectedAction = {
+      type: types.PRODUCT_C_REQUEST_SENT,
+    }
+    expect(actions.productCRequestSent()).toEqual(expectedAction)
+  })
+})
+
+describe('actions', () => {
+  it('should create an action for product C request success', () => {
+    const categories = "shoes"
+    const details = "none"
+    const name = "Blue Shoe"
+    const price = 340
+    const quantity = 30
+    const sku = '0079'
+    const expectedAction = {
+      type: types.PRODUCT_C_REQUEST_SUCCESS,
+      categories,
+      details,
+      name,
+      price,
+      quantity,
+      sku
+    }
+    expect(actions.productCRequestSuccess({categories, details, name, price, quantity, sku})).toEqual(expectedAction)
+  })
+})
+
 // export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku }) => {
 //   return {
 //     type: types.PRODUCT_C_REQUEST_SUCCESS,
@@ -262,31 +318,61 @@ describe('actions', () => {
 //     sku
 //   };
 // };
-// export const productCRequestFailure = () => {
-//   return {
-//     type: types.PRODUCT_C_REQUEST_FAILURE
-//   };
-// };
 
-// /**
-// * product request R action creators
-// */
-// export const productRRequestSent = () => {
-//   return {
-//     type: types.PRODUCT_R_REQUEST_SENT
-//   };
-// };
+describe('actions', () => {
+  it('should create an action for product C request failure', () => {
+    const expectedAction = {
+      type: types.PRODUCT_C_REQUEST_FAILURE,
+    }
+    expect(actions.productCRequestFailure()).toEqual(expectedAction)
+  })
+})
+
+
+/**
+* product request R action creators
+*/
+describe('actions', () => {
+  it('should create an action for product R request sent', () => {
+    const expectedAction = {
+      type: types.PRODUCT_R_REQUEST_FAILURE,
+    }
+    expect(actions.productRRequestFailure()).toEqual(expectedAction)
+  })
+})
+
+describe('actions', () => {
+  it('should create an action for product R request success', () => {
+    const products = "productOne"
+    const expectedAction = {
+      type: types.PRODUCT_R_REQUEST_SUCCESS,
+      products
+    }
+    expect(actions.productRRequestSuccess(products)).toEqual(expectedAction)
+  })
+})
 // export const productRRequestSuccess = (products) => {
 //   return {
 //     type: types.PRODUCT_R_REQUEST_SUCCESS,
 //     products
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for product R request failure', () => {
+    const expectedAction = {
+      type: types.PRODUCT_R_REQUEST_FAILURE,
+    }
+    expect(actions.productRRequestFailure()).toEqual(expectedAction)
+  })
+})
 // export const productRRequestFailure = () => {
 //   return {
 //     type: types.PRODUCT_R_REQUEST_FAILURE
 //   };
 // };
+
+
 // /**
 // * product request U action creators
 // */
