@@ -6,3 +6,5 @@ var path = require('path');
 router.get('/:sku', function(req, res) {
   res.sendFile(path.resolve(__dirname, `../../../images/${req.user.business}`, req.params.sku + '.jpg'));
 });
+
+module.exports = router;
