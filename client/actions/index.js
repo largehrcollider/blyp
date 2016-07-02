@@ -406,12 +406,12 @@ export const acceptanceRequestSent = () => {
 /**
 * Login, Signup, Logout operations
 */
-export const login = ({username, password}) => {
+export const login = ({username, password, jwt}) => {
   return (dispatch) => {
     const config = {
       url: '/login',
       method: 'post',
-      data: {username, password},
+      data: {username, password, jwt},
     };
     axios(config)
     .then(({ data }) => {

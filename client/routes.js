@@ -12,25 +12,26 @@ import ProductEditor from './containers/ProductEditor.js';
 import Signup from './containers/Signup.js';
 import Profile from './containers/Profile_test.js';
 import Settings from './containers/Settings.js';
-// import ComponentOrContainer from './containers/Name';
+import Auth from './containers/Auth.js';
 
 //testing imports
 import Testing from './components/Testing.jsx';
 import CreateProduct from './containers/CreateProduct.js'
 
 export default (
-  // main app routes
   <Route>
-    <Route path="/" component={InitialPrompt} />
-    <Route path='/signup' component={Signup} />
-    <Route component={CoreLayout}>
-      <Route path="/checkout" component={Checkout} />
-      <Route path="/create" component={CreateProduct} />
-      <Route path='/inventory' component={Inventory} />
-      <Route path='/inventory/:sku' component={ProductEditor} />
-      <Route path="/sell" component={Sell} />
-      <Route path='/profile' component={Profile} />
-      <Route path='/settings' component={Settings} />
+    <Route component={Auth}>
+      <Route path="/" component={InitialPrompt} />
+      <Route path='/signup' component={Signup} />
+      <Route component={CoreLayout}>
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/create" component={CreateProduct} />
+        <Route path='/inventory' component={Inventory} />
+        <Route path='/inventory/:sku' component={ProductEditor} />
+        <Route path="/sell" component={Sell} />
+        <Route path='/profile' component={Profile} />
+        <Route path='/settings' component={Settings} />
+      </Route>
     </Route>
 
     {/* for testing and debugging*/}

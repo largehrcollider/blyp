@@ -1,16 +1,16 @@
 import jwtDecode from 'jwt-decode';
 import * as types from '../constants/actionTypes.js'
 
-var jwt = localStorage.getItem('jwt');
-if (jwt) {
-  var { username } = jwtDecode(jwt);
-} else {
-  jwt = null;
-}
+// var jwt = localStorage.getItem('jwt');
+// if (jwt) {
+//   var { username } = jwtDecode(jwt);
+// } else {
+//   jwt = null;
+// }
 
 const initialState = {
-  jwt,
-  username,
+  jwt: null,
+  username: null,
   businesses: [], // businesses the user belongs to
   business: {
     name: null,
