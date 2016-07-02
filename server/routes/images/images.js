@@ -5,14 +5,16 @@ var path = require('path');
 var jwt = require('jsonwebtoken');
 var SECRET = require('../../../keys/secret.js');
 
-router.get(':sku/:jwt', function(req, res) {
-  jwt(req.params.jwt, SECRET, (err, decoded) => {
+router.get('/:sku', function(req, res) {
+  console.log('>>>JWT:');
+  console.log(req.query.jwt);
+  jwt.verify(req.query.jwt, SECRET, (err, decoded) => {
     if (err) {
       console.log('Does not have access to requested image.');
       console.log(err);
       res.sendStatus(403);
     } else {
-      res.sendFile(path.resolve(__dirname, `../../../images/${req.user.business}`, req.params.sku + '.jpg'));
+      res.sendFile(path.resolve(__dirname, `../../../images/${decoded.business}`, req.params.sku + '.jpg'));
     }
   });
 });
