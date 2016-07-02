@@ -307,18 +307,6 @@ describe('actions', () => {
   })
 })
 
-// export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku }) => {
-//   return {
-//     type: types.PRODUCT_C_REQUEST_SUCCESS,
-//     categories, 
-//     details,
-//     name,
-//     price,
-//     quantity,
-//     sku
-//   };
-// };
-
 describe('actions', () => {
   it('should create an action for product C request failure', () => {
     const expectedAction = {
@@ -351,12 +339,7 @@ describe('actions', () => {
     expect(actions.productRRequestSuccess(products)).toEqual(expectedAction)
   })
 })
-// export const productRRequestSuccess = (products) => {
-//   return {
-//     type: types.PRODUCT_R_REQUEST_SUCCESS,
-//     products
-//   };
-// };
+
 
 describe('actions', () => {
   it('should create an action for product R request failure', () => {
@@ -366,60 +349,93 @@ describe('actions', () => {
     expect(actions.productRRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const productRRequestFailure = () => {
-//   return {
-//     type: types.PRODUCT_R_REQUEST_FAILURE
-//   };
-// };
+
+/**
+* product request U action creators
+*/
+describe('actions', () => {
+  it('should create an action for product U request sent', () => {
+    const expectedAction = {
+      type: types.PRODUCT_U_REQUEST_SENT,
+    }
+    expect(actions.productURequestSent()).toEqual(expectedAction)
+  })
+})
+
+describe('actions', () => {
+  it('should create an action for product U request success', () => {
+    const expectedAction = {
+      type: types.PRODUCT_U_REQUEST_SUCCESS,
+    }
+    expect(actions.productURequestSuccess()).toEqual(expectedAction)
+  })
+})
+
+describe('actions', () => {
+  it('should create an action for product U request failure', () => {
+    const expectedAction = {
+      type: types.PRODUCT_U_REQUEST_FAILURE,
+    }
+    expect(actions.productURequestFailure()).toEqual(expectedAction)
+  })
+})
+
+/**
+* product request D action creators
+*/
+
+describe('actions', () => {
+  it('should create an action for product D request sent', () => {
+    const expectedAction = {
+      type: types.PRODUCT_D_REQUEST_SENT,
+    }
+    expect(actions.productDRequestSent()).toEqual(expectedAction)
+  })
+})
+
+describe('actions', () => {
+  it('should create an action for product D request success', () => {
+    const expectedAction = {
+      type: types.PRODUCT_D_REQUEST_SUCCESS,
+    }
+    expect(actions.productDRequestSuccess()).toEqual(expectedAction)
+  })
+})
+
+describe('actions', () => {
+  it('should create an action for product D request failure', () => {
+    const expectedAction = {
+      type: types.PRODUCT_D_REQUEST_FAILURE,
+    }
+    expect(actions.productDRequestFailure()).toEqual(expectedAction)
+  })
+})
+
+/**
+* Business selector
+*/
 
 
-// /**
-// * product request U action creators
-// */
-// export const productURequestSent = () => {
-//   return {
-//     type: types.PRODUCT_U_REQUEST_SENT
-//   };
-// };
-// export const productURequestSuccess = () => {
-//   return {
-//     type: types.PRODUCT_U_REQUEST_SUCCESS
-//   };
-// };
-// export const productURequestFailure = () => {
-//   return {
-//     type: types.PRODUCT_U_REQUEST_FAILURE
-//   };
-// };
-
-// /**
-// * product request D action creators
-// */
-// export const productDRequestSent = () => {
-//   return {
-//     type: types.PRODUCT_D_REQUEST_SENT
-//   };
-// };
-// export const productDRequestSuccess = () => {
-//   return {
-//     type: types.PRODUCT_D_REQUEST_SUCCESS
-//   };
-// };
-// export const productDRequestFailure = () => {
-//   return {
-//     type: types.PRODUCT_D_REQUEST_FAILURE
-//   };
-// };
-
-// /**
-// * Business selector
-// */
-// // export const business = (business) => {
-// //   return {
-// //     type: types.SELECT_BUSINESS,
-// //     business
-// //   }
-// // };
+describe('actions', () => {
+  it('should create an action for business checkin request successful', () => {
+    const business = "myBusiness"
+    const jwt = '342'
+    const products = []
+    const requests = []
+    const role = "admin"
+    const users = []
+    const expectedAction = {
+      type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
+      business,
+      jwt,
+      products,
+      requests,
+      role,
+      users
+    }
+    expect(actions.businessCheckinRequestSuccesful({business, jwt, role, products, requests, role, users})).toEqual(expectedAction)
+  })
+})
 // export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, requests, users }) => {
 //   return {
 //     type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
@@ -431,20 +447,40 @@ describe('actions', () => {
 //     users
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for business checkin request failure', () => {
+    const expectedAction = {
+      type: types.BUSINESS_CHECKIN_REQUEST_FAILURE,
+    }
+    expect(actions.businessCheckinRequestFailure()).toEqual(expectedAction)
+  })
+})
 // export const businessCheckinRequestFailure = () => {
 //   return {
 //     type: types.BUSINESS_CHECKIN_REQUEST_FAILURE
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for business checkin request sent', () => {
+    const expectedAction = {
+      type: types.BUSINESS_CHECKIN_REQUEST_SENT,
+    }
+    expect(actions.businessCheckinRequestSent()).toEqual(expectedAction)
+  })
+})
 // export const businessCheckinRequestSent = () => {
 //   return {
 //     type: types.BUSINESS_CHECKIN_REQUEST_SENT
 //   };
 // };
 
-// /**
-// * Business related action creators
-// */
+/**
+* Business related action creators
+*/
+
+
 // export const businessCRequestSuccess = (business) => {
 //   return {
 //     type: types.BUSINESS_C_REQUEST_SUCCESS,
@@ -461,41 +497,112 @@ describe('actions', () => {
 //     type: types.BUSINESS_C_REQUEST_SENT
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for business join request success', () => {
+    const expectedAction = {
+      type: types.BUSINESS_JOIN_REQUEST_SUCCESS,
+    }
+    expect(actions.businessJoinRequestSuccess()).toEqual(expectedAction)
+  })
+})
 // export const businessJoinRequestSuccess = () => {
 //   return {
 //     type: types.BUSINESS_JOIN_REQUEST_SUCCESS
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for business join request failure', () => {
+    const expectedAction = {
+      type: types.BUSINESS_JOIN_REQUEST_FAILURE,
+    }
+    expect(actions.businessJoinRequestFailure()).toEqual(expectedAction)
+  })
+})
 // export const businessJoinRequestFailure = () => {
 //   return {
 //     type: types.BUSINESS_JOIN_REQUEST_FAILURE
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for business join request sent', () => {
+    const expectedAction = {
+      type: types.BUSINESS_JOIN_REQUEST_SENT,
+    }
+    expect(actions.businessJoinRequestSent()).toEqual(expectedAction)
+  })
+})
 // export const businessJoinRequestSent = () => {
 //   return {
 //     type: types.BUSINESS_JOIN_REQUEST_SENT
 //   };
 // };
 
-// /**
-// * requests
-// */
+/**
+* requests
+*/
+
+describe('actions', () => {
+  it('should create an action for requests request success', () => {
+    const requests = []
+    const expectedAction = {
+      type: types.REQUESTS_REQUEST_SUCCESS,
+      requests
+    }
+    expect(actions.requestsRequestSuccess(requests)).toEqual(expectedAction)
+  })
+})
 // export const requestsRequestSuccess = (requests) => {
 //   return {
 //     type: types.REQUESTS_REQUEST_SUCCESS,
 //     requests
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for requests request failure', () => {
+    const expectedAction = {
+      type: types.REQUESTS_REQUEST_FAILURE,
+    }
+    expect(actions.requestsRequestFailure()).toEqual(expectedAction)
+  })
+})
 // export const requestsRequestFailure = () => {
 //   return {
 //     type: types.REQUESTS_REQUEST_FAILURE
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for requests request sent', () => {
+    const expectedAction = {
+      type: types.REQUESTS_REQUEST_SENT,
+    }
+    expect(actions.requestsRequestSent()).toEqual(expectedAction)
+  })
+})
 // export const requestsRequestSent = () => {
 //   return {
 //     type: types.REQUESTS_REQUEST_SENT
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for acceptance request success', () => {
+    const accept = true
+    const username = "Johnny"
+    const role = "admin"
+    const expectedAction = {
+      type: types.ACCEPTANCE_REQUEST_SUCCESS,
+      accept,
+      username,
+      role
+    }
+    expect(actions.acceptanceRequestSuccess({ accept, username, role })).toEqual(expectedAction)
+  })
+})
 // export const acceptanceRequestSuccess = ({ accept, username, role }) => {
 //   return {
 //     type: types.ACCEPTANCE_REQUEST_SUCCESS,
@@ -504,11 +611,29 @@ describe('actions', () => {
 //     role
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for acceptance request failure', () => {
+    const expectedAction = {
+      type: types.ACCEPTANCE_REQUEST_FAILURE,
+    }
+    expect(actions.acceptanceRequestFailure()).toEqual(expectedAction)
+  })
+})
 // export const acceptanceRequestFailure = () => {
 //   return {
 //       type: types.ACCEPTANCE_REQUEST_FAILURE
 //   };
 // };
+
+describe('actions', () => {
+  it('should create an action for acceptance request sent', () => {
+    const expectedAction = {
+      type: types.ACCEPTANCE_REQUEST_SENT,
+    }
+    expect(actions.acceptanceRequestSent()).toEqual(expectedAction)
+  })
+})
 // export const acceptanceRequestSent = () => {
 //   return {
 //       type: types.ACCEPTANCE_REQUEST_SENT
