@@ -1,6 +1,7 @@
 import expect from 'expect'
 import * as actions from '../../client/actions/index.js'
 import * as types from '../../client/constants/actionTypes.js'
+import authReducer from '../../client/reducers/authReducer.js'
 
 describe('actions', () => {
   it('should create an action to select a payment method', () => {
@@ -436,17 +437,6 @@ describe('actions', () => {
     expect(actions.businessCheckinRequestSuccesful({business, jwt, role, products, requests, role, users})).toEqual(expectedAction)
   })
 })
-// export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, requests, users }) => {
-//   return {
-//     type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
-//     business,
-//     jwt,
-//     products,
-//     requests,
-//     role,
-//     users
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business checkin request failure', () => {
@@ -456,11 +446,6 @@ describe('actions', () => {
     expect(actions.businessCheckinRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const businessCheckinRequestFailure = () => {
-//   return {
-//     type: types.BUSINESS_CHECKIN_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business checkin request sent', () => {
@@ -470,34 +455,10 @@ describe('actions', () => {
     expect(actions.businessCheckinRequestSent()).toEqual(expectedAction)
   })
 })
-// export const businessCheckinRequestSent = () => {
-//   return {
-//     type: types.BUSINESS_CHECKIN_REQUEST_SENT
-//   };
-// };
 
 /**
 * Business related action creators
 */
-
-
-// export const businessCRequestSuccess = (business) => {
-//   return {
-//     type: types.BUSINESS_C_REQUEST_SUCCESS,
-//     business
-//   };
-// };
-// export const businessCRequestFailure = () => {
-//   return {
-//     type: types.BUSINESS_C_REQUEST_FAILURE
-//   };
-// };
-// export const businessCRequestSent = () => {
-//   return {
-//     type: types.BUSINESS_C_REQUEST_SENT
-//   };
-// };
-
 describe('actions', () => {
   it('should create an action for business join request success', () => {
     const expectedAction = {
@@ -506,11 +467,6 @@ describe('actions', () => {
     expect(actions.businessJoinRequestSuccess()).toEqual(expectedAction)
   })
 })
-// export const businessJoinRequestSuccess = () => {
-//   return {
-//     type: types.BUSINESS_JOIN_REQUEST_SUCCESS
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business join request failure', () => {
@@ -520,11 +476,6 @@ describe('actions', () => {
     expect(actions.businessJoinRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const businessJoinRequestFailure = () => {
-//   return {
-//     type: types.BUSINESS_JOIN_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business join request sent', () => {
@@ -534,16 +485,10 @@ describe('actions', () => {
     expect(actions.businessJoinRequestSent()).toEqual(expectedAction)
   })
 })
-// export const businessJoinRequestSent = () => {
-//   return {
-//     type: types.BUSINESS_JOIN_REQUEST_SENT
-//   };
-// };
 
 /**
 * requests
 */
-
 describe('actions', () => {
   it('should create an action for requests request success', () => {
     const requests = []
@@ -554,12 +499,6 @@ describe('actions', () => {
     expect(actions.requestsRequestSuccess(requests)).toEqual(expectedAction)
   })
 })
-// export const requestsRequestSuccess = (requests) => {
-//   return {
-//     type: types.REQUESTS_REQUEST_SUCCESS,
-//     requests
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for requests request failure', () => {
@@ -569,11 +508,6 @@ describe('actions', () => {
     expect(actions.requestsRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const requestsRequestFailure = () => {
-//   return {
-//     type: types.REQUESTS_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for requests request sent', () => {
@@ -583,11 +517,6 @@ describe('actions', () => {
     expect(actions.requestsRequestSent()).toEqual(expectedAction)
   })
 })
-// export const requestsRequestSent = () => {
-//   return {
-//     type: types.REQUESTS_REQUEST_SENT
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for acceptance request success', () => {
@@ -603,14 +532,6 @@ describe('actions', () => {
     expect(actions.acceptanceRequestSuccess({ accept, username, role })).toEqual(expectedAction)
   })
 })
-// export const acceptanceRequestSuccess = ({ accept, username, role }) => {
-//   return {
-//     type: types.ACCEPTANCE_REQUEST_SUCCESS,
-//     accept,
-//     username,
-//     role
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for acceptance request failure', () => {
@@ -620,11 +541,6 @@ describe('actions', () => {
     expect(actions.acceptanceRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const acceptanceRequestFailure = () => {
-//   return {
-//       type: types.ACCEPTANCE_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for acceptance request sent', () => {
@@ -634,8 +550,114 @@ describe('actions', () => {
     expect(actions.acceptanceRequestSent()).toEqual(expectedAction)
   })
 })
-// export const acceptanceRequestSent = () => {
-//   return {
-//       type: types.ACCEPTANCE_REQUEST_SENT
-//   };
-// };
+
+
+
+
+// const initialState = [
+//   {
+//     text: 'Use Redux',
+//     completed: false,
+//     id: 0
+//   }
+// ]
+
+// export default function todos(state = initialState, action) {
+//   switch (action.type) {
+//     case ADD_TODO:
+//       return [
+//         {
+//           id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+//           completed: false,
+//           text: action.text
+//         },
+//         ...state
+//       ]
+
+//     default:
+//       return state
+//   }
+// }
+
+
+describe('auth reducer', () => {
+  it('should return the initial state', () => {
+    expect(
+      authReducer(undefined, {})
+    ).toEqual([
+      {
+        jwt,
+        username,
+        businesses: [], // businesses the user belongs to
+        business: {
+          name: null,
+          products: {}, // key is sku, value is product object
+          role: null,
+          requests: [],
+          users: []
+        }
+      }
+    ])
+  })
+})
+
+
+// describe('todos reducer', () => {
+//   it('should return the initial state', () => {
+//     expect(
+//       reducer(undefined, {})
+//     ).toEqual([
+//       {
+//         text: 'Use Redux',
+//         completed: false,
+//         id: 0
+//       }
+//     ])
+//   })
+
+//   it('should handle ADD_TODO', () => {
+//     expect(
+//       reducer([], {
+//         type: types.ADD_TODO,
+//         text: 'Run the tests'
+//       })
+//     ).toEqual(
+//       [
+//         {
+//           text: 'Run the tests',
+//           completed: false,
+//           id: 0
+//         }
+//       ]
+//     )
+
+//     expect(
+//       reducer(
+//         [
+//           {
+//             text: 'Use Redux',
+//             completed: false,
+//             id: 0
+//           }
+//         ],
+//         {
+//           type: types.ADD_TODO,
+//           text: 'Run the tests'
+//         }
+//       )
+//     ).toEqual(
+//       [
+//         {
+//           text: 'Run the tests',
+//           completed: false,
+//           id: 1
+//         },
+//         {
+//           text: 'Use Redux',
+//           completed: false,
+//           id: 0
+//         }
+//       ]
+//     )
+//   })
+// })
