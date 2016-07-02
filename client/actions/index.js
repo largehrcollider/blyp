@@ -574,14 +574,9 @@ export const validateCashReceived = (amount) => {
 };
 export const checkoutCompleted = () => {
   return (dispatch) => {
-    try {
-      dispatch(clearBasket());
-    } catch (e){
-      // ignore it
-    } finally {
-      dispatch(push('/sell'));
-      dispatch(resetPayment());
-    }
+    dispatch(clearBasket());
+    dispatch(push('/sell'));
+    dispatch(resetPayment());
   };
 };
 
@@ -589,9 +584,6 @@ export const checkoutCompleted = () => {
 * product CRUD operations
 */
 
-/**
-* the sku is optional. if not supplied, will fetch all products in database
-*/
 export const createProduct = (product) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
@@ -626,6 +618,9 @@ export const createProduct = (product) => {
     dispatch(productCRequestSent());
   };
 };
+/**
+* the sku is optional. if not supplied, will fetch all products in database
+*/
 export const readProduct = (sku = '') => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
