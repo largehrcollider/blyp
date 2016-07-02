@@ -9,7 +9,7 @@ export default class Product extends Component {
     super(props);
   }
   render() {
-    const { incrementItem, product: { name, sku } } = this.props;
+    const { incrementItem, product: { name, sku }, jwt } = this.props;
     return (
       <div className={bootstrap.colmd3 +" "+index.indexCard}>
         <div className={index.myCard} onClick={incrementItem} col-md-3>
@@ -17,7 +17,7 @@ export default class Product extends Component {
             <h3 className={index.myCardTitle}>{name}</h3>
           </div>
           <div className={index.myCardImage}>
-          <img className={material.circle+" "+index.pic} src={`/images/${sku}`} alt={name} />
+          <img className={material.circle+" "+index.pic} src={`/api/images/${sku}?jwt=${jwt}`} alt={name} />
           </div>
         </div>
       </div>
