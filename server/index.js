@@ -9,6 +9,7 @@ var productsRouter = require('./routes/products/products.js');
 var transactionsRouter = require('./routes/transactions/transactions.js');
 var employmentRouter = require('./routes/employment/employment.js');
 var businessesRouter = require('./routes/businesses/businesses.js');
+var imageRouter = require('./routes/images/images.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
 var signupRouter = require('./routes/signupRouter.js');
