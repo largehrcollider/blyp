@@ -6,12 +6,13 @@ class Basket extends Component {
     super(props);
   }
   render() {
-    const { basketItems } = this.props;
+    const { basket } = this.props;
+    // return (<div></div>);
     return (
       <div>
-        {basketItems.map(item => (
-          <BasketItem key={item.sku} sku={item.sku} />
-        ))}
+        {basket.map(item => {
+          return (<BasketItem key={item.sku} sku={item.sku} />);
+        })}
       </div>
     );
   }

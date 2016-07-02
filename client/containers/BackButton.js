@@ -1,7 +1,7 @@
-import * as actions from '../actions'
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import BackButton from '../components/BackButton.jsx'
+import BackButton from '../components/BackButton.jsx';
 
 const mapStateToProps = (state) => {
   return {};

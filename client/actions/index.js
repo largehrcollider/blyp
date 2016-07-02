@@ -406,12 +406,12 @@ export const acceptanceRequestSent = () => {
 /**
 * Login, Signup, Logout operations
 */
-export const login = ({username, password}) => {
+export const login = ({username, password, jwt}) => {
   return (dispatch) => {
     const config = {
       url: '/login',
       method: 'post',
-      data: {username, password},
+      data: {username, password, jwt},
     };
     axios(config)
     .then(({ data }) => {
@@ -574,14 +574,9 @@ export const validateCashReceived = (amount) => {
 };
 export const checkoutCompleted = () => {
   return (dispatch) => {
-    try {
-      dispatch(clearBasket());
-    } catch (e){
-      // ignore it
-    } finally {
-      dispatch(push('/sell'));
-      dispatch(resetPayment());
-    }
+    dispatch(clearBasket());
+    dispatch(push('/sell'));
+    dispatch(resetPayment());
   };
 };
 
@@ -589,9 +584,6 @@ export const checkoutCompleted = () => {
 * product CRUD operations
 */
 
-/**
-* the sku is optional. if not supplied, will fetch all products in database
-*/
 export const createProduct = (product) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
@@ -626,6 +618,9 @@ export const createProduct = (product) => {
     dispatch(productCRequestSent());
   };
 };
+/**
+* the sku is optional. if not supplied, will fetch all products in database
+*/
 export const readProduct = (sku = '') => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
@@ -702,9 +697,12 @@ export const checkinBusiness = (business) => {
     .then(({ data }) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(businessCheckinRequestSuccesful(data));
+      dispatch(clearBasket());
+      dispatch(toggleCategory('all'));
       dispatch(push('/sell'));
     })
     .catch(err => {
+      console.error(err);
       dispatch(businessCheckinRequestFailure());
     });
     dispatch(businessCheckinRequestSent());

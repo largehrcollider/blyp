@@ -4,7 +4,7 @@ import index from '../assets/styles/index.css';
 import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
-export default class BasketItem extends Component {
+export default class Product extends Component {
   constructor(props) {
     super(props);
   }
