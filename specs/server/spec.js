@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Customer = require('../../server/db/customer/customer.js');
 var userController = require('../../server/db/user/userController.js');
 var productController = require('../../server/db/product/productController.js');
+var businessController = require('../../server/db/business/businessController.js');
 
 var dbURI = 'mongodb://localhost/blypTest';
 
@@ -217,7 +218,6 @@ describe('Product controller', function(){
     productController.getProductByName('Test Business', 'Bag', function(err, product){
       var sku= product.sku;
       productController.updateProductBySku('Test Business', sku, {price: 10.00, details: 'Green'}, function(err, product){
-        console.log(product)
         expect(product.price).to.equal(10.00);
         done();
       });
@@ -228,7 +228,6 @@ describe('Product controller', function(){
     productController.getProductByName('Test Business', 'Bag', function(err, product){
       var sku = product.sku;
       productController.addProductCategoryBySku('Test Business', sku, 'Fashon', function(err, product){
-        console.log(product)
         expect(product.categories.length).to.equal(3);
         done();
       });
@@ -239,12 +238,70 @@ describe('Product controller', function(){
     productController.getProductByName('Test Business', 'iPhone', function(err, product){
       var sku = product.sku;
       productController.deleteProductBySku('Test Business',sku, function(err, product){
-        console.log(product)
         productController.getProductBySku('Test Business', sku, function(err, product){
           expect(product).to.equal(null);
           done();
         })
 
+      });
+    });
+  });
+});
+
+describe('Business controller', function(){
+    before(function(done){
+    function clearDB() {
+      for (var i in mongoose.connection.collections) {
+        mongoose.connection.collections[i].remove(function() {});
+      }
+      return done();
+    }
+
+    if (mongoose.connection.readyState === 0) {
+      mongoose.connect(dbURI, function (err) {
+        if (err) {
+          throw err;
+        }
+        return clearDB();
+      });
+    } else {
+      return clearDB();
+    }
+  });
+
+  after(function(done){
+    // for (var i in mongoose.connection.collections) {
+    //   mongoose.connection.collections[i].remove(function() {});
+    // }
+    mongoose.connection.close(done);
+  });
+
+  it('Should create a new business', function(done){
+    var req = {};
+    req.body = {business: 'Pawn Shop'};
+    var tokenPayload = {username: 'TestEric'};
+    req.body.requests = ['FakeEmployee', 'NewEmployee'];
+    businessController.createBusiness(req.body, tokenPayload, function(err, business){
+      expect(business.name).to.equal('Pawn Shop');
+      expect(business.users.length).to.equal(1);
+      expect(business.users[0].username).to.equal('TestEric');
+      expect(business.users[0].role).to.equal('admin');
+      done();
+    });
+  });
+
+  it('Should be able to update an employement request correctly', function(done){
+    businessController.updateEmploymentRequest('NewEmployee', 'Pawn Shop', 'accept', function(err, users){
+      businessController.getAllBusinesses(function(err, businesses){
+        expect(businesses[0].requests.length).to.equal(1);
+        for(var i = 0; i < businesses[0].users.length; i++){
+          if(businesses[0].users[i].username === 'NewEmployee'){
+            break;
+          }
+
+        }
+        expect(businesses[0].users[i].username).to.equal('NewEmployee');
+        done();
       });
     });
   });
