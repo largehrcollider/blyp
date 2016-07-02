@@ -35,6 +35,21 @@ exports.updateUserById = function(id, update, callback){
   });
 };
 
+exports.updateUserRequests = function(username, business, callback){
+  User.findOne({username: username}, function(err, user){
+    if(err){
+      callback(err);
+    } else {
+      for(var i = 0; i < user.requests.length; i++){
+        if(user.requests[i] === business){
+          user.requests.splice(i, 1);
+          break;
+        }
+      }
+      callback(null, user);
+    }
+  });
+};
 exports.deleteUserById = function(id, callback){
   User.findOneAndRemove({_id: id})
   .then(function(user){
