@@ -5,10 +5,10 @@ import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
 
-const ProfileUsername = ({ changeUsername }) => (
-  <div className={index.updateButton +" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={changeUsername}>
+const ProfileEmail = ({ changeEmail }) => (
+  <div className={index.updateButton +" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={changeEmail}>
     UPDATE
   </div>
 );
 
-export default ProfileUsername;
+export default ProfileEmail;
