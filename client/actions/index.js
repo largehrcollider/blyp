@@ -644,9 +644,9 @@ export const updateProduct = (product) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
-      url: `/api/products/${sku}`,
+      url: `/api/products/${product.sku}`,
       method: 'put',
-      data: {...product, business: getState().auth.business},
+      data: product,
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)

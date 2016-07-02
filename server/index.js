@@ -9,6 +9,7 @@ var productsRouter = require('./routes/products/products.js');
 var transactionsRouter = require('./routes/transactions/transactions.js');
 var employmentRouter = require('./routes/employment/employment.js');
 var businessesRouter = require('./routes/businesses/businesses.js');
+var imageRouter = require('./routes/images/images.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
 var signupRouter = require('./routes/signupRouter.js');
@@ -51,9 +52,8 @@ app.use('/api/products', jwtParser({secret: SECRET}), productsRouter, errHandler
 app.use('/api/transactions', jwtParser({secret: SECRET}), transactionsRouter);
 app.use('/api/employment', employmentRouter);
 app.use('/api/business', jwtParser({secret: SECRET}), businessesRouter, errHandler);
-app.get('/images/:sku', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../images', req.params.sku + '.jpg'));
-});
+// app.get('/api/images/', jwtParser({secret: SECRET}), imageRouter, errHandler);
+app.use('/api/images/', imageRouter);
 
 //stripe
 app.use('/stripe', stripeRouter);

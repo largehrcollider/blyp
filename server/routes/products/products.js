@@ -38,7 +38,7 @@ router.post('/', acl(['admin']), upload.single('file'), function(req, res){
   if(!req.user.business){
     res.status(500).send('Business not selected!');
   } else {
-    fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, '../../../images', '' + newProduct.sku + '.jpg'), () => {
+    fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, `../../../images/${req.user.business}`, '' + newProduct.sku + '.jpg'), () => {
       Product.createProduct(newProduct, function(err, product){
         if(err){
           res.status(500).send(err.message);

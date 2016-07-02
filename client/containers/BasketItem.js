@@ -6,7 +6,6 @@ const mapStateToProps = (state, ownProps) => {
   const { sku } = ownProps;
   return {
     name: state.auth.business.products[sku].name,
-    // quantity: state.basket.find((item) => (item.sku === sku)).quantity,
     quantity: (() => {
       var item = state.basket.find((item) => (item.sku === sku));
       return item ? item.quantity : 0;
