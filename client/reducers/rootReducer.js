@@ -5,7 +5,6 @@ import { reducer as formReducer } from 'redux-form';
 import toolbar from './toolbarReducer.js';
 import auth from './authReducer.js';
 import basket from './basketReducer.js';
-import products from './productsReducer.js';
 import payment from './paymentReducer';
 import network from './networkReducer.js';
 // import reducer from './myReducerFile.js';
@@ -20,7 +19,6 @@ const appReducer = combineReducers({
   routing,
   auth,
   basket,
-  products,
   payment,
   network
 });

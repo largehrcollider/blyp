@@ -9,4 +9,4 @@ var businessSchema = mongoose.Schema({
 });
 
 businessSchema.plugin(uniqueValidator);
-module.exports= mongoose.model('Busienss', businessSchema);
+module.exports= mongoose.model('Business', businessSchema);

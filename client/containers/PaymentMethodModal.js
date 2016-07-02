@@ -4,8 +4,7 @@ import PaymentMethodModal from '../components/PaymentMethodModal.jsx';
 import total from '../helpers/basketTotal.js'
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-  };
+  return {};
 };
 
 const mapStateToProps = (state) => {
@@ -13,6 +12,6 @@ const mapStateToProps = (state) => {
     method: state.payment.method,
     changeDue: state.payment.cashReceived - total(state) >= 0
   };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentMethodModal);

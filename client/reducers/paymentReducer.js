@@ -5,11 +5,9 @@ import * as types from '../constants/actionTypes';
  * NOTE: valid payment method descriptors: 'cash', 'credit card'.
  */
 
-
-
 var initialState = {
   method: null,
-  cashReceived: null
+  cashReceived: 0
 };
 
  const paymentReducer = (state = initialState, action) => {
@@ -18,8 +16,8 @@ var initialState = {
     case types.PAYMENT_METHOD_SELECTED:
     return {
       ...state,
-      method: state.method === action.method ? null : action.method,
-      cashReceived: null
+      method: action.method,
+      cashReceived: 0
     };
 
     case types.CASH_RECEIVED:
@@ -28,19 +26,12 @@ var initialState = {
       cashReceived: action.amount
     };
 
-    case types.CHECKOUT_COMPLETED:
-    return {
-      ...state,
-      method: null,
-      cashReceived: null
-    }
-
     case types.RESET_PAYMENT:
     return {
       ...state,
       method: null,
-      cashReceived: null
-    }
+      cashReceived: 0
+    };
 
     default:
     return state;

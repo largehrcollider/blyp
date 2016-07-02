@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const sku = ownProps.params.sku;
   return {
     updateProduct: (data) => {
-      dispatch(actions.updateProduct(data));
+      dispatch(actions.updateProduct({...data, sku}));
     },
     deleteProduct: ({ sku }) => {
       dispatch(actions.deleteProduct(sku));

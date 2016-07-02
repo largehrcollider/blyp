@@ -48,7 +48,7 @@ app.use('/signup', signupRouter);
 // protected routes
 app.use('/api/products', jwtParser({secret: SECRET}), productsRouter, errHandler);
 // app.use('/api/clients', clientsRouter);
-app.use('/api/transactions', transactionsRouter);
+app.use('/api/transactions', jwtParser({secret: SECRET}), transactionsRouter);
 app.use('/api/employment', employmentRouter);
 app.use('/api/business', jwtParser({secret: SECRET}), businessesRouter, errHandler);
 app.get('/images/:sku', (req, res) => {

@@ -5,10 +5,10 @@ import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
 
-const MethodCash = ({ selectCash }) => (
+const CashSelector = ({ selectCash }) => (
   <div className={index.payButton +" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={selectCash}>
     Cash
   </div>
 );
 
-export default MethodCash;
+export default CashSelector;

@@ -18,7 +18,6 @@ router.get('/', function(req, res){
 
 router.post('/create', function(req, res){
   Business.createBusiness(req.body, req.user, function(err, business){
-    console.log(req.user)
     if(err){
       res.status(500).send('It failed with the business!');
     } else {
@@ -43,31 +42,38 @@ router.post('/checkin', function(req, res){
     if(err){
       res.sendStatus(500);
     } else {
-      for(var i = 0; i < business.users.length; i++){
-        if(business.users[i].username === req.user.username){
-          data.jwt = jwt.sign({username: req.user.username, name: req.user.name, 
-            email: req.user.email, business: business.name, role: business.users[i].role}, SECRET);
-          data.username = req.user.username;
-          data.name = req.user.name;
-          data.business = business.name;
-          data.email = req.user.email;
-          data.role = business.users[i].role;
-          if(business.users[i].role === 'admin'){
-            data.users = business.users;
-            data.requests = business.requests;
-          }
-          Product.getAllProducts(business.name, function(err, products){
-            if(err){
-              res.sendStatus(500);
-            } else {
-              data.products = products;
-              res.status(200).json(data);
+      if(!business){
+        res.status(404).send('Business not found!');
+      } else {
+        for(var i = 0; i < business.users.length; i++){
+          if(business.users[i].username === req.user.username){
+            data.jwt = jwt.sign({username: req.user.username, name: req.user.name, 
+              email: req.user.email, business: business.name, role: business.users[i].role}, SECRET);
+            data.username = req.user.username;
+            data.name = req.user.name;
+            data.business = business.name;
+            data.email = req.user.email;
+            data.role = business.users[i].role;
+            if(business.users[i].role === 'admin'){
+              data.users = business.users;
+              data.requests = business.requests;
             }
-          });
+            Product.getAllProducts(business.name, function(err, products){
+              if(err){
+                res.sendStatus(500);
+              } else if (!products){
+                res.status(404).send('No products found for this business!');
+              } else {
+                data.products = products;
+                res.status(200).json(data);
+              }
+            });
+          } 
+        }
+        if(!('username' in data)){
+          res.status(500).send('There was an error with this business record!');
         }
       }
-
-      //res.status(403).send('You do not have permission for this business!');
     }
   });
 });
