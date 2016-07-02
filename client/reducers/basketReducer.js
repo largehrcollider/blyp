@@ -41,7 +41,6 @@ const basketReducer = (state = [], action) => {
       return state;
     }
 
-
     case types.CLEAR_BASKET:
     return [];
 

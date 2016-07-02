@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, IndexRedirect} from 'react-router';
 import CoreLayout from './containers/CoreLayout.js';
 import InitialPrompt from './containers/InitialPromptContainer.js';
-import ProductsPane from './containers/ProductsPaneContainer.js';
 import Toolbar from './containers/ToolbarContainer.js';
 import StoreMaster from './containers/StoreMasterContainer.js';
 import Chat from './containers/ChatContainer.js';

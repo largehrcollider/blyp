@@ -1,6 +1,6 @@
 import * as actions from '../actions'
 import { connect } from 'react-redux';
-import ProductsPane from '../components/ProductsPane5.jsx'
+import ProductsPane from '../components/ProductsPane.jsx'
 
 const mapStateToProps = (state) => {
   return {

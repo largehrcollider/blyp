@@ -702,9 +702,12 @@ export const checkinBusiness = (business) => {
     .then(({ data }) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(businessCheckinRequestSuccesful(data));
+      dispatch(clearBasket());
+      dispatch(toggleCategory('all'));
       dispatch(push('/sell'));
     })
     .catch(err => {
+      console.error(err);
       dispatch(businessCheckinRequestFailure());
     });
     dispatch(businessCheckinRequestSent());
