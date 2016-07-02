@@ -406,12 +406,12 @@ export const acceptanceRequestSent = () => {
 /**
 * Login, Signup, Logout operations
 */
-export const login = ({username, password}) => {
+export const login = ({username, password, jwt}) => {
   return (dispatch) => {
     const config = {
       url: '/login',
       method: 'post',
-      data: {username, password},
+      data: {username, password, jwt},
     };
     axios(config)
     .then(({ data }) => {
@@ -644,9 +644,9 @@ export const updateProduct = (product) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
-      url: `/api/products/${sku}`,
+      url: `/api/products/${product.sku}`,
       method: 'put',
-      data: {...product, business: getState().auth.business},
+      data: product,
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
