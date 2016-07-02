@@ -51,9 +51,10 @@ app.use('/api/products', jwtParser({secret: SECRET}), productsRouter, errHandler
 app.use('/api/transactions', jwtParser({secret: SECRET}), transactionsRouter);
 app.use('/api/employment', employmentRouter);
 app.use('/api/business', jwtParser({secret: SECRET}), businessesRouter, errHandler);
-app.get('/images/:sku', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../images', req.params.sku + '.jpg'));
-});
+// app.get('/api/images/:sku', jwtParser({secret: SECRET}), (req, res) => {
+//   res.sendFile(path.resolve(__dirname, `../images/${req.user.business}`, req.params.sku + '.jpg'));
+// });
+app.get('/api/images/:sku', jwtParser({secret: SECRET}), imageRouter, errHandler);
 
 //stripe
 app.use('/stripe', stripeRouter);

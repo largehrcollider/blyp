@@ -1,5 +1,7 @@
+var fs = require('fs');
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 var jwt = require('jsonwebtoken');
 var SECRET = require('../../../keys/secret.js');
 var Business = require('../../db/business/businessController.js');
@@ -29,7 +31,15 @@ router.post('/create', function(req, res){
         }else {
           user.businesses.push(business.name);
           user.save();
-          res.status(201).json(business);
+          fs.mkdir(path.resolve(__dirname, `../../../images/${business.name}`), (err) => {
+            if (err) {
+              console.log(`Directory for ${business.name} could not be created.`);
+              console.log(err);
+              res.sendStatus(500);
+            } else {
+              res.status(201).json(business);
+            }
+          })
         }
       });
     }
@@ -47,7 +57,7 @@ router.post('/checkin', function(req, res){
       } else {
         for(var i = 0; i < business.users.length; i++){
           if(business.users[i].username === req.user.username){
-            data.jwt = jwt.sign({username: req.user.username, name: req.user.name, 
+            data.jwt = jwt.sign({username: req.user.username, name: req.user.name,
               email: req.user.email, business: business.name, role: business.users[i].role}, SECRET);
             data.username = req.user.username;
             data.name = req.user.name;
@@ -68,7 +78,7 @@ router.post('/checkin', function(req, res){
                 res.status(200).json(data);
               }
             });
-          } 
+          }
         }
         if(!('username' in data)){
           res.status(500).send('There was an error with this business record!');
