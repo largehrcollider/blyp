@@ -52,7 +52,8 @@ app.use('/api/products', jwtParser({secret: SECRET}), productsRouter, errHandler
 app.use('/api/transactions', jwtParser({secret: SECRET}), transactionsRouter);
 app.use('/api/employment', employmentRouter);
 app.use('/api/business', jwtParser({secret: SECRET}), businessesRouter, errHandler);
-app.get('/api/images/:sku', jwtParser({secret: SECRET}), imageRouter, errHandler);
+// app.get('/api/images/', jwtParser({secret: SECRET}), imageRouter, errHandler);
+app.get('/api/images/', imageRouter);
 
 //stripe
 app.use('/stripe', stripeRouter);

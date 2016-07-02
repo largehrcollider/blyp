@@ -5,7 +5,8 @@ import Product from '../components/Product.jsx'
 const mapStateToProps = (state, ownProps) => {
   const { sku } = ownProps;
   return {
-    product: state.auth.business.products[sku]
+    product: state.auth.business.products[sku],
+    jwt: state.auth.jwt
   };
 }
 
