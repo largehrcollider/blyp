@@ -25,14 +25,14 @@ describe('actions', () => {
   })
 })
 
-describe('actions', () => {
-  it('should create an action to show checkout complete', () => {
-    const expectedAction = {
-      type: types.CHECKOUT_COMPLETED,
-    }
-    expect(actions.checkoutCompleted()).toEqual(expectedAction)
-  })
-})
+// describe('actions', () => {
+//   it('should create an action to show checkout complete', () => {
+//     const expectedAction = {
+//       type: types.CHECKOUT_COMPLETED,
+//     }
+//     expect(actions.checkoutCompleted()).toEqual(expectedAction)
+//   })
+// })
 
 describe('actions', () => {
   it('should create an action to reset payment', () => {
@@ -79,13 +79,15 @@ describe('actions', () => {
     const businesses = "myBusiness"
     const jwt = "3425"
     const username = "jeffJeffries"
+    const name = "Jeff"
     const expectedAction = {
       type: types.LOGIN_REQUEST_SUCCESS,
       businesses,
       jwt,
-      username
+      username,
+      name
     }
-    expect(actions.loginRequestSuccess({businesses, jwt, username})).toEqual(expectedAction)
+    expect(actions.loginRequestSuccess({businesses, name, jwt, username})).toEqual(expectedAction)
   })
 })
 
@@ -552,42 +554,15 @@ describe('actions', () => {
 })
 
 
-
-
-// const initialState = [
-//   {
-//     text: 'Use Redux',
-//     completed: false,
-//     id: 0
-//   }
-// ]
-
-// export default function todos(state = initialState, action) {
-//   switch (action.type) {
-//     case ADD_TODO:
-//       return [
-//         {
-//           id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-//           completed: false,
-//           text: action.text
-//         },
-//         ...state
-//       ]
-
-//     default:
-//       return state
-//   }
-// }
-
-
+//auth reducer
 describe('auth reducer', () => {
   it('should return the initial state', () => {
     expect(
       authReducer(undefined, {})
-    ).toEqual([
+    ).toEqual(
       {
-        jwt,
-        username,
+        jwt: null,
+        username: null,
         businesses: [], // businesses the user belongs to
         business: {
           name: null,
@@ -597,67 +572,172 @@ describe('auth reducer', () => {
           users: []
         }
       }
-    ])
+    )
   })
+
+  it('should handle product C request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.PRODUCT_C_REQUEST_SUCCESS,
+        categories: 'shoes',
+        details: 'none',
+        name: 'Shoe',
+        price: 500,
+        quantity: 50,
+        sku: 58
+      })
+    ).toEqual(
+      {
+          jwt: null,
+          username: null,
+          businesses: [], // businesses the user belongs to
+          business: {
+            name: null,
+            products: {
+              58: {
+                categories: 'shoes',
+                details: 'none',
+                name: 'Shoe',
+                price: 500,
+                quantity: 50,
+                sku: 58
+              }
+            },
+            requests: [],
+            role: null,
+            users: []
+          },
+      }
+    )
+  }) 
+
+  it('should handle login request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.LOGIN_REQUEST_SUCCESS,
+        businesses: ['myBusiness'],
+        jwt: '234',
+        name: 'John',
+        username: 'jonuser'
+      })
+    ).toEqual(
+      {
+        jwt: '234',
+        username: 'jonuser',
+        businesses: ['myBusiness'], // businesses the user belongs to
+        business: {
+          name: null,
+          products: {}, // key is sku, value is product object
+          role: null,
+          requests: [],
+          users: []
+        },
+        name: 'John'
+      }
+    )
+  }) 
+
+  it('should handle signup request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.SIGNUP_REQUEST_SUCCESS,
+        businesses: ['myBusiness'],
+        jwt: '234',
+        name: 'John',
+        username: 'jonuser'
+      })
+    ).toEqual(
+      {
+        jwt: '234',
+        username: 'jonuser',
+        businesses: ['myBusiness'], // businesses the user belongs to
+        business: {
+          name: null,
+          products: {}, // key is sku, value is product object
+          role: null,
+          requests: [],
+          users: []
+        },
+        name: 'John'
+      }
+    )
+  }) 
+
+  // it('should handle business checkin request successful', () => {
+  //   expect(
+  //     authReducer(
+  //       undefined
+  //     , {
+  //       type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
+  //       business: {
+  //       role: 'admin',
+  //       products: {
+  //         58: {
+  //               categories: 'shoes',
+  //               details: 'none',
+  //               name: 'Shoe',
+  //               price: 500,
+  //               quantity: 50,
+  //               sku: 58
+  //             }
+  //           },
+  //       requests: [],
+  //       users: [],
+  //     },
+  //       jwt: '234',
+  //     })
+  //   ).toEqual(
+  //     {
+  //       jwt: '234',
+  //       username: null,
+  //       businesses: ['myBusiness'],
+  //       business: {
+  //         name: 'myBusiness',
+  //         products: {58: {
+  //               categories: 'shoes',
+  //               details: 'none',
+  //               name: 'Shoe',
+  //               price: 500,
+  //               quantity: 50,
+  //               sku: 58
+  //             }},
+  //         role: 'admin',
+  //         requests: [],
+  //         users: []
+  //       },
+  //       name: null
+  //     }
+  //   )
+  // }) 
+
+  it('should handle requests request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.REQUESTS_REQUEST_SUCCESS,
+        requests: ['requestOne','requestTwo']
+      })
+    ).toEqual(
+      {
+        jwt: null,
+        businesses: [],
+        business: {
+          name: null,
+          requests: [],
+          products: {}, // key is sku, value is product object
+          role: null,
+          users: []
+        },
+        requests: ['requestOne','requestTwo'],
+        username: null
+      }
+    )
+  }) 
 })
-
-
-// describe('todos reducer', () => {
-//   it('should return the initial state', () => {
-//     expect(
-//       reducer(undefined, {})
-//     ).toEqual([
-//       {
-//         text: 'Use Redux',
-//         completed: false,
-//         id: 0
-//       }
-//     ])
-//   })
-
-//   it('should handle ADD_TODO', () => {
-//     expect(
-//       reducer([], {
-//         type: types.ADD_TODO,
-//         text: 'Run the tests'
-//       })
-//     ).toEqual(
-//       [
-//         {
-//           text: 'Run the tests',
-//           completed: false,
-//           id: 0
-//         }
-//       ]
-//     )
-
-//     expect(
-//       reducer(
-//         [
-//           {
-//             text: 'Use Redux',
-//             completed: false,
-//             id: 0
-//           }
-//         ],
-//         {
-//           type: types.ADD_TODO,
-//           text: 'Run the tests'
-//         }
-//       )
-//     ).toEqual(
-//       [
-//         {
-//           text: 'Run the tests',
-//           completed: false,
-//           id: 1
-//         },
-//         {
-//           text: 'Use Redux',
-//           completed: false,
-//           id: 0
-//         }
-//       ]
-//     )
-//   })
-// })
