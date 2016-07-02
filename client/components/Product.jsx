@@ -17,7 +17,7 @@ export default class Product extends Component {
             <h3 className={index.myCardTitle}>{name}</h3>
           </div>
           <div className={index.myCardImage}>
-          <img className={material.circle+" "+index.pic} src={`/images/${sku}`} alt={name} />
+          <img className={material.circle+" "+index.pic} src={`/api/images/${sku}`} alt={name} />
           </div>
         </div>
       </div>
