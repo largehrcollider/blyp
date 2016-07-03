@@ -5,13 +5,7 @@ exports.createUser = function(newUser, callback){
 };
 
 exports.getAllUsers = function(callback){
-  User.find({})
-  .then(function(users){
-    callback(null, users);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+  User.find({}, callback);
 };
 
 exports.getUserByUsername = function(username, callback){
@@ -50,8 +44,9 @@ exports.updateUserRequests = function(username, business, callback){
     }
   });
 };
-exports.deleteUserById = function(id, callback){
-  User.findOneAndRemove({_id: id})
+
+exports.deleteUserByUsername = function(username, callback){
+  User.findOneAndRemove({username: username})
   .then(function(user){
     callback(null, user);
   })
