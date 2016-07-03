@@ -9,7 +9,14 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    businesses: state.auth.businesses
+    businesses: state.auth.businesses,
+    changeName: state.ui.changeName,
+    changeEmail: state.ui.changeEmail,
+    changeUsername: state.ui.changeUsername,
+    changePassword: state.ui.changePassword,
+    name: state.auth.name,
+    username: state.auth.username,
+    email: state.auth.email
   };
 };
 
