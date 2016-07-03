@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    checkout: state.toolbar.checkoutButton,
-    inventory: state.toolbar.inventoryButton
+    checkout: state.ui.checkoutButton,
+    inventory: state.ui.inventoryButton
   };
 }
 
