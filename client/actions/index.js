@@ -32,9 +32,31 @@ export const cashReceived = (amount) => {
 //   };
 // };
 
+//action creators FOR CHANGING USER INFO
+export const changeName = () => {
+  return {
+    type: types.CHANGE_NAME
+  };
+}
+export const changeEmail = () => {
+  return {
+    type: types.CHANGE_EMAIL
+  };
+}
+export const changeUsername = () => {
+  return {
+    type: types.CHANGE_USERNAME
+  };
+}
+export const changePassword = () => {
+  return {
+    type: types.CHANGE_PASSWORD
+  };
+}
+
 export const resetPayment = () => {
   return {
-    type: types.RESET_PAYMENT,
+    type: types.RESET_PAYMENT
   };
 };
 
@@ -289,6 +311,34 @@ export const productDRequestFailure = () => {
   };
 };
 
+/*
+
+User Update Info
+
+
+*/
+
+export const updateDetailsRequestSuccess = ({ name, username, email, jwt }) => {
+  return {
+    type: types.UPDATE_DETAILS_REQUEST_SUCCESS,
+    name,
+    username,
+    email,
+    jwt
+  };
+};
+export const updateDetailsRequestFailure = () => {
+  return {
+    type: types.UPDATE_DETAILS_REQUEST_FAILURE
+  };
+};
+export const updateDetailsRequestSent = () => {
+  return {
+    type: types.UPDATE_DETAILS_REQUEST_SENT
+  };
+};
+
+
 /**
 * Business selector
 */
@@ -461,6 +511,30 @@ export const logout = () => {
     dispatch(push('/'));
   };
 };
+
+//change to
+export const updateDetails = (data) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/profile',
+      method: 'put',
+      headers: {'Authorization': 'Bearer ' + jwt},
+      data
+    };
+    axios(config)
+    .then(({ data }) => {
+      localStorage.setItem('jwt', data.jwt);
+      dispatch(updateDetailsRequestSuccess(data))
+    })
+    .catch(err => {
+      dispatch(updateDetailsRequestFailure(err));
+    });
+    dispatch(updateDetailsRequestSent());
+  }
+}
+
+
 
 export const saveProduct = (data) => {
   const jwt = localStorage.getItem('jwt');
@@ -747,7 +821,6 @@ export const joinBusiness = (business) => {
     dispatch(businessJoinRequestSent());
   };
 };
-
 /**
 * User management related thunks
 */

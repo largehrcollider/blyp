@@ -2,7 +2,7 @@ import * as types from '../constants/actionTypes';
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
-import toolbar from './toolbarReducer.js';
+import ui from './uiReducer.js';
 import auth from './authReducer.js';
 import basket from './basketReducer.js';
 import payment from './paymentReducer';
@@ -20,7 +20,7 @@ const appReducer = combineReducers({
       price: normalizePrice
     }
   }), // Reducer provided by 'redux-form' module
-  toolbar,
+  ui,
   routing,
   auth,
   basket,

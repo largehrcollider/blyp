@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     create: (data) => {
+      data.categories = data.categories.split(',').map(c => c.trim());
       dispatch(actions.createProduct(data));
     }
   };
