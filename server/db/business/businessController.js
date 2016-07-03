@@ -50,3 +50,13 @@ exports.updateEmploymentRequest = function(username, businessName, status, callb
     }
   });
 };
+
+exports.getProperty = function(businessName, propertyKey, callback){
+  Business.findOne({name: businessName}, function(err, business){
+    if(err){
+      callback(err);
+    } else {
+      callback(null, business ? business[propertyKey] : null);
+    }
+  });
+};
