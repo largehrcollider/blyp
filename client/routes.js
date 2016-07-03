@@ -13,6 +13,7 @@ import Signup from './containers/Signup.js';
 import Profile from './containers/Profile_test.js';
 import Settings from './containers/Settings.js';
 import Auth from './containers/Auth.js';
+import Receipt from './components/ReceiptPane.jsx'
 
 //testing imports
 import Testing from './components/Testing.jsx';
@@ -31,6 +32,7 @@ export default (
         <Route path="/sell" component={Sell} />
         <Route path='/profile' component={Profile} />
         <Route path='/settings' component={Settings} />
+        <Route path='/receipt' component={Receipt}/>
       </Route>
     </Route>
 
