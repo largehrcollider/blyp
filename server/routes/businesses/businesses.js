@@ -77,6 +77,18 @@ router.post('/checkin', function(req, res){
       }
     }
   });
+});   
+
+router.get('/requests', acl(['admin']), function(req, res){
+  Business.getProperty(req.user.business, 'requests', function(err, requests){
+    if(err || requests === null){
+      console.log('There was an error getting the requests!');
+      requests === null ? console.log('Could not find the business!') : console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.status(200).json(requests);
+    }
+  });
 });
 
 router.get('/:name', acl(['admin', 'cashier']), function(req, res){
