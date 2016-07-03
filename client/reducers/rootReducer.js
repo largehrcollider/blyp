@@ -1,12 +1,13 @@
 import * as types from '../constants/actionTypes';
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as form } from 'redux-form';
 import ui from './uiReducer.js';
 import auth from './authReducer.js';
 import basket from './basketReducer.js';
 import payment from './paymentReducer';
 import network from './networkReducer.js';
+import normalizePrice from './normalizePrice';
 // import reducer from './myReducerFile.js';
 
 /**
@@ -14,7 +15,11 @@ import network from './networkReducer.js';
  *  About Reducer in Redux : http://redux.js.org/docs/basics/Reducers.html
  */
 const appReducer = combineReducers({
-  form: formReducer, // Reducer provided by 'redux-form' module
+  form: form.normalize({
+    createProduct: {
+      price: normalizePrice
+    }
+  }), // Reducer provided by 'redux-form' module
   ui,
   routing,
   auth,

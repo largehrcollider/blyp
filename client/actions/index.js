@@ -666,7 +666,7 @@ export const createProduct = (product) => {
     data.append('details', product.details);
     data.append('quantity', product.quantity);
     data.append('name', product.name);
-    data.append('price', product.price);
+    data.append('price', product.price.replace('.', ''));
     data.append('sku', product.sku);
     data.append('business', getState().auth.business);
     if (product.productPicture[0]) {
