@@ -34,14 +34,17 @@ router.get('/', acl(['admin', 'cashier']), function(req, res){
 router.post('/', acl(['admin']), upload.single('file'), function(req, res){
   var filePath =  req.file ? req.file.path : '';
   var newProduct = req.body;
+  newProduct.categories = newProduct.categories.split(',').map(c => c.trim());
   newProduct.business = req.user.business;
   if(!req.user.business){
-    res.status(500).send('Business not selected!');
+    console.log('Business not selected!');
+    res.sendStatus(400);
   } else {
     fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, `../../../images/${req.user.business}`, '' + newProduct.sku + '.jpg'), () => {
       Product.createProduct(newProduct, function(err, product){
         if(err){
-          res.status(500).send(err.message);
+          console.log(err.message);
+          res.sendStatus(500);
         } else {
           res.status(201).json(product);
         }
