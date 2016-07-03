@@ -1,9 +1,12 @@
 import * as actions from '../actions/index.js';
 import { connect } from 'react-redux'
-import ChangeProfileName from '../components/ProfileNameButton.jsx';
+import ProfileNameButton from '../components/ProfileNameButton.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    changeName: () =>  {
+      dispatch(actions.changeName());
+    }
   };
 };
 
@@ -12,4 +15,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangeProfileName);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileNameButton);

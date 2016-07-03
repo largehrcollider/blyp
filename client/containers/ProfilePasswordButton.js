@@ -1,9 +1,12 @@
 import * as actions from '../actions/index.js';
 import { connect } from 'react-redux'
-import ChangeProfilePassword from '../components/ProfilePasswordButton.jsx';
+import ProfilePasswordButton from '../components/ProfilePasswordButton.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    changePassword: () =>  {
+      dispatch(actions.changePassword());
+    }
   };
 };
 
@@ -12,4 +15,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangeProfilePassword);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePasswordButton);
