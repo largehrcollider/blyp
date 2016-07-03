@@ -1,11 +1,13 @@
 import * as actions from '../actions/index.js';
 import { connect } from 'react-redux'
-import ChangeProfileEmail from '../components/ProfileEmailButton.jsx';
+import ProfileEmailButton from '../components/ProfileEmailButton.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
-  };
+    changeEmail: () =>  {
+      dispatch(actions.changeEmail());
+    }
+  }
 };
 
 const mapStateToProps = (state) => {
@@ -13,4 +15,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangeProfileName);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileEmailButton);
