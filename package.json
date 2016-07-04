@@ -14,9 +14,8 @@
     "test": "./node_modules/.bin/mocha specs/server/spec.js;",
     "test-front": "mocha --compilers js:babel-register --recursive specs/client/spec.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hrr16-velociraptors/triceratops.git"
+  "engines": {
+    "node": "6.2.0"
   },
   "keywords": [
     "blyp",

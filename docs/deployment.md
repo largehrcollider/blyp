@@ -22,7 +22,7 @@ Configure app with `package.json`:
 ```json
 {
   "engines": {
-    "node": "6.2.2"
+    "node": "6.2.0"
   },
   "scripts": {
     "bundle": "webpack --config webpack.config.js",
