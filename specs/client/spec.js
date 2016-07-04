@@ -740,4 +740,82 @@ describe('auth reducer', () => {
       }
     )
   }) 
+
+  // it('should handle acceptance request success', () => {
+  //   expect(
+  //     authReducer(
+  //       undefined
+  //     , {
+  //       type: types.ACCEPTANCE_REQUEST_SUCCESS,
+  //       //accept: true,
+  //       business: {
+  //         name: null,
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users: [{
+  //           role: 'admin',
+  //           username: 'Jojo'
+  //         }]
+  //       }
+  //     })
+  //   ).toEqual(
+  //     {
+  //       //accept: true,
+  //       jwt: null,
+  //       businesses: [],
+  //       username: null,
+  //       business: {
+  //         name: null,
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users:[]
+  //       },
+  //       users: [{
+  //           role: 'admin',
+  //           username: 'Jojo'
+  //         }]
+  //     }
+  //   )
+  // }) 
+
+  // it('should handle business c request success', () => {
+  //   expect(
+  //     authReducer(
+  //       undefined
+  //     , {
+  //       type: types.BUSINESS_C_REQUEST_SUCCESS,
+  //       business: {
+  //         name: 'myBusiness',
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users: []
+  //       }
+  //     })
+  //   ).toEqual(
+  //     {
+  //       jwt: null,
+        
+  //       business: {
+  //         name: [null],
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users: []
+  //       },
+  //       businesses: [{
+  //         name: 'myBusiness',
+  //         products: {},
+  //         requests: [],
+  //         role: [[null]],
+  //         users: []
+  //       }],
+  //       username: null
+  //     }
+  //   )
+  // }) 
+
+
 })
