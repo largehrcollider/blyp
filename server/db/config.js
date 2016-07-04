@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var User = require('./user/user.js');
 var Transaction = require('./transaction/transaction.js')
 var Users = require('./user/userController.js');
+var nconf = require('../environment.js');
 
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blyp';
-mongoose.connect(mongoURI);
+mongoose.connect(nconf.get('mongoURI'));
 
 var db = mongoose.connection;
 db.on('connecting', function(){

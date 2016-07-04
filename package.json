@@ -8,7 +8,7 @@
     "bundle": "webpack --config webpack.config.js",
     "deploy": "gcloud app deploy --project getblyp16",
     "forever": "forever start -c nodemon index.js",
-    "here": "concurrently \"npm run build\" \"nodemon index.js\"",
+    "here": "NODE_ENV=development concurrently \"npm run build\" \"nodemon index.js\"",
     "prestart": "npm run bundle",
     "start": "node index.js",
     "test": "./node_modules/.bin/mocha specs/server/spec.js;",

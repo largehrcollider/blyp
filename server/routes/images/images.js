@@ -6,8 +6,6 @@ var jwt = require('jsonwebtoken');
 var SECRET = require('../../../keys/secret.js');
 
 router.get('/:sku', function(req, res) {
-  console.log('>>>JWT:');
-  console.log(req.query.jwt);
   jwt.verify(req.query.jwt, SECRET, (err, decoded) => {
     if (err) {
       console.log('Does not have access to requested image.');
