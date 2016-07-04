@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Point of Sale for a new era.",
   "scripts": {
-    "start": "node index.js",
-    "forever": "forever start -c nodemon index.js",
-    "test": "./node_modules/.bin/mocha specs/server/spec.js;",
-    "here": "concurrently \"npm run build\" \"nodemon index.js\"",
     "build": "webpack -c -d -w",
     "buildnow": "webpack -c -d",
+    "bundle": "webpack --config webpack.config.js",
+    "deploy": "gcloud app deploy --project getblyp16",
+    "forever": "forever start -c nodemon index.js",
+    "here": "concurrently \"npm run build\" \"nodemon index.js\"",
+    "prestart": "npm run bundle",
+    "start": "node index.js",
+    "test": "./node_modules/.bin/mocha specs/server/spec.js;",
     "test-front": "mocha --compilers js:babel-register --recursive specs/client/spec.js"
   },
   "repository": {
@@ -79,7 +82,8 @@
     "socket.io-client": "",
     "stripe": "^4.7.0",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "webpack": "",
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "6.8.0",
@@ -100,7 +104,6 @@
     "redux-mock-store": "^1.0.4",
     "request": "^2.72.0",
     "static-site-generator-webpack-plugin": "^2.1.0",
-    "webpack": "",
     "webpack-dev-server": "^1.14.1"
   }
 }
