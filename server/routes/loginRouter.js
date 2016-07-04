@@ -17,9 +17,12 @@ module.exports = router.post('/', (req, res) => {
   User.getUserByUsername(req.body.username, (err, user) => {
     console.log(req.body.username)
     if(err){
+      console.log('There was an error loggin in!');
+      console.log(err);
       res.sendStatus(500);
     } else if(!user){
-      res.status(500).send('User does not exist');
+      console.log('User not found exist!');
+      res.sendStatus(500);
     } else {
       user.comparePasswords(req.body.password)
       .then(function(isMatch){
@@ -30,6 +33,7 @@ module.exports = router.post('/', (req, res) => {
           data.businesses = user.businesses;
           res.status(200).json(data);
         } else {
+          console.log('The password was incorrect!');
           res.sendStatus(403);
         }
       });
