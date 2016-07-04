@@ -18,8 +18,8 @@ var users = [
   {
     username:"EricSmith", 
     email:"eric@eric.com",
-        password:"test", 
-    businesses: ["Eric's Sunglass Cabana"], 
+    password:"test", 
+    businesses: ["Eric's Sunglass Cabana", "Clothing Store"], 
     requests: ["Edu's Shoe Store"]
   },
   {
@@ -64,6 +64,13 @@ var users = [
     users: [
     {username: "Leo", role: "cashier"}, 
     {username:"Eric", role:"admin"}
+    ],
+    requests: []
+  },
+    {
+    name: "Clothing Store",
+    users: [
+    {username:"EricSmith", role:"admin"}
     ],
     requests: []
   }
@@ -199,6 +206,7 @@ describe('User Controller', function () {
 
   it('Create a new user', function(done){
     userController.createUser(users[0], function(err, newUser){
+      console.log(newUser)
       expect(newUser.username).to.equal(users[0].username);
       done();
     });
@@ -334,7 +342,7 @@ describe('Business controller', function(){
   });
 
   it('Should create a new business', function(done){
-    var tokenPayload = {username: products[0].username};
+    var tokenPayload = {username: "Edu"};
     businessController.createBusiness(businesses[0], tokenPayload, function(err, business){
       expect(business.name).to.equal("Edu's Shoe Store");
       expect(business.users.length).to.equal(3);
@@ -343,6 +351,16 @@ describe('Business controller', function(){
       done();
     });
   });
+
+  it('Should create several bsuinesses', function(done){
+    businessController.createBusiness(businesses[1], function(err, business){
+      businessController.createBusiness(businesses[2], function(err, business){
+        console.log(err);
+        console.log(business)
+        done();
+      });
+    });
+  }); 
 
   it('Should be able to update an employement request correctly', function(done){
     businessController.updateEmploymentRequest('NewEmployee', 'Pawn Shop', 'accept', function(err, users){
