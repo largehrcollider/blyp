@@ -17,9 +17,12 @@ module.exports = router.post('/', (req, res) => {
   User.getUserByUsername(req.body.username, (err, user) => {
     console.log(req.body.username)
     if(err){
+      console.log('Error retrieving user from db');
+      console.log(err.message);
       res.sendStatus(500);
     } else if(!user){
-      res.status(500).send('User does not exist');
+      console.log(`User ${req.body.username} does not exist in the db`);
+      res.sendStatus(403);
     } else {
       user.comparePasswords(req.body.password)
       .then(function(isMatch){
