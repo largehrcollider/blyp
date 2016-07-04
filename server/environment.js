@@ -8,7 +8,7 @@ if (nconf.get('NODE_ENV') === 'production') {
   nconf.get('PORT') || nconf.set('PORT', 80);
 
   // database
-  nconf.get('mongoURI') || nconf.set('mongoURI', 'mongo://'
+  nconf.get('mongoURI') || nconf.set('mongoURI', 'mongodb://'
     + nconf.get('mongoUser')
     + ':'
     + nconf.get('mongoPass')
