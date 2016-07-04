@@ -6,8 +6,8 @@ import inventory from '../assets/styles/InventoryPane.css';
 
 
 const ProfileName = ({ changeName }) => (
-  <div className={index.creditButton +" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={changeName}>
-    Credit Card
+  <div className={index.updateButton +" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={changeName}>
+    UPDATE
   </div>
 );
 
