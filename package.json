@@ -63,7 +63,7 @@
     "mongoose-unique-validator": "^1.0.2",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",
-    "n": "^0.8.6",
+    "n": "",
     "q": "^1.4.1",
     "react": "15.1.0",
     "react-dom": "15.1.0",
