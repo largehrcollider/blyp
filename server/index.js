@@ -16,7 +16,9 @@ var signupRouter = require('./routes/signupRouter.js');
 var db = require('./db/config.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
 var jwtParser = require('express-jwt');
-var SECRET = require('../keys/secret.js');
+var nconf = require('./environment.js');
+
+var SECRET = nconf.get('jwtSecret');
 
 var multer = require('multer');
 var upload = multer({ dest: path.resolve(__dirname, '../uploads') });
