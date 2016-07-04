@@ -22,13 +22,19 @@ router.get('/', function(req, res){
 router.post('/create', function(req, res){
   Business.createBusiness(req.body, req.user, function(err, business){
     if(err){
-      res.status(500).send('It failed with the business!');
+      console.log('There was an error creating the business!');
+      console.log(err);
+      res.sendStatus(500);
     } else {
       User.getUserByUsername(req.user.username, function(err, user){
         if(err){
-          res.status(500).send('Something went wrong with getting the user!');
+          console.log('There was an error creating the business!');
+          console.log(err);
+          res.sendStatus(500);
         } else if (!user){
-          res.status(500).send('User not found!');
+          console.log('There was an error creating the business!');
+          console.log('The user was not found!');
+          res.sendStatus(500);
         }else {
           user.businesses.push(business.name);
           user.save();
@@ -82,7 +88,8 @@ router.post('/checkin', function(req, res){
           }
         }
         if(!('username' in data)){
-          res.status(500).send('There was an error with this business record!');
+          console.log('The user was not found as being authorized for the business!');
+          res.sendStatus(403);
         }
       }
     }
@@ -99,6 +106,79 @@ router.get('/requests', acl(['admin']), function(req, res){
       res.status(200).json(requests);
     }
   });
+});
+
+router.post('/requests', function(req, res){
+  if(!req.user){
+    console.log('No token found!');
+    res.sendStatus(403);
+  } else {
+    console.log(req.user)
+    console.log(req.body)
+    Business.addEmploymentRequest(req.user.username, req.body.business, function(err, business){
+      if(err){
+        console.log('There was an error with the employment request!');
+        console.log(err);
+        res.sendStatus(500);
+      } else if (!business){
+        console.log('There was an error with finding the business!');
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(201);
+      }
+    });
+  }
+});
+
+router.post('/users/role', acl(['admin']), function(req, res){
+  var newUser = {};
+  newUser.username = req.body.username;
+  newUser.role = req.body.role;
+  Business.addUser(req.user.business, newUser, function(err, business){
+    if(err){
+      console.log('There was an error adding the user!');
+      console.log(err);
+      res.sendStatus(500);
+    } else if(!business){
+      console.log('There was a problem finding the business!');
+      res.sendStatus(500);
+    } else {
+      res.status(201).send(business.users);
+    }
+  });
+});
+
+router.put('/users/role', acl(['admin']), function(req, res){
+  var updatedUser = {};
+  updatedUser.username = req.body.username;
+  updatedUser.role = req.body.role;
+  Business.updateUserRole(req.user.business, updatedUser, function(err, business){
+    if(err){
+      console.log('There was an error adding the user!');
+      console.log(err);
+      res.sendStatus(500);
+    } else if(!business){
+      console.log('There was a problem finding the business!');
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(business.users);
+    }
+  })
+});
+
+router.delete('/users/role', acl(['admin']), function(req, res){
+  Business.removeUser(req.user.business, req.body.username, function(err, business){
+    if(err){
+      console.log('There was an error adding the user!');
+      console.log(err);
+      res.sendStatus(500);
+    } else if(!business){
+      console.log('There was a problem finding the business!');
+      res.sendStatus(500);
+    } else {
+      res.status(200).send(business.users);
+    }
+  })
 });
 
 router.get('/:name', acl(['admin', 'cashier']), function(req, res){
@@ -122,7 +202,7 @@ router.delete('/:name', acl(['admin']), function(req, res){
 });
 
 router.post('/accept', acl(['admin']), function(req, res){
-  Business.updateEmploymentRequst(req.body.username, req.user.business, req.body.status, 
+  Business.updateEmploymentRequest(req.body.username, req.user.business, req.body.status, 
     function(err, business){
       if(err){
         res.status(500).send(err.message);
