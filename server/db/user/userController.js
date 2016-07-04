@@ -9,24 +9,11 @@ exports.getAllUsers = function(callback){
 };
 
 exports.getUserByUsername = function(username, callback){
-  User.findOne({username: username})
-  .then(function(user){
-    callback(null, user);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+  User.findOne({username: username}, callback);
 };
 
-//Not tested
-exports.updateUserById = function(id, update, callback){
-  User.findOneAndUpdate({_id: id}, update, {new: true})
-  .then(function(user){
-    callback(null, user);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+exports.updateByUsername = function(username, update, callback){
+  User.findOneAndUpdate({username: username}, update, {new: true}, callback);
 };
 
 exports.updateUserRequests = function(username, business, callback){
@@ -46,11 +33,5 @@ exports.updateUserRequests = function(username, business, callback){
 };
 
 exports.deleteUserByUsername = function(username, callback){
-  User.findOneAndRemove({username: username})
-  .then(function(user){
-    callback(null, user);
-  })
-  .catch(function(err){
-    callback(err);
-  });
+  User.findOneAndRemove({username: username}, callback);
 };
