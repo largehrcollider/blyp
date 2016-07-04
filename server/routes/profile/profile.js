@@ -38,7 +38,7 @@ router.get('/requests', function(req, res){
 });
 
 router.put('/', function(req, res){
-  User.updateByUsername(req.user.username, function(err, user){
+  User.updateByUsername(req.user.username, req.body, function(err, user){
     if(err){
       console.log('There was an error updating the user!');
       console.log(err);
@@ -47,12 +47,19 @@ router.put('/', function(req, res){
       console.log('There was an error finding the user!');
       res.sendStatus(500);
     }else{
+      console.log(user)
       var token = jwt.sign({
         username: user.username,
         business: req.user.business ? req.user.business : '',
         email: user.email,
         name: user.name
       }, SECRET);
+      var sendObj = {};
+      sendObj.token = token;
+      sendObj.username = user.username;
+      sendObj.email = user.email;
+      sendObj.name = user.name;
+      res.status(200).json(sendObj);
     }
   });
 });
