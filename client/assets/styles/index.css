@@ -315,14 +315,36 @@ body .login_fields__submit input:hover {
   margin: 5px;
 }
 
+.receiptreturncontainer{
+  padding-top: 25px;
+  width: 450px;
+  height: 75px;
+  background-color: #b0b0b0;
+  box-shadow: 2px;
+  text-align: center;
+  border-radius: 8px;
+  text-transform: capitalize;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 230px;
+  opacity: 0.6;
+}
+
+
 .receipt-container{
   width: 510px;
   height: 710px;
   border: #ff9966;
   background-color: #ffffff;
   box-shadow: 2px 2px 2px 2px;
-  padding: 5px;
-  margin: 0 auto;
+  padding-top: 45px;
+  padding-right: 5px;
+  padding-left: 5px;
+  /*margin: 0 auto;*/
+  text-align: center;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
 
 }
 
@@ -330,7 +352,7 @@ body .login_fields__submit input:hover {
   width:200px;
   height: 300px;
   float: right;
-  margin-top: 400px;
+  margin-top: 170px;
   font-weight: bold;
 
 }

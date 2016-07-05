@@ -13,33 +13,32 @@ class Receipt extends Component {
     const { basket, quantity, price, subtotal, total, checkoutCompleted } = this.props;
     return (
       <div>
+
       <div className={index.receiptContainer}>
-        <div className={index.receiptheader}>
-          <h3>THANK YOU FOR YOUR BUSINESS!</h3>
-          {<br></br>}
-        </div>
-        {basket.map(item => {
-          return (<ReceiptItem key={item.sku} sku={item.sku} />);
-        })}
-        <div className={index.receipttotal}>
-          <div className={index.quantity}>
-            {`SUBTOTAL $${subtotal}.00`}
+        <div className={index.receiptbody}>
+          <div className={index.receiptheader}>
+            <h3>THANK YOU FOR YOUR BUSINESS!</h3>
+            {<br></br>}
           </div>
-          <div className={index.quantity}>
-           {`TOTAL QTY: ${quantity}`}
+          {basket.map(item => {
+            return (<ReceiptItem key={item.sku} sku={item.sku} />);
+          })}
+          <div className={index.receiptreturncontainer}  onClick={checkoutCompleted}>
+            <h4>Click Here To Return To The Sales Page </h4>
           </div>
-          <div className={index.quantity}>
-            {`TOTAL $${total}.00`}
-          </div>
-          <div className={index.quantity}>
-            {`PRICE $${price}.00`}
-          </div>
-        </div>
-      </div>
-      <div className={index.updateshift}>
-        <div className={index.updatecontainer}>
-          <div className={index.updateButton +" "+material.wavesEffect+" "+material.wavesLight+" "+material.btn} onClick={checkoutCompleted}>
-            RETURN TO SELL
+          <div className={index.receipttotal}>
+            <div className={index.quantity}>
+              {`SUBTOTAL $${subtotal}.00`}
+            </div>
+            <div className={index.quantity}>
+             {`TOTAL QTY: ${quantity}`}
+            </div>
+            <div className={index.quantity}>
+              {`TOTAL $${total}.00`}
+            </div>
+            <div className={index.quantity}>
+              {`PRICE $${price}.00`}
+            </div>
           </div>
         </div>
       </div>
