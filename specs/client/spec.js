@@ -1,7 +1,16 @@
-import expect from 'expect'
-import * as actions from '../../client/actions/index.js'
-import * as types from '../../client/constants/actionTypes.js'
-import authReducer from '../../client/reducers/authReducer.js'
+import expect from 'expect';
+import React from 'react';
+import * as actions from '../../client/actions/index.js';
+import * as types from '../../client/constants/actionTypes.js';
+import authReducer from '../../client/reducers/authReducer.js';
+
+import TestUtils from 'react-addons-test-utils'
+
+import AcceptComponent from '../../client/components/Accept.jsx';
+import BackButtonComponent from '../../client/components/BackButton.jsx';
+import BasketComponent from '../../client/components/Basket.jsx';
+import BasketItemComponent from '../../client/components/BasketItem.jsx';
+import BasketPaneComponent from '../../client/components/BasketPane.jsx';
 
 describe('actions', () => {
   it('should create an action to select a payment method', () => {
@@ -818,4 +827,163 @@ describe('auth reducer', () => {
   // }) 
 
 
+})
+
+
+function AcceptSetup() {
+  // let props = {
+  //   addTodo: expect.createSpy()
+  // }
+
+  let renderer = TestUtils.createRenderer()
+  renderer.render(<AcceptComponent />)
+  let output = renderer.getRenderOutput()
+
+  return {
+    // props,
+    output,
+    renderer
+  }
+}
+
+describe('components', () => {
+  describe('Accept', () => {
+    it('should render correctly', () => {
+      const { output } = AcceptSetup()
+
+      expect(output.type).toBe('div')
+      // expect(output.props.className).toBe('div')
+
+      // let [ h1, input ] = output.props.children
+
+      // expect(h1.type).toBe('h1')
+      // expect(h1.props.children).toBe('todos')
+
+      // expect(input.type).toBe(TodoTextInput)
+      // expect(input.props.newTodo).toBe(true)
+      // expect(input.props.placeholder).toBe('What needs to be done?')
+    })
+
+    // it('should call addTodo if length of text is greater than 0', () => {
+    //   const { output, props } = setup()
+    //   let input = output.props.children[1]
+    //   input.props.onSave('')
+    //   expect(props.addTodo.calls.length).toBe(0)
+    //   input.props.onSave('Use Redux')
+    //   expect(props.addTodo.calls.length).toBe(1)
+    // })
+  })
+})
+
+function BackButtonSetup() {
+
+
+  let renderer = TestUtils.createRenderer()
+  renderer.render(<BackButtonComponent />)
+  let output = renderer.getRenderOutput()
+
+  return {
+    output,
+    renderer
+  }
+}
+
+describe('components', () => {
+  describe('BackButton', () => {
+    it('should render correctly', () => {
+      const { output } = BackButtonSetup()
+
+      expect(output.type).toBe('button')
+    })
+  })
+})
+
+function BasketItemSetup() {
+  // let props = {
+  //   addTodo: expect.createSpy()
+  // }
+
+  let renderer = TestUtils.createRenderer()
+  renderer.render(<BasketItemComponent />)
+  let output = renderer.getRenderOutput()
+
+  return {
+    // props,
+    output,
+    renderer
+  }
+}
+
+describe('components', () => {
+  describe('Accept', () => {
+    it('should render correctly', () => {
+      const { output } = BasketItemSetup()
+
+      expect(output.type).toBe('div')
+      // expect(output.props.className).toBe('div')
+
+      // let [ h1, input ] = output.props.children
+
+      // expect(h1.type).toBe('h1')
+      // expect(h1.props.children).toBe('todos')
+
+      // expect(input.type).toBe(TodoTextInput)
+      // expect(input.props.newTodo).toBe(true)
+      // expect(input.props.placeholder).toBe('What needs to be done?')
+    })
+
+    // it('should call addTodo if length of text is greater than 0', () => {
+    //   const { output, props } = setup()
+    //   let input = output.props.children[1]
+    //   input.props.onSave('')
+    //   expect(props.addTodo.calls.length).toBe(0)
+    //   input.props.onSave('Use Redux')
+    //   expect(props.addTodo.calls.length).toBe(1)
+    // })
+  })
+})
+
+function BasketSetup() {
+  let props = {
+    map: expect.createSpy()
+  }
+
+  let renderer = TestUtils.createRenderer()
+  renderer.render(<BasketComponent basket={this.props}/>)
+  let output = renderer.getRenderOutput()
+
+  return {
+    props,
+    output,
+    renderer
+  }
+}
+
+describe('components', () => {
+  describe('Accept', () => {
+    it('should render correctly', () => {
+      const { output } = BasketSetup()
+
+      expect(output.type).toBe('div')
+      // expect(output.props.className).toBe('div')
+
+      // let [ h1, input ] = output.props.children
+
+      // expect(h1.type).toBe('h1')
+      // expect(h1.props.children).toBe('todos')
+
+      // expect(input.type).toBe(TodoTextInput)
+      // expect(input.props.newTodo).toBe(true)
+      // expect(input.props.placeholder).toBe('What needs to be done?')
+    })
+
+    // it('should call addTodo if length of text is greater than 0', () => {
+    //   const { output, props } = setup()
+    //   let input = output.props.children[1]
+    //   input.props.onSave('')
+    //   expect(props.addTodo.calls.length).toBe(0)
+    //   input.props.onSave('Use Redux')
+    //   expect(props.addTodo.calls.length).toBe(1)
+    // })
+  })
 })
