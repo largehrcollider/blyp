@@ -113,8 +113,6 @@ router.post('/requests', function(req, res){
     console.log('No token found!');
     res.sendStatus(403);
   } else {
-    console.log(req.user)
-    console.log(req.body)
     Business.addEmploymentRequest(req.user.username, req.body.business, function(err, business){
       if(err){
         console.log('There was an error with the employment request!');
@@ -124,7 +122,17 @@ router.post('/requests', function(req, res){
         console.log('There was an error with finding the business!');
         res.sendStatus(500);
       } else {
-        res.sendStatus(201);
+        User.addRequest(req.user, req.body.business, function(err, user){
+          if(err){
+            console.log('There was an error getting the user!');
+            console.log(err);
+          } else if(!user){
+            console.log('The user could not be found!');
+            res.sendStatus(500);
+          } else {
+            res.sendStatus(201);
+          }
+        });
       }
     });
   }
@@ -211,7 +219,11 @@ router.post('/accept', acl(['admin']), function(req, res){
           if(err){
             res.status(500).send(err.message);
           } else {
-            res.status(200).json(business);
+            var sendObj = {};
+            sendObj.username = req.body.username;
+            sendObj.accept = status;
+            sendObj.role = 'cashier';
+            res.status(200).json(sendObj);
           }
         });
       }
