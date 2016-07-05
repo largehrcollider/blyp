@@ -815,7 +815,7 @@ export const joinBusiness = (business) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: '/api/business/join',
+      url: '/api/business/requests',
       method: 'post',
       data: {business},
       headers: {'Authorization': 'Bearer ' + jwt}
@@ -854,12 +854,12 @@ export const requests = () => {
 };
 export const acceptance = (username, accept) => {
   const jwt = localStorage.getItem('jwt');
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
       url: '/api/business/accept',
       method: 'post',
       data: {
-        business: getState().auth.business,
+        business: getState().auth.business.name,
         username,
         accept
       },
