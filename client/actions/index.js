@@ -237,11 +237,12 @@ export const productCRequestSent = () => {
     type: types.PRODUCT_C_REQUEST_SENT
   };
 };
-export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku }) => {
+export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku, imgSrc }) => {
   return {
     type: types.PRODUCT_C_REQUEST_SUCCESS,
     categories,
     details,
+    imgSrc,
     name,
     price,
     quantity,
