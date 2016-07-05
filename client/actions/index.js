@@ -624,7 +624,8 @@ export const stripe = (data) => {
         axios(config)
         .then(({ data }) => {
           dispatch(transactionRequestSuccess());
-          dispatch(checkoutCompleted());
+          // dispatch(checkoutCompleted());
+          dispatch(receiptPage());
         })
         .catch(err => {
           dispatch(transactionRequestFailure());
@@ -647,6 +648,13 @@ export const validateCashReceived = (amount) => {
     }
   };
 };
+
+export const receiptPage = () => {
+  return (dispatch) => {
+    dispatch(push('/receipt'));
+  };
+};
+
 export const checkoutCompleted = () => {
   return (dispatch) => {
     dispatch(clearBasket());
