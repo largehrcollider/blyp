@@ -41,7 +41,9 @@ exports.addRequest = function(username, businessName, callback){
     if(err){
       callback(err);
     } else {
-      user.requests.push(businessName);
+      if(user.requests.indexOf(businessName) === -1){
+        user.requests.push(businessName);
+      }
       user.save(callback);
     }
   });
