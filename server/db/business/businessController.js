@@ -67,14 +67,14 @@ exports.updateUserRole = function(businessName, userObj, callback){
  * @param {string} sku - 
  * @param {function} callback - 
  */
-exports.updateEmploymentRequest = function(username, businessName, status, callback){
+exports.updateEmploymentRequest = function(username, businessName, accept, callback){
   Business.findOne({name: businessName}, function(err, business){
     if(err){
       callback(err);
     } else {
       var index = business.requests.indexOf(username);
       if(index !== -1){
-        if(status === 'accept'){
+        if(accept){
           business.users.push({username: username, role: 'cashier'});
           business.requests.splice(index, 1);
           business.save(function(){
