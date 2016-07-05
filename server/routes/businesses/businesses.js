@@ -122,7 +122,7 @@ router.post('/requests', function(req, res){
         console.log('There was an error with finding the business!');
         res.sendStatus(500);
       } else {
-        User.addRequest(req.user, req.body.business, function(err, user){
+        User.addRequest(req.user.username, req.body.business, function(err, user){
           if(err){
             console.log('There was an error getting the user!');
             console.log(err);
