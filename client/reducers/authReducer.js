@@ -36,6 +36,7 @@ const authReducer = (state = initialState, action) => {
           [action.sku]: {
             categories: action.categories,
             details: action.details,
+            imgSrc: action.imgSrc,
             name: action.name,
             price: action.price,
             quantity: action.quantity,

@@ -31,15 +31,15 @@ router.post('/create', function(req, res){
         }else {
           user.businesses.push(business.name);
           user.save();
-          fs.mkdir(path.resolve(__dirname, `../../../images/${business.name}`), (err) => {
-            if (err) {
-              console.log(`Directory for ${business.name} could not be created.`);
-              console.log(err);
-              res.sendStatus(500);
-            } else {
+          // fs.mkdir(path.resolve(__dirname, `../../../images/${business.name}`), (err) => {
+          //   if (err) {
+          //     console.log(`Directory for ${business.name} could not be created.`);
+          //     console.log(err);
+          //     res.sendStatus(500);
+          //   } else {
               res.status(201).json(business);
-            }
-          })
+            // }
+          // });
         }
       });
     }

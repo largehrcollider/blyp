@@ -9,8 +9,9 @@ var productSchema = mongoose.Schema({
   name: String,
   categories: Array,
   image: String,
+  imgSrc: String,
 
-  //Can contain an arbritray number of details. i.e. Album, Artist etc. 
+  //Can contain an arbritray number of details. i.e. Album, Artist etc.
   details: String
 },
   { timestamps: true }
