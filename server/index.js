@@ -30,7 +30,8 @@ var app = express();
 */
 // fs.mkdirSync(path.resolve(__dirname, '../images'));
 var errHandler = function(err, req, res, next){
-  console.log(err)
+  console.error('Insufficient privilages');
+  console.error(err);
   res.sendStatus(403);
 }
 
