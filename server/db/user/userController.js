@@ -35,3 +35,14 @@ exports.updateUserRequests = function(username, business, callback){
 exports.deleteUserByUsername = function(username, callback){
   User.findOneAndRemove({username: username}, callback);
 };
+
+exports.addRequest = function(username, businessName, callback){
+  User.findOne({username: username}, function(err, user){
+    if(err){
+      callback(err);
+    } else {
+      user.requests.push(businessName);
+      user.save(callback);
+    }
+  });
+};
