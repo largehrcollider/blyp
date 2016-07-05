@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    checkoutCompleted: () => {
-      dispatch(actions.checkoutCompleted());
+    receiptPage: () => {
+      dispatch(actions.receiptPage());
     }
   };
 }
