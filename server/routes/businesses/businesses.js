@@ -94,7 +94,7 @@ router.post('/checkin', function(req, res){
       }
     }
   });
-});   
+});
 
 router.get('/requests', acl(['admin']), function(req, res){
   Business.getProperty(req.user.business, 'requests', function(err, requests){
@@ -210,7 +210,7 @@ router.delete('/:name', acl(['admin']), function(req, res){
 });
 
 router.post('/accept', acl(['admin']), function(req, res){
-  Business.updateEmploymentRequest(req.body.username, req.user.business, req.body.accept, 
+  Business.updateEmploymentRequest(req.body.username, req.user.business, req.body.accept,
     function(err, business){
       if(err){
         res.status(500).send(err.message);
