@@ -21,12 +21,6 @@ const NavBar = () => (
           <img src={blypLogo}/>
         </Link>
       </li>
-			<li>
-        <form className={index.search}>
-					<input type="text" name="search" placeholder="search"/>
-					<button type="searchicon"/>
-				</form>
-      </li>
       <li>
         <Link to='/settings'>
           <img src={settings}/>
@@ -49,7 +43,9 @@ const NavBar = () => (
       </li>
       <li>
         <Link to='/profile'>
-          Profile
+          <div className={index.logOut}>
+            <h4>Profile</h4>
+          </div>
         </Link>
       </li>
     </ul>
