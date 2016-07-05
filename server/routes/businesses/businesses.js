@@ -210,7 +210,7 @@ router.delete('/:name', acl(['admin']), function(req, res){
 });
 
 router.post('/accept', acl(['admin']), function(req, res){
-  Business.updateEmploymentRequest(req.body.username, req.user.business, req.body.status, 
+  Business.updateEmploymentRequest(req.body.username, req.user.business, req.body.accept, 
     function(err, business){
       if(err){
         res.status(500).send(err.message);
