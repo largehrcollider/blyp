@@ -97,10 +97,11 @@ exports.addEmploymentRequest = function(username, businessName, callback){
       callback(err);
     } else {
       if(business){
-        business.requests.push(username);
-        business.save();
+        if(business.requests.indexOf(username) === -1){
+          business.requests.push(username);
+        }
+        business.save(callback);
       }
-      callback(null, business);
     }
   });
 };
