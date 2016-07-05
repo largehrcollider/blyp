@@ -51,6 +51,8 @@ if (config.get('NODE_ENV') === 'production') {
     var stream = file.createWriteStream();
 
     stream.on('error', function (err) {
+      console.error('There was a stream error');
+      console.error(err);
       req.file.cloudStorageError = err;
       next(err);
     });
