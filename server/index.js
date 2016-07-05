@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var path = require('path');
 var morgan = require('morgan');
 // var auth = require('./routes/auth/auth.js');
+var profileRouter = require('./routes/profile/profile.js');
 var productsRouter = require('./routes/products/products.js');
 var transactionsRouter = require('./routes/transactions/transactions.js');
 var employmentRouter = require('./routes/employment/employment.js');
@@ -48,6 +49,7 @@ app.use('/signup', signupRouter);
 
 // protected routes
 app.use('/api/products', jwtParser({secret: SECRET}), productsRouter, errHandler);
+app.use('/api/profile', jwtParser({secret: SECRET}), profileRouter, errHandler);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', jwtParser({secret: SECRET}), transactionsRouter);
 app.use('/api/employment', employmentRouter);

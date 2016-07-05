@@ -79,12 +79,13 @@ router.get('/:sku', acl(['admin', 'cashier']), function(req, res){
  * If successful, returns the newly updated product
  */
 router.put('/:sku', acl(['admin', 'cashier']), function(req, res){
+  console.log(req.body);
   if(!req.user.business){
     res.status(500).send('Business not selected!');
   } else {
     Product.updateProductBySku(req.user.business, req.params.sku, req.body, function(err, product){
       if(err){
-        res.sendStatus(500);
+        res.status(500).send(err.message);
       } else if(!product) {
         res.status(404).send('Could not find product!');
       } else {
@@ -113,4 +114,15 @@ router.delete('/:sku', acl(['admin']), function(req, res){
   }
 });
 
+/**
+ * Deletes a product by it's sku number
+ *
+ *
+ */
+router.delete('/accept', acl(['admin']), function(req, res){
+  if(req.accept){
+
+  } else {
+  }
+});
 module.exports = router;

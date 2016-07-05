@@ -32,6 +32,7 @@ module.exports = router.post('/', (req, res) => {
           data.businesses = user.businesses;
           res.status(200).json(data);
         } else {
+          console.log('The password was incorrect!');
           res.sendStatus(403);
         }
       });

@@ -1,6 +1,7 @@
 import expect from 'expect'
 import * as actions from '../../client/actions/index.js'
 import * as types from '../../client/constants/actionTypes.js'
+import authReducer from '../../client/reducers/authReducer.js'
 
 describe('actions', () => {
   it('should create an action to select a payment method', () => {
@@ -24,14 +25,14 @@ describe('actions', () => {
   })
 })
 
-describe('actions', () => {
-  it('should create an action to show checkout complete', () => {
-    const expectedAction = {
-      type: types.CHECKOUT_COMPLETED,
-    }
-    expect(actions.checkoutCompleted()).toEqual(expectedAction)
-  })
-})
+// describe('actions', () => {
+//   it('should create an action to show checkout complete', () => {
+//     const expectedAction = {
+//       type: types.CHECKOUT_COMPLETED,
+//     }
+//     expect(actions.checkoutCompleted()).toEqual(expectedAction)
+//   })
+// })
 
 describe('actions', () => {
   it('should create an action to reset payment', () => {
@@ -78,13 +79,15 @@ describe('actions', () => {
     const businesses = "myBusiness"
     const jwt = "3425"
     const username = "jeffJeffries"
+    const name = "Jeff"
     const expectedAction = {
       type: types.LOGIN_REQUEST_SUCCESS,
       businesses,
       jwt,
-      username
+      username,
+      name
     }
-    expect(actions.loginRequestSuccess({businesses, jwt, username})).toEqual(expectedAction)
+    expect(actions.loginRequestSuccess({businesses, name, jwt, username})).toEqual(expectedAction)
   })
 })
 
@@ -436,17 +439,6 @@ describe('actions', () => {
     expect(actions.businessCheckinRequestSuccesful({business, jwt, role, products, requests, role, users})).toEqual(expectedAction)
   })
 })
-// export const businessCheckinRequestSuccesful = ({ business, jwt, role, products, requests, users }) => {
-//   return {
-//     type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
-//     business,
-//     jwt,
-//     products,
-//     requests,
-//     role,
-//     users
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business checkin request failure', () => {
@@ -456,11 +448,6 @@ describe('actions', () => {
     expect(actions.businessCheckinRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const businessCheckinRequestFailure = () => {
-//   return {
-//     type: types.BUSINESS_CHECKIN_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business checkin request sent', () => {
@@ -470,34 +457,10 @@ describe('actions', () => {
     expect(actions.businessCheckinRequestSent()).toEqual(expectedAction)
   })
 })
-// export const businessCheckinRequestSent = () => {
-//   return {
-//     type: types.BUSINESS_CHECKIN_REQUEST_SENT
-//   };
-// };
 
 /**
 * Business related action creators
 */
-
-
-// export const businessCRequestSuccess = (business) => {
-//   return {
-//     type: types.BUSINESS_C_REQUEST_SUCCESS,
-//     business
-//   };
-// };
-// export const businessCRequestFailure = () => {
-//   return {
-//     type: types.BUSINESS_C_REQUEST_FAILURE
-//   };
-// };
-// export const businessCRequestSent = () => {
-//   return {
-//     type: types.BUSINESS_C_REQUEST_SENT
-//   };
-// };
-
 describe('actions', () => {
   it('should create an action for business join request success', () => {
     const expectedAction = {
@@ -506,11 +469,6 @@ describe('actions', () => {
     expect(actions.businessJoinRequestSuccess()).toEqual(expectedAction)
   })
 })
-// export const businessJoinRequestSuccess = () => {
-//   return {
-//     type: types.BUSINESS_JOIN_REQUEST_SUCCESS
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business join request failure', () => {
@@ -520,11 +478,6 @@ describe('actions', () => {
     expect(actions.businessJoinRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const businessJoinRequestFailure = () => {
-//   return {
-//     type: types.BUSINESS_JOIN_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for business join request sent', () => {
@@ -534,16 +487,10 @@ describe('actions', () => {
     expect(actions.businessJoinRequestSent()).toEqual(expectedAction)
   })
 })
-// export const businessJoinRequestSent = () => {
-//   return {
-//     type: types.BUSINESS_JOIN_REQUEST_SENT
-//   };
-// };
 
 /**
 * requests
 */
-
 describe('actions', () => {
   it('should create an action for requests request success', () => {
     const requests = []
@@ -554,12 +501,6 @@ describe('actions', () => {
     expect(actions.requestsRequestSuccess(requests)).toEqual(expectedAction)
   })
 })
-// export const requestsRequestSuccess = (requests) => {
-//   return {
-//     type: types.REQUESTS_REQUEST_SUCCESS,
-//     requests
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for requests request failure', () => {
@@ -569,11 +510,6 @@ describe('actions', () => {
     expect(actions.requestsRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const requestsRequestFailure = () => {
-//   return {
-//     type: types.REQUESTS_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for requests request sent', () => {
@@ -583,11 +519,6 @@ describe('actions', () => {
     expect(actions.requestsRequestSent()).toEqual(expectedAction)
   })
 })
-// export const requestsRequestSent = () => {
-//   return {
-//     type: types.REQUESTS_REQUEST_SENT
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for acceptance request success', () => {
@@ -603,14 +534,6 @@ describe('actions', () => {
     expect(actions.acceptanceRequestSuccess({ accept, username, role })).toEqual(expectedAction)
   })
 })
-// export const acceptanceRequestSuccess = ({ accept, username, role }) => {
-//   return {
-//     type: types.ACCEPTANCE_REQUEST_SUCCESS,
-//     accept,
-//     username,
-//     role
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for acceptance request failure', () => {
@@ -620,11 +543,6 @@ describe('actions', () => {
     expect(actions.acceptanceRequestFailure()).toEqual(expectedAction)
   })
 })
-// export const acceptanceRequestFailure = () => {
-//   return {
-//       type: types.ACCEPTANCE_REQUEST_FAILURE
-//   };
-// };
 
 describe('actions', () => {
   it('should create an action for acceptance request sent', () => {
@@ -634,8 +552,270 @@ describe('actions', () => {
     expect(actions.acceptanceRequestSent()).toEqual(expectedAction)
   })
 })
-// export const acceptanceRequestSent = () => {
-//   return {
-//       type: types.ACCEPTANCE_REQUEST_SENT
-//   };
-// };
+
+
+//auth reducer
+describe('auth reducer', () => {
+  it('should return the initial state', () => {
+    expect(
+      authReducer(undefined, {})
+    ).toEqual(
+      {
+        jwt: null,
+        username: null,
+        businesses: [], // businesses the user belongs to
+        business: {
+          name: null,
+          products: {}, // key is sku, value is product object
+          role: null,
+          requests: [],
+          users: []
+        }
+      }
+    )
+  })
+
+  it('should handle product C request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.PRODUCT_C_REQUEST_SUCCESS,
+        categories: 'shoes',
+        details: 'none',
+        name: 'Shoe',
+        price: 500,
+        quantity: 50,
+        sku: 58
+      })
+    ).toEqual(
+      {
+          jwt: null,
+          username: null,
+          businesses: [], // businesses the user belongs to
+          business: {
+            name: null,
+            products: {
+              58: {
+                categories: 'shoes',
+                details: 'none',
+                name: 'Shoe',
+                price: 500,
+                quantity: 50,
+                sku: 58
+              }
+            },
+            requests: [],
+            role: null,
+            users: []
+          },
+      }
+    )
+  }) 
+
+  it('should handle login request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.LOGIN_REQUEST_SUCCESS,
+        businesses: ['myBusiness'],
+        jwt: '234',
+        name: 'John',
+        username: 'jonuser'
+      })
+    ).toEqual(
+      {
+        jwt: '234',
+        username: 'jonuser',
+        businesses: ['myBusiness'], // businesses the user belongs to
+        business: {
+          name: null,
+          products: {}, // key is sku, value is product object
+          role: null,
+          requests: [],
+          users: []
+        },
+        name: 'John'
+      }
+    )
+  }) 
+
+  it('should handle signup request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.SIGNUP_REQUEST_SUCCESS,
+        businesses: ['myBusiness'],
+        jwt: '234',
+        name: 'John',
+        username: 'jonuser'
+      })
+    ).toEqual(
+      {
+        jwt: '234',
+        username: 'jonuser',
+        businesses: ['myBusiness'], // businesses the user belongs to
+        business: {
+          name: null,
+          products: {}, // key is sku, value is product object
+          role: null,
+          requests: [],
+          users: []
+        },
+        name: 'John'
+      }
+    )
+  }) 
+
+  // it('should handle business checkin request successful', () => {
+  //   expect(
+  //     authReducer(
+  //       undefined
+  //     , {
+  //       type: types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL,
+  //       business: {
+  //       role: 'admin',
+  //       products: {
+  //         58: {
+  //               categories: 'shoes',
+  //               details: 'none',
+  //               name: 'Shoe',
+  //               price: 500,
+  //               quantity: 50,
+  //               sku: 58
+  //             }
+  //           },
+  //       requests: [],
+  //       users: [],
+  //     },
+  //       jwt: '234',
+  //     })
+  //   ).toEqual(
+  //     {
+  //       jwt: '234',
+  //       username: null,
+  //       businesses: ['myBusiness'],
+  //       business: {
+  //         name: 'myBusiness',
+  //         products: {58: {
+  //               categories: 'shoes',
+  //               details: 'none',
+  //               name: 'Shoe',
+  //               price: 500,
+  //               quantity: 50,
+  //               sku: 58
+  //             }},
+  //         role: 'admin',
+  //         requests: [],
+  //         users: []
+  //       },
+  //       name: null
+  //     }
+  //   )
+  // }) 
+
+  it('should handle requests request success', () => {
+    expect(
+      authReducer(
+        undefined
+      , {
+        type: types.REQUESTS_REQUEST_SUCCESS,
+        requests: ['requestOne','requestTwo']
+      })
+    ).toEqual(
+      {
+        jwt: null,
+        businesses: [],
+        business: {
+          name: null,
+          requests: [],
+          products: {}, // key is sku, value is product object
+          role: null,
+          users: []
+        },
+        requests: ['requestOne','requestTwo'],
+        username: null
+      }
+    )
+  }) 
+
+  // it('should handle acceptance request success', () => {
+  //   expect(
+  //     authReducer(
+  //       undefined
+  //     , {
+  //       type: types.ACCEPTANCE_REQUEST_SUCCESS,
+  //       //accept: true,
+  //       business: {
+  //         name: null,
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users: [{
+  //           role: 'admin',
+  //           username: 'Jojo'
+  //         }]
+  //       }
+  //     })
+  //   ).toEqual(
+  //     {
+  //       //accept: true,
+  //       jwt: null,
+  //       businesses: [],
+  //       username: null,
+  //       business: {
+  //         name: null,
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users:[]
+  //       },
+  //       users: [{
+  //           role: 'admin',
+  //           username: 'Jojo'
+  //         }]
+  //     }
+  //   )
+  // }) 
+
+  // it('should handle business c request success', () => {
+  //   expect(
+  //     authReducer(
+  //       undefined
+  //     , {
+  //       type: types.BUSINESS_C_REQUEST_SUCCESS,
+  //       business: {
+  //         name: 'myBusiness',
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users: []
+  //       }
+  //     })
+  //   ).toEqual(
+  //     {
+  //       jwt: null,
+        
+  //       business: {
+  //         name: [null],
+  //         requests: [],
+  //         products: {}, // key is sku, value is product object
+  //         role: null,
+  //         users: []
+  //       },
+  //       businesses: [{
+  //         name: 'myBusiness',
+  //         products: {},
+  //         requests: [],
+  //         role: [[null]],
+  //         users: []
+  //       }],
+  //       username: null
+  //     }
+  //   )
+  // }) 
+
+
+})
