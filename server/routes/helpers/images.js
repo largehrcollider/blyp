@@ -8,7 +8,7 @@ var path = require('path');
 * helper functions
 */
 var getPublicUrl = function getPublicUrl (filename) {
-  return 'https://storage.googleapis.com/' + config.get('CLOUD_BUCKET')) + '/' + filename;
+  return 'https://storage.googleapis.com/' + config.get('CLOUD_BUCKET') + '/' + filename;
 };
 
 // var getLocalUrl = function getLocalUrl (filename) {
