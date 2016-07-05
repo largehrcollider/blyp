@@ -38,8 +38,6 @@ var saveImage;
 if (config.get('NODE_ENV') === 'production') {
   saveImage = function saveImageGCS(req, res, next) {
 
-    console.error('Project: ', config.get('GCLOUD_PROJECT'));
-    console.error('Bucket: ', config.get('CLOUD_BUCKET'));
 
     var storage = gcloud.storage({projectId: config.get('GCLOUD_PROJECT')});
     var bucket = storage.bucket(config.get('CLOUD_BUCKET'));
@@ -51,7 +49,6 @@ if (config.get('NODE_ENV') === 'production') {
     var gcsname = `${req.user.business.replace(/\W+/g, '-').toLowerCase()}-${req.body.sku}-${Date.now()}`;
     var remoteWriteStream = bucket.file(gcsname).createWriteStream();
 
-    console.error('Target filename: ', gcsname);
 
     remoteWriteStream.on('error', function (err) {
       console.error('There was a stream error');
