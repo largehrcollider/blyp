@@ -237,11 +237,12 @@ export const productCRequestSent = () => {
     type: types.PRODUCT_C_REQUEST_SENT
   };
 };
-export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku }) => {
+export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku, imgSrc }) => {
   return {
     type: types.PRODUCT_C_REQUEST_SUCCESS,
     categories,
     details,
+    imgSrc,
     name,
     price,
     quantity,
@@ -623,7 +624,8 @@ export const stripe = (data) => {
         axios(config)
         .then(({ data }) => {
           dispatch(transactionRequestSuccess());
-          dispatch(checkoutCompleted());
+          // dispatch(checkoutCompleted());
+          dispatch(receiptPage());
         })
         .catch(err => {
           dispatch(transactionRequestFailure());
@@ -646,6 +648,13 @@ export const validateCashReceived = (amount) => {
     }
   };
 };
+
+export const receiptPage = () => {
+  return (dispatch) => {
+    dispatch(push('/receipt'));
+  };
+};
+
 export const checkoutCompleted = () => {
   return (dispatch) => {
     dispatch(clearBasket());
@@ -806,7 +815,7 @@ export const joinBusiness = (business) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: '/api/business/join',
+      url: '/api/business/requests',
       method: 'post',
       data: {business},
       headers: {'Authorization': 'Bearer ' + jwt}
@@ -845,12 +854,12 @@ export const requests = () => {
 };
 export const acceptance = (username, accept) => {
   const jwt = localStorage.getItem('jwt');
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
       url: '/api/business/accept',
       method: 'post',
       data: {
-        business: getState().auth.business,
+        business: getState().auth.business.name,
         username,
         accept
       },

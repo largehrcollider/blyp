@@ -10,9 +10,9 @@ class Requests extends Component {
     return (
       <div>
         <h1>Pending Requests</h1>
-        {usernames.map(u => {
+        {usernames.map(u => (
           <Request key={u} username={u} />
-        })}
+        ))}
       </div>
     )
   }
