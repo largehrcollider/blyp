@@ -51,6 +51,8 @@ if (config.get('NODE_ENV') === 'production') {
     var gcsname = `${req.user.business.replace(/\W+/g, '-').toLowerCase()}-${req.body.sku}-${Date.now()}`;
     var remoteWriteStream = bucket.file(gcsname).createWriteStream();
 
+    console.error('Target filename: ', gcsname);
+
     remoteWriteStream.on('error', function (err) {
       console.error('There was a stream error');
       console.error(err);
