@@ -1,5 +1,6 @@
 h4{
   display: inline;
+  text-decoration: none;
 }
 
 .testing {
@@ -376,7 +377,7 @@ body .login_fields__submit input:hover {
 }
 
 .logOut{
-
+  padding-top: 8px;
 }
 
 .login-fields {
