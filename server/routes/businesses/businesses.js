@@ -213,18 +213,20 @@ router.post('/accept', acl(['admin']), function(req, res){
   Business.updateEmploymentRequest(req.body.username, req.user.business, req.body.accept,
     function(err, business){
       if(err){
-        res.status(500).send(err.message);
+        console.error(err.message);
+        res.sendStatus(500);
       } else {
-        User.updateUserRequests(req.body.username, req.user.business, function(err, user){
-          if(err){
-            res.status(500).send(err.message);
-          } else {
-            var sendObj = {};
-            sendObj.username = req.body.username;
-            sendObj.accept = req.body.accept;
-            sendObj.role = 'cashier';
-            res.status(200).json(sendObj);
-          }
+        User.updateUserRequests(req.body.username, req.user.business, req.body.accept,
+          function(err, user){
+            if(err){
+              res.status(500).send(err.message);
+            } else {
+              var sendObj = {};
+              sendObj.username = req.body.username;
+              sendObj.accept = req.body.accept;
+              sendObj.role = 'cashier';
+              res.status(200).json(sendObj);
+            }
         });
       }
     });
