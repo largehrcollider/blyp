@@ -8,6 +8,10 @@ export default (state = {
   inventoryButton: false,
   viewCheckout: false,
   visibilityFilter: 'all',
+  changeName: false,
+  changeEmail: false,
+  changeUsername: false,
+  changePassword: false
 }, action) => {
   switch (action.type) {
     case types.CHECKOUT_CLICK:
@@ -31,6 +35,30 @@ export default (state = {
     return {
       ...state,
       visibilityFilter: action.category
+    }
+
+    case types.CHANGE_NAME:
+    return {
+      ...state,
+      changeName: !state.changeName
+    }
+
+    case types.CHANGE_EMAIL:
+    return {
+      ...state,
+      changeEmail: !state.changeEmail
+    }
+
+    case types.CHANGE_USERNAME:
+    return {
+      ...state,
+      changeUsername: !state.changeUsername
+    }
+
+    case types.CHANGE_PASSWORD:
+    return {
+      ...state,
+      changePassword: !state.changePassword
     }
 
     default:

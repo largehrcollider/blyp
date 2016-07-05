@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var Product = require('../../db/product/productController.js');
-var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
 var acl = require('../../utils/helpers.js').checkPermission;
 var fs = require('fs');
 var path = require('path');
+var images = require('../helpers/images.js');
 
 /**
  * Gets all products for a business
@@ -13,17 +12,14 @@ var path = require('path');
  * Returns an array of objects
  */
 router.get('/', acl(['admin', 'cashier']), function(req, res){
-  if(!req.user.business){
-    res.status(500).send('Business not selected!');
-  } else {
-    Product.getAllProducts(req.user.business, function(err, products){
-      if(err){
-        res.sendStatus(500);
-      } else {
-        res.status(200).json(products);
-      }
-    });
-  }
+  Product.getAllProducts(req.user.business, function(err, products){
+    if(err){
+      console.error(err);
+      res.sendStatus(500);
+    } else {
+      res.status(200).json(products);
+    }
+  });
 });
 
 /**
@@ -31,23 +27,29 @@ router.get('/', acl(['admin', 'cashier']), function(req, res){
  * Request object must have a 'user' property generated from a jwt token. It must contain a business name.
  * If successful, returns the newly created product
  */
-router.post('/', acl(['admin']), upload.single('file'), function(req, res){
-  var filePath =  req.file ? req.file.path : '';
-  var newProduct = req.body;
-  newProduct.business = req.user.business;
-  if(!req.user.business){
-    res.status(500).send('Business not selected!');
-  } else {
-    fs.rename(path.resolve(__dirname, '../../../', filePath), path.resolve(__dirname, `../../../images/${req.user.business}`, '' + newProduct.sku + '.jpg'), () => {
-      Product.createProduct(newProduct, function(err, product){
-        if(err){
-          res.status(500).send(err.message);
-        } else {
-          res.status(201).json(product);
-        }
-      });
-    });
+router.post('/', acl(['admin']), images.multer.single('file'), images.saveImage, function insert (req, res){
+  var product = req.body;
+
+  // if file was uploaded, append imgSrc to product properties
+  if (req.file && req.file.imgSrc) {
+    product.imgSrc = req.file.imgSrc;
   }
+
+  // separate comma delimited categories
+  product.categories = product.categories.split(',').map(c => c.trim());
+
+  // register to what business this product belongs
+  product.business = req.user.business;
+
+  // save product to db
+  Product.createProduct(product, function (err, product){
+    if(err){
+      console.error(err);
+      res.sendStatus(500);
+    } else {
+      res.status(201).json(product);
+    }
+  });
 });
 
 /**
@@ -77,12 +79,13 @@ router.get('/:sku', acl(['admin', 'cashier']), function(req, res){
  * If successful, returns the newly updated product
  */
 router.put('/:sku', acl(['admin', 'cashier']), function(req, res){
+  console.log(req.body);
   if(!req.user.business){
     res.status(500).send('Business not selected!');
   } else {
     Product.updateProductBySku(req.user.business, req.params.sku, req.body, function(err, product){
       if(err){
-        res.sendStatus(500);
+        res.status(500).send(err.message);
       } else if(!product) {
         res.status(404).send('Could not find product!');
       } else {
@@ -111,4 +114,15 @@ router.delete('/:sku', acl(['admin']), function(req, res){
   }
 });
 
+/**
+ * Deletes a product by it's sku number
+ *
+ *
+ */
+router.delete('/accept', acl(['admin']), function(req, res){
+  if(req.accept){
+
+  } else {
+  }
+});
 module.exports = router;

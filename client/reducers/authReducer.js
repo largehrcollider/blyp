@@ -11,6 +11,8 @@ import * as types from '../constants/actionTypes.js'
 const initialState = {
   jwt: null,
   username: null,
+  name: null,
+  email: null,
   businesses: [], // businesses the user belongs to
   business: {
     name: null,
@@ -34,6 +36,7 @@ const authReducer = (state = initialState, action) => {
           [action.sku]: {
             categories: action.categories,
             details: action.details,
+            imgSrc: action.imgSrc,
             name: action.name,
             price: action.price,
             quantity: action.quantity,
@@ -85,6 +88,15 @@ const authReducer = (state = initialState, action) => {
     return {
       ...state,
       businesses: [...(state.businesses), action.business]
+    };
+
+    case types.UPDATE_DETAILS_REQUEST_SUCCESS:
+    return {
+      ...state,
+      jwt: action.jwt,
+      username: action.username,
+      name: action.name,
+      email: action.email
     };
 
     default:

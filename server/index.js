@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var path = require('path');
 var morgan = require('morgan');
 // var auth = require('./routes/auth/auth.js');
+var profileRouter = require('./routes/profile/profile.js');
 var productsRouter = require('./routes/products/products.js');
 var transactionsRouter = require('./routes/transactions/transactions.js');
 var employmentRouter = require('./routes/employment/employment.js');
@@ -16,10 +17,9 @@ var signupRouter = require('./routes/signupRouter.js');
 var db = require('./db/config.js');
 var stripeRouter = require('./routes/stripe/stripe.js');
 var jwtParser = require('express-jwt');
-var SECRET = require('../keys/secret.js');
+var config = require('./config.js');
 
-var multer = require('multer');
-var upload = multer({ dest: path.resolve(__dirname, '../uploads') });
+var SECRET = config.get('jwtSecret');
 
 var app = express();
 
@@ -31,7 +31,8 @@ var app = express();
 */
 // fs.mkdirSync(path.resolve(__dirname, '../images'));
 var errHandler = function(err, req, res, next){
-  console.log(err)
+  console.error('Insufficient privilages');
+  console.error(err);
   res.sendStatus(403);
 }
 
@@ -48,6 +49,7 @@ app.use('/signup', signupRouter);
 
 // protected routes
 app.use('/api/products', jwtParser({secret: SECRET}), productsRouter, errHandler);
+app.use('/api/profile', jwtParser({secret: SECRET}), profileRouter, errHandler);
 // app.use('/api/clients', clientsRouter);
 app.use('/api/transactions', jwtParser({secret: SECRET}), transactionsRouter);
 app.use('/api/employment', employmentRouter);
