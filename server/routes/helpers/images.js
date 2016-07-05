@@ -37,27 +37,28 @@ if (config.get('NODE_ENV') === 'production') {
 var saveImage;
 if (config.get('NODE_ENV') === 'production') {
   saveImage = function saveImageGCS(req, res, next) {
-    var CLOUD_BUCKET = config.get('CLOUD_BUCKET');
+
+    console.error('Project: ', config.get('GCLOUD_PROJECT'));
+    console.error('Bucket: ', config.get('CLOUD_BUCKET'));
 
     var storage = gcloud.storage({projectId: config.get('GCLOUD_PROJECT')});
-    var bucket = storage.bucket(CLOUD_BUCKET);
+    var bucket = storage.bucket(config.get('CLOUD_BUCKET'));
 
     if (!req.file) {
       return next();
     }
 
     var gcsname = `${req.user.business.replace(/\W+/g, '-').toLowerCase()}-${req.body.sku}-${Date.now()}`;
-    var file = bucket.file(gcsname);
-    var stream = file.createWriteStream();
+    var remoteWriteStream = bucket.file(gcsname).createWriteStream();
 
-    stream.on('error', function (err) {
+    remoteWriteStream.on('error', function (err) {
       console.error('There was a stream error');
       console.error(err);
       req.file.cloudStorageError = err;
       next(err);
     });
 
-    stream.on('finish', function () {
+    remoteWriteStream.on('finish', function () {
       req.file.destination = 'gcp'; // google cloud platform
       req.file.cloudStorageObject = gcsname;
       req.file.cloudStoragePublicUrl = getPublicUrl(gcsname);
@@ -65,7 +66,7 @@ if (config.get('NODE_ENV') === 'production') {
       next();
     });
 
-    stream.end(req.file.buffer);
+    remoteWriteStream.end(req.file.buffer);
   }
 
 } else if (config.get('NODE_ENV') === 'development') {
