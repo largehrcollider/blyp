@@ -221,7 +221,7 @@ router.post('/accept', acl(['admin']), function(req, res){
           } else {
             var sendObj = {};
             sendObj.username = req.body.username;
-            sendObj.accept = status;
+            sendObj.accept = req.body.status;
             sendObj.role = 'cashier';
             res.status(200).json(sendObj);
           }
