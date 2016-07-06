@@ -5,6 +5,8 @@ import { reset } from 'redux-form';
 import axios from 'axios';
 import total from '../helpers/basketTotal.js'
 
+var localStorage = localStorage || {getItem: function(){}, setItem(){}}
+
 //////////////////////////////////////////////////////////////
 // Synchronous Action Creators
 //////////////////////////////////////////////////////////////
@@ -523,7 +525,8 @@ export const updateDetails = (data) => {
       headers: {'Authorization': 'Bearer ' + jwt},
       data
     };
-    axios(config)
+    dispatch(updateDetailsRequestSent());
+    return axios(config)
     .then(({ data }) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(updateDetailsRequestSuccess(data))
@@ -531,7 +534,7 @@ export const updateDetails = (data) => {
     .catch(err => {
       dispatch(updateDetailsRequestFailure(err));
     });
-    dispatch(updateDetailsRequestSent());
+    
   }
 }
 
@@ -919,3 +922,5 @@ export const deleteUser = (username, business) => {
     dispatch(deleteUserRequestSent());
   };
 }
+
+
