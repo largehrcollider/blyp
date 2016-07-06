@@ -272,6 +272,9 @@ body .login_fields__submit input:hover {
   color: #f2f2f2;
   font-size: 2em;
 }
+.createProductHeader{
+  text-align: center;
+}
 
 .my-card{
   border: 1px solid #000000;
