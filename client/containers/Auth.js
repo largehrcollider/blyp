@@ -17,14 +17,7 @@ const mapDispatchToProps = (dispatch) => {
         return;
       } else {
         if (jwt = localStorage.getItem('jwt')) {
-          var { username, business } = jwtDecode(jwt);
-          if (business) {
-            dispatch(actions.checkinBusiness(business));
-          } else if (username) {
-            dispatch(actions.login({jwt}));
-          } else {
-            dispatch(push('/'));
-          }
+          dispatch(actions.login({jwt}));
         } else {
           dispatch(push('/'));
         }
