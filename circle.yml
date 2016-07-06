@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: 6.0.0
+deployment:
+  staging:
+    branch: dev
+    heroku:
+      appname: blyp
+  prod:
+    branch: dev
+    heroku:
+      appname: blyp
+test:
+  override:
+    - npm test
