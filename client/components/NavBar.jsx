@@ -13,7 +13,7 @@ import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
 
-const NavBar = ({ business }) => (
+const NavBar = ({ business, showSettings, showInventory, showSell }) => (
   <nav className={index.menu}>
   	<ul>
     	<li className={index.active}>
@@ -25,19 +25,25 @@ const NavBar = ({ business }) => (
       {business}
       </li>
       <li>
-        <Link to='/settings'>
-          <img src={settings}/>
-        </Link>
+        {showSettings &&
+          <Link to='/settings'>
+            <img src={settings}/>
+          </Link>
+        }
       </li>
       <li>
-        <Link to='/inventory'>
-          <img src={barcode}/>
-        </Link>
+        {showInventory &&
+          <Link to='/inventory'>
+            <img src={barcode}/>
+          </Link>
+        }
       </li>
       <li>
-        <Link to='/sell'>
-          <img src={cart}/>
-        </Link>
+        {showSell &&
+          <Link to='/sell'>
+            <img src={cart}/>
+          </Link>
+        }
       </li>
       <li>
         <Link to='/'>
