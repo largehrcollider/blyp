@@ -26,6 +26,18 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
 
+    case types.PRODUCT_D_REQUEST_SUCCESS:
+    var newProducts = {...state.business.products};
+    delete newProducts[action.sku];
+
+    return {
+      ...state,
+      business: {
+        ...state.business,
+        products: newProducts
+      }
+    };
+
     case types.PRODUCT_U_REQUEST_SUCCESS:
     return {
       ...state,
@@ -36,7 +48,7 @@ const authReducer = (state = initialState, action) => {
           [action.product.sku]: action.product
         }
       }
-    }
+    };
 
     case types.ROLE_REQUEST_SUCCESS:
     case types.DELETE_USER_REQUEST_SUCCESS:
