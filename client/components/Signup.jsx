@@ -46,7 +46,7 @@ render() {
                   <div className={index.icon}>
                     <img src={lockPNG} />
                   </div>
-                  
+
                   <input placeholder='Password' type='password' {...password} />
                 </div>
                 <div className={index.login_fields__submit}>
@@ -60,7 +60,9 @@ render() {
           </div>
         </form>
       <div>
-        <div>Already have an accout? <Link to='/'>Log in</Link></div>
+        <div className={index.signupcontainer}>
+          <span><p>Already have an account? </p></span><span className={index.plink}><Link to='/'>Log in</Link></span>
+        </div>
       </div>
     </div>
     );
