@@ -119,65 +119,6 @@ var products = [
 }
 ];
 
-// describe('Customer Model', function () {
-
-//   before(function(done){
-
-//     function clearDB() {
-//       for (var i in mongoose.connection.collections) {
-//         mongoose.connection.collections[i].remove(function() {});
-//       }
-//       return done();
-//     }
-
-//     if (mongoose.connection.readyState === 0) {
-//       mongoose.connect(dbURI, function (err) {
-//         if (err) {
-//           throw err;
-//         }
-//         return clearDB();
-//       });
-//     } else {
-//       return clearDB();
-//     }
-//   });
-
-//   after(function(done){
-//     for (var i in mongoose.connection.collections) {
-//       mongoose.connection.collections[i].remove(function() {});
-//     }
-//     mongoose.connection.close(done);
-//   });
-
-//   it('should save', function(done){
-//     var testCustomer = {
-//       name: 'Eric Smith',
-//       address: '123 Street Jacksonville, FL 32250',
-//       phone: '404-555-5555'
-//     };
-
-//     new Customer(testCustomer).save(function(err, user){
-//       expect(user.name).to.equal(testCustomer.name);
-//       done();
-//     }); 
-//   });
-
-//   it('should retrieve all customers', function(done){
-//     var testCustomer2 = {
-//       name: 'Jenny Thompson',
-//       address: '555 Some Road Chicago, IL 55555',
-//       phone: '555-904-404'
-//     }
-//     new Customer(testCustomer2).save(function(err, user){
-//       Customer.find({}, function(err, customers){
-//         if(err) return err;
-//         expect(customers.length).to.equal(2);
-//         done();
-//       });
-//     });
-//   });
-// });
-
 describe('User Controller', function () {
 
   before(function(done){
@@ -249,131 +190,129 @@ describe('User Controller', function () {
     });
 });
 
-describe('Product controller', function(){
+// describe('Product controller', function(){
 
-  it('Should create a new product', function(done){
-    productController.createProduct(products[0], function(err, product){
-      expect(product.sku).to.equal(products[0].sku);
-      done();
-    });
-  });
+//   it('Should create a new product', function(done){
+//     productController.createProduct(products[0], function(err, product){
+//       expect(product.sku).to.equal(products[0].sku);
+//       done();
+//     });
+//   });
 
-  it('Should setup product data', function(){
-  productController.createProduct(products[1], function(err, product){
-      productController.createProduct(products[2], function(err, product){
-        productController.createProduct(products[3], function(err, product){
-          productController.createProduct(products[4], function(err, product){
-            done();
-          });
-        });
-      });
-    });
-});
+//   it('Should setup product data', function(){
+//   productController.createProduct(products[1], function(err, product){
+//       productController.createProduct(products[2], function(err, product){
+//         productController.createProduct(products[3], function(err, product){
+//           productController.createProduct(products[4], function(err, product){
+//             done();
+//           });
+//         });
+//       });
+//     });
+// });
 
-  it('Should get all products', function(done){
-    productController.createProduct(fakeProduct, function(err, product){
-      productController.getAllProducts('Test Business', function(err, products){
-        expect(products.length).to.equal(2);
-        done();
-      });
-    });
-  });
+//   it('Should get all products', function(done){
+//       productController.getAllProducts("Eric's Sunglass Cabana", function(err, products){
+//         expect(products.length).to.equal(3);
+//         done();
+//     });
+//   });
 
-  it('Should update a product by id', function(done){
-    productController.getProductByName('Test Business', 'Bag', function(err, product){
-      var sku= product.sku;
-      productController.updateProductBySku('Test Business', sku, {price: 10.00, details: 'Green'}, function(err, product){
-        expect(product.price).to.equal(10.00);
-        done();
-      });
-    });
-  });
+//   it('Should update a product by id', function(done){
+//     productController.getProductByName('Test Business', 'Bag', function(err, product){
+//       var sku= product.sku;
+//       productController.updateProductBySku('Test Business', sku, {price: 10.00, details: 'Green'}, function(err, product){
+//         expect(product.price).to.equal(10.00);
+//         done();
+//       });
+//     });
+//   });
 
-    it('Should add a category by sku', function(done){
-    productController.getProductByName('Test Business', 'Bag', function(err, product){
-      var sku = product.sku;
-      productController.addProductCategoryBySku('Test Business', sku, 'Fashon', function(err, product){
-        expect(product.categories.length).to.equal(3);
-        done();
-      });
-    });
-  });
+//     it('Should add a category by sku', function(done){
+//     productController.getProductByName('Test Business', 'Bag', function(err, product){
+//       var sku = product.sku;
+//       productController.addProductCategoryBySku('Test Business', sku, 'Fashon', function(err, product){
+//         expect(product.categories.length).to.equal(3);
+//         done();
+//       });
+//     });
+//   });
 
-    it('Should delete a product by sku', function(done){
-    productController.getProductByName('Test Business', 'iPhone', function(err, product){
-      var sku = product.sku;
-      productController.deleteProductBySku('Test Business',sku, function(err, product){
-        productController.getProductBySku('Test Business', sku, function(err, product){
-          expect(product).to.equal(null);
-          done();
-        })
+//     it('Should delete a product by sku', function(done){
+//     productController.getProductByName('Test Business', 'iPhone', function(err, product){
+//       var sku = product.sku;
+//       productController.deleteProductBySku('Test Business',sku, function(err, product){
+//         productController.getProductBySku('Test Business', sku, function(err, product){
+//           expect(product).to.equal(null);
+//           done();
+//         })
 
-      });
-    });
-  });
-});
+//       });
+//     });
+//   });
+// });
 
-describe('Business controller', function(){
-  //   before(function(done){
-  //   function clearDB() {
-  //     for (var i in mongoose.connection.collections) {
-  //       mongoose.connection.collections[i].remove(function() {});
-  //     }
-  //     return done();
-  //   }
+// describe('Business controller', function(){
+//   //   before(function(done){
+//   //   function clearDB() {
+//   //     for (var i in mongoose.connection.collections) {
+//   //       mongoose.connection.collections[i].remove(function() {});
+//   //     }
+//   //     return done();
+//   //   }
 
-  //   if (mongoose.connection.readyState === 0) {
-  //     mongoose.connect(dbURI, function (err) {
-  //       if (err) {
-  //         throw err;
-  //       }
-  //       return clearDB();
-  //     });
-  //   } else {
-  //     return clearDB();
-  //   }
-  // });
+//   //   if (mongoose.connection.readyState === 0) {
+//   //     mongoose.connect(dbURI, function (err) {
+//   //       if (err) {
+//   //         throw err;
+//   //       }
+//   //       return clearDB();
+//   //     });
+//   //   } else {
+//   //     return clearDB();
+//   //   }
+//   // });
 
-  after(function(done){
-    // for (var i in mongoose.connection.collections) {
-    //   mongoose.connection.collections[i].remove(function() {});
-    // }
-    mongoose.connection.close(done);
-  });
+//   after(function(done){
+//     // for (var i in mongoose.connection.collections) {
+//     //   mongoose.connection.collections[i].remove(function() {});
+//     // }
+//     mongoose.connection.close(done);
+//   });
 
-  it('Should create a new business', function(done){
-    var tokenPayload = {username: "Edu"};
-    businessController.createBusiness(businesses[0], tokenPayload, function(err, business){
-      expect(business.name).to.equal("Edu's Shoe Store");
-      expect(business.users.length).to.equal(3);
-      expect(business.users[0].username).to.equal('Leo');
-      expect(business.users[0].role).to.equal('admin');
-      done();
-    });
-  });
+//   it('Should create a new business', function(done){
+//     var tokenPayload = {username: "Edu"};
+//     businessController.createBusiness(businesses[0], tokenPayload, function(err, business){
+//       expect(business.name).to.equal("Edu's Shoe Store");
+//       expect(business.users.length).to.equal(3);
+//       expect(business.users[0].username).to.equal('Leo');
+//       expect(business.users[0].role).to.equal('admin');
+//       done();
+//     });
+//   });
 
-  it('Should create several bsuinesses', function(done){
-    businessController.createBusiness(businesses[1], function(err, business){
-      businessController.createBusiness(businesses[2], function(err, business){
-        console.log(err);
-        console.log(business)
-        done();
-      });
-    });
-  }); 
+//   it('Should create several bsuinesses', function(done){
+//     businessController.createBusiness(businesses[1], function(err, business){
+//       businessController.createBusiness(businesses[2], function(err, business){
+//         console.log(err);
+//         console.log(business)
+//         done();
+//       });
+//     });
+//   }); 
 
-  it('Should be able to update an employement request correctly', function(done){
-    businessController.updateEmploymentRequest('NewEmployee', 'Pawn Shop', 'accept', function(err, users){
-      businessController.getBusinessByName('Pawn Shop', function(err, business){
-        expect(business.requests.length).to.equal(1);
-        for(var i = 0; i < business.users.length; i++){
-          if(business.users[i].username === 'NewEmployee'){
-            break;
-          }
-        }
-        expect(business.users[i].username).to.equal('NewEmployee');
-        done();
-      });
-    });
-  });
-});
+//   it('Should be able to update an employement request correctly', function(done){
+//     businessController.updateEmploymentRequest('NewEmployee', 'Pawn Shop', 'accept', function(err, users){
+//       businessController.getBusinessByName('Pawn Shop', function(err, business){
+//         expect(business.requests.length).to.equal(1);
+//         for(var i = 0; i < business.users.length; i++){
+//           if(business.users[i].username === 'NewEmployee'){
+//             break;
+//           }
+//         }
+//         expect(business.users[i].username).to.equal('NewEmployee');
+//         done();
+//       });
+//     });
+//   });
+// });

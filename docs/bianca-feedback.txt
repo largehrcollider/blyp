@@ -1,0 +1,33 @@
+*Login Page:
+-It looks pretty, no idea what this is.  No title.  
+-Put copywrite stuff on footer/on the bottom somewhere
+-On bottom of login button, link to account sign up
+-Also, if account signup is on top left, put it on top right of page.
+
+Signup page:
+
+Profile Page:
+  
+*Settings Page:
+-Padding around white so it looks like it's floating.  Put space between Make User and Delete button.
+-Confusing about changing role, look into 'make user' as it seems like it's creating user instead of making user not admin
+-BUG: Should not be able to make last admin into user
+-Make User and Accept User are two different colors.... Make User is not primary action, so could be a small button under name instead.
+-Change Purple button on this page.
+
+*Create Page: 
+-this form has no background, but some have white background.  So all should have the same background, Bianca thinks would look better if all forms had white or grey background.
+-Create button at bottom is hard to see.
+
+Invetory Page:
+-menu on left (filter) looks like unformatted test.  Needs to be more clear it's a menu
+-Create New Product link and the actual products look exactly the same, seperate create new product link and links to actually added items.  Could create a plus sign for add button.
+-Title for this page, like inventory management, to make it more clear what's going on, what's on the page, what action we need to take.
+-Something that shows which filter is active, hard to tell if page is being filtered or not.
+
+Sell Page:
+Margins around page, inventory basket is pushed up against left side.
+
+**Add splash page if possible--static page to tell what blyp is, marketing page, which will take you to a login page.  This is a stretch goal but would be cool.
+
+Can put team name, privacy policy on splash page or login page.  
