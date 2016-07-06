@@ -7,7 +7,12 @@ var Product = require('./product.js');
  * @param {function} callback - Node err back style callback. Newly created product passed to callback
  */
 exports.createProduct = function(newProduct, callback){
-  new Product(newProduct).save(callback);
+  if(newProduct.price < 0 || newProduct.price > Number.MAX_SAFE_INTEGER){
+    console.log('The price is out of bounds!');
+    callback(null, null);
+  } else {
+    new Product(newProduct).save(callback);
+  }
 };
 
 //Read operations

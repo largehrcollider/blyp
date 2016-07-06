@@ -44,7 +44,11 @@ router.post('/', acl(['admin']), images.multer.single('file'), images.saveImage,
   // save product to db
   Product.createProduct(product, function (err, product){
     if(err){
+      console.log('There was an error creating the product!');
       console.error(err);
+      res.sendStatus(500);
+    } else if(!product) {
+      console.log('There was an error creating the product!');
       res.sendStatus(500);
     } else {
       res.status(201).json(product);
