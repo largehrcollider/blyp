@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import c from 'classnames';
 import m from '../assets/materialize/css/materialize.css';
+import index from '../assets/styles/index.css';
+
 
 export default class CreateProduct extends Component {
   constructor(props) {
@@ -11,7 +13,7 @@ export default class CreateProduct extends Component {
     const { fields: { sku, price, quantity, name, categories, details, productPicture }, handleSubmit, create } = this.props;
     return (
       <div>
-        <h1>New Product</h1>
+      <div className={index.createProductHeader}><h1>New Product</h1></div>
         <div className={m.row}>
           <div className={c(m.col, m.s12, m.m8, m.pushM2, m.l6, m.pushL3)}>
             <form
