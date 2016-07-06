@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import centsNumberToString from '../helpers/centsNumberToString.js';
+
 import material from '../assets/materialize/css/materialize.css';
 import index from '../assets/styles/index.css';
 import bootstrap from '../assets/styles/bootstrap.css';
@@ -12,7 +14,7 @@ class ReceiptItem extends Component {
     const { name, quantity, price, sku} = this.props;
     return (
       <div className={index.receiptitem}>
-        Product: <strong>{name}</strong> Sku: <strong>{sku}</strong> QTY: <strong>{quantity}</strong> Price: <strong>${price}.00</strong>
+        Product: <strong>{name}</strong> Sku: <strong>{sku}</strong> QTY: <strong>{quantity}</strong> Price: <strong>${centsNumberToString(price)}</strong>
         {<br></br>}
       </div>
     )

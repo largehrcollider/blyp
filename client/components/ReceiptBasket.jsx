@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReceiptItem from '../containers/ReceiptItem.js';
+import centsNumberToString from '../helpers/centsNumberToString.js';
+
 import material from '../assets/materialize/css/materialize.css';
 import index from '../assets/styles/index.css';
 import bootstrap from '../assets/styles/bootstrap.css';
@@ -28,16 +30,16 @@ class Receipt extends Component {
           </div>
           <div className={index.receipttotal}>
             <div className={index.quantity}>
-              {`SUBTOTAL $${subtotal}.00`}
+              {`SUBTOTAL $ ${centsNumberToString(subtotal)}`}
             </div>
             <div className={index.quantity}>
              {`TOTAL QTY: ${quantity}`}
             </div>
             <div className={index.quantity}>
-              {`TOTAL $${total}.00`}
+              {`TOTAL $ ${centsNumberToString(total)}`}
             </div>
             <div className={index.quantity}>
-              {`PRICE $${price}.00`}
+              {`PRICE $ ${centsNumberToString(price)}`}
             </div>
           </div>
         </div>
