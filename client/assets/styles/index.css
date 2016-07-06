@@ -1,3 +1,7 @@
+h4{
+  display: inline;
+}
+
 .testing {
   background-color: #ff9966;
 }
@@ -61,6 +65,64 @@ body .login {
   background: #58595d;
 }
 
+/*profile styling*/
+.profilecontainer {
+  margin-left: -200px;
+}
+
+.profilerow {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-left: -240px;
+}
+
+.profilepic {
+  height: 150px;
+  width: 150px;
+  margin:0 auto;
+  background-color: grey;
+  -moz-border-radius: 75px;
+  -webkit-border-radius: 75px;
+  border-radius: 75px;
+}
+
+.profilebuttonrow {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-left: -120px;
+}
+
+.profilebox {
+  height: 550px;
+  width: 650px;
+  border-radius: 8px;
+  margin: 0 auto;
+  background-color: white;
+  padding-top: 20px;
+  box-shadow: 0 0 15px;
+}
+
+.profile p {
+  color: #b0b0b0;
+  font-size: 18px;
+  text-align: left;
+}
+.updateContainer{
+  height: 20px;
+  width: 100px;
+  display: inline;
+  text-align: left;
+  margin: 0 auto;
+}
+.updateBanner{
+  color: #333333;
+  font-size: 10px;
+}
+.updateinfo{
+  color: #000000;
+  text-align: left;
+  margin: 0 auto;
+}
 
 .loginHeight {
   height: 320px;
@@ -158,6 +220,8 @@ body .login_fields__submit input:hover {
   min-width: 200px;
 }
 
+
+
 .createProduct{
   color: #ffffff;
 
@@ -251,6 +315,58 @@ body .login_fields__submit input:hover {
   margin: 5px;
 }
 
+.receiptreturncontainer{
+  padding-top: 25px;
+  width: 450px;
+  height: 75px;
+  background-color: #b0b0b0;
+  box-shadow: 2px;
+  text-align: center;
+  border-radius: 8px;
+  text-transform: capitalize;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 230px;
+  opacity: 0.6;
+}
+
+
+.receipt-container{
+  width: 510px;
+  height: 710px;
+  border: #ff9966;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 2px 2px;
+  padding-top: 45px;
+  padding-right: 5px;
+  padding-left: 5px;
+  /*margin: 0 auto;*/
+  text-align: center;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+.receipttotal{
+  width:200px;
+  height: 300px;
+  float: right;
+  margin-top: 170px;
+  font-weight: bold;
+
+}
+
+.receiptheader {
+  text-align: center;
+}
+
+.receiptitem {
+  margin-right: 55px;
+  float: right;
+}
+
+
 .quantity: {
   margin: 3px 0px 15px 0px;
 }
@@ -279,12 +395,23 @@ body .login_fields__submit input:hover {
   background-color: #009933;
 }
 
+.updateButton{
+  background-color: #65a2ee;
+}
 .pay-with{
   padding: 0px 0px 0px 10px;
 }
 
 .total{
   padding: 0px 0px 0px 10px;
+}
+.centerupdatecontainer{
+  height: 30px;
+  width: 40px;
+}
+.updateshift{
+  margin-left: 700px;
+
 }
 
 /*Nav bar styling below*/

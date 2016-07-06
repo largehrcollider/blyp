@@ -5,7 +5,7 @@ import CheckoutButton from '../components/CheckoutButton.jsx'
 
 const mapStateToProps = (state) => {
   return {};
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -13,6 +13,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(push('/checkout'));;
     }
   };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutButton);

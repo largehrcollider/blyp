@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Requests from '../containers/Requests.js';
+import UserAdministration from '../components/UserAdministration.jsx';
 
 class Settings extends Component {
   constructor(props) {
@@ -8,17 +10,8 @@ class Settings extends Component {
     const { requests, admins, users } = this.props;
     return (
       <div>
-        {(requests.length > 0) && (<h1>Pending Requests</h1>)}
-        {(requests.length > 0) && (
-          <div>
-            {requests.map(username => (
-              <Request key={user} username={username} />
-            ))}
-          </div>
-        )}
-        <h1>Admins</h1>
-
-        <h1>Users</h1>
+        <Requests />
+        <UserAdministration />
       </div>
     )
   }

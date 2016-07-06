@@ -16,13 +16,11 @@ const PaymentMethodModal = ({ method, changeDue }) => (
         <ChangeDue />
       )}
     </div>
-
     <div>
       {(method === 'credit card' || method === 'manual' || method === 'swipe') && (
         <CreditCardModal />
       )}
     </div>
-
   </div>
 );
 

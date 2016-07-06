@@ -5,6 +5,8 @@ import { reset } from 'redux-form';
 import axios from 'axios';
 import total from '../helpers/basketTotal.js'
 
+var localStorage = localStorage || {getItem: function(){}, setItem(){}}
+
 //////////////////////////////////////////////////////////////
 // Synchronous Action Creators
 //////////////////////////////////////////////////////////////
@@ -26,15 +28,37 @@ export const cashReceived = (amount) => {
   };
 };
 
-export const checkoutCompleted = () => {
+// export const checkoutCompleted = () => {
+//   return {
+//     type: types.CHECKOUT_COMPLETED,
+//   };
+// };
+
+//action creators FOR CHANGING USER INFO
+export const changeName = () => {
   return {
-    type: types.CHECKOUT_COMPLETED,
+    type: types.CHANGE_NAME
   };
-};
+}
+export const changeEmail = () => {
+  return {
+    type: types.CHANGE_EMAIL
+  };
+}
+export const changeUsername = () => {
+  return {
+    type: types.CHANGE_USERNAME
+  };
+}
+export const changePassword = () => {
+  return {
+    type: types.CHANGE_PASSWORD
+  };
+}
 
 export const resetPayment = () => {
   return {
-    type: types.RESET_PAYMENT,
+    type: types.RESET_PAYMENT
   };
 };
 
@@ -67,11 +91,12 @@ export const loginRequestSent = () => {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-export const loginRequestSuccess = ({ businesses, jwt, username }) => {
+export const loginRequestSuccess = ({ businesses, name, jwt, username }) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
     businesses,
     jwt,
+    name,
     username
   }
 }
@@ -214,11 +239,12 @@ export const productCRequestSent = () => {
     type: types.PRODUCT_C_REQUEST_SENT
   };
 };
-export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku }) => {
+export const productCRequestSuccess = ({ categories, details, name, price, quantity, sku, imgSrc }) => {
   return {
     type: types.PRODUCT_C_REQUEST_SUCCESS,
-    categories, 
+    categories,
     details,
+    imgSrc,
     name,
     price,
     quantity,
@@ -287,6 +313,34 @@ export const productDRequestFailure = () => {
     type: types.PRODUCT_D_REQUEST_FAILURE
   };
 };
+
+/*
+
+User Update Info
+
+
+*/
+
+export const updateDetailsRequestSuccess = ({ name, username, email, jwt }) => {
+  return {
+    type: types.UPDATE_DETAILS_REQUEST_SUCCESS,
+    name,
+    username,
+    email,
+    jwt
+  };
+};
+export const updateDetailsRequestFailure = () => {
+  return {
+    type: types.UPDATE_DETAILS_REQUEST_FAILURE
+  };
+};
+export const updateDetailsRequestSent = () => {
+  return {
+    type: types.UPDATE_DETAILS_REQUEST_SENT
+  };
+};
+
 
 /**
 * Business selector
@@ -405,12 +459,12 @@ export const acceptanceRequestSent = () => {
 /**
 * Login, Signup, Logout operations
 */
-export const login = ({username, password}) => {
+export const login = ({username, password, jwt}) => {
   return (dispatch) => {
     const config = {
       url: '/login',
       method: 'post',
-      data: {username, password},
+      data: {username, password, jwt},
     };
     axios(config)
     .then(({ data }) => {
@@ -461,6 +515,30 @@ export const logout = () => {
   };
 };
 
+//change to
+export const updateDetails = (data) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/profile',
+      method: 'put',
+      headers: {'Authorization': 'Bearer ' + jwt},
+      data
+    };
+    dispatch(updateDetailsRequestSent());
+    return axios(config)
+    .then(({ data }) => {
+      localStorage.setItem('jwt', data.jwt);
+      dispatch(updateDetailsRequestSuccess(data))
+    })
+    .catch(err => {
+      dispatch(updateDetailsRequestFailure(err));
+    });
+    
+  }
+}
+
+
 
 export const saveProduct = (data) => {
   const jwt = localStorage.getItem('jwt');
@@ -483,7 +561,27 @@ export const saveProduct = (data) => {
   }
 }
 
-export const transactionCompleted = () => {
+export const paymentMethodChange = (newMethod) => {
+  return (dispatch) => {
+    dispatch(resetPayment());
+    /**
+    * No need to reset forms after resetting payment: before the next line of
+    * code is run, React will re-render and all forms will be unmounted.
+    * Unmounted forms are automatically reset
+    */
+    dispatch(paymentMethodSelected(newMethod));
+  };
+};
+
+/**
+* Notifies the server that a cash transaction took place. Only necessary
+* to explicitly notify the server of cash transactions due to their offline and
+* physical nature.
+*
+* CC payments not explicitly notified b/c server interprets
+* succesful response from payment servers as finalization of a CC transaction.
+*/
+export const cashTransaction = () => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     var transaction = {
@@ -507,7 +605,9 @@ export const transactionCompleted = () => {
   };
 };
 
-//stripe CHARGE
+/**
+* Processes cc payments with Stripe.
+*/
 export const stripe = (data) => {
   return (dispatch, getState) => {
     Stripe.card.createToken(data, (status, response) => {
@@ -526,16 +626,9 @@ export const stripe = (data) => {
         };
         axios(config)
         .then(({ data }) => {
-          dispatch(resetPayment());
-          dispatch(paymentMethodSelected(newMethod));
-          // clear payment forms?
-          dispatch(reset('amountReceived'));
-        })
-        .then(()=>{
-          dispatch(reset('amountReceived'));
-          dispatch(checkoutCompleted());
-          dispatch(clearBasket());
-          dispatch(push('/sell'));
+          dispatch(transactionRequestSuccess());
+          // dispatch(checkoutCompleted());
+          dispatch(receiptPage());
         })
         .catch(err => {
           dispatch(transactionRequestFailure());
@@ -548,31 +641,28 @@ export const stripe = (data) => {
 
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
+    dispatch(cashReceived(amount));
     if (amount - total(getState()) >= 0) {
-      // send transaction request to server
-      dispatch(transactionCompleted());
+      dispatch(cashTransaction());
+      // checkoutCompleted will be called as `onClick` of "Done" button of
+      // `ChangeDue` component
     } else {
       // display warning not enough
     }
-    dispatch(cashReceived(amount));
   };
 };
 
-export const paymentMethodChange = (newMethod) => {
+export const receiptPage = () => {
   return (dispatch) => {
-    dispatch(resetPayment());
-    dispatch(paymentMethodSelected(newMethod));
-    // clear payment forms?
-    dispatch(reset('amountReceived'));
+    dispatch(push('/receipt'));
   };
 };
 
-export const cashCheckoutCompleted = () => {
+export const checkoutCompleted = () => {
   return (dispatch) => {
-    dispatch(reset('amountReceived'));
-    dispatch(checkoutCompleted());
     dispatch(clearBasket());
     dispatch(push('/sell'));
+    dispatch(resetPayment());
   };
 };
 
@@ -580,9 +670,6 @@ export const cashCheckoutCompleted = () => {
 * product CRUD operations
 */
 
-/**
-* the sku is optional. if not supplied, will fetch all products in database
-*/
 export const createProduct = (product) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
@@ -591,7 +678,7 @@ export const createProduct = (product) => {
     data.append('details', product.details);
     data.append('quantity', product.quantity);
     data.append('name', product.name);
-    data.append('price', product.price);
+    data.append('price', product.price.replace('.', ''));
     data.append('sku', product.sku);
     data.append('business', getState().auth.business);
     if (product.productPicture[0]) {
@@ -617,6 +704,9 @@ export const createProduct = (product) => {
     dispatch(productCRequestSent());
   };
 };
+/**
+* the sku is optional. if not supplied, will fetch all products in database
+*/
 export const readProduct = (sku = '') => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
@@ -640,9 +730,9 @@ export const updateProduct = (product) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
-      url: `/api/products/${sku}`,
+      url: `/api/products/${product.sku}`,
       method: 'put',
-      data: {...product, business: getState().auth.business},
+      data: product,
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
@@ -693,9 +783,12 @@ export const checkinBusiness = (business) => {
     .then(({ data }) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(businessCheckinRequestSuccesful(data));
+      dispatch(clearBasket());
+      dispatch(toggleCategory('all'));
       dispatch(push('/sell'));
     })
     .catch(err => {
+      console.error(err);
       dispatch(businessCheckinRequestFailure());
     });
     dispatch(businessCheckinRequestSent());
@@ -725,7 +818,7 @@ export const joinBusiness = (business) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
-      url: '/api/business/join',
+      url: '/api/business/requests',
       method: 'post',
       data: {business},
       headers: {'Authorization': 'Bearer ' + jwt}
@@ -740,9 +833,8 @@ export const joinBusiness = (business) => {
     dispatch(businessJoinRequestSent());
   };
 };
-
 /**
-* requests, requests
+* User management related thunks
 */
 export const requests = () => {
   const jwt = localStorage.getItem('jwt');
@@ -765,12 +857,12 @@ export const requests = () => {
 };
 export const acceptance = (username, accept) => {
   const jwt = localStorage.getItem('jwt');
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const config = {
       url: '/api/business/accept',
       method: 'post',
       data: {
-        business: getState().auth.business,
+        business: getState().auth.business.name,
         username,
         accept
       },
@@ -786,3 +878,49 @@ export const acceptance = (username, accept) => {
     dispatch(acceptanceRequestSent());
   };
 };
+export const role = (username, role) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch) => {
+    const config = {
+      url: '/api/business/users/role',
+      method: 'post',
+      data: {username, role},
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(roleRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(roleRequestFailure());
+    });
+    dispatch(roleRequestSent());
+  };
+}
+/**
+* Deletes `username` from business.
+* Business argument optional. If not provided, assumed to be currently checked-
+* in business
+*/
+export const deleteUser = (username, business) => {
+  const jwt = localStorage.getItem('jwt');
+  return (dispatch, getState) => {
+    business = business || getState().auth.business.name;
+    const config = {
+      url: '/api/business/users/delete',
+      method: 'post',
+      data: {username, business},
+      headers: {'Authorization': 'Bearer ' + jwt}
+    };
+    axios(config)
+    .then(({ data }) => {
+      dispatch(deleteUserRequestSuccess(data));
+    })
+    .catch(err => {
+      dispatch(deleteUserRequestFailure());
+    });
+    dispatch(deleteUserRequestSent());
+  };
+}
+
+

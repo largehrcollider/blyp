@@ -1,16 +1,18 @@
 import jwtDecode from 'jwt-decode';
 import * as types from '../constants/actionTypes.js'
 
-var jwt = localStorage.getItem('jwt');
-if (jwt) {
-  var { username } = jwtDecode(jwt);
-} else {
-  jwt = null;
-}
+// var jwt = localStorage.getItem('jwt');
+// if (jwt) {
+//   var { username } = jwtDecode(jwt);
+// } else {
+//   jwt = null;
+// }
 
 const initialState = {
-  jwt,
-  username,
+  jwt: null,
+  username: null,
+  name: null,
+  email: null,
   businesses: [], // businesses the user belongs to
   business: {
     name: null,
@@ -34,6 +36,7 @@ const authReducer = (state = initialState, action) => {
           [action.sku]: {
             categories: action.categories,
             details: action.details,
+            imgSrc: action.imgSrc,
             name: action.name,
             price: action.price,
             quantity: action.quantity,
@@ -47,9 +50,10 @@ const authReducer = (state = initialState, action) => {
     case types.SIGNUP_REQUEST_SUCCESS:
     return {
       ...state,
+      businesses: action.businesses,
       jwt: action.jwt,
-      username: action.username,
-      businesses: action.businesses
+      name: action.name,
+      username: action.username
     };
 
     case types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL:
@@ -57,7 +61,13 @@ const authReducer = (state = initialState, action) => {
       jwt: action.jwt,
       business: {
       name: action.business,
-      products: action.products,
+      products: (() => {
+        var products = {};
+        action.products.forEach((p) => {
+          products[p.sku] = p;
+        });
+        return products;
+      })(),
       role: action.role,
       requests: action.requests,
       users: action.users
@@ -78,6 +88,15 @@ const authReducer = (state = initialState, action) => {
     return {
       ...state,
       businesses: [...(state.businesses), action.business]
+    };
+
+    case types.UPDATE_DETAILS_REQUEST_SUCCESS:
+    return {
+      ...state,
+      jwt: action.jwt,
+      username: action.username,
+      name: action.name,
+      email: action.email
     };
 
     default:

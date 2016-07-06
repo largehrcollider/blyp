@@ -2,8 +2,9 @@ var app = require('./server');
 var app = require('http').Server(app);
 var io = require('socket.io')(app);
 var path = require('path');
+var config = require('./server/config.js');
 
-var port = process.env.PORT || 3210;
+var port = config.get('PORT');
 
 var i = 0;
 
