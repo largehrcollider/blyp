@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import centsNumberToString from '../helpers/centsNumberToString';
 
 import material from '../assets/materialize/css/materialize.css';
 import index from '../assets/styles/index.css';
@@ -18,7 +19,7 @@ class BasketItem extends Component {
         </span>
       <span className={index.delete+" "+material.btnFloating+" "+material.materialIcons+" "+material.wavesEffect+" "+material.wavesLight+" "+material.red} onClick={incrementItem} onClick={deleteItem}>X</span>
         <div>
-        {'($' + price*quantity + ')'}
+        {`$ ${centsNumberToString(price*quantity)}`}
         </div>
         <div className={index.quantity}>
         <span> {'Quantity: '+quantity+' '}</span>
