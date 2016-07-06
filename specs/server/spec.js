@@ -296,7 +296,23 @@ describe('Business controller', function(){
       expect(business.users.length).to.equal(2);
       done();
     })
-  })
+  });
+
+  it('Should remove a user from a business', function(done){
+    businessController.addUser("Edu's Shoe Store", {username:'Delete', role:'cashier'}, function(err, users){
+      businessController.removeUser("Edu's Shoe Store", 'Delete', function(err, business){
+        businessController.getBusinessByName("Edu's Shoe Store", function(err, business){
+          for(var i = 0; i < business.users.length; i++){
+            if(business.users[i].username === 'Delete'){
+              break;
+            }
+          }
+          expect(business.users[i]).to.equal(undefined);
+          done();
+        });
+      });
+    });
+  });
 
   it('Should create several bsuinesses', function(done){
     new businessModel(businesses[1]).save(function(err, business){
@@ -316,8 +332,44 @@ describe('Business controller', function(){
           }
         }
         expect(business.users[i].username).to.equal('EricSmith');
+        expect(business.requests.indexOf('EricSmith')).to.equal(-1);
         done();
       });
+    });
+  });
+
+  it('Should update a user role', function(done){
+    businessController.updateUserRole("Edu's Shoe Store", {username:'Leo', role:'admin'}, function(err, business){
+      businessController.getBusinessByName("Edu's Shoe Store", function(err, business){
+        for(var i = 0; i < business.users.length; i++){
+          if(business.users[i].username === 'Leo'){
+            break;
+          }
+        }
+        expect(business.users[i].role).to.equal('admin');
+        done();
+      });
+    });
+  });
+
+  it('Should add an employment request', function(done){
+    businessController.addEmploymentRequest('added', "Edu's Shoe Store", function(err, business){
+      businessController.getBusinessByName("Edu's Shoe Store", function(err, business){
+        for(var i = 0; i < business.requests.length; i++){
+          if(business.requests[i] === 'added'){
+            break;
+          }
+        }
+        expect(business.requests[i]).to.equal('added');
+        done();
+      });
+    });
+  });
+
+  it('Should be able to get a property of a business', function(done){
+    businessController.getProperty("Eric's Sunglass Cabana", 'users', function(err, property){
+      expect(property.length).to.equal(2);
+      done();
     });
   });
 });
