@@ -26,6 +26,7 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
 
+    case types.ROLE_REQUEST_SUCCESS:
     case types.DELETE_USER_REQUEST_SUCCESS:
     return {
       ...state,

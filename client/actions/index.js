@@ -463,6 +463,23 @@ export const deleteUserRequestSent = () => {
     type: types.DELETE_USER_REQUEST_SENT
   };
 };
+
+export const roleRequestSuccess = (users) => {
+  return {
+    type: types.ROLE_REQUEST_SUCCESS,
+    users
+  };
+};
+export const roleRequestFailure = () => {
+  return {
+    type: types.ROLE_REQUEST_FAILURE
+  };
+};
+export const roleRequestSent = () => {
+  return {
+    type: types.ROLE_REQUEST_SENT
+  };
+};
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -895,12 +912,15 @@ export const acceptance = (username, accept) => {
     dispatch(acceptanceRequestSent());
   };
 };
+/**
+* Sets role of user
+*/
 export const role = (username, role) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
     const config = {
       url: '/api/business/users/role',
-      method: 'post',
+      method: 'put',
       data: {username, role},
       headers: {'Authorization': 'Bearer ' + jwt}
     };
@@ -913,7 +933,7 @@ export const role = (username, role) => {
     });
     dispatch(roleRequestSent());
   };
-}
+};
 /**
 * Deletes `username` from business.
 * Business argument optional. If not provided, assumed to be currently checked-
@@ -938,4 +958,4 @@ export const deleteUser = (username, business) => {
     });
     dispatch(deleteUserRequestSent());
   };
-}
+};
