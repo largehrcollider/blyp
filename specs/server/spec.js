@@ -201,6 +201,28 @@ describe('Product controller', function(){
     });
   });
 
+  it('Should not allow a product to be created with a price less than zero', function(done){
+    var newProduct = {
+      sku: 123,
+      price: Math.pow(2, 53)
+    };
+    productController.createProduct(newProduct, function(err, product){
+      expect(product).to.equal(null);
+      done();
+    });
+  });
+
+  it('Should not allow a product to be created with a price less than zero', function(done){
+    var newProduct = {
+      sku: 123,
+      price: -10
+    };
+    productController.createProduct(newProduct, function(err, product){
+      expect(product).to.equal(null);
+      done();
+    });
+  });
+
   it('Should setup product data', function(done){
     productController.createProduct(products[1], function(err, product){
       expect(product).to.exist;
