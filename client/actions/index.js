@@ -282,9 +282,10 @@ export const productURequestSent = () => {
     type: types.PRODUCT_U_REQUEST_SENT
   };
 };
-export const productURequestSuccess = () => {
+export const productURequestSuccess = (product) => {
   return {
-    type: types.PRODUCT_U_REQUEST_SUCCESS
+    type: types.PRODUCT_U_REQUEST_SUCCESS,
+    product
   };
 };
 export const productURequestFailure = () => {
@@ -770,10 +771,11 @@ export const updateProduct = (product) => {
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
-    .then(({ data }) => {
-      dispatch(productURequestSuccess(data));
-      // dispatch(reset('addComponentForm'));
-      // maybe reset the an updateComponent form?
+    .then(({ data: { sku, price, quantity, name, categories, details, imgSrc } }) => {
+      var product = {sku, price, quantity, name, categories, details, imgSrc}
+      dispatch(productURequestSuccess(product));
+      dispatch(reset('addComponentForm'));
+      dispatch(push('/inventory'));
     })
     .catch(err => {
       dispatch(productURequestFailure());
@@ -793,6 +795,7 @@ export const deleteProduct = (sku) => {
     axios(config)
     .then(({ data }) => {
       dispatch(productDRequestSuccess(data));
+      dispatch(push('/inventory'));
     })
     .catch(err => {
       dispatch(productDRequestFailure());

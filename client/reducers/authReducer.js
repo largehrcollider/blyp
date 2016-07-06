@@ -26,6 +26,18 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch(action.type) {
 
+    case types.PRODUCT_U_REQUEST_SUCCESS:
+    return {
+      ...state,
+      business: {
+        ...state.business,
+        products: {
+          ...state.business.products,
+          [action.product.sku]: action.product
+        }
+      }
+    }
+
     case types.ROLE_REQUEST_SUCCESS:
     case types.DELETE_USER_REQUEST_SUCCESS:
     return {

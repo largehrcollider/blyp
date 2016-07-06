@@ -7,7 +7,7 @@ import auth from './authReducer.js';
 import basket from './basketReducer.js';
 import payment from './paymentReducer';
 import network from './networkReducer.js';
-import normalizePrice from './normalizePrice';
+import normalizePrice from './normalizePrice.js';
 // import reducer from './myReducerFile.js';
 
 /**
@@ -17,6 +17,9 @@ import normalizePrice from './normalizePrice';
 const appReducer = combineReducers({
   form: form.normalize({
     createProduct: {
+      price: normalizePrice
+    },
+    productEditor: {
       price: normalizePrice
     }
   }), // Reducer provided by 'redux-form' module
