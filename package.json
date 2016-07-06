@@ -11,9 +11,9 @@
     "here": "NODE_ENV=development concurrently \"npm run build\" \"nodemon index.js\"",
     "prestart": "npm run bundle",
     "start": "node index.js",
-    "test-back": "./node_modules/.bin/mocha specs/server/spec.js;",
+    "test-back": "./node_modules/.bin/mocha specs/server/spec.js; ",
     "test-front": "mocha --require ignore-styles --compilers js:babel-register --recursive specs/client/spec.js",
-    "test":"npm run test npm run test-front"
+    "test":"./node_modules/.bin/mocha specs/server/spec.js; mocha --require ignore-styles --compilers js:babel-register --recursive specs/client/spec.js"
   },
   "engines": {
     "node": "6.2.0"
