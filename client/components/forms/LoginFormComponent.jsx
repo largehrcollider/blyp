@@ -3,6 +3,9 @@ import { Link } from 'react-router';
 import userPNG from '../../assets/images/user.png'
 import lockPNG from '../../assets/images/lock.png'
 import index from '../../assets/styles/index.css';
+import Radium from 'radium';
+
+let RadiumLink = Radium(Link);
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -39,7 +42,9 @@ export default class LoginForm extends Component {
           </div>
         </form>
         <div>
-          <span>Don't have an account? <Link to='/signup'>Sign Up!</Link></span>
+        <div className={index.signupcontainer}>
+          <span><p>Don't have an account? </p></span><span className={index.plink}><Link to='/signup'>Sign Up!</Link></span>
+        </div>
         </div>
       </div>
     );

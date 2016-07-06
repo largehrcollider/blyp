@@ -25,6 +25,31 @@ body {
   background: linear-gradient(135deg, #82a7d3 0%, #0ca56a 100%);
 }
 
+.signupcontainer {
+  height: 42px;
+  width: auto;
+  border-radius: 1px;
+  background-color: #717274;
+  padding-top: 4px;
+  box-shadow: 0 0 15px;
+}
+.signupcontainer p{
+  font-size: 18px;
+  display: inline;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #f0f0f0;
+}
+
+.signupcontainer .plink{
+  color: #000000;
+  font-size: 18px;
+}
+
+.signupcontainer .plink:hover {
+  color: #ffffff;
+}
+
 body .authent {
   display: none;
   background: #58595d;
