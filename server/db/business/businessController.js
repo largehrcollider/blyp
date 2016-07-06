@@ -53,8 +53,10 @@ exports.updateUserRole = function(businessName, userObj, callback){
     } else {
       for(var i = 0; i < business.users.length; i++){
         if(business.users[i].username === userObj.username){
-          business.users[i].role = userObj.role;
+          business.users.splice(i, 1);
+          business.users.push(userObj);
           business.save(callback);
+          break;
         }
       }
     }
