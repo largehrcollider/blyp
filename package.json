@@ -12,7 +12,8 @@
     "prestart": "npm run bundle",
     "start": "node index.js",
     "test": "./node_modules/.bin/mocha specs/server/spec.js;",
-    "test-front": "mocha --compilers js:babel-register --recursive specs/client/spec.js"
+    "test-front": "mocha --require ignore-styles --compilers js:babel-register --recursive specs/client/spec.js",
+    "test-all":"npm run test npm run test-front"
   },
   "engines": {
     "node": "6.2.0"
@@ -94,6 +95,7 @@
     "eslint-plugin-react": "^5.1.1",
     "expect": "^1.20.2",
     "forever": "^0.15.2",
+    "ignore-styles": "^4.0.0",
     "live-server": "1.0.0",
     "lodash": "4.13.1",
     "mocha": "^2.5.3",
