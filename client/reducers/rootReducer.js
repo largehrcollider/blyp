@@ -21,6 +21,9 @@ const appReducer = combineReducers({
     },
     productEditor: {
       price: normalizePrice
+    },
+    amountReceived: {
+      amount: normalizePrice
     }
   }), // Reducer provided by 'redux-form' module
   ui,

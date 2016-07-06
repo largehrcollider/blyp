@@ -5,6 +5,7 @@ import AmountReceived from '../components/AmountReceived.jsx';
 const mapDispatchToProps = (dispatch) => {
   return {
     received: ({ amount }) => {
+      amount = amount.replace('.', ''); // converts to number of cents
       dispatch(actions.validateCashReceived(Number(amount)));
     }
   };
