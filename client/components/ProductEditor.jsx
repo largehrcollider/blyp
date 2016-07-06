@@ -81,7 +81,7 @@ const ProductEditor = class extends Component {
               </div>
               <div className={m.row}>
                 <button className={c(m.btn, m.wavesEffect, m.wavesLight)} type='submit'>Update</button>
-                <button onClick={deleteProduct} className={c(m.btn, m.wavesEffect, m.wavesLight, m.red, m.right)}>Delete</button>
+                <button onClick={deleteProduct} className={c(m.btn, m.wavesEffect, m.wavesLight, m.red, m.right)} type='button'>Delete</button>
               </div>
             </form>
           </div>
