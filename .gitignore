@@ -50,7 +50,7 @@ keys
 
 # Client uploads
 uploads
-images
+// images
 !docs/**
 !server/**
 

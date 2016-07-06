@@ -1,6 +1,5 @@
 h4{
   display: inline;
-  text-decoration: none;
 }
 
 .testing {
@@ -106,10 +105,12 @@ body .login {
   height: 150px;
   width: 150px;
   margin:0 auto;
-  background-color: grey;
+  background-image: url('../images/userphoto.png');
+  background-repeat: no-repeat;
   -moz-border-radius: 75px;
-  -webkit-border-radius: 75px;
-  border-radius: 75px;
+  -webkit-border-radius:75px 75px 75px 75px;
+  border-radius: 75px 75px 75px 75px;
+  border: 1px solid #b0b0b0;
 }
 
 .profilebuttonrow {
@@ -441,6 +442,13 @@ body .login_fields__submit input:hover {
 }
 
 /*Nav bar styling below*/
+.busName{
+  font-size: 24px;
+  font-family: 'Muli', sans-serif;
+  margin-right: 10px;
+  margin-left: 14px;
+  color: #b0b0b0;
+}
 
 .menu{
 	width:100%;
@@ -469,6 +477,7 @@ body .login_fields__submit input:hover {
 	padding:0 30px;
 	font:15px/45px 'Muli', sans-serif;
 	color:#b0b0b0;
+  text-decoration: none;
 }
 
 .menu .active{
@@ -485,6 +494,7 @@ body .login_fields__submit input:hover {
 	float:right;
 	border:solid 1px #555;
 }
+
 
 .search input[type="text"]{
 	width:183px;

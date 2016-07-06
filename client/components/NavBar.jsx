@@ -21,6 +21,9 @@ const NavBar = () => (
           <img src={blypLogo}/>
         </Link>
       </li>
+      <li className={index.busName}>
+      BUSINESS NAME
+      </li>
       <li>
         <Link to='/settings'>
           <img src={settings}/>
