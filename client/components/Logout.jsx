@@ -7,7 +7,7 @@ import inventory from '../assets/styles/InventoryPane.css';
 
 const Logout = ({ logout }) => (
   <div className={index.logOut} onClick={logout}>
-    Logout
+    <h4>Logout</h4>
   </div>
 );
 
