@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 import { reset } from 'redux-form';
 import axios from 'axios';
 import total from '../helpers/basketTotal.js'
+import jwtDecode from 'jwt-decode';
 
 //////////////////////////////////////////////////////////////
 // Synchronous Action Creators
@@ -495,7 +496,7 @@ export const roleRequestSent = () => {
 /**
 * Login, Signup, Logout operations
 */
-export const login = ({username, password, jwt}) => {
+export const login = ({ username, password, jwt }) => {
   return (dispatch) => {
     const config = {
       url: '/login',
@@ -507,10 +508,16 @@ export const login = ({username, password, jwt}) => {
       localStorage.setItem('jwt', data.jwt);
       dispatch(loginRequestSuccess(data));
       dispatch(reset('loginForm'));
-      dispatch(push('/profile')); // will have to be changed to '/profile'
+      var { business } = jwtDecode(data.jwt);
+      if (business) {
+        dispatch(checkinBusiness(business));
+      } else {
+        dispatch(push('/profile'));
+      }
     })
     .catch(err => {
       dispatch(loginRequestFailure(err));
+      dispatch(push('/'));
     });
     dispatch(loginRequestSent());
   }
@@ -551,7 +558,9 @@ export const logout = () => {
   };
 };
 
-//change to
+/**
+* Updates the values of the provided user details.
+*/
 export const updateDetails = (data) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
@@ -573,29 +582,9 @@ export const updateDetails = (data) => {
   }
 }
 
-
-
-export const saveProduct = (data) => {
-  const jwt = localStorage.getItem('jwt');
-  return (dispatch) => {
-    const config = {
-      url: '/api/products',
-      method: 'post',
-      data,
-      headers: {'Authorization': 'Bearer ' + jwt}
-    };
-    axios(config)
-    .then(({ data }) => {
-      dispatch(saveProductRequestSuccess(data));
-      dispatch(reset('addComponentForm'));
-    })
-    .catch(err => {
-      dispatch(saveProductRequestFailure(err));
-    });
-    dispatch(saveProductRequestSent());
-  }
-}
-
+/**
+* Sets payment method to `newMethod`
+*/
 export const paymentMethodChange = (newMethod) => {
   return (dispatch) => {
     dispatch(resetPayment());
@@ -674,10 +663,14 @@ export const stripe = (data) => {
   };
 };
 
+/**
+* When cash is received, will consider that the transaction has "taken place"
+* if the amount of cash received is sufficient.
+*/
 export const validateCashReceived = (amount) => {
   return (dispatch, getState) => {
     dispatch(cashReceived(amount));
-    if (amount - total(getState()) >= 0) {
+    if (amount >= total(getState())) {
       dispatch(cashTransaction());
       // checkoutCompleted will be called as `onClick` of "Done" button of
       // `ChangeDue` component
@@ -687,12 +680,18 @@ export const validateCashReceived = (amount) => {
   };
 };
 
+/**
+* Takes user to receipt page
+*/
 export const receiptPage = () => {
   return (dispatch) => {
     dispatch(push('/receipt'));
   };
 };
 
+/**
+* Readies store and ui for next order
+*/
 export const checkoutCompleted = () => {
   return (dispatch) => {
     dispatch(clearBasket());
@@ -704,7 +703,6 @@ export const checkoutCompleted = () => {
 /**
 * product CRUD operations
 */
-
 export const createProduct = (product) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
@@ -739,10 +737,8 @@ export const createProduct = (product) => {
     dispatch(productCRequestSent());
   };
 };
-/**
-* the sku is optional. if not supplied, will fetch all products in database
-*/
 export const readProduct = (sku = '') => {
+  // the sku is optional. if not supplied, will fetch all products in database
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     const config = {
@@ -870,6 +866,7 @@ export const joinBusiness = (business) => {
     dispatch(businessJoinRequestSent());
   };
 };
+
 /**
 * User management related thunks
 */
@@ -915,9 +912,6 @@ export const acceptance = (username, accept) => {
     dispatch(acceptanceRequestSent());
   };
 };
-/**
-* Sets role of user
-*/
 export const role = (username, role) => {
   const jwt = localStorage.getItem('jwt');
   return (dispatch) => {
@@ -937,12 +931,8 @@ export const role = (username, role) => {
     dispatch(roleRequestSent());
   };
 };
-/**
-* Deletes `username` from business.
-* Business argument optional. If not provided, assumed to be currently checked-
-* in business
-*/
 export const deleteUser = (username, business) => {
+  // removes a user from a business
   const jwt = localStorage.getItem('jwt');
   return (dispatch, getState) => {
     business = business || getState().auth.business.name;
