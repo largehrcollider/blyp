@@ -443,6 +443,26 @@ export const acceptanceRequestSent = () => {
       type: types.ACCEPTANCE_REQUEST_SENT
   };
 };
+
+/**
+* Delete user from business action creators
+*/
+export const deleteUserRequestSuccess = (users) => {
+  return {
+    type: types.DELETE_USER_REQUEST_SUCCESS,
+    users
+  };
+};
+export const deleteUserRequestFailure = () => {
+  return {
+    type: types.DELETE_USER_REQUEST_FAILURE
+  };
+};
+export const deleteUserRequestSent = () => {
+  return {
+    type: types.DELETE_USER_REQUEST_SENT
+  };
+};
 //////////////////////////////////////////////////////////////
 // Asynchronous Action Creator
 //////////////////////////////////////////////////////////////
@@ -904,9 +924,9 @@ export const deleteUser = (username, business) => {
   return (dispatch, getState) => {
     business = business || getState().auth.business.name;
     const config = {
-      url: '/api/business/users/delete',
-      method: 'post',
-      data: {username, business},
+      url: '/api/business/users/role',
+      method: 'delete',
+      data: {username},
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
