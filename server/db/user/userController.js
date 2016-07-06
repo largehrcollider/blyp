@@ -16,18 +16,26 @@ exports.updateByUsername = function(username, update, callback){
   User.findOneAndUpdate({username: username}, update, {new: true}, callback);
 };
 
-exports.updateUserRequests = function(username, business, callback){
+exports.updateUserRequests = function(username, business, accept, callback){
   User.findOne({username: username}, function(err, user){
     if(err){
       callback(err);
     } else {
-      for(var i = 0; i < user.requests.length; i++){
-        if(user.requests[i] === business){
-          user.requests.splice(i, 1);
-          break;
+      var index = user.requests.indexOf(business);
+      if(index !== -1){
+        if(accept){
+          user.requests.splice(index, 1);
+          if(!user.businesses.includes(business)) {
+            user.businesses.push(business);
+          }
+          user.save(callback);
+        } else {
+          user.requests.splice(index, 1);
+          user.save(callback);
         }
+      } else {
+        callback("The user's request was not found with the business!");
       }
-      callback(null, user);
     }
   });
 };
