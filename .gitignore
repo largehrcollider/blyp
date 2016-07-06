@@ -50,9 +50,10 @@ keys
 
 # Client uploads
 uploads
-// images
+images
 !docs/**
 !server/**
+!client/**
 
 # Items to be deleted
 **z_del**
