@@ -303,9 +303,10 @@ export const productDRequestSent = () => {
     type: types.PRODUCT_D_REQUEST_SENT
   };
 };
-export const productDRequestSuccess = () => {
+export const productDRequestSuccess = ({ sku }) => {
   return {
-    type: types.PRODUCT_D_REQUEST_SUCCESS
+    type: types.PRODUCT_D_REQUEST_SUCCESS,
+    sku
   };
 };
 export const productDRequestFailure = () => {

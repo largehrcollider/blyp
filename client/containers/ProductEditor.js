@@ -5,14 +5,20 @@ import ProductEditor from '../components/ProductEditor.jsx';
 const mapStateToProps = (state, ownProps) => {
   const sku = ownProps.params.sku;
   const product = state.auth.business.products[sku];
-  return {
-    initialValues: {
-      ...product,
-      price: '' + product.price,
-      categories: product.categories.join(', ')
-    },
-    product: state.auth.business.products[sku]
-  };
+  if (product) {
+    return {
+      initialValues: {
+        ...product,
+        price: '' + product.price,
+        categories: product.categories.join(', ')
+      },
+      product: state.auth.business.products[sku]
+    };
+  } else {
+    return {
+      product: {}
+    };
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -25,7 +31,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       product.sku = sku;
       dispatch(actions.updateProduct(product));
     },
-    deleteProduct: ({ sku }) => {
+    deleteProduct: () => {
       dispatch(actions.deleteProduct(sku));
     }
   };
