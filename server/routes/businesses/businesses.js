@@ -184,7 +184,17 @@ router.delete('/users/role', acl(['admin']), function(req, res){
       console.log('There was a problem finding the business!');
       res.sendStatus(500);
     } else {
-      res.status(200).send(business.users);
+      User.deleteBusiness(req.body.username, req.user.business, function(err, user){
+        if(err){
+          console.log('There was an error with the user!');
+          console.log(err);
+        } else if(!user){
+          console.log('There was an error finding the user!');
+          res.sendStatus(500);
+        } else {
+          res.status(200).send(business.users);
+        }
+      })
     }
   })
 });
