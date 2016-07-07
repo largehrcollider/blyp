@@ -19,10 +19,14 @@ module.exports = router.post('/', (req, res) => {
             console.error(err.message);
             res.sendStatus(500);
           } else {
-            var data = {};
-            data.jwt = req.body.jwt
-            data.username = decoded.username;
-            data.businesses = user.businesses;
+            var data = {
+              jwt: req.body.jwt,
+              name: user.name,
+              username: user.username,
+              email: user.email,
+              imgSrc: user.imgSrc,
+              businesses: user.businesses
+            };
             res.json(data);
           }
         });
@@ -42,13 +46,17 @@ module.exports = router.post('/', (req, res) => {
         user.comparePasswords(req.body.password)
         .then(function(isMatch){
           if(isMatch){
-            var data = {};
-            data.jwt = jwt.sign({username: req.body.username}, SECRET);
-            data.username = req.body.username;
-            data.businesses = user.businesses;
-            res.status(200).json(data);
+            var data = {
+              jwt: jwt.sign({username: req.body.username}, SECRET),
+              name: user.name,
+              username: req.body.username,
+              email: user.email,
+              imgSrc: user.imgSrc,
+              businesses: user.businesses
+            };
+            res.json(data);
           } else {
-            console.log('The password was incorrect!');
+            console.error(`Incorrect password for ${req.body.username}.`);
             res.sendStatus(403);
           }
         });

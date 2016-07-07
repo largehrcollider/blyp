@@ -10,6 +10,7 @@ var productsRouter = require('./routes/products/products.js');
 var transactionsRouter = require('./routes/transactions/transactions.js');
 var employmentRouter = require('./routes/employment/employment.js');
 var businessesRouter = require('./routes/businesses/businesses.js');
+var avatarRouter = require('./routes/avatar/avatar.js');
 var imageRouter = require('./routes/images/images.js');
 // var authRouter = require('./routes/auth/auth.js');
 var loginRouter = require('./routes/loginRouter.js');
@@ -55,7 +56,8 @@ app.use('/api/transactions', jwtParser({secret: SECRET}), transactionsRouter);
 app.use('/api/employment', employmentRouter);
 app.use('/api/business', jwtParser({secret: SECRET}), businessesRouter, errHandler);
 // app.get('/api/images/', jwtParser({secret: SECRET}), imageRouter, errHandler);
-app.use('/api/images/', imageRouter);
+app.use('/api/avatar', avatarRouter);
+app.use('/api/images/', imageRouter); // image server for NODE_ENV=development
 
 //stripe
 app.use('/stripe', stripeRouter);

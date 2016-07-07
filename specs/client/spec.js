@@ -93,17 +93,21 @@ describe('actions', () => {
 describe('actions', () => {
   it('should create an action for login request success', () => {
     const businesses = "myBusiness"
-    const jwt = "3425"
-    const username = "jeffJeffries"
     const name = "Jeff"
+    const username = "jeffJeffries"
+    const email = 'me@example.com'
+    const imgSrc = '/api/avatar/username'
+    const jwt = "3425"
     const expectedAction = {
       type: types.LOGIN_REQUEST_SUCCESS,
       businesses,
-      jwt,
+      name,
       username,
-      name
+      email,
+      imgSrc,
+      jwt
     }
-    expect(actions.loginRequestSuccess({businesses, name, jwt, username})).toEqual(expectedAction)
+    expect(actions.loginRequestSuccess({businesses, name, username, email, imgSrc, jwt})).toEqual(expectedAction)
   })
 })
 
@@ -113,7 +117,7 @@ describe('actions', () => {
     const expectedAction = {
       type: types.LOGIN_REQUEST_FAILURE,
       message
-    }
+    };
     expect(actions.loginRequestFailure(message)).toEqual(expectedAction)
   })
 })
@@ -130,15 +134,21 @@ describe('actions', () => {
 describe('actions', () => {
   it('should create an action for signup request success', () => {
     const businesses = []
-    const jwt = "243"
+    const name = 'Fred'
     const username = "JohnDenver"
+    const email = 'fredjohn@example.com'
+    const imgSrc = '/api/avatar/JohnDenver'
+    const jwt = "243"
     const expectedAction = {
       type: types.SIGNUP_REQUEST_SUCCESS,
       businesses,
-      jwt,
-      username
-    }
-    expect(actions.signupRequestSuccess({businesses, jwt, username})).toEqual(expectedAction)
+      name,
+      username,
+      email,
+      imgSrc,
+      jwt
+    };
+    expect(actions.signupRequestSuccess({businesses, name, username, email, imgSrc, jwt })).toEqual(expectedAction)
   })
 })
 
@@ -414,10 +424,12 @@ describe('actions', () => {
 
 describe('actions', () => {
   it('should create an action for product D request success', () => {
+    const sku = 12345;
     const expectedAction = {
       type: types.PRODUCT_D_REQUEST_SUCCESS,
+      sku
     }
-    expect(actions.productDRequestSuccess()).toEqual(expectedAction)
+    expect(actions.productDRequestSuccess({sku})).toEqual(expectedAction)
   })
 })
 
@@ -634,7 +646,7 @@ describe('actions', () => {
 //           },
 //       }
 //     )
-//   }) 
+//   })
 
 //   it('should handle login request success', () => {
 //     expect(
@@ -662,7 +674,7 @@ describe('actions', () => {
 //         name: 'John'
 //       }
 //     )
-//   }) 
+//   })
 
 //   it('should handle signup request success', () => {
 //     expect(
@@ -690,7 +702,7 @@ describe('actions', () => {
 //         name: 'John'
 //       }
 //     )
-//   }) 
+//   })
 
   //above
 
@@ -739,7 +751,7 @@ describe('actions', () => {
   //       name: null
   //     }
   //   )
-  // }) 
+  // })
 
 
 
@@ -768,7 +780,7 @@ describe('actions', () => {
   //       username: null
   //     }
   //   )
-  // }) 
+  // })
 
 //above
 
@@ -815,7 +827,7 @@ describe('actions', () => {
   //         }]
   //     }
   //   )
-  // }) 
+  // })
 
   // it('should handle business c request success', () => {
   //   expect(
@@ -834,7 +846,7 @@ describe('actions', () => {
   //   ).toEqual(
   //     {
   //       jwt: null,
-        
+
   //       business: {
   //         name: [null],
   //         requests: [],
@@ -852,7 +864,7 @@ describe('actions', () => {
   //       username: null
   //     }
   //   )
-  // }) 
+  // })
 
 //below
 //})
@@ -881,7 +893,7 @@ describe('actions', () => {
 
 //     })
 
-    
+
 //   })
 // })
 
@@ -1041,4 +1053,3 @@ describe('components', () => {
 //       })
 //   })
 // })
-
