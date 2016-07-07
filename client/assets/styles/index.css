@@ -189,11 +189,15 @@ body .login {
 }
 
 .loginHeight {
-  height: 320px;
+  height: 400px;
+}
+
+.createProductHeader{
+  text-align: center;
 }
 
 .signupHeight {
-  height: 500px;
+  height: 600px;
 }
 
 body .login .validation {
@@ -212,11 +216,15 @@ body .login .disclaimer {
 body .login_title {
   /*background-image: url("../imgs/blyplogo.png");
   background-repeat: no-repeat;*/
-  height: 60px;
+  height: -30px;
   width: 50%;
   margin: auto;
-
 }
+.blyplogoposition{
+  margin-bottom: 20px;
+  padding-bottom:40px;
+}
+
 body .login_fields {
   height: 208px;
   position: absolute;
