@@ -1,3 +1,12 @@
+.fileselect {
+  text-align: center;
+}
+
+.fileselectspan {
+  font-size: 18px;
+  color: #f0f0f0;
+}
+
 h4{
   display: inline;
 }
