@@ -10,7 +10,7 @@ export default class ProducttdeRow extends Component {
 
   render() {
     return (
-      <tr>
+      <tr className={material.collectionItem}>
      
         <td><Link to={`/inventory/${this.props.row.sku}`}>{this.props.row.name}</Link></td>
         <td> {this.props.row.price} </td>
