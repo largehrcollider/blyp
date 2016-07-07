@@ -47,7 +47,9 @@ export default class LoginForm extends Component {
         </form>
         <div>
         <div className={index.signupcontainer}>
-          <span><p>Don't have an account? </p></span><span className={index.plink}><Link to='/signup'>Sign Up!</Link></span>
+        <div className={index.accountRight}>
+          <span><p>Don't have an account? </p></span><span className={index.plink}><Link className={index.glink} to='/signup'>Sign Up!</Link></span>
+        </div>
         </div>
         </div>
       </div>
