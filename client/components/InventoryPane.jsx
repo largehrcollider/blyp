@@ -4,8 +4,6 @@ import ProductsPaneRow from './ProductsPaneRow.jsx';
 import m from '../assets/materialize/css/materialize.css';
 import classNames from 'classnames';
 
-import style from '../assets/styles/InventoryPane.css';
-
 export default class InventoryPane extends Component {
   constructor(props) {
     super(props);
@@ -32,12 +30,8 @@ export default class InventoryPane extends Component {
     var list = order(filter(products));
     return (
       <div>
-        <Link to='/create'>
-          <div className={classNames(m.teal, m.lighten2, m.wavesEffect, m.wavesLight, m.btn)}>
-          CREATE NEW PRODUCT
-          </div>
-        </Link>
-        <table className={classNames(m.bordered, m.striped)}>
+        <div>
+        <table className={classNames(m.bordered, m.white, m.grey, m.lighten5, m.collection)}>
         <thead>
         <tr>
         <th>Product Name</th>
@@ -53,6 +47,12 @@ export default class InventoryPane extends Component {
         ))}
         </tbody>
         </table>
+        </div>
+        <Link to='/create'>
+          <div className={classNames(m.teal, m.lighten2, m.wavesEffect, m.wavesLight, m.btn)}>
+          CREATE NEW PRODUCT
+          </div>
+        </Link>
       </div>
     );
   };
