@@ -296,6 +296,38 @@ body .login_fields__submit input {
   text-transform: uppercase;
   font-size: 12px;
 }
+
+body .login_fields__submit span {
+  position: relative;
+  top: -32px;
+  left: 12px;
+  width: 87%;
+  right: 0;
+  margin: auto;
+}
+
+
+body .login_fields__submit span {
+  border-radius: 50px;
+  background: transparent;
+  padding: 13px 100px;
+  border: 2px solid #0ca56a;
+  color: #0ca56a;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+body .login_fields__submit span {
+  border-radius: 50px;
+  background: transparent;
+  padding: 13px 100px;
+  border: 2px solid #0ca56a;
+  color: #0ca56a;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+
 body .login_fields__submit input:focus {
   box-shadow: none;
   outline: none;
@@ -305,6 +337,18 @@ body .login_fields__submit input:hover {
   background: #0ca56a;
   cursor: pointer;
 }
+
+body .login_fields__submit span:focus {
+  box-shadow: none;
+  outline: none;
+}
+body .login_fields__submit span:hover {
+  color: white;
+  background: #0ca56a;
+  cursor: pointer;
+}
+
+
 
 .index-card {
   height: 150px;
