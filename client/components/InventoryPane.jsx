@@ -37,13 +37,22 @@ export default class InventoryPane extends Component {
           CREATE NEW PRODUCT
           </div>
         </Link>
+        <table className={classNames(m.bordered, m.striped)}>
+        <thead>
+        <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Category</th>
+        <th>Sku</th>
+        </tr>
+        </thead>
+        <tbody>
         {list.map(element => (
-          <div className={m.collection} key={element.name}>
-            <Link to={`/inventory/${element.sku}`}>
-              <ProductsPaneRow row={element}/>
-            </Link>
-          </div>
+            <ProductsPaneRow row={element}/>
         ))}
+        </tbody>
+        </table>
       </div>
     );
   };
