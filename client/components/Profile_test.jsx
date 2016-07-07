@@ -20,14 +20,19 @@ import UpdateUsername from '../containers/UpdateUsernameForm';
 
 const Profile = ({ businesses, name, username, email, changeName, changeEmail, changeUsername, changePassword}) => (
   <div>
-    <div className={bootstrap.colmd6}>
+    <div>
+      <div className={index.selectBusinessLeft}>
       {businesses.map(b => (
         <SelectBusiness key={b} business={b} />
       ))}
+      </div>
+      <div className={index.selectBusinessRight}>
         <JoinBusiness />
         <CreateBusiness />
+      </div>
     </div>
     {/*Profile info starts here */}
+    {/*
     <div className={index.profilebox}>
       <div className={index.profilepic}/>
       <div className={index.container}>
@@ -49,6 +54,7 @@ const Profile = ({ businesses, name, username, email, changeName, changeEmail, c
         </div>
       </div>
     </div>
+  */}
   </div>
 );
 

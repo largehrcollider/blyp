@@ -134,6 +134,43 @@ body .login {
   font-size: 18px;
   text-align: left;
 }
+
+.productLine{
+  width: 400px;
+  float: left;
+}
+
+.submitBusiness{
+  width: 100px;
+  float: left;
+
+}
+.createBusiness{
+  text-align: center;
+  color: #000000;
+}
+
+.selectBusiness{
+  margin: 3px;
+  width: 184px;
+}
+
+
+.selectBusinessLeft{
+  background-color: white;
+  width: 200px;
+  float: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.selectBusinessRight{
+  background-color: white;
+  width: 500px;
+  float: left;
+  padding: 5px;
+  margin: 5px;
+}
 .updateContainer{
   height: 20px;
   width: 100px;
@@ -250,7 +287,6 @@ body .login_fields__submit input:hover {
 
 
 .createProduct{
-  color: #ffffff;
 
 }
 
