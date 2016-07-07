@@ -32,7 +32,11 @@ render() {
                   </div>
                   <input placeholder='Password' type='password' {...password} />
                 </div>
-                <input className='' type='file' {...profilePicture} value={undefined}/>
+                <div>
+                  {/* sorry leo, this is as far as i got! */}
+                  <span>Profile image</span>
+                  <input className='' type='file' {...profilePicture} value={undefined} />
+                </div>
                 <div className={index.login_fields__submit}>
                   <input type='submit' value='Sign Up' />
                 </div>
