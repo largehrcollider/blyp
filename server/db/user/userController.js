@@ -56,3 +56,18 @@ exports.addRequest = function(username, businessName, callback){
     }
   });
 };
+
+exports.deleteBusiness = function(username, businessName, callback){
+  User.findOne({username: username}, function(err, user){
+    if(err){
+      callback(err);
+    } else {
+      for(var i = 0; i < user.businesses.length; i++){
+        if(user.businesses[i] === businessName){
+          user.businesses.splice(i, 1);
+        }
+      }
+      user.save(callback);
+    }
+  });
+};
