@@ -6,8 +6,11 @@ import ChangeProfileName from '../containers/ProfileUsernameButton.js';
 import ChangePassword from '../containers/ProfilePasswordButton.js';
 import ChangeName from '../containers/ProfileNameButton.js';
 import ChangeEmail from '../containers/ProfileEmailButton.js';
+
+import c from 'classnames';
+import m from '../assets/materialize/css/materialize.css';
+
 import bootstrap from '../assets/styles/bootstrap.css';
-import material from '../assets/materialize/css/materialize.css';
 import index from '../assets/styles/index.css';
 import inventory from '../assets/styles/InventoryPane.css';
 import UpdateName from'../containers/UpdateNameForm';
@@ -20,15 +23,30 @@ import UpdateUsername from '../containers/UpdateUsernameForm';
 
 const Profile = ({ businesses, name, username, email, changeName, changeEmail, changeUsername, changePassword}) => (
   <div>
-    <div>
-      <div className={index.selectBusinessLeft}>
-      {businesses.map(b => (
+    <div className={m.container}>
+      <div className={m.row}>
+
+        {(businesses.length > 0 &&
+        <div className={c(m.col, m.s12, m.m4, m.l4)}>
+        <ul className={c(m.collection, m.withHeader)}>
+        <li className={c(m.collectionHeader)}><h4>My Businesses</h4></li>
+        {businesses.map(b => (
         <SelectBusiness key={b} business={b} />
-      ))}
-      </div>
-      <div className={index.selectBusinessRight}>
-        <JoinBusiness />
-        <CreateBusiness />
+        ))}
+        </ul>
+        </div>
+        )}
+
+        {((() => {
+        var classes = businesses.length > 0 ? c(m.col, m.s12, m.m8, m.l7, m.pushL1) : c(m.col, m.s12, m.m8, m.pushM2, m.l6, m.pushL3);
+        return (
+        <div className={classes}>
+          <JoinBusiness />
+          <CreateBusiness />
+        </div>
+        )
+        })())}
+
       </div>
     </div>
     {/*Profile info starts here */}
