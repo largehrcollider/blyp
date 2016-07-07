@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import ProductsPaneRow from './ProductsPaneRow.jsx';
 import m from '../assets/materialize/css/materialize.css';
 import classNames from 'classnames';
+import index from '../assets/styles/index.css';
 
 export default class InventoryPane extends Component {
   constructor(props) {
@@ -31,16 +32,16 @@ export default class InventoryPane extends Component {
     return (
       <div>
         <div>
-        <table className={classNames(m.bordered, m.white, m.grey, m.lighten5, m.collection)}>
-        <thead>
-        <tr>
-        <th>Product Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Category</th>
-        <th>Sku</th>
-        </tr>
-        </thead>
+        <table className={classNames(m.table, m.bordered, m.white, m.grey, m.lighten5, m.highlight)}>
+          <thead>
+            <tr>
+              <th className={m.th}>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Category</th>
+              <th>Sku</th>
+            </tr>
+          </thead>
         <tbody>
         {list.map(element => (
             <ProductsPaneRow row={element}/>
