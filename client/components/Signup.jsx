@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import userPNG from '../assets/images/user.png'
-import lockPNG from '../assets/images/lock.png'
+import userPNG from '../assets/images/user.png';
+import lockPNG from '../assets/images/lock.png';
 import index from '../assets/styles/index.css';
+import logo from '../assets/images/blyplogo.png';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -16,6 +17,9 @@ render() {
         <form onSubmit={handleSubmit(signup)}>
           <div className={index.login+" "+index.signupHeight}>
             <div className={index.login_title}>
+              <div className={index.blyplogoposition}>
+                <img src={logo}/>
+              </div>
             </div>
             <div className={index.login_fields}>
               <div className={index.login_fields__user}>
@@ -23,6 +27,7 @@ render() {
                 <div className={index.icon}>
                   <img src={userPNG} />
                 </div>
+
                 <input placeholder='Name' type='text' {...name} />
                 <input placeholder='Username' type='text' {...username} />
                 <input placeholder='Email' type='text' {...email} />
@@ -33,8 +38,6 @@ render() {
                   <input placeholder='Password' type='password' {...password} />
                 </div>
                 <div>
-                  {/* sorry leo, this is as far as i got! */}
-                  <span>Profile image</span>
                   <input className='' type='file' {...profilePicture} value={undefined} />
                 </div>
                 <div className={index.login_fields__submit}>
