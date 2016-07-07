@@ -90,13 +90,15 @@ export const loginRequestSent = () => {
     type: types.LOGIN_REQUEST_SENT
   }
 }
-export const loginRequestSuccess = ({ businesses, name, jwt, username }) => {
+export const loginRequestSuccess = ({ businesses, name, username, email, imgSrc, jwt }) => {
   return {
     type: types.LOGIN_REQUEST_SUCCESS,
     businesses,
-    jwt,
     name,
-    username
+    username,
+    email,
+    imgSrc,
+    jwt
   }
 }
 export const loginRequestFailure = (message) => {
@@ -110,12 +112,15 @@ export const signupRequestSent = () => {
     type: types.SIGNUP_REQUEST_SENT
   };
 };
-export const signupRequestSuccess = ({ jwt, username }) => {
+export const signupRequestSuccess = ({ name, username, email, imgSrc, jwt }) => {
   return {
     type: types.SIGNUP_REQUEST_SUCCESS,
     businesses: [],
-    jwt,
+    name,
     username,
+    email,
+    imgSrc,
+    jwt
   };
 };
 export const signupRequestFailure = () => {
@@ -523,17 +528,26 @@ export const login = ({ username, password, jwt }) => {
     dispatch(loginRequestSent());
   }
 }
-export const signup = (data) => {
+export const signup = (user) => {
   return (dispatch) => {
+    var data = new FormData();
+    data.append('name', user.name);
+    data.append('username', user.username);
+    data.append('email', user.email);
+    data.append('password', user.password);
+    if (user.profilePicture[0]) {
+      data.append('file', user.profilePicture[0]);
+    }
     const config = {
       url: '/signup',
       method: 'post',
       data
     }
     axios(config)
-    .then(({ data: { jwt, username } }) => {
-    // .then( ({ data }) => {
-      localStorage.setItem('jwt', jwt);
+    .then(({ data }) => {
+      console.log('########');
+      console.log(data);
+      localStorage.setItem('jwt', data.jwt);
       dispatch(signupRequestSuccess(data));
       dispatch(reset('signup'));
       dispatch(push('/profile')); // should dispatch to landing page first

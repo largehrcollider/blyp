@@ -7,7 +7,7 @@ import m from '../assets/materialize/css/materialize.css';
 
 const Admin = ({ username }) => (
   <li className={classNames(m.collectionItem, m.avatar)}>
-    <img className={m.circle} src={`/images/profile/${username}`} alt={username} />
+    <img className={m.circle} src={`/api/avatar/${username}`} alt={username} />
     <div className={m.row} >
       <div className={classNames(m.col, m.s8)}>
         <span className={m.title}>{username}</span>
