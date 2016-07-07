@@ -52,7 +52,9 @@ render() {
         </form>
       <div>
         <div className={index.signupcontainer}>
-          <span><p>Already have an account? </p></span><span className={index.plink}><Link to='/'>Log in</Link></span>
+        <div className={index.accountRight}>
+          <span><p>Already have an account? </p></span><span className={index.plink}><Link className={index.glink} to='/'>Log in</Link></span>
+        </div>
         </div>
       </div>
     </div>

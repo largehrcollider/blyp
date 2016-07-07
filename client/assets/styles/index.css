@@ -39,7 +39,10 @@ body {
   text-decoration: none;
   color: #f0f0f0;
 }
-
+.accountRight{
+  padding: 0px 10px 0px 0px;
+  float: right;
+}
 .signupcontainer .plink{
   color: #000000;
   font-size: 18px;
@@ -47,6 +50,14 @@ body {
 
 .signupcontainer .plink:hover {
   color: #ffffff;
+}
+
+.glink{
+  color: #0ca56a;
+}
+
+.glink:hover{
+  color: #075f3d;
 }
 
 body .authent {
