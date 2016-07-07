@@ -10,9 +10,10 @@ import * as types from '../constants/actionTypes.js'
 
 const initialState = {
   jwt: null,
-  username: null,
   name: null,
+  username: null,
   email: null,
+  imgSrc: null,
   businesses: [], // businesses the user belongs to
   business: {
     name: null,
@@ -87,7 +88,9 @@ const authReducer = (state = initialState, action) => {
       businesses: action.businesses,
       jwt: action.jwt,
       name: action.name,
-      username: action.username
+      username: action.username,
+      email: action.email,
+      imgSrc: action.imgSrc
     };
 
     case types.BUSINESS_CHECKIN_REQUEST_SUCCESFUL:
