@@ -3,54 +3,51 @@ var User = require('../db/user/userController.js');
 var jwt = require('jsonwebtoken');
 var SECRET = require('../../keys/secret.js');
 var router = require('express').Router();
+var images = require('./helpers/images.js');
 
-module.exports = router.post('/', (req, res) => {
-  var name = req.body.name;
-  var username = req.body.username;
-  var email = req.body.email;
-  var password = req.body.password;
+
+router.post('/', images.multer.single('file'), images.saveProfileImage, (req, res) => {
+  var user = req.body;
+
+  // if file was uploaded, append imgSrc to product properties
+  if (req.file && req.file.imgSrc) {
+    user.imgSrc = req.file.imgSrc;
+  }
+
+  var { name, username, email, imgSrc } = user;
+  // var name = req.body.name;
+  // var username = req.body.username;
+  // var email = req.body.email;
+  // var password = req.body.password;
 
   //Check if user exists
-  User.getUserByUsername(username, (err, user) => {
-    if(err){
-      console.log(err);
+  User.getUserByUsername(user.username, (err, result) => {
+    if (err) {
+      console.error(`Error retrieving user ${user.username} from db.`);
+      console.error(err.message);
+      res.sendStatus(500);
     }
-    if(user){
+    if (result) {
       res.status(409).send('User already exists!');
     } else {
-      var newUser = {name: name, username: username, email: email, password: password};
-      User.createUser(newUser, (err, user) => {
-        if(err){
+      User.createUser(user, (err, result) => {
+        if (err) {
+          console.error(`Error creating user ${user.username} in db.`);
+          console.error(err.message);
           res.sendStatus(500);
-        } else if(user){
+        } else {
+          var user = {name, username, email, imgSrc};
           var token = jwt.sign({
             businesses: {},
             email,
             name,
             username,
           }, SECRET);
-          res.status(201).json({user, jwt: token});
+          res.status(201).json({name, username, email, imgSrc, jwt: token});
         }
       });
     }
   });
 });
-  /**
-  * use info above to insert user in DB
-  */
 
-  // if does not exist, create user and send back token below
-  // else, send back 403
-
-  // if insertion succesful:
-  // var token = jwt.sign({
-  //   businesses: {},
-  //   email,
-  //   name,
-  //   username,
-  // }, SECRET);
-  // res.json({businesses: {}, email, jwt: token, name, username});
-
-  // if insertion not succesful:
-  // res.sendStatus(403);
-
+module.exports = router;

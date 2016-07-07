@@ -46,7 +46,7 @@ if (config.get('NODE_ENV') === 'production') {
       return next();
     }
 
-    var gcsname = `${req.user.business.replace(/\W+/g, '-').toLowerCase()}-${req.body.sku}-${Date.now()}`;
+    var gcsname = `product-${req.user.business.replace(/\W+/g, '-').toLowerCase()}-${req.body.sku}-${Date.now()}`;
     var remoteWriteStream = bucket.file(gcsname).createWriteStream();
 
 
@@ -93,7 +93,70 @@ if (config.get('NODE_ENV') === 'production') {
   };
 }
 
+/**
+* Configuration for saveProfileImage
+*/
+var saveProfileImage;
+if (config.get('NODE_ENV') === 'production') {
+  saveProfileImage = function saveProfileImageGCS(req, res, next) {
+
+
+    var storage = gcloud.storage({projectId: config.get('GCLOUD_PROJECT')});
+    var bucket = storage.bucket(config.get('CLOUD_BUCKET'));
+
+    if (!req.file) {
+      return next();
+    }
+
+    var gcsname = `profile-${req.body.username}-${Date.now()}`;
+    var remoteWriteStream = bucket.file(gcsname).createWriteStream();
+
+
+    remoteWriteStream.on('error', function (err) {
+      console.error('There was a stream error');
+      console.error(err);
+      req.file.cloudStorageError = err;
+      next(err);
+    });
+
+    remoteWriteStream.on('finish', function () {
+      req.file.destination = 'gcp'; // google cloud platform
+      req.file.cloudStorageObject = gcsname;
+      req.file.cloudStoragePublicUrl = getPublicUrl(gcsname);
+      req.file.imgSrc = getPublicUrl(gcsname);
+      next();
+    });
+
+    remoteWriteStream.end(req.file.buffer);
+  }
+
+} else if (config.get('NODE_ENV') === 'development') {
+  saveProfileImage = function saveProfileImageLocal(req, res, next) {
+    if (!req.file) {
+      return next();
+    }
+
+    fs.mkdir(path.resolve(__dirname, '../../../images'), (err) => {
+      var filePath = path.resolve(__dirname, '../../../uploads', req.file.filename);
+      var filename = `profile-${req.body.username}-${Date.now()}`;
+      var target = path.resolve(__dirname, '../../../images/', filename);
+
+      fs.rename(filePath, target, (err) => {
+        if (err) {
+          console.error(err);
+          next(err);
+        }
+        req.file.destination = 'fs'; // file system
+        req.file.fsUrl = target;
+        req.file.imgSrc = path.resolve('/api/images/', filename); // as requested by browser
+        next();
+      });
+    });
+  };
+}
+
 module.exports = {
   multer: multer,
-  saveImage: saveImage
+  saveImage: saveImage,
+  saveProfileImage: saveProfileImage
 };
