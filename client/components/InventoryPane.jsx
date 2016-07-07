@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ProductsPaneRow from './ProductsPaneRow.jsx';
+import m from '../assets/materialize/css/materialize.css';
+import classNames from 'classnames';
 
 import style from '../assets/styles/InventoryPane.css';
 
@@ -31,10 +33,12 @@ export default class InventoryPane extends Component {
     return (
       <div>
         <Link to='/create'>
-          <div>CREATE NEW PRODUCT</div>
+          <div className={classNames(m.teal, m.lighten2, m.wavesEffect, m.wavesLight, m.btn)}>
+          CREATE NEW PRODUCT
+          </div>
         </Link>
         {list.map(element => (
-          <div className={style.row} key={element.name}>
+          <div className={m.collection} key={element.name}>
             <Link to={`/inventory/${element.sku}`}>
               <ProductsPaneRow row={element}/>
             </Link>
