@@ -800,7 +800,6 @@ export const deleteProduct = (sku) => {
     const config = {
       url: `/api/products/${sku}`,
       method: 'delete',
-      data: {business: getState().auth.business},
       headers: {'Authorization': 'Bearer ' + jwt}
     };
     axios(config)
