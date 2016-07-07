@@ -37,8 +37,9 @@ render() {
                   </div>
                   <input placeholder='Password' type='password' {...password} />
                 </div>
-                <div>
-                  <input className='' type='file' {...profilePicture} value={undefined} />
+                <div className={index.fileselect}>
+                  <label htmlFor="files"> <span className={index.fileselectspan}>Select Image</span></label>
+                  <input {...profilePicture} value={undefined} style={{visibility: 'hidden', position: 'absolute'}} className='form-control' id="files" type="file" name="files" />
                 </div>
                 <div className={index.login_fields__submit}>
                   <input type='submit' value='Sign Up' />
