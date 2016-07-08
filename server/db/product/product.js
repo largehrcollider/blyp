@@ -1,23 +1,23 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var uniqueValidator = require('mongoose-unique-validator');
 
 var productSchema = mongoose.Schema({
-  sku: {type: String, unique: true},
+  sku: String,
   business: String,
   price: {type: Number, required: true},
   quantity: {type: Number, required: true},
   name: String,
   categories: Array,
   image: String,
+  imgSrc: String,
 
-  //Can contain an arbritray number of details. i.e. Album, Artist etc. 
-  details: Schema.Types.Mixed
-  },
-  {
-    timestamps: true
-  });
+  //Can contain an arbritray number of details. i.e. Album, Artist etc.
+  details: String
+},
+  { timestamps: true }
+);
 
+productSchema.index({sku: 1, business: 1}, {unique: true});
 productSchema.plugin(uniqueValidator);
 var Product = mongoose.model('Product', productSchema);
 

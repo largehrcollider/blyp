@@ -1,24 +1,17 @@
-import React, {Component} from 'react';
-// import BasketItem from '';
-// import Checkout from '';
+import React, { Component } from 'react';
+import centsNumberToString from '../helpers/centsNumberToString';
+
 import material from '../assets/materialize/css/materialize.css';
 import index from '../assets/styles/index.css';
 import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
-
-export default class BasketItem extends Component {
+class BasketItem extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    /**
-    * TODO:
-    * attach function to increment quantity
-    * attach function to decrement quantity
-    * attach function to delete item
-    */
-    const {name, quantity, price, incrementItem, decrementItem, deleteItem} = this.props;
+    const { name, quantity, price, incrementItem, decrementItem, deleteItem } = this.props;
     return (
       <div className={index.basketItem}>
       <span className={index.name}>
@@ -26,7 +19,7 @@ export default class BasketItem extends Component {
         </span>
       <span className={index.delete+" "+material.btnFloating+" "+material.materialIcons+" "+material.wavesEffect+" "+material.wavesLight+" "+material.red} onClick={incrementItem} onClick={deleteItem}>X</span>
         <div>
-        {'($' + price*quantity + ')'}
+        {`$ ${centsNumberToString(price*quantity)}`}
         </div>
         <div className={index.quantity}>
         <span> {'Quantity: '+quantity+' '}</span>
@@ -34,8 +27,9 @@ export default class BasketItem extends Component {
         <span className={index.incrementDown+" "+material.btnFloating+" "+material.materialIcons+" "+material.wavesEffect+" "+material.wavesLight+" "+material.green} onClick={incrementItem} onClick={decrementItem}>-</span>
         </div>
         {<br></br>}
-        
       </div>
     )
   }
 }
+
+export default BasketItem;

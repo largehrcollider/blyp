@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar.jsx';
+import NavBar from '../containers/NavBar.js';
 
 class CoreLayout extends Component {
   constructor(props) {

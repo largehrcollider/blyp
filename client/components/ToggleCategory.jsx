@@ -1,9 +1,11 @@
 import React from 'react';
+import material from '../assets/materialize/css/materialize.css';
+
 
 const ToggleCategory = ({ category, toggleCategory }) => (
-  <div onClick={toggleCategory}>
+  <a onClick={toggleCategory} className={material.collectionItem}>
     {category}
-  </div>
+  </a>
 );
 
 export default ToggleCategory;

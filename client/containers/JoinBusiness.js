@@ -4,7 +4,7 @@ import JoinBusiness from '../components/JoinBusiness.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    create: ({ business }) => {
+    join: ({ business }) => {
       dispatch(actions.joinBusiness(business));
     }
   };

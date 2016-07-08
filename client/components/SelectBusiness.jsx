@@ -1,13 +1,18 @@
 import React from 'react'
-import material from '../assets/materialize/css/materialize.css';
-import index from '../assets/styles/index.css';
-import bootstrap from '../assets/styles/bootstrap.css';
-import inventory from '../assets/styles/InventoryPane.css';
 
+import c from 'classnames';
+import m from '../assets/materialize/css/materialize.css';
+
+/**
+renders each business contained in the Profile_test component
+*/
 const SelectBusiness = ({ checkin, business }) => (
-  <button className={index.selectBusiness+" "+material.btn +" "+material.wavesYellow+" "+ material.wavesEffect +" "+ material.wavesLight} onClick={checkin}>
-    {business}
-  </button>
+  <a
+    onClick={checkin}
+    className={c(m.collectionItem)}
+  >
+    <li>{business}</li>
+  </a>
 );
 
 export default SelectBusiness;

@@ -16,5 +16,5 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'signup',
-  fields: ['name', 'username', 'email', 'password']
+  fields: ['name', 'username', 'email', 'password', 'profilePicture']
 }, mapStateToProps, mapDispatchToProps)(Signup);

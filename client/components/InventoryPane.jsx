@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ProductsPaneRow from './ProductsPaneRow.jsx';
-
-import style from '../assets/styles/InventoryPane.css';
+import m from '../assets/materialize/css/materialize.css';
+import classNames from 'classnames';
+import index from '../assets/styles/index.css';
 
 export default class InventoryPane extends Component {
   constructor(props) {
@@ -30,16 +31,29 @@ export default class InventoryPane extends Component {
     var list = order(filter(products));
     return (
       <div>
-        <Link to='/create'>
-          <div>CREATE NEW PRODUCT</div>
-        </Link>
+        <div>
+        <table className={classNames(m.table, m.bordered, m.white, m.grey, m.lighten5, m.highlight)}>
+          <thead>
+            <tr>
+              <th className={m.th}>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Category</th>
+              <th>Sku</th>
+            </tr>
+          </thead>
+        <tbody>
         {list.map(element => (
-          <div className={style.row} key={element.name}>
-            <Link to={`/inventory/${element.sku}`}>
-              <ProductsPaneRow row={element}/>
-            </Link>
-          </div>
+            <ProductsPaneRow row={element}/>
         ))}
+        </tbody>
+        </table>
+        </div>
+        <Link to='/create'>
+          <div className={classNames(m.teal, m.lighten2, m.wavesEffect, m.wavesLight, m.btn)}>
+          CREATE NEW PRODUCT
+          </div>
+        </Link>
       </div>
     );
   };

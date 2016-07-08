@@ -13,7 +13,7 @@ import bootstrap from '../assets/styles/bootstrap.css';
 import inventory from '../assets/styles/InventoryPane.css';
 
 
-const NavBar = () => (
+const NavBar = ({ business, showSettings, showInventory, showSell }) => (
   <nav className={index.menu}>
   	<ul>
     	<li className={index.active}>
@@ -21,30 +21,40 @@ const NavBar = () => (
           <img src={blypLogo}/>
         </Link>
       </li>
-			<li>
-        <form className={index.search}>
-					<input type="text" name="search" placeholder="search"/>
-					<button type="searchicon"/>
-				</form>
+      <li className={index.busName}>
+      {business}
       </li>
       <li>
-        <Link to='/settings'>
-          <img src={settings}/>
-        </Link>
+        {showSettings &&
+          <Link to='/settings'>
+            <img src={settings}/>
+          </Link>
+        }
       </li>
       <li>
-        <Link to='/inventory'>
-          <img src={barcode}/>
-        </Link>
+        {showInventory &&
+          <Link to='/inventory'>
+            <img src={barcode}/>
+          </Link>
+        }
       </li>
       <li>
-        <Link to='/sell'>
-          <img src={cart}/>
-        </Link>
+        {showSell &&
+          <Link to='/sell'>
+            <img src={cart}/>
+          </Link>
+        }
       </li>
       <li>
         <Link to='/'>
           <Logout/>
+        </Link>
+      </li>
+      <li>
+        <Link to='/profile'>
+          <div className={index.logOut}>
+            <h4>Profile</h4>
+          </div>
         </Link>
       </li>
     </ul>
