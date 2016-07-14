@@ -1,7 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/largehrcollider/blyp.png?label=ready&title=Ready)](https://waffle.io/largehrcollider/blyp)
 
 # Blyp
-> A payment registration app for a new age.
+Blyp is a low-cost cloud-based point-of-sale app.
 
 
 ## Team
