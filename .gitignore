@@ -1,3 +1,6 @@
+# webpack build directory
+build
+
 # Logs
 logs
 *.log
@@ -35,3 +38,22 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Mac OS X hidden files
+.DS_Store
+
+# Personal project notes
+notes
+
+# Keys and secrets
+keys
+
+# Client uploads
+uploads
+images
+!docs/**
+!server/**
+!client/**
+
+# Items to be deleted
+**z_del**
